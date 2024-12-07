@@ -1,36 +1,9 @@
-import { promises as fs } from 'fs';
-import path from 'path';
 import { Cafe, CityData } from './types';
 
 export async function getCafes(): Promise<CityData> {
-  const filePath = path.join(process.cwd(), 'data/cafes.csv');
-  const fileContent = await fs.readFile(filePath, 'utf-8');
-  
-  const rows = fileContent.split('\n').slice(1); // Skip header
-  const cafes = rows.map(row => {
-    const [city, name, address, wifi_speed, power_outlets, noise_level, opening_hours, website, image_url] = row.split(',');
-    return {
-      city,
-      name,
-      address,
-      wifi_speed,
-      power_outlets,
-      noise_level,
-      opening_hours,
-      website,
-      image_url,
-      slug: generateSlug(city, name)
-    };
-  });
-
-  // Group by city
-  return cafes.reduce((acc: CityData, cafe) => {
-    if (!acc[cafe.city]) {
-      acc[cafe.city] = [];
-    }
-    acc[cafe.city].push(cafe);
-    return acc;
-  }, {});
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const response = await fetch(`${baseUrl}/api/cafes`);
+  return response.json();
 }
 
 export function generateSlug(city: string, name: string): string {
