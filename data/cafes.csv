@@ -1,0 +1,6 @@
+city,name,address,wifi_speed,power_outlets,noise_level,opening_hours,website,image_url
+Berlin,The Barn,Auguststraße 58,Fast,Many,Quiet,Mon-Fri 8-18|Sat-Sun 9-18,https://thebarn.de,https://images.unsplash.com/photo-1521017432531-fbd92d768814
+Berlin,St. Oberholz,Rosenthaler Str. 72a,Very Fast,Plenty,Moderate,Mon-Sun 8-20,https://sanktoberholz.de,https://images.unsplash.com/photo-1554118811-1e0d58224f24
+Munich,Man Versus Machine,Müllerstraße 23,Fast,Some,Low,Mon-Fri 8-18|Sat 9-18,https://manvsmachine.coffee,https://images.unsplash.com/photo-1495474472287-4d71bcdd2085
+Hamburg,Less Political,Sternstraße 68,Fast,Many,Moderate,Mon-Sun 9-18,https://lesspolitical.de,https://images.unsplash.com/photo-1600093463592-2e8d28d7f1f6
+Frankfurt,Cafe Wacker,Leipziger Straße 91,Moderate,Few,Lively,Mon-Sat 7-19,https://cafe-wacker.de,https://images.unsplash.com/photo-1559925393-8be0ec4767c8
