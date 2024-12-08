@@ -1,15 +1,15 @@
 import './globals.css';
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
+import { getSEOTags } from '@/libs/seo';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'WorkCafes.de - Best Cafes for Working in Germany',
-  description: 'Find the perfect cafe for working, studying, or meeting in German cities.',
-};
+export const metadata = getSEOTags({
+  title: `Cafés zum Arbeiten`,
+  description: `Finde den perfekten Arbeitsplatz für deine Bedürfnisse. Entdecken Sie Orte, Einrichtungen und Bewertungen, um deinen Arbeitsalltag zu genießen.`,
+});
 
 export default function RootLayout({
   children,

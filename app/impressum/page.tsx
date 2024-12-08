@@ -6,9 +6,9 @@ import { Header } from "@/components/layout/header";
 import { Suspense } from "react";
 
 export const metadata = getSEOTags({
-  title: `Imprint | ${config.appName}`,
-  description: `Imprint for ${config.appName}`,
-  canonicalUrlRelative: "/imprint",
+  title: `Impressum | ${config.appName}`,
+  description: `Impressum für ${config.appName}`,
+  canonicalUrlRelative: "/impressum",
 });
 
 const lastUpdated = "2024-12-08";

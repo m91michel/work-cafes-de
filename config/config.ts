@@ -1,14 +1,14 @@
 
-export const domainName = "work-cafes.de";
+export const domainName = "cafeszumarbeiten.de";
 export const baseUrl = `https://${domainName}`;
-export const appName = "Work Cafes";
+export const appName = "Cafés zum Arbeiten";
 
 const config = {
     // REQUIRED
     appName: appName,
     // REQUIRED: a short description of your app for SEO tags (can be overwritten)
     appDescription:
-      "Find the perfect coworking space for your needs. Discover locations, amenities, and reviews to make your work experience more enjoyable.",
+      "Finde den perfekten Arbeitsplatz für deine Bedürfnisse. Entdecken Sie Orte, Einrichtungen und Bewertungen, um deinen Arbeitsalltag zu genießen.",
     // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
     domainName: domainName,
     founderName: "Mathias",

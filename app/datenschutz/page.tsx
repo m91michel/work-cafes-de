@@ -28,9 +28,9 @@ import { Footer } from "@/components/layout/footer";
 // Please write a simple privacy policy for my site. Add the current date.  Do not add or explain your reasoning. Answer:
 
 export const metadata = getSEOTags({
-  title: `Privacy Policy | ${config.appName}`,
-  description: `Privacy Policy for ${config.appName}`,
-  canonicalUrlRelative: "/privacy-policy",
+  title: `Datenschutz | ${config.appName}`,
+  description: `Datenschutz für ${config.appName}`,
+  canonicalUrlRelative: "/datenschutz",
 });
 
 const PrivacyPolicy = () => {
@@ -42,7 +42,7 @@ const PrivacyPolicy = () => {
       <main className="max-w-7xl mx-auto px-8 py-16 md:py-32">
         <div className="max-w-2xl mx-auto p-5">
           <h1 className="text-3xl font-extrabold pb-6">
-            Privacy Policy for {config.appName}
+            Datenschutz für {config.appName}
           </h1>
 
           <pre

@@ -1,6 +1,6 @@
 import { Coffee, Github, Twitter } from "lucide-react";
 import Link from "next/link";
-import config from "@/config/config";
+import config, { domainName } from "@/config/config";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -12,40 +12,40 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Coffee className="w-6 h-6" />
-              <span className="font-bold text-xl">WorkCafes.de</span>
+              <span className="font-bold text-xl">Cafés zum Arbeiten</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Discover the best work-friendly cafes across Germany.
+              Entdecken Sie die besten Cafes zum Arbeiten in Deutschland.
             </p>
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4">Popular Cities</h3>
+            <h3 className="font-semibold mb-4">Die besten Cafes</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#berlin" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Berlin
+                <Link href="/city/berlin" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Cafes zum Arbeiten in Berlin
                 </Link>
               </li>
               <li>
-                <Link href="#munich" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Munich
+                <Link href="/city/munich" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Cafes zum Arbeiten in München
                 </Link>
               </li>
               <li>
-                <Link href="#hamburg" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Hamburg
+                <Link href="/city/hamburg" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Cafes zum Arbeiten in Hamburg
                 </Link>
               </li>
             </ul>
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4">Resources</h3>
+            <h3 className="font-semibold mb-4">Ressourcen</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  About Us
+                  Über uns
                 </Link>
               </li>
               <li>
@@ -54,20 +54,20 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Privacy Policy
+                <Link href="/datenschutz" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Datenschutz
                 </Link>
               </li>
               <li>
-                <Link href="/imprint" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Imprint
+                <Link href="/impressum" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Impressum
                 </Link>
               </li>
             </ul>
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4">Follow Us</h3>
+            <h3 className="font-semibold mb-4">Folge uns</h3>
             <div className="flex items-center gap-4">
               <Link href="#twitter" className="text-muted-foreground hover:text-primary transition-colors">
                 <Twitter className="w-5 h-5" />
@@ -80,7 +80,7 @@ export function Footer() {
         </div>
         
         <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
-          <p>&copy; {currentYear} WorkCafes.de. All rights reserved.</p>
+          <p>&copy; {currentYear} {domainName}. Alle Rechte vorbehalten.</p>
         </div>
       </div>
     </footer>
