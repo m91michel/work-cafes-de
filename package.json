@@ -1,5 +1,5 @@
 {
-  "name": "nextjs",
+  "name": "arbeits-cafe.de",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -58,6 +58,7 @@
     "lodash": "^4.17.21",
     "lucide-react": "^0.446.0",
     "next": "13.5.1",
+    "next-sitemap": "^4.2.3",
     "next-themes": "^0.3.0",
     "node-fetch": "^3.3.2",
     "postcss": "8.4.30",

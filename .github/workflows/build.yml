@@ -1,0 +1,57 @@
+name: 'Build NextJS'
+on:
+  pull_request:
+    branches-ignore:
+      - 'main'
+  push:
+    branches:
+      - main
+      - dev
+      - 'renovate/**'
+      - 'feat/**'
+      - use-package
+jobs:
+  build:
+    name: Build NextJS
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      packages: 'read'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@m91michel'
+      - name: Build cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          # Generate a new cache whenever packages or source files change.
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
+          restore-keys: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
+
+      - name: Install dependencies
+        run: yarn install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Tests
+      #   run: yarn test:ci
+
+      - name: Build
+        run: yarn run build
+        env:
+          CI: true
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}

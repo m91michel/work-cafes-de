@@ -16,7 +16,7 @@ export default function ContributePage() {
               <h2 className="text-2xl font-semibold">Suggest a New Listing</h2>
             </div>
             <p className="text-muted-foreground mb-6">
-              Know a great cafe that's perfect for working? Help others discover it by adding it to our directory.
+              Know a great cafe that&apos;s perfect for working? Help others discover it by adding it to our directory.
             </p>
             <Button asChild>
               <a href="https://forms.gle/example" target="_blank" rel="noopener noreferrer">

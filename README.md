@@ -1,3 +1,10 @@
-# bolt-cafes-for-work
+# arbeits-cafe.de
 
-[Edit in StackBlitz next generation editor ⚡️](https://stackblitz.com/~/github.com/m91michel/bolt-cafes-for-work)
+A directory website for best cafes for work in Germany.
+
+## Development
+
+```bash
+yarn install
+yarn dev
+```
