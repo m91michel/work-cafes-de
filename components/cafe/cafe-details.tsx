@@ -7,7 +7,7 @@ interface CafeDetailsProps {
 }
 
 export function CafeDetails({ cafe }: CafeDetailsProps) {
-  const openingHours = cafe.opening_hours.split('|').map(hours => (
+  const openingHours = cafe.open_hours?.split('\n').map(hours => (
     <div key={hours} className="text-sm">{hours}</div>
   ));
 

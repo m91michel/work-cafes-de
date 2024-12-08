@@ -1,8 +1,12 @@
 import { getCafes } from '@/lib/cafe-utils';
 import { CafeDirectory } from '@/components/cafe-directory';
+import { isDev } from '@/lib/environment';
+
+export const revalidate = isDev ? 5 : 3600; 
 
 export default async function Home() {
   const cafesData = await getCafes();
+
   const cities = Object.keys(cafesData).sort();
 
   return (

@@ -2,13 +2,16 @@ export interface Cafe {
   city: string;
   name: string;
   address: string;
-  wifi_speed: string;
-  power_outlets: string;
-  noise_level: string;
-  opening_hours: string;
+  wifi_quality: string;
+  seating_comfort: string;
+  ambiance: string;
+  food_content: string;
+  open_hours: string;
   website: string;
-  image_url: string;
+  preview_image: string;
   slug: string;
+  // TODO: remove this
+  amenities: string[];
 }
 
 export type CityData = {

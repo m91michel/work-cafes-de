@@ -3,25 +3,31 @@ import { Wifi, Power, Volume2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Cafe } from '@/lib/types';
-import { generateSlug } from '@/lib/cafe-utils';
+import { generateSlug } from '@/lib/utils';
+import { DefaultCafeImage } from '../cafe/Image';
+
 
 interface CafeCardProps {
   cafe: Cafe;
 }
 
 export function CafeCard({ cafe }: CafeCardProps) {
-  const slug = generateSlug(cafe.city, cafe.name);
+  const slug = generateSlug(`${cafe.city}-${cafe.name}`);
 
   return (
     <Link href={`/cafe/${slug}`}>
       <Card className="overflow-hidden hover:shadow-lg transition-shadow">
         <div className="relative h-48">
-          <Image
-            src={cafe.image_url}
-            alt={cafe.name}
-            fill
-            className="object-cover"
-          />
+          {cafe.preview_image && (
+            <Image
+              src={cafe.preview_image}
+              alt={cafe.name}
+              fill
+              unoptimized
+              className="object-cover"
+            />
+          )}
+          {!cafe.preview_image && <DefaultCafeImage />}
         </div>
         
         <div className="p-6">
@@ -31,15 +37,15 @@ export function CafeCard({ cafe }: CafeCardProps) {
           <div className="flex gap-4 text-sm">
             <div className="flex items-center gap-1">
               <Wifi className="h-4 w-4" />
-              <span>{cafe.wifi_speed}</span>
+              <span>{cafe.wifi_quality}</span>
             </div>
             <div className="flex items-center gap-1">
               <Power className="h-4 w-4" />
-              <span>{cafe.power_outlets}</span>
+              <span>{cafe.seating_comfort}</span>
             </div>
             <div className="flex items-center gap-1">
               <Volume2 className="h-4 w-4" />
-              <span>{cafe.noise_level}</span>
+              <span>{cafe.ambiance}</span>
             </div>
           </div>
         </div>

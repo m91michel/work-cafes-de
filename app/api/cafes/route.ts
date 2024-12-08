@@ -2,6 +2,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { NextResponse } from 'next/server';
 import { parse } from 'csv-parse/sync';
+import { isDev } from '@/lib/environment';
 
 interface Cafe {
   city: string;
@@ -15,6 +16,8 @@ interface Cafe {
   image_url: string;
   slug: string;
 }
+
+export const revalidate = isDev ? 5 : 3600; 
 
 export async function GET() {
   const filePath = path.join(process.cwd(), 'data/cafes.csv');

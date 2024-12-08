@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Wifi, Power, Volume2 } from 'lucide-react';
+import { Wifi, Volume2, Armchair } from 'lucide-react';
 import Link from 'next/link';
 import { Cafe } from '@/lib/types';
 
@@ -18,24 +18,25 @@ export function CafeAmenities({ cafe }: CafeAmenitiesProps) {
           <div className="flex items-center gap-3">
             <Wifi className="h-5 w-5 text-muted-foreground" />
             <div>
-              <h3 className="font-medium">WiFi Speed</h3>
-              <p className="text-muted-foreground">{cafe.wifi_speed}</p>
+              <h3 className="font-medium">WiFi Quality</h3>
+              <p className="text-muted-foreground">{cafe.wifi_quality}</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            <Power className="h-5 w-5 text-muted-foreground" />
+            <Armchair className="h-5 w-5 text-muted-foreground" />
+            
             <div>
-              <h3 className="font-medium">Power Outlets</h3>
-              <p className="text-muted-foreground">{cafe.power_outlets}</p>
+              <h3 className="font-medium">Seating Comfort</h3>
+              <p className="text-muted-foreground">{cafe.seating_comfort}</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
             <Volume2 className="h-5 w-5 text-muted-foreground" />
             <div>
-              <h3 className="font-medium">Noise Level</h3>
-              <p className="text-muted-foreground">{cafe.noise_level}</p>
+              <h3 className="font-medium">Ambiance</h3>
+              <p className="text-muted-foreground">{cafe.ambiance}</p>
             </div>
           </div>
         </div>
