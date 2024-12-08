@@ -1,39 +1,80 @@
-import { Coffee, Github, Twitter } from 'lucide-react';
-import Link from 'next/link';
+import { Coffee, Github, Twitter } from "lucide-react";
+import Link from "next/link";
 
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="border-t mt-auto">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <Coffee className="h-5 w-5" />
-            <span className="font-semibold">WorkCafes.de</span>
+    <footer className="border-t bg-secondary/30">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <Coffee className="w-6 h-6" />
+              <span className="font-bold text-xl">WorkCafes.de</span>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Discover the best work-friendly cafes across Germany.
+            </p>
           </div>
           
-          <nav className="flex gap-6">
-            <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
-              Home
-            </Link>
-            <Link href="/contribute" className="text-muted-foreground hover:text-foreground transition-colors">
-              Contribute
-            </Link>
-          </nav>
+          <div>
+            <h3 className="font-semibold mb-4">Popular Cities</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="#berlin" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Berlin
+                </Link>
+              </li>
+              <li>
+                <Link href="#munich" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Munich
+                </Link>
+              </li>
+              <li>
+                <Link href="#hamburg" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Hamburg
+                </Link>
+              </li>
+            </ul>
+          </div>
           
-          <div className="flex gap-4">
-            <a href="https://twitter.com/workcafes" target="_blank" rel="noopener noreferrer" 
-               className="text-muted-foreground hover:text-foreground transition-colors">
-              <Twitter className="h-5 w-5" />
-            </a>
-            <a href="https://github.com/workcafes" target="_blank" rel="noopener noreferrer"
-               className="text-muted-foreground hover:text-foreground transition-colors">
-              <Github className="h-5 w-5" />
-            </a>
+          <div>
+            <h3 className="font-semibold mb-4">Resources</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="#about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="#privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="font-semibold mb-4">Follow Us</h3>
+            <div className="flex items-center gap-4">
+              <Link href="#twitter" className="text-muted-foreground hover:text-primary transition-colors">
+                <Twitter className="w-5 h-5" />
+              </Link>
+              <Link href="#github" className="text-muted-foreground hover:text-primary transition-colors">
+                <Github className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
         </div>
         
-        <div className="mt-8 text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} WorkCafes.de. All rights reserved.
+        <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
+          <p>&copy; {currentYear} WorkCafes.de. All rights reserved.</p>
         </div>
       </div>
     </footer>
