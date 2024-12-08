@@ -1,7 +1,7 @@
 /** @type {import('next-sitemap').IConfig} */
 // docs: https://www.npmjs.com/package/next-sitemap
 
-const siteUrl = process.env.SITE_URL || "https://rewritebar.com";
+const siteUrl = process.env.SITE_URL || "https://work-cafes.de";
 
 module.exports = {
   // REQUIRED: add your own domain name here
@@ -15,10 +15,10 @@ module.exports = {
     "/icon.*",
     "/server-sitemap.xml",
     "/signin",
+    "/api/*",
     "/unsubscribe",
     "/app/*",
     "/dashboard/*",
-    "/purchase-success",
   ],
   // robotsTxtOptions: {
   //   additionalSitemaps: [
