@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Clock, Globe, MapPin } from 'lucide-react';
-import { Cafe } from '@/lib/types';
+import { Cafe } from '@/libs/types';
 
 interface CafeDetailsProps {
   cafe: Cafe;

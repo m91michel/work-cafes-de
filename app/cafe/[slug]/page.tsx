@@ -1,4 +1,4 @@
-import { getCafes, getCafeBySlug } from '@/lib/cafe-utils';
+import { getCafes, getCafeBySlug } from '@/libs/cafe-utils';
 import { CafeHero } from '@/components/cafe/cafe-hero';
 import { CafeDetails } from '@/components/cafe/cafe-details';
 import { CafeAmenities } from '@/components/cafe/cafe-amenities';

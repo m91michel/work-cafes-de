@@ -1,6 +1,6 @@
-import { getCafes } from '@/lib/cafe-utils';
+import { getCafes } from '@/libs/cafe-utils';
 import { CafeDirectory } from '@/components/cafe-directory';
-import { isDev } from '@/lib/environment';
+import { isDev } from '@/libs/environment';
 
 export const revalidate = isDev ? 5 : 3600; 
 

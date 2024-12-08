@@ -2,8 +2,8 @@ import { Card } from '@/components/ui/card';
 import { Wifi, Power, Volume2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Cafe } from '@/lib/types';
-import { generateSlug } from '@/lib/utils';
+import { Cafe } from '@/libs/types';
+import { generateSlug } from '@/libs/utils';
 import { DefaultCafeImage } from '../cafe/Image';
 
 

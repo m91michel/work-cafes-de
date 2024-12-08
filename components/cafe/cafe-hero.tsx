@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Cafe } from '@/lib/types';
+import { Cafe } from '@/libs/types';
 import { DefaultCafeImage } from './Image';
 
 interface CafeHeroProps {

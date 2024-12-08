@@ -1,4 +1,4 @@
-import { getCafes } from '@/lib/cafe-utils'
+import { getCafes } from '@/libs/cafe-utils'
 import { FilteredCafes } from '@/components/filtered-cafes'
 
 export default async function FiltersPage() {

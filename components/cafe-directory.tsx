@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { CitySelector } from '@/components/ui/city-selector';
 import { CafeCard } from '@/components/ui/cafe-card';
-import { CityData } from '@/lib/types';
+import { CityData } from '@/libs/types';
 
 interface CafeDirectoryProps {
   initialCities: string[];

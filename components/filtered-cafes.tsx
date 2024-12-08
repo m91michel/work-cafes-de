@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { FiltersPanel } from '@/components/filters-panel'
 import { CafeResults } from '@/components/cafe-results'
-import { CityData } from '@/lib/types'
+import { CityData } from '@/libs/types'
 
 interface FilteredCafesProps {
   initialCafesData: CityData

@@ -1,4 +1,4 @@
-import { getCafes } from '@/lib/cafe-utils';
+import { getCafes } from '@/libs/cafe-utils';
 import { CafeCard } from '@/components/ui/cafe-card';
 import { CityHero } from '@/components/city/city-hero';
 import { notFound } from 'next/navigation';

@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Wifi, Volume2, Armchair } from 'lucide-react';
 import Link from 'next/link';
-import { Cafe } from '@/lib/types';
+import { Cafe } from '@/libs/types';
 
 interface CafeAmenitiesProps {
   cafe: Cafe;

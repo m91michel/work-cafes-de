@@ -1,5 +1,6 @@
 import { Coffee, Github, Twitter } from "lucide-react";
 import Link from "next/link";
+import config from "@/config/config";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -43,18 +44,23 @@ export function Footer() {
             <h3 className="font-semibold mb-4">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link href="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Contact
+                <a href={`mailto:${config.mailgun.supportEmail}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Support
+                </a>
+              </li>
+              <li>
+                <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Privacy Policy
+                <Link href="/imprint" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Imprint
                 </Link>
               </li>
             </ul>
