@@ -1,6 +1,14 @@
 import { Button } from '@/components/ui/button';
+import config from '@/config/config';
+import { getSEOTags } from '@/libs/seo';
 import { Share2, PlusCircle } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata = getSEOTags({
+  title: `Unterstütze uns | ${config.appName}`,
+  description: `Unterstütze uns, indem du diese Seite mit Freunden teilst.`,
+  canonicalUrlRelative: "/helfe-uns",
+});
 
 export default function ContributePage() {
   return (
