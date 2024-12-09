@@ -1,8 +1,6 @@
 import { getSEOTags } from "@/libs/seo";
-import config from "@/config/config";
-import { Suspense } from "react";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
+import config, { baseUrl } from "@/config/config";
+import dayjs from "dayjs";
 
 // CHATGPT PROMPT TO GENERATE YOUR PRIVACY POLICY — replace with your own data 👇
 
@@ -13,17 +11,17 @@ import { Footer } from "@/components/layout/footer";
 
 // You are an excellent lawyer.
 
-// I need your help to write a simple privacy policy for my website. Here is some context:
-// - Website: https://shipfa.st
-// - Name: ShipFast
-// - Description: A JavaScript code boilerplate to help entrepreneurs launch their startups faster
-// - User data collected: name, email and payment information
-// - Non-personal data collection: web cookies
-// - Purpose of Data Collection: Order processing
-// - Data sharing: we do not share the data with any other parties
-// - Children's Privacy: we do not collect any data from children
+// Ich benötige deine Hilfe, um eine einfache Datenschutzrichtlinie für meine Website zu erstellen. Hier sind einige Kontextinformationen:
+// - Website: https://cafezumarbeiten.de
+// - Name: Café zum Arbeiten
+// - Beschreibung: Finde das perfekte Cafe wo du arbeiten kannst und darfst
+// - Daten die erhoben werden: name, email
+// - Nicht-persönliche Daten: web cookies
+// - Zweck der Datenerhebung: Kontaktaufnahme per Email
+// - Datenweitergabe: wir geben die Daten nicht an andere Dritte weiter
+// - Datenschutz bei Kindern: wir erheben keine Daten von Kindern
 // - Updates to the Privacy Policy: users will be updated by email
-// - Contact information: marc@shipfa.st
+// - Contact information: privacy@cafezumarbeiten.de
 
 // Please write a simple privacy policy for my site. Add the current date.  Do not add or explain your reasoning. Answer:
 
@@ -33,62 +31,63 @@ export const metadata = getSEOTags({
   canonicalUrlRelative: "/datenschutz",
 });
 
+const lastUpdated = "2024-12-08";
 const PrivacyPolicy = () => {
+
   return (
-    <>
-      <Suspense>
-        <Header />
-      </Suspense>
-      <main className="max-w-7xl mx-auto px-8 py-16 md:py-32">
-        <div className="max-w-2xl mx-auto p-5">
-          <h1 className="text-3xl font-extrabold pb-6">
-            Datenschutz für {config.appName}
-          </h1>
+    <main className="max-w-7xl mx-auto px-8 py-16 md:py-32">
+      <div className="max-w-2xl mx-auto p-5">
+        <h1 className="text-3xl font-extrabold pb-6">
+          Datenschutz für {config.appName}
+        </h1>
 
-          <pre
-            className="leading-relaxed whitespace-pre-wrap"
-            style={{ fontFamily: "sans-serif" }}
-          >
-            {`Last Updated: 2024-03-29
+        <pre
+          className="leading-relaxed whitespace-pre-wrap"
+          style={{ fontFamily: "sans-serif" }}
+        >
+{`
+Letzte Aktualisierung: ${dayjs(lastUpdated).format("DD.MM.YYYY")}
 
-Welcome to ${config.appName}!
+Willkommen bei ${config.appName}!
 
-This Privacy Policy describes how ${config.appName} ("we", "us", or "our") collects, uses, and shares information when you use our website https://${config.domainName} (the "Site") and the ${config.appName} MacOS Application (the "Application"). By accessing or using the Site or Application, you agree to the terms of this Privacy Policy.
+Diese Datenschutzerklärung beschreibt, wie wir Informationen sammeln, nutzen und schützen, wenn Sie unsere Website ${baseUrl} nutzen.
 
-Information We Collect
+Erhebung von Daten
 
-We collect certain information when you use our Site or Application:
+Wir erfassen die folgenden Daten:
+	•	Persönliche Daten: Name und E-Mail-Adresse, die Sie uns für die Kontaktaufnahme per E-Mail bereitstellen.
+	•	Nicht-personenbezogene Daten: Informationen, die durch Web-Cookies gesammelt werden, um die Benutzerfreundlichkeit unserer Website zu verbessern.
 
-Personal Information: When you make a purchase or sign up for our services, we may collect your name, email address, and payment information for order processing purposes.
+Zweck der Datenerhebung
 
-Non-Personal Information: We may also collect non-personal information through the use of web cookies. This information helps us improve your experience on our Site and Application.
+Die von Ihnen bereitgestellten Daten werden ausschließlich zur Kontaktaufnahme verwendet.
 
-Purpose of Data Collection
+Weitergabe von Daten
 
-We collect your personal information solely for the purpose of order processing and providing you with our services. We do not use your information for any other purposes without your consent.
+Wir geben Ihre Daten nicht an Dritte weiter.
 
-Data Sharing
+Datenschutz bei Kindern
 
-We do not share your personal information with any third parties. Your privacy is important to us, and we take all necessary measures to protect your information.
+Wir sammeln keine Daten von Kindern unter 13 Jahren.
 
-Children's Privacy
+Aktualisierungen der Datenschutzerklärung
 
-We do not knowingly collect any personal information from children under the age of 13. If you are a parent or guardian and believe that your child has provided us with personal information, please contact us at privacy@${config.domainName}, and we will promptly delete such information from our records.
+Diese Datenschutzerklärung kann gelegentlich aktualisiert werden. Über wesentliche Änderungen informieren wir Sie per E-Mail.
 
-Updates to the Privacy Policy
+Kontakt
 
-We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify users of any material changes to this Privacy Policy by email.
+Wenn Sie Fragen oder Bedenken zu unserer Datenschutzerklärung haben, kontaktieren Sie uns bitte unter:
+E-Mail: privacy@${config.domainName}
 
-Contact Information
+Vielen Dank, dass Sie Café zum Arbeiten nutzen!
 
-If you have any questions or concerns about our Privacy Policy or our practices regarding your personal information, please contact us at privacy@${config.domainName}.
 
-Thank you for using ${config.appName}!`}
-          </pre>
-        </div>
-      </main>
-      <Footer />
-    </>
+`}
+
+
+        </pre>
+      </div>
+    </main>
   );
 };
 

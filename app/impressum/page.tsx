@@ -1,9 +1,6 @@
 import Link from "next/link";
 import { getSEOTags } from "@/libs/seo";
 import config from "@/config/config";
-import { Footer } from "@/components/layout/footer";
-import { Header } from "@/components/layout/header";
-import { Suspense } from "react";
 
 export const metadata = getSEOTags({
   title: `Impressum | ${config.appName}`,
@@ -17,80 +14,72 @@ const url = `https://${config.domainName}`;
 
 const Imprint = () => {
   return (
-    <>
-      <Suspense>
-        <Header />
-      </Suspense>
-      <main>
-        <section className="max-w-7xl mx-auto px-8 py-16 md:py-32">
-          <div className="prose leading-relaxed whitespace-pre-wrap mx-auto">
-            <h1>Imprint for {config.appName}</h1>
-            <p>Last Updated: {lastUpdated}</p>
-            <p>
-              Website Name: {config.appName}
-              <br />
-              Website URL: <Link href={url}>{url}</Link>
-            </p>
+    <section className="max-w-7xl mx-auto px-8 py-16 md:py-32">
+      <div className="prose leading-relaxed whitespace-pre-wrap mx-auto">
+        <h1>Impressum für {config.appName}</h1>
+        <p>Letzte Aktualisierung: {lastUpdated}</p>
+        <p>
+          Website Name: {config.appName}
+          <br />
+          Website URL: <Link href={url}>{url}</Link>
+        </p>
 
-            <h2>Responsible for Content according to § 5 TMG</h2>
-            <p>
-              Name: Mathias Michel
-              <br />
-              Address: {address}
-              <br />
-              Email: {config.mailgun.supportEmail}
-            </p>
-            <h2>Disclaimer</h2>
-            <p>
-              The content of this website has been created with the utmost care.
-              However, we cannot guarantee the accuracy, completeness, or
-              timeliness of the content. As a service provider, we are
-              responsible for our own content on these pages under the general
-              laws according to § 7 Abs.1 TMG. However, according to §§ 8 to 10
-              TMG, we are not obliged to monitor transmitted or stored
-              third-party information or to investigate circumstances that
-              indicate illegal activity. Obligations to remove or block the use
-              of information under the general laws remain unaffected. However,
-              liability in this regard is only possible from the time of
-              knowledge of a specific infringement. Upon notification of such
-              violations, we will remove the content immediately.
-            </p>
-            <h2>Liability for Links</h2>
-            <p>
-              Our website contains links to external websites over which we have
-              no control. Therefore, we cannot accept any responsibility for
-              their content. The respective provider or operator of the linked
-              pages is always responsible for the content of these pages. The
-              linked pages were checked for possible legal violations at the
-              time of linking. Illegal contents were not recognizable at the
-              time of linking. However, permanent monitoring of the content of
-              the linked pages is not reasonable without concrete evidence of a
-              violation. Upon notification of violations, we will remove such
-              links immediately.
-            </p>
-            <h2>Intellectual Property</h2>
-            <p>
-              The content and works on these pages created by the site operator
-              are subject to German copyright law. The reproduction, editing,
-              distribution, and any kind of exploitation outside the limits of
-              copyright require the written consent of the respective author or
-              creator. Downloads and copies of this site are only permitted for
-              private, non-commercial use. Insofar as the content on this site
-              was not created by the operator, the copyrights of third parties
-              are respected. In particular, third-party content is marked as
-              such. Should you nevertheless become aware of a copyright
-              infringement, please inform us accordingly. Upon notification of
-              violations, we will remove such content immediately.
-            </p>
-            <h2>Privacy Policy</h2>
-            <p>
-              Please see our <Link href="/privacy-policy">Privacy Policy</Link>
-            </p>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+        <h2>Verantwortlich für den Inhalt nach § 5 TMG</h2>
+        <p>
+          Name: Mathias Michel
+          <br />
+          Adresse: {address}
+          <br />
+          E-Mail: {config.mailgun.supportEmail}
+        </p>
+        <h2>Haftungsausschluss</h2>
+        <p>
+        Der Inhalt dieser Website wurde mit größter Sorgfalt erstellt.
+          Jedoch können wir keine Gewähr für die Genauigkeit, Vollständigkeit
+          oder Aktualität des Inhalts übernehmen. Als Diensteanbieter sind
+          wir gemäß § 7 Abs. 1 TMG für unseren eigenen Inhalt auf diesen
+          Seiten verantwortlich. Nach § 8 bis 10 TMG sind wir jedoch nicht
+          verpflichtet, übermittelte oder gespeicherte Informationen Dritter
+          zu überwachen oder zu untersuchen, die auf eine rechtswidrige
+          Tätigkeit hinweisen. Die Pflicht zur Entfernung oder Sperrung der
+          Nutzung von Informationen nach den allgemeinen Gesetzen bleibt
+          unberührt. Eine Haftung in diesem Zusammenhang besteht jedoch nur
+          von der Zeit der Kenntnis einer konkreten Rechtsverletzung.
+        </p>
+        <h2>Haftung für Links</h2>
+        <p>
+          Diese Website enthält Links zu externen Websites, über die wir keinen
+          Einfluss haben. Daher können wir keine Verantwortung für deren
+          Inhalt übernehmen. Der jeweilige Anbieter oder Betreiber der
+          verlinkten Seiten ist immer für den Inhalt dieser Seiten verantwortlich.
+          Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf
+          mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren
+          zum Zeitpunkt der Verlinkung nicht erkennbar. Jedoch ist eine
+          regelmäßige Überprüfung der verlinkten Seiten ohne konkrete
+          Anhaltspunkte für eine Rechtsverletzung nicht zumutbar. Bei
+          Bekanntwerden von Rechtsverletzungen werden wir derartige Links
+          unverzüglich entfernen.
+        </p>
+        <h2>Urheberrecht</h2>
+        <p>
+          Der Inhalt und die Werke auf diesen Seiten unterliegen dem deutschen
+          Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und
+          jede Art der Nutzung außerhalb der Grenzen des Urheberrechts
+          bedürfen der schriftlichen Zustimmung des jeweiligen Autors oder
+          Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten,
+          nicht kommerziellen Gebrauch gestattet. Insofern der Inhalt dieser
+          Seite nicht vom Betreiber erstellt wurde, sind die Urheberrechte
+          Dritter zu beachten. Insbesondere sind Inhalte Dritter als solche
+          zu kennzeichnen. Sollten Sie dennoch rechtswidrige Inhalte bemerken,
+          bitten wir Sie, uns unverzüglich zu informieren. Bei Bekanntwerden von
+          Rechtsverletzungen werden wir derartige Inhalte unverzüglich entfernen.
+        </p>
+        <h2>Datenschutzerklärung</h2>
+        <p>
+          Bitte lesen Sie unsere <Link href="/datenschutz">Datenschutzerklärung</Link>
+        </p>
+      </div>
+    </section>
   );
 };
 
