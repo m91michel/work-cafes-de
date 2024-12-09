@@ -1,7 +1,7 @@
 /** @type {import('next-sitemap').IConfig} */
 // docs: https://www.npmjs.com/package/next-sitemap
 
-const siteUrl = process.env.SITE_URL || "https://work-cafes.de";
+const siteUrl = process.env.SITE_URL || "https://cafezumarbeiten.de";
 
 module.exports = {
   // REQUIRED: add your own domain name here
