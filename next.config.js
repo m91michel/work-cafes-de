@@ -11,6 +11,14 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/stats/:match*',
+        destination: 'https://umami.mathias.rocks/:match*'
+      },
+    ]
+  },
 };
 
 module.exports = nextConfig;
