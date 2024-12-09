@@ -15,7 +15,7 @@ jobs:
   google-indexing:
     runs-on: ubuntu-latest
     steps:
-      - uses: robingenz/action-google-indexing@v1.0.0
+      - uses: robingenz/action-google-indexing@v1.0.1
         with:
           siteUrl: ${{ env.SITE_URL }}
           gcpServiceAccountKey: ${{ env.GCP_SA_KEY }}
