@@ -1,0 +1,21 @@
+name: "[Cron] Google Indexing"
+
+# Documentation: https://github.com/robingenz/action-google-indexing
+
+on:
+  schedule:
+    - cron: '7 0 * * *' # every day at 7am
+  workflow_dispatch:
+
+env:
+  SITE_URL: 'https://cafezumarbeiten.de'
+  GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+
+jobs:
+  google-indexing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: robingenz/action-google-indexing@v1.0.0
+        with:
+          siteUrl: ${{ env.SITE_URL }}
+          gcpServiceAccountKey: ${{ env.GCP_SA_KEY }}
