@@ -1,12 +1,22 @@
-import { getCafes } from '@/libs/cafe-utils';
+import { getCafeBySlug, getCafes } from '@/libs/cafe-utils';
 import { CafeCard } from '@/components/ui/cafe-card';
 import { CityHero } from '@/components/city/city-hero';
 import { notFound } from 'next/navigation';
+import { getSEOTags } from '@/libs/seo';
 
 interface CityPageProps {
   params: {
     city: string;
   };
+}
+
+// generate metadata
+export async function generateMetadata({ params }: CityPageProps) {
+  return getSEOTags({
+    title: `Die besten Cafés in ${params.city}`,
+    description: `Entdecke die besten Cafés in ${params.city}, die sich am besten fürs Arbeiten oder Studieren eignen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt.`,
+    canonicalUrlRelative: `/city/${params.city}`,
+  });
 }
 
 export async function generateStaticParams() {
