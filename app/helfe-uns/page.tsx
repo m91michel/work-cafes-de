@@ -1,16 +1,19 @@
 import { Button } from '@/components/ui/button';
-import config from '@/config/config';
+import config, { baseUrl, submitFormUrl } from '@/config/config';
 import { getSEOTags } from '@/libs/seo';
 import { Share2, PlusCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata = getSEOTags({
   title: `Unterstütze uns | ${config.appName}`,
-  description: `Unterstütze uns, indem du diese Seite mit Freunden teilst.`,
+  description: `Unterstütze uns, indem du diese Seite mit Freunden teilst.`, // 100-160 characters
   canonicalUrlRelative: "/helfe-uns",
 });
 
+const tweetText = `Du suchst nach einem Café zum Arbeiten? Dann schau doch mal auf Cafés zum Arbeiten vorbei.`;
+
 export default function ContributePage() {
+  const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(baseUrl)}`;
   return (
     <main className="flex-1 bg-background">
       <div className="max-w-4xl mx-auto px-4 py-12">
@@ -27,7 +30,7 @@ export default function ContributePage() {
               Du kennst ein Cafe, was noch nicht auf dieser Seite ist? Dann schlage es uns vor!
             </p>
             <Button asChild>
-              <a href="https://forms.gle/example" target="_blank" rel="noopener noreferrer">
+              <a href={submitFormUrl} target="_blank" rel="noopener noreferrer">
                 Cafe vorschlagen
               </a>
             </Button>
@@ -44,12 +47,27 @@ export default function ContributePage() {
             </p>
             <div className="flex gap-4">
               <Button asChild variant="outline">
-                <a href="https://twitter.com/intent/tweet?text=Check%20out%20WorkCafes.de%20-%20Find%20the%20best%20cafes%20for%20working%20in%20Germany!%20%23WorkCafes%20%23RemoteWork&url=https%3A%2F%2Fworkcafes.de" 
-                   target="_blank" rel="noopener noreferrer">
+                <a href={tweetUrl} target="_blank" rel="noopener noreferrer">
                   Auf Twitter teilen
                 </a>
               </Button>
             </div>
+          </div>
+
+          {/* Feedback */}
+          <div className="bg-card rounded-lg p-6 border">
+            <div className="flex items-center gap-3 mb-4">
+              <PlusCircle className="h-6 w-6 text-primary" />
+              <h2 className="text-2xl font-semibold">Feedback geben</h2>
+            </div>
+            <p className="text-muted-foreground mb-6">
+              Du hast eine Idee wie man die Seite verbessern kann? Dann schreibe uns eine Mail.
+            </p>
+            <Button asChild>
+              <a href="mailto:feedback@example.com" target="_blank" rel="noopener noreferrer">
+                Feedback geben
+              </a>
+            </Button>
           </div>
         </div>
 

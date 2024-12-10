@@ -3,6 +3,8 @@ export const domainName = "cafeszumarbeiten.de";
 export const baseUrl = `https://${domainName}`;
 export const appName = "Cafés zum Arbeiten";
 
+export const submitFormUrl = "https://tally.so/r/mB81VA";
+
 const config = {
     // REQUIRED
     appName: appName,
