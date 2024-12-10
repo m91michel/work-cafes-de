@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  SITE_URL: 'https://cafezumarbeiten.de'
+  SITE_URL: 'cafezumarbeiten.de'
   GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
 
 jobs:
