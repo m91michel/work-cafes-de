@@ -1,5 +1,5 @@
 
-export const domainName = "cafeszumarbeiten.de";
+export const domainName = "cafezumarbeiten.de";
 export const baseUrl = `https://${domainName}`;
 export const appName = "Cafés zum Arbeiten";
 
