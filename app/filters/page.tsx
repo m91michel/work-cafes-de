@@ -1,8 +1,8 @@
-import { getCafes } from '@/libs/cafe-utils'
 import { FilteredCafes } from '@/components/filtered-cafes'
+import { getListings } from '@/libs/cafe-utils'
 
 export default async function FiltersPage() {
-  const cafesData = await getCafes()
+  const cafesData = await getListings()
   const cities = Object.keys(cafesData).sort()
   
   return (

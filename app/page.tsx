@@ -1,6 +1,8 @@
-import { getCafes } from '@/libs/cafe-utils';
+
 import { CafeDirectory } from '@/components/cafe-directory';
 import { getSEOTags } from '@/libs/seo';
+import { getCafes } from '@/libs/supabase/cafes';
+import { getCities } from '@/libs/supabase/cities';
 
 export const revalidate = 5; 
 
@@ -12,8 +14,7 @@ export const metadata = getSEOTags({
 
 export default async function Home() {
   const cafesData = await getCafes();
-
-  const cities = Object.keys(cafesData).sort();
+  const cities = await getCities();
 
   return (
     <main className="flex-1 bg-background">
@@ -25,7 +26,7 @@ export default async function Home() {
           </p>
         </div>
 
-        <CafeDirectory initialCities={cities} initialCafesData={cafesData} />
+        <CafeDirectory cities={cities} cafes={cafesData} />
       </div>
     </main>
   );

@@ -1,10 +1,11 @@
-import { getCafes, getCafeBySlug } from '@/libs/cafe-utils';
+
 import { CafeHero } from '@/components/cafe/cafe-hero';
 import { CafeDetails } from '@/components/cafe/cafe-details';
 import { CafeAmenities } from '@/components/cafe/cafe-amenities';
 import { notFound } from 'next/navigation';
 import { getSEOTags } from '@/libs/seo';
 import config from '@/config/config';
+import { getCafeBySlug, getCafes } from '@/libs/supabase/cafes';
 
 type Params = Promise<{ slug: string }>
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>

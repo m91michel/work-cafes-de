@@ -3,7 +3,6 @@ import { Wifi, Power, Volume2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Cafe } from '@/libs/types';
-import { generateSlug } from '@/libs/utils';
 import { DefaultCafeImage } from '../cafe/Image';
 
 
@@ -12,16 +11,15 @@ interface CafeCardProps {
 }
 
 export function CafeCard({ cafe }: CafeCardProps) {
-  const slug = generateSlug(`${cafe.city}-${cafe.name}`);
 
   return (
-    <Link href={`/cafe/${slug}`}>
+    <Link href={`/cafe/${cafe.slug}`}>
       <Card className="overflow-hidden hover:shadow-lg transition-shadow">
         <div className="relative h-48">
           {cafe.preview_image && (
             <Image
               src={cafe.preview_image}
-              alt={cafe.name}
+              alt={cafe.name || 'Preview Image of the Cafe'}
               fill
               unoptimized
               className="object-cover"
@@ -37,7 +35,7 @@ export function CafeCard({ cafe }: CafeCardProps) {
           <div className="flex gap-4 text-sm">
             <div className="flex items-center gap-1">
               <Wifi className="h-4 w-4" />
-              <span>{cafe.wifi_quality}</span>
+              <span>{cafe.wifi_qualitity}</span>
             </div>
             <div className="flex items-center gap-1">
               <Power className="h-4 w-4" />

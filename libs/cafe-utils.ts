@@ -4,7 +4,7 @@ import path from 'node:path';
 import { parse } from 'csv-parse/sync';
 import { generateSlug } from './utils';
 
-export async function getCafes(): Promise<CityData> {
+export async function getListings(): Promise<CityData> {
   if (typeof window !== 'undefined') {
     throw new Error('This function can only be called on the server side');
   }
@@ -23,7 +23,7 @@ export async function getCafes(): Promise<CityData> {
     if (!cafesByCity[record.city]) {
       cafesByCity[record.city] = [];
     }
-    
+
     cafesByCity[record.city].push({
       name: record.name,
       city: record.city,
@@ -38,7 +38,7 @@ export async function getCafes(): Promise<CityData> {
 }
 
 export async function getCafeBySlug(slug: string): Promise<Cafe | null> {
-  const cafes = await getCafes();
+  const cafes = await getListings();
   for (const cityData of Object.values(cafes)) {
     const cafe = cityData.find(c => generateSlug(`${c.city}-${c.name}`) === slug);
     if (cafe) return cafe;
@@ -47,7 +47,7 @@ export async function getCafeBySlug(slug: string): Promise<Cafe | null> {
 }
 
 export async function getCafeByCitySlug(slug: string, city: string): Promise<Cafe | null> {
-  const cafes = await getCafes();
+  const cafes = await getListings();
   const cityData = cafes[city];
   return cityData?.find(c => generateSlug(`${c.city}-${c.name}`) === slug) || null;
 }

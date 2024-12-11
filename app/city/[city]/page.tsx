@@ -1,8 +1,10 @@
-import { getCafes } from '@/libs/cafe-utils';
+
 import { CafeCard } from '@/components/ui/cafe-card';
 import { CityHero } from '@/components/city/city-hero';
 import { notFound } from 'next/navigation';
 import { getSEOTags } from '@/libs/seo';
+import { getCafes, getCafesByCity } from '@/libs/supabase/cafes';
+import { getCityBySlug } from '@/libs/supabase/cities';
 
 type Params = Promise<{ city: string }>
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
@@ -30,24 +32,21 @@ export async function generateStaticParams() {
 
 export default async function CityPage({ params }: Props) {
   const citySlug = (await params).city
-  const cafes = await getCafes();
-  const cityName = Object.keys(cafes).find(
-    (city) => city.toLowerCase() === citySlug.toLowerCase()
-  );
+  const city = await getCityBySlug(citySlug);
+  const cafes = await getCafesByCity(citySlug) || [];
+  
 
-  if (!cityName || !cafes[cityName]) {
+  if (!city || !city.name) {
     notFound();
   }
 
-  const cityCafes = cafes[cityName];
-
   return (
     <main className="flex-1 bg-background">
-      <CityHero cityName={cityName} cafeCount={cityCafes.length} />
+      <CityHero cityName={city.name} cafeCount={cafes.length} />
       
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cityCafes.map((cafe) => (
+          {cafes.map((cafe) => (
             <CafeCard key={cafe.name} cafe={cafe} />
           ))}
         </div>
