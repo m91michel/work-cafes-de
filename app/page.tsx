@@ -3,7 +3,7 @@ import { CafeDirectory } from '@/components/cafe-directory';
 import { isDev } from '@/libs/environment';
 import { getSEOTags } from '@/libs/seo';
 
-export const revalidate = isDev ? 5 : 3600; 
+export const revalidate = 5; 
 
 export const metadata = getSEOTags({
   title: `Cafés zum Arbeiten`,
