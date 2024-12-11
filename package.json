@@ -7,7 +7,8 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "s:types": "npx --yes supabase gen types typescript --project-id \"nkmwwlzfsdpqxnflygyr\" --schema cafeforwork > types_db.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -39,6 +40,7 @@
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
+    "@supabase/supabase-js": "^2.47.3",
     "@types/lodash": "^4.17.13",
     "@types/node": "22.10.0",
     "@types/react": "18.3.12",
