@@ -50,7 +50,7 @@ export async function generateStaticParams() {
 export default async function CafePage({ params }: Props) {
   const slug = (await params).slug
   const cafe = await getCafeBySlug(slug);
-  const relatedCafes = await getCafesByCity(cafe?.city_slug || "", 3);
+  const relatedCafes = await getCafesByCity(cafe?.city_slug || "", { limit: 3, excludeSlug: slug });
   
   if (!cafe) {
     notFound();
