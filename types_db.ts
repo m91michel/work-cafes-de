@@ -11,19 +11,99 @@ export type Database = {
     Tables: {
       cafes: {
         Row: {
-          created_at: string
-          id: number
+          address: string | null
+          ambiance: string | null
+          city: string | null
+          city_slug: string | null
+          created_at: string | null
+          food_content: string | null
+          id: string
+          lat_long: string | null
+          links: string | null
           name: string | null
+          open_hours: string | null
+          preview_image: string | null
+          seating_comfort: string | null
+          slug: string | null
+          updated_at: string | null
+          wifi_qualitity: string | null
         }
         Insert: {
-          created_at?: string
-          id?: number
+          address?: string | null
+          ambiance?: string | null
+          city?: string | null
+          city_slug?: string | null
+          created_at?: string | null
+          food_content?: string | null
+          id?: string
+          lat_long?: string | null
+          links?: string | null
           name?: string | null
+          open_hours?: string | null
+          preview_image?: string | null
+          seating_comfort?: string | null
+          slug?: string | null
+          updated_at?: string | null
+          wifi_qualitity?: string | null
         }
         Update: {
-          created_at?: string
-          id?: number
+          address?: string | null
+          ambiance?: string | null
+          city?: string | null
+          city_slug?: string | null
+          created_at?: string | null
+          food_content?: string | null
+          id?: string
+          lat_long?: string | null
+          links?: string | null
           name?: string | null
+          open_hours?: string | null
+          preview_image?: string | null
+          seating_comfort?: string | null
+          slug?: string | null
+          updated_at?: string | null
+          wifi_qualitity?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cafes_city_slug_fkey"
+            columns: ["city_slug"]
+            isOneToOne: false
+            referencedRelation: "cities"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
+      cities: {
+        Row: {
+          country: string | null
+          country_code: string | null
+          created_at: string | null
+          lat_long: string | null
+          name: string | null
+          preview_image: string | null
+          slug: string
+          updated_at: string | null
+        }
+        Insert: {
+          country?: string | null
+          country_code?: string | null
+          created_at?: string | null
+          lat_long?: string | null
+          name?: string | null
+          preview_image?: string | null
+          slug: string
+          updated_at?: string | null
+        }
+        Update: {
+          country?: string | null
+          country_code?: string | null
+          created_at?: string | null
+          lat_long?: string | null
+          name?: string | null
+          preview_image?: string | null
+          slug?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
