@@ -36,11 +36,13 @@ export async function getCafeBySlug(slug: string): Promise<Cafe | null> {
   return data;
 }
 
-export async function getCafesByCity(citySlug: string): Promise<Cafe[]> {
+export async function getCafesByCity(citySlug: string, limit = 100, offset = 0): Promise<Cafe[]> {
   const { data, error } = await supabase
     .from("cafes")
     .select('*')
-    .eq('city_slug', citySlug);
+    .eq('city_slug', citySlug)
+    .range(offset, offset + limit - 1)
+    .order('created_at', { ascending: false });
 
   if (error) {
     console.error('Error fetching data:', error);

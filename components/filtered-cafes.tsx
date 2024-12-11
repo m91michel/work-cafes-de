@@ -23,17 +23,6 @@ export function FilteredCafes({ initialCafesData, initialCities }: FilteredCafes
       }
     }
 
-    // Filter by amenities
-    if (selectedAmenities.length > 0) {
-      Object.keys(filtered).forEach(city => {
-        filtered[city] = filtered[city].filter(cafe => 
-          selectedAmenities.every(amenity => 
-            cafe.amenities?.includes(amenity) ?? false
-          )
-        )
-      })
-    }
-
     setFilteredCafes(filtered)
   }
 

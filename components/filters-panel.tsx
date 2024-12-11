@@ -49,7 +49,7 @@ export function FiltersPanel({ cities, onFiltersChange }: FiltersPanelProps) {
             <SelectValue placeholder="Select a city" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Cities</SelectItem>
+            <SelectItem value="all">Alle Städte</SelectItem>
             {cities.map((city) => (
               <SelectItem key={city} value={city}>
                 {city}

@@ -12,7 +12,7 @@ export function CafeHero({ cafe }: CafeHeroProps) {
       {cafe.preview_image && (
         <Image
           src={cafe.preview_image}
-          alt={cafe.name}
+          alt={cafe.name || ''}
           fill
           className="object-cover"
           unoptimized
@@ -20,6 +20,8 @@ export function CafeHero({ cafe }: CafeHeroProps) {
         />
       )}
       {!cafe.preview_image && <DefaultCafeImage />}
+      
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-transparent" />
       
       <div className="absolute bottom-0 left-0 right-0">
         <div className="max-w-7xl mx-auto px-4 py-8">

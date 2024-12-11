@@ -42,7 +42,7 @@ export default async function CityPage({ params }: Props) {
 
   return (
     <main className="flex-1 bg-background">
-      <CityHero cityName={city.name} cafeCount={cafes.length} />
+      <CityHero city={city} cafeCount={cafes.length} />
       
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

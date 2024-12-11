@@ -5,7 +5,8 @@ import { CafeAmenities } from '@/components/cafe/cafe-amenities';
 import { notFound } from 'next/navigation';
 import { getSEOTags } from '@/libs/seo';
 import config from '@/config/config';
-import { getCafeBySlug, getCafes } from '@/libs/supabase/cafes';
+import { getCafeBySlug, getCafes, getCafesByCity } from '@/libs/supabase/cafes';
+import { CafeCard } from '@/components/ui/cafe-card';
 
 type Params = Promise<{ slug: string }>
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
@@ -13,6 +14,8 @@ type Props = {
   params: Params
   searchParams: SearchParams
 }
+
+export const revalidate = 0;
 
 // generate metadata
 export async function generateMetadata({ params }: Props) {
@@ -47,6 +50,7 @@ export async function generateStaticParams() {
 export default async function CafePage({ params }: Props) {
   const slug = (await params).slug
   const cafe = await getCafeBySlug(slug);
+  const relatedCafes = await getCafesByCity(cafe?.city_slug || "", 3);
   
   if (!cafe) {
     notFound();
@@ -63,6 +67,15 @@ export default async function CafePage({ params }: Props) {
           </div>
           <div>
             <CafeAmenities cafe={cafe} />
+          </div>
+        </div>
+
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold mb-6">Weitere Cafés in {cafe.city}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {relatedCafes.map((cafe) => (
+              <CafeCard key={cafe.id} cafe={cafe} />
+            ))}
           </div>
         </div>
       </div>

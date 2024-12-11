@@ -14,7 +14,7 @@ export function CitySelector({ cities }: CitySelectorProps) {
   return (
     <div className="flex flex-wrap gap-3 justify-center">
       <Button>
-        All Cities
+        Alle Städte
       </Button>
       
       {cities.map((city) => (

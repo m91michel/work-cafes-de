@@ -8,3 +8,9 @@ export function cn(...inputs: ClassValue[]) {
 export function generateSlug(string: string): string {
   return string.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 }
+
+// Returns a list of urls from a string
+export function parseUrls(string: string): string[] {
+  const urls = string.match(/(https?:\/\/[^\s]+)/g);
+  return urls ? urls.map(url => url.trim()) : [];
+}

@@ -18,7 +18,7 @@ export function NavLinks({ className }: { className?: string }) {
           {item.label}
         </Link>
       ))}
-      <Button asChild variant="default" className="block mt-2 md:mt-0 md:ml-4">
+      <Button asChild variant="default" className="mt-2 md:mt-0 md:ml-4">
         <Link href="/helfe-uns">Helfe uns</Link>
       </Button>
     </div>

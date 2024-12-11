@@ -12,14 +12,14 @@ export function CafeAmenities({ cafe }: CafeAmenitiesProps) {
   return (
     <>
       <Card className="p-6">
-        <h2 className="text-2xl font-semibold mb-6">Amenities</h2>
+        <h2 className="text-2xl font-semibold mb-6">Ausstattung</h2>
         
         <div className="space-y-6">
           <div className="flex items-center gap-3">
             <Wifi className="h-5 w-5 text-muted-foreground" />
             <div>
-              <h3 className="font-medium">WiFi Quality</h3>
-              <p className="text-muted-foreground">{cafe.wifi_quality}</p>
+              <h3 className="font-medium">WiFi Qualität</h3>
+              <p className="text-muted-foreground">{cafe.wifi_qualitity || "Nicht angegeben"}</p>
             </div>
           </div>
 
@@ -27,25 +27,30 @@ export function CafeAmenities({ cafe }: CafeAmenitiesProps) {
             <Armchair className="h-5 w-5 text-muted-foreground" />
             
             <div>
-              <h3 className="font-medium">Seating Comfort</h3>
-              <p className="text-muted-foreground">{cafe.seating_comfort}</p>
+              <h3 className="font-medium">Sitzkomfort</h3>
+              <p className="text-muted-foreground">{cafe.seating_comfort || "Nicht angegeben"}</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
             <Volume2 className="h-5 w-5 text-muted-foreground" />
             <div>
-              <h3 className="font-medium">Ambiance</h3>
-              <p className="text-muted-foreground">{cafe.ambiance}</p>
+              <h3 className="font-medium">Ambiente</h3>
+              <p className="text-muted-foreground">{cafe.ambiance || "Nicht angegeben"}</p>
             </div>
           </div>
         </div>
       </Card>
 
-      <div className="mt-6">
-        <Button asChild variant="outline" className="w-full">
-          <Link href="/">
-            Back to All Cafes
+      <div className="mt-6 flex flex-col lg:flex-row gap-6">
+        <Button asChild variant="outline" className="w-full lg:w-1/2">
+          <Link href={`/city/${cafe.city_slug}`}>
+            Alle Cafes in {cafe.city}
+          </Link>
+        </Button>
+        <Button asChild variant="outline" className="w-full lg:w-1/2">
+          <Link href={`/cities`}>
+            Alle Städte
           </Link>
         </Button>
       </div>
