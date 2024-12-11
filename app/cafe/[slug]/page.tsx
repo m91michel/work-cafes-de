@@ -6,28 +6,30 @@ import { notFound } from 'next/navigation';
 import { getSEOTags } from '@/libs/seo';
 import config from '@/config/config';
 
-interface CafePageProps {
-  params: {
-    slug: string;
-  };
+type Params = Promise<{ slug: string }>
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+type Props = {
+  params: Params
+  searchParams: SearchParams
 }
 
 // generate metadata
-export async function generateMetadata({ params }: CafePageProps) {
-  const cafe = await getCafeBySlug(params.slug);
+export async function generateMetadata({ params }: Props) {
+  const slug = (await params).slug
+  const cafe = await getCafeBySlug(slug);
 
   if (!cafe) {
     return getSEOTags({
       title: `Café nicht gefunden | ${config.appName}`,
       description: `Café nicht gefunden`,
-      canonicalUrlRelative: `/cafe/${params.slug}`,
+      canonicalUrlRelative: `/cafe/${slug}`,
     });
   }
   
   return getSEOTags({
     title: `${cafe.name} | Cafés zum Arbeiten`,
     description: `Das ${cafe.name} in ${cafe.city} ist ein idealer Ort zum Arbeiten, Studieren oder sich auszutauschen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt.`,
-    canonicalUrlRelative: `/cafe/${params.slug}`,
+    canonicalUrlRelative: `/cafe/${slug}`,
   });
 }
 
@@ -41,8 +43,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function CafePage({ params }: CafePageProps) {
-  const cafe = await getCafeBySlug(params.slug);
+export default async function CafePage({ params }: Props) {
+  const slug = (await params).slug
+  const cafe = await getCafeBySlug(slug);
   
   if (!cafe) {
     notFound();

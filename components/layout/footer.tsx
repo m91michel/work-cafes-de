@@ -2,9 +2,9 @@ import { Coffee, Github, Twitter } from "lucide-react";
 import Link from "next/link";
 import config, { domainName } from "@/config/config";
 
-export function Footer() {
-  const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear();
 
+export function Footer() {
   return (
     <footer className="border-t bg-secondary/30">
       <div className="container mx-auto px-4 py-12">

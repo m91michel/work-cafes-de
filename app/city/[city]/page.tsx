@@ -1,21 +1,23 @@
-import { getCafeBySlug, getCafes } from '@/libs/cafe-utils';
+import { getCafes } from '@/libs/cafe-utils';
 import { CafeCard } from '@/components/ui/cafe-card';
 import { CityHero } from '@/components/city/city-hero';
 import { notFound } from 'next/navigation';
 import { getSEOTags } from '@/libs/seo';
 
-interface CityPageProps {
-  params: {
-    city: string;
-  };
+type Params = Promise<{ city: string }>
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+type Props = {
+  params: Params
+  searchParams: SearchParams
 }
 
 // generate metadata
-export async function generateMetadata({ params }: CityPageProps) {
+export async function generateMetadata({ params }: Props) {
+  const city = (await params).city
   return getSEOTags({
-    title: `Die besten Cafés in ${params.city}`,
-    description: `Entdecke die besten Cafés in ${params.city}, die sich am besten fürs Arbeiten oder Studieren eignen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt.`,
-    canonicalUrlRelative: `/city/${params.city}`,
+    title: `Die besten Cafés in ${city}`,
+    description: `Entdecke die besten Cafés in ${city}, die sich am besten fürs Arbeiten oder Studieren eignen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt.`,
+    canonicalUrlRelative: `/city/${city}`,
   });
 }
 
@@ -26,10 +28,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function CityPage({ params }: CityPageProps) {
+export default async function CityPage({ params }: Props) {
+  const citySlug = (await params).city
   const cafes = await getCafes();
   const cityName = Object.keys(cafes).find(
-    (city) => city.toLowerCase() === params.city.toLowerCase()
+    (city) => city.toLowerCase() === citySlug.toLowerCase()
   );
 
   if (!cityName || !cafes[cityName]) {
