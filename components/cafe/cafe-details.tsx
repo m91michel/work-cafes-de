@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Clock, Globe, MapPin } from "lucide-react";
+import { Clock, LinkIcon, MapPin } from "lucide-react";
 import { Cafe } from "@/libs/types";
 import { CafeLinks } from "./links";
 
@@ -39,10 +39,10 @@ export function CafeDetails({ cafe }: CafeDetailsProps) {
         </div>
 
         <div className="flex items-start gap-3">
-          <Globe className="h-5 w-5 text-muted-foreground mt-1" />
+          <LinkIcon className="h-5 w-5 text-muted-foreground mt-1" />
 
           <div className="w-full">
-            <h3 className="font-medium">Website</h3>
+            <h3 className="font-medium">Links</h3>
             <CafeLinks cafe={cafe} />
           </div>
         </div>

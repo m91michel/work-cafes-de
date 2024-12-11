@@ -2,6 +2,7 @@ import { Cafe } from "@/libs/types";
 import { parseUrls } from "@/libs/utils";
 import { FacebookIcon, GlobeIcon, InstagramIcon, YoutubeIcon } from "lucide-react";
 import Link from "next/link";
+import { SiFacebook, SiInstagram, SiTiktok, SiTripadvisor, SiYelp, SiYoutube } from "@icons-pack/react-simple-icons";
 
 type Props = {
   cafe: Cafe;
@@ -32,7 +33,7 @@ export function CafeLink({ link }: { link: string }) {
     <li key={link}>
       <Link href={link} {...externalProps} className="flex items-center gap-2">
         {icon}
-        {link}
+        {formatLinkName(link)}
       </Link>
     </li>
   );
@@ -41,16 +42,16 @@ export function CafeLink({ link }: { link: string }) {
 function getLinkType(link: string) {
   if (link.includes("instagram")) {
     return "instagram";
-  } else if (link.includes("tiktok")) {
-    return "tiktok";
-  } else if (link.includes("facebook")) {
-    return "facebook";
-  } else if (link.includes("youtube")) {
-    return "youtube";
   } else if (link.includes("tripadvisor")) {
     return "tripadvisor";
   } else if (link.includes("yelp")) {
     return "yelp";
+  } else if (link.includes("facebook")) {
+    return "facebook";
+  } else if (link.includes("tiktok")) {
+    return "tiktok";
+  } else if (link.includes("youtube")) {
+    return "youtube";
   } else if (link.includes("pinterest")) {
     return "pinterest";
   } else {
@@ -58,16 +59,35 @@ function getLinkType(link: string) {
   }
 }
 
+function formatLinkName(link: string) {
+  if (link.includes("instagram")) {
+    const handle = link.split("instagram.com/")[1];
+    return `@${handle.replace("/", "")}`;
+  } else if (link.includes("facebook")) {
+    const handle = link.split("facebook.com/")[1];
+    return `@${handle}`;
+  }
+
+  return link
+    .replace(/https?:\/\//, "")
+    .replace(/^www\./, "")
+    .replace(/\/$/, ""); // keeping the trailing slash removal
+}
+
 function getLinkIcon(type: string, className?: string) {
   switch (type) {
     case "instagram":
-      return <InstagramIcon className={className} />;
-    case "tiktok":
-      return <FacebookIcon className={className} />;
+      return <SiInstagram className={className} />;
+    case "tripadvisor":
+      return <SiTripadvisor className={className} />;
+    case "yelp":
+      return <SiYelp className={className} />;
     case "facebook":
-      return <FacebookIcon className={className} />;
+      return <SiFacebook className={className} />;
+    case "tiktok":
+      return <SiTiktok className={className} />;
     case "youtube":
-      return <YoutubeIcon className={className} />;
+      return <SiYoutube className={className} />;
     default:
       return <GlobeIcon className={className} />;
   }
