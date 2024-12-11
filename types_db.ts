@@ -23,6 +23,8 @@ export type Database = {
           name: string | null
           open_hours: string | null
           preview_image: string | null
+          processed: Json | null
+          processed_at: string | null
           seating_comfort: string | null
           slug: string | null
           updated_at: string | null
@@ -41,6 +43,8 @@ export type Database = {
           name?: string | null
           open_hours?: string | null
           preview_image?: string | null
+          processed?: Json | null
+          processed_at?: string | null
           seating_comfort?: string | null
           slug?: string | null
           updated_at?: string | null
@@ -59,6 +63,8 @@ export type Database = {
           name?: string | null
           open_hours?: string | null
           preview_image?: string | null
+          processed?: Json | null
+          processed_at?: string | null
           seating_comfort?: string | null
           slug?: string | null
           updated_at?: string | null

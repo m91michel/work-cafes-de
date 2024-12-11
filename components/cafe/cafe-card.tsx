@@ -3,7 +3,7 @@ import { Wifi, Power, Volume2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Cafe } from '@/libs/types';
-import { DefaultCafeImage } from '../cafe/Image';
+import { DefaultCafeImage } from './Image';
 
 
 interface CafeCardProps {

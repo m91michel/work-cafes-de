@@ -42,13 +42,13 @@ export function CafeAmenities({ cafe }: CafeAmenitiesProps) {
         </div>
       </Card>
 
-      <div className="mt-6 flex flex-col lg:flex-row gap-6">
-        <Button asChild variant="outline" className="w-full lg:w-1/2">
+      <div className="mt-6 flex flex-col xl:flex-row gap-6">
+        <Button asChild variant="outline" className="w-full xl:w-1/2">
           <Link href={`/city/${cafe.city_slug}`}>
             Alle Cafes in {cafe.city}
           </Link>
         </Button>
-        <Button asChild variant="outline" className="w-full lg:w-1/2">
+        <Button asChild variant="outline" className="w-full xl:w-1/2">
           <Link href={`/cities`}>
             Alle Städte
           </Link>

@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 import { getSEOTags } from '@/libs/seo';
 import config from '@/config/config';
 import { getCafeBySlug, getCafes, getCafesByCity } from '@/libs/supabase/cafes';
-import { CafeCard } from '@/components/ui/cafe-card';
+import { CafeCard } from '@/components/cafe/cafe-card';
 
 type Params = Promise<{ slug: string }>
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>

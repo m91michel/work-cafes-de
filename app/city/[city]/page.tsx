@@ -1,5 +1,5 @@
 
-import { CafeCard } from '@/components/ui/cafe-card';
+import { CafeCard } from '@/components/cafe/cafe-card';
 import { CityHero } from '@/components/city/city-hero';
 import { notFound } from 'next/navigation';
 import { getSEOTags } from '@/libs/seo';

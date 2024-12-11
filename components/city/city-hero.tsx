@@ -17,11 +17,11 @@ export function CityHero({ city, cafeCount }: CityHeroProps) {
         </div>
         
         <h1 className="text-4xl font-bold mb-4">
-          Die {cafeCount} besten Cafes in {cityName}
+          Die {cafeCount} besten Cafés in {cityName}
         </h1>
         
         <p className="text-xl text-muted-foreground">
-          Entdecke {cafeCount} sorgfältig ausgewählten {cafeCount === 1 ? 'ausgewähltes Cafe' : 'ausgewählten Cafes'} in {cityName} um zu Arbeiten oder mit deinen Kommilitonen zu lernen.
+          Entdecke {cafeCount} sorgfältig {cafeCount === 1 ? 'ausgewähltes Cafe' : 'ausgewählten Cafes'} in {cityName} um zu Arbeiten oder mit deinen Kommilitonen zu lernen.
         </p>
       </div>
     </div>

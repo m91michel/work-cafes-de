@@ -1,6 +1,6 @@
 'use client'
 
-import { CafeCard } from '@/components/ui/cafe-card'
+import { CafeCard } from '@/components/cafe/cafe-card'
 import { CityData } from '@/libs/types'
 
 interface CafeResultsProps {

@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from 'react';
 import { CitySelector } from '@/components/ui/city-selector';
-import { CafeCard } from '@/components/ui/cafe-card';
+import { CafeCard } from '@/components/cafe/cafe-card';
 import { Cafe, City } from '@/libs/types';
 
 interface CafeDirectoryProps {
