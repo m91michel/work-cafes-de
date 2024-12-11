@@ -1,6 +1,5 @@
 import { getCafes } from '@/libs/cafe-utils';
 import { CafeDirectory } from '@/components/cafe-directory';
-import { isDev } from '@/libs/environment';
 import { getSEOTags } from '@/libs/seo';
 
 export const revalidate = 5; 
