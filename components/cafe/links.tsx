@@ -1,6 +1,6 @@
 import { Cafe } from "@/libs/types";
 import { parseUrls } from "@/libs/utils";
-import { FacebookIcon, GlobeIcon, InstagramIcon, YoutubeIcon } from "lucide-react";
+import { GlobeIcon } from "lucide-react";
 import Link from "next/link";
 import { SiFacebook, SiInstagram, SiTiktok, SiTripadvisor, SiYelp, SiYoutube } from "@icons-pack/react-simple-icons";
 

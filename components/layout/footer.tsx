@@ -1,8 +1,18 @@
-import { Coffee, Github, Twitter } from "lucide-react";
+import { Coffee, Github } from "lucide-react";
 import Link from "next/link";
 import config, { domainName } from "@/config/config";
+import { SiInstagram, SiX } from "@icons-pack/react-simple-icons";
 
 const currentYear = new Date().getFullYear();
+
+const cities = [
+  { name: "Berlin", slug: "berlin" },
+  { name: "München", slug: "munich" },
+  { name: "Hamburg", slug: "hamburg" },
+  { name: "Frankfurt", slug: "frankfurt" },
+  { name: "Stuttgart", slug: "stuttgart" },
+  { name: "Köln", slug: "koeln" },
+];
 
 export function Footer() {
   return (
@@ -15,26 +25,23 @@ export function Footer() {
               <span className="font-bold text-xl">Cafés zum Arbeiten</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Entdecken Sie die besten Cafes zum Arbeiten in Deutschland.
+              Wir helfen dir, die besten Cafés zum Arbeiten in Deutschland zu finden.
             </p>
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4">Die besten Cafes</h3>
+            <h3 className="font-semibold mb-4">Die besten Cafés</h3>
             <ul className="space-y-2">
+              {cities.map((city) => (
+                <li key={city.slug}>
+                  <Link href={`/city/${city.slug}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Cafés zum Arbeiten in {city.name}
+                  </Link>
+                </li>
+              ))}
               <li>
-                <Link href="/city/berlin" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Cafes zum Arbeiten in Berlin
-                </Link>
-              </li>
-              <li>
-                <Link href="/city/munich" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Cafes zum Arbeiten in München
-                </Link>
-              </li>
-              <li>
-                <Link href="/city/hamburg" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Cafes zum Arbeiten in Hamburg
+                <Link href="/cities" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Alle Städte
                 </Link>
               </li>
             </ul>
@@ -70,10 +77,10 @@ export function Footer() {
             <h3 className="font-semibold mb-4">Folge uns</h3>
             <div className="flex items-center gap-4">
               <Link href="#twitter" className="text-muted-foreground hover:text-primary transition-colors">
-                <Twitter className="w-5 h-5" />
+                <SiX className="w-5 h-5" />
               </Link>
-              <Link href="#github" className="text-muted-foreground hover:text-primary transition-colors">
-                <Github className="w-5 h-5" />
+              <Link href="#instagram" className="text-muted-foreground hover:text-primary transition-colors">
+                <SiInstagram className="w-5 h-5" />
               </Link>
             </div>
           </div>

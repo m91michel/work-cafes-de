@@ -8,9 +8,16 @@ export const metadata = getSEOTags({
   canonicalUrlRelative: "/impressum",
 });
 
-const lastUpdated = "2024-12-08";
+const lastUpdated = "2024-12-11";
 const address = "Waldstr. 48, 90763 Fürth, Germany";
 const url = `https://${config.domainName}`;
+
+const unsplashCredits = [
+  'Photo by <a href="https://unsplash.com/@stewi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Stephan Widua</a> on <a href="https://unsplash.com/photos/time-lapse-photography-of-vehicle-at-the-road-in-between-the-building-at-nighttime-aerial-photography-iPOZf3tQfHA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>',
+  'Photo by <a href="https://unsplash.com/@jankolar?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Jan Antonin Kolar</a> on <a href="https://unsplash.com/photos/view-of-buildings-8QJSi37vhms?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>',
+  'Photo by <a href="https://unsplash.com/@kumas_taverne?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">𝕶𝖚𝖒𝖆𝖘 𝕿𝖆𝖛𝖊𝖗𝖓𝖊</a> on <a href="https://unsplash.com/photos/a-water-fountain-in-front-of-a-large-building-5TvIkh12MSA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>',
+  
+]
 
 const Imprint = () => {
   return (
@@ -78,6 +85,12 @@ const Imprint = () => {
         <p>
           Bitte lesen Sie unsere <Link href="/datenschutz">Datenschutzerklärung</Link>
         </p>
+        <h2>Bildquellen</h2>
+        <ul className="list-disc list-inside">
+          {unsplashCredits.map((credit, index) => (
+            <li key={index} dangerouslySetInnerHTML={{ __html: credit }} />
+          ))}
+        </ul>
       </div>
     </section>
   );

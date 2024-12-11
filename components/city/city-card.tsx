@@ -17,7 +17,7 @@ export function CityCard({ city }: Props) {
           <div className="relative h-48">
             {city.preview_image && (
               <Image
-                src={city.preview_image}
+                src={`${city.preview_image}?width=300`}
                 alt={city.name || 'Preview Image of the City'}
                 fill
                 unoptimized
