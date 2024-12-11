@@ -17,9 +17,12 @@ export type Database = {
           city_slug: string | null
           created_at: string | null
           food_content: string | null
+          google_place_id: string | null
+          google_rating: number | null
           id: string
           lat_long: string | null
           links: string | null
+          maps_data: Json | null
           name: string | null
           open_hours: string | null
           preview_image: string | null
@@ -37,9 +40,12 @@ export type Database = {
           city_slug?: string | null
           created_at?: string | null
           food_content?: string | null
+          google_place_id?: string | null
+          google_rating?: number | null
           id?: string
           lat_long?: string | null
           links?: string | null
+          maps_data?: Json | null
           name?: string | null
           open_hours?: string | null
           preview_image?: string | null
@@ -57,9 +63,12 @@ export type Database = {
           city_slug?: string | null
           created_at?: string | null
           food_content?: string | null
+          google_place_id?: string | null
+          google_rating?: number | null
           id?: string
           lat_long?: string | null
           links?: string | null
+          maps_data?: Json | null
           name?: string | null
           open_hours?: string | null
           preview_image?: string | null

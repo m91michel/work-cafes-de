@@ -21,9 +21,7 @@ export async function GET() {
     .from("cafes")
     .select("*")
     .is("processed_at", null)
-    .limit(1);
-
-  const { data: cities } = await supabase.from("cities").select("*");
+    .limit(10);
 
   if (!cafes) {
     return NextResponse.json({ message: "No cafes found" }, { status: 404 });

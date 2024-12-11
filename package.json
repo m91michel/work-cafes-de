@@ -11,6 +11,7 @@
     "s:types": "npx --yes supabase gen types typescript --project-id \"nkmwwlzfsdpqxnflygyr\" --schema cafeforwork > types_db.ts"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.0",
     "@hookform/resolvers": "^3.9.0",
     "@icons-pack/react-simple-icons": "^10.2.0",
     "@radix-ui/react-accordion": "^1.2.0",
@@ -46,6 +47,7 @@
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",
     "autoprefixer": "10.4.20",
+    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",

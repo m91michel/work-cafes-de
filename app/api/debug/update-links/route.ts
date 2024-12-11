@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
-import { generateSlugForCafe } from "./_helpers";
-import { updateImageUrl } from "./_helpers";
+import { adjustLinks } from "./_helpers";
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -19,23 +18,34 @@ export async function GET() {
   const { data: cafes } = await supabase
           .from("cafes")
           .select("*")
-          .eq("processed->broken_image", true)
-          .limit(2);
+          .is("processed->links", null)
+          .neq("links", null)
+          .limit(50);
 
   if (!cafes) {
     return NextResponse.json({ message: "No cafes found" }, { status: 404 });
   }
 
-  const { data: cities = [] } = await supabase
-          .from("cities")
-          .select("*")
-
-  if (!cities) {
-    return NextResponse.json({ message: "No cities found" }, { status: 404 });
-  }
-
   for (const cafe of cafes) {
-    await updateImageUrl(cafe)
+    const links = await adjustLinks(cafe)
+    console.log({
+      links,
+      original_links: cafe.links,
+    })
+    if (!links) {
+      continue
+    }
+
+    const { error } = await supabase.from("cafes").update({ 
+      links, 
+      processed: {
+        links: true,
+      },
+      processed_at: new Date().toISOString() 
+    }).eq("id", cafe.id)
+    if (error) {
+      console.log(`Error updating cafe: ${cafe.name}`, error)
+    }
   }
 
   const processedCafes = cafes.map(cafe => ({
@@ -43,6 +53,7 @@ export async function GET() {
     name: cafe.name,
     slug: cafe.slug,
     city: cafe.city,
+    links: cafe.links,
     preview_image: cafe.preview_image,
   }))
   return NextResponse.json({ message: "success", cafes: processedCafes });
