@@ -5,7 +5,6 @@ export const revalidate = 0;
 
 export default async function FiltersPage() {
   const cafesData = await getCafes()
-  console.log(cafesData)
   
   return (
     <div className="container mx-auto px-4 py-8">

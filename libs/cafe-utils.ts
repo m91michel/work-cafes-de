@@ -23,7 +23,7 @@ export async function getCafes(): Promise<CityData> {
     if (!cafesByCity[record.city]) {
       cafesByCity[record.city] = [];
     }
-    console.log(record);
+    
     cafesByCity[record.city].push({
       name: record.name,
       city: record.city,
