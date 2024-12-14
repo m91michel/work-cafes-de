@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Wifi, Volume2, Armchair } from 'lucide-react';
 import Link from 'next/link';
 import { Cafe } from '@/libs/types';
+import { AmbianceBadge, SeatingComfortBadge, WifiQualitityBadge } from './cafe-badges';
 
 interface CafeAmenitiesProps {
   cafe: Cafe;
@@ -19,7 +20,7 @@ export function CafeAmenities({ cafe }: CafeAmenitiesProps) {
             <Wifi className="h-5 w-5 text-muted-foreground" />
             <div>
               <h3 className="font-medium">WiFi Qualität</h3>
-              <p className="text-muted-foreground">{cafe.wifi_qualitity || "Nicht angegeben"}</p>
+              <WifiQualitityBadge value={cafe.wifi_qualitity} />
             </div>
           </div>
 
@@ -28,7 +29,7 @@ export function CafeAmenities({ cafe }: CafeAmenitiesProps) {
             
             <div>
               <h3 className="font-medium">Sitzkomfort</h3>
-              <p className="text-muted-foreground">{cafe.seating_comfort || "Nicht angegeben"}</p>
+              <SeatingComfortBadge value={cafe.seating_comfort} />
             </div>
           </div>
 
@@ -36,7 +37,7 @@ export function CafeAmenities({ cafe }: CafeAmenitiesProps) {
             <Volume2 className="h-5 w-5 text-muted-foreground" />
             <div>
               <h3 className="font-medium">Ambiente</h3>
-              <p className="text-muted-foreground">{cafe.ambiance || "Nicht angegeben"}</p>
+              <AmbianceBadge value={cafe.ambiance} />
             </div>
           </div>
         </div>

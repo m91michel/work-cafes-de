@@ -8,15 +8,16 @@ interface CafeDetailsProps {
 }
 
 export function CafeDetails({ cafe }: CafeDetailsProps) {
-  const openingHours = cafe.open_hours?.split("\n").map((hours) => (
-    <div key={hours} className="text-sm">
+  const openingHours = cafe.open_hours?.split("\n").map((hours, index) => (
+    <div key={index} className="text-sm">
       {hours}
+      {hours.length == 0 && <br />}
     </div>
   ));
 
   return (
     <Card className="p-6">
-      <h2 className="text-2xl font-semibold mb-6">Über dieses Cafe</h2>
+      <h2 className="text-2xl font-semibold mb-6">Über dieses Café</h2>
 
       <div className="grid gap-6">
         <div className="flex items-start gap-3">
@@ -33,8 +34,18 @@ export function CafeDetails({ cafe }: CafeDetailsProps) {
             <Clock className="h-5 w-5 text-muted-foreground mt-1" />
           </div>
           <div>
+            <h3 className="font-medium">Essen</h3>
+            <div className="text-muted-foreground">{cafe.food_content || 'Wir können leider keine Essensmöglichkeiten für dieses Cafe finden.'}</div>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-3">
+          <div className="w-5">
+            <Clock className="h-5 w-5 text-muted-foreground mt-1" />
+          </div>
+          <div>
             <h3 className="font-medium">Öffnungszeiten</h3>
-            <div className="text-muted-foreground">{openingHours}</div>
+            <div className="text-muted-foreground">{openingHours || 'Wir können leider keine Öffnungszeiten für dieses Cafe finden.'}</div>
           </div>
         </div>
 
@@ -43,7 +54,8 @@ export function CafeDetails({ cafe }: CafeDetailsProps) {
 
           <div className="w-full">
             <h3 className="font-medium">Links</h3>
-            <CafeLinks cafe={cafe} />
+            {cafe.links && <CafeLinks cafe={cafe} />}
+            {!cafe.links && <p className="text-muted-foreground">Keine Links verfügbar</p>}
           </div>
         </div>
       </div>

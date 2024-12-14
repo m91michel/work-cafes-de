@@ -91,33 +91,51 @@ export type Database = {
       }
       cities: {
         Row: {
+          cafes_count: number | null
           country: string | null
           country_code: string | null
           created_at: string | null
+          description_long: string | null
+          description_short: string | null
           lat_long: string | null
           name: string | null
+          population: number | null
           preview_image: string | null
           slug: string
+          state: string | null
+          state_code: string | null
           updated_at: string | null
         }
         Insert: {
+          cafes_count?: number | null
           country?: string | null
           country_code?: string | null
           created_at?: string | null
+          description_long?: string | null
+          description_short?: string | null
           lat_long?: string | null
           name?: string | null
+          population?: number | null
           preview_image?: string | null
           slug: string
+          state?: string | null
+          state_code?: string | null
           updated_at?: string | null
         }
         Update: {
+          cafes_count?: number | null
           country?: string | null
           country_code?: string | null
           created_at?: string | null
+          description_long?: string | null
+          description_short?: string | null
           lat_long?: string | null
           name?: string | null
+          population?: number | null
           preview_image?: string | null
           slug?: string
+          state?: string | null
+          state_code?: string | null
           updated_at?: string | null
         }
         Relationships: []

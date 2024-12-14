@@ -10,7 +10,7 @@ export async function getCafes(
 ): Promise<Cafe[]> {
   const { data, error } = await supabase
     .from("cafes")
-    .select("*")
+    .select("*, cities(name, slug)")
     .range(offset, offset + limit - 1)
     .order("created_at", { ascending: false });
 
@@ -19,13 +19,13 @@ export async function getCafes(
     return [];
   }
 
-  return data;
+  return data as Cafe[];
 }
 
 export async function getCafeBySlug(slug: string): Promise<Cafe | null> {
   const { data, error } = await supabase
     .from("cafes")
-    .select("*")
+    .select("*, cities(name, slug)")
     .eq("slug", slug)
     .single();
 

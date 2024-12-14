@@ -1,10 +1,11 @@
+import { CafeList } from "@/components/cafe-directory";
+import { CityList } from "@/components/city/city-list";
+import { CitySelector } from "@/components/ui/city-selector";
+import { getSEOTags } from "@/libs/seo";
+import { getCafes } from "@/libs/supabase/cafes";
+import { getCities } from "@/libs/supabase/cities";
 
-import { CafeDirectory } from '@/components/cafe-directory';
-import { getSEOTags } from '@/libs/seo';
-import { getCafes } from '@/libs/supabase/cafes';
-import { getCities } from '@/libs/supabase/cities';
-
-export const revalidate = 5; 
+export const revalidate = 5;
 
 export const metadata = getSEOTags({
   title: `Cafés zum Arbeiten`,
@@ -13,21 +14,33 @@ export const metadata = getSEOTags({
 });
 
 export default async function Home() {
-  const cafesData = await getCafes();
-  const cities = await getCities();
+  const cafes = await getCafes({ limit: 6, offset: 0 });
+  const cities = await getCities({ limit: 6, offset: 0 });
 
   return (
     <main className="flex-1 bg-background">
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 pt-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Cafés zum Arbeiten in Deutschland</h1>
+          <h1 className="text-4xl font-bold mb-4">
+            Cafés zum Arbeiten in Deutschland
+          </h1>
           <p className="text-xl text-muted-foreground">
-            Finde den perfekten Platz zum Arbeiten, Coden oder Lernen in deiner Stadt
+            Finde den perfekten Platz zum Arbeiten, Coden oder Lernen in deiner
+            Stadt
           </p>
         </div>
-
-        <CafeDirectory cities={cities} cafes={cafesData} />
+        { cities && <CitySelector cities={cities} /> }
       </div>
+      <CafeList
+        cafes={cafes}
+        title="Die besten Cafés zum Arbeiten in Deutschland"
+      />
+
+      <CityList
+        cities={cities}
+        title="Finde ein Cafe zum Arbeiten in deiner Stadt"
+        showMoreButton={true}
+      />
     </main>
   );
 }

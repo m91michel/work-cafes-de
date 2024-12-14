@@ -1,34 +1,24 @@
 "use client";
 
-import { CitySelector } from '@/components/ui/city-selector';
-import { CafeCard } from '@/components/cafe/cafe-card';
-import { Cafe, City } from '@/libs/types';
+import { CafeCard } from "@/components/cafe/cafe-card";
+import { Cafe } from "@/libs/types";
+import { cn } from "@/libs/utils";
 
-interface CafeDirectoryProps {
+interface Props {
   title?: string;
-  cities: City[];
   cafes: Cafe[];
+  className?: string;
 }
 
-export function CafeDirectory({ title, cities, cafes }: CafeDirectoryProps) {
-
+export function CafeList({ title, cafes, className }: Props) {
   return (
-    <>
-      <CitySelector
-        cities={cities} 
-      />
-
-      <div className="mt-12">
-        
-          <div className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6">{title}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {cafes.map((cafe) => (
-                <CafeCard key={cafe.slug} cafe={cafe} />
-              ))}
-            </div>
-          </div>
+    <section className={cn("max-w-7xl mx-auto px-4 py-12", className)}>
+      {title && <h2 className="text-2xl font-semibold mb-6">{title}</h2>}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {cafes.map((cafe) => (
+          <CafeCard key={cafe.slug} cafe={cafe} />
+        ))}
       </div>
-    </>
+    </section>
   );
 }

@@ -1,16 +1,21 @@
-import { Cafe, City } from '../types';
+import { City } from '../types';
 import supabase from './supabaseClient';
 
 type GetCafeProps = {
     limit?: number
     offset?: number
+    excludeSlug?: string;
 }
-export async function getCities({ limit = 100, offset = 0 }: GetCafeProps = { limit: 100, offset: 0 }): Promise<City[]> {
+export async function getCities(props: GetCafeProps = { limit: 100, offset: 0 }): Promise<City[]> {
+  const { limit = 100, offset = 0, excludeSlug } = props;
+
   const { data, error } = await supabase
     .from("cities")
     .select('*')
     .range(offset, offset + limit - 1)
-    .order('created_at', { ascending: false });
+    .neq('slug', excludeSlug)
+    .gte('cafes_count', 1)
+    .order('population', { ascending: false });
 
   if (error) {
     console.error('Error fetching data:', error);

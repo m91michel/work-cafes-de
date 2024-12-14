@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Cafe } from "./types";
 
 const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY || "";
 
@@ -13,13 +12,13 @@ export type GoogleMapsCandidate = {
   geometry: any;
 }
 
-export async function searchInGoogleMaps(cafe: Cafe) {
+export async function searchInGoogleMaps(query: string): Promise<GoogleMapsCandidate[] | null> {
   try {
     const response = await axios.get(
       "https://maps.googleapis.com/maps/api/place/findplacefromtext/json",
       {
         params: {
-          input: `${cafe.name} ${cafe.city}`,
+          input: query,
           inputtype: "textquery",
           fields:
             "place_id,photos,formatted_address,name,rating,opening_hours,geometry",
@@ -28,7 +27,19 @@ export async function searchInGoogleMaps(cafe: Cafe) {
       }
     );
 
-    return response.data;
+    const data = response.data;
+
+    if (!data || data?.candidates?.length === 0) {
+      console.log(`No Google Maps data found for ${query}:`, data);
+      return null;
+    }
+
+    if (data && data?.candidates?.length > 1) {
+      console.log(`Multiple candidates found for ${query}:`, data);
+      return data.candidates;
+    }
+
+    return data.candidates;
   } catch (error) {
     console.error(`Error fetching data from Google Places API:`, error);
     return null;

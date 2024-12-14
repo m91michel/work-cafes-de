@@ -16,7 +16,11 @@ const unsplashCredits = [
   'Photo by <a href="https://unsplash.com/@stewi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Stephan Widua</a> on <a href="https://unsplash.com/photos/time-lapse-photography-of-vehicle-at-the-road-in-between-the-building-at-nighttime-aerial-photography-iPOZf3tQfHA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>',
   'Photo by <a href="https://unsplash.com/@jankolar?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Jan Antonin Kolar</a> on <a href="https://unsplash.com/photos/view-of-buildings-8QJSi37vhms?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>',
   'Photo by <a href="https://unsplash.com/@kumas_taverne?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">𝕶𝖚𝖒𝖆𝖘 𝕿𝖆𝖛𝖊𝖗𝖓𝖊</a> on <a href="https://unsplash.com/photos/a-water-fountain-in-front-of-a-large-building-5TvIkh12MSA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>',
-  
+  'Photo by Philipp Birmes: https://www.pexels.com/photo/worms-eye-view-of-high-rise-building-3646913/',
+  'Photo by Jasper Kortmann: https://www.pexels.com/photo/view-of-cologne-cathedral-and-hohenzollern-bridge-29693403/',
+  'Photo by Pixabay: https://www.pexels.com/photo/view-of-skyscrapers-against-cloudy-sky-258642/',
+  'Image by <a href="https://pixabay.com/users/maxmann-665103/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2890738">Th G</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2890738">Pixabay</a>',
+ 
 ]
 
 const Imprint = () => {

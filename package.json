@@ -1,7 +1,10 @@
 {
-  "name": "arbeits-cafe.de",
+  "name": "cafezumarbeiten.de",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "scripts"
+  ],
   "scripts": {
     "dev": "next dev -p 3010",
     "build": "next build",

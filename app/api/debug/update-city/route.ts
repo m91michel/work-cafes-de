@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
-import { generateSlugForCafe } from "./_helpers";
 import { updateImageUrl } from "./_helpers";
 
 export const dynamic = 'force-dynamic'

@@ -50,7 +50,7 @@ export const getSEOTags = ({
       //     height: 660,
       //   },
       // ],
-      locale: "en_DE",
+      locale: "de_DE",
       type: "website",
       ...openGraph,
     },

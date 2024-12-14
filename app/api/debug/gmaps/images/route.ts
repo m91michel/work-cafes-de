@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
 import { uploadImagesToBunny } from "@/libs/bunny";
-import { getPlaceDetails, GoogleMapsCandidate, searchInGoogleMaps } from "@/libs/google-maps";
+import { getPlaceDetails } from "@/libs/google-maps";
 
 export const dynamic = "force-dynamic";
 

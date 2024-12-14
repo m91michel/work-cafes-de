@@ -1,10 +1,11 @@
 
-import { CafeCard } from '@/components/cafe/cafe-card';
 import { CityHero } from '@/components/city/city-hero';
 import { notFound } from 'next/navigation';
 import { getSEOTags } from '@/libs/seo';
-import { getCafes, getCafesByCity } from '@/libs/supabase/cafes';
-import { getCityBySlug } from '@/libs/supabase/cities';
+import { getCafesByCity } from '@/libs/supabase/cafes';
+import { getCities, getCityBySlug } from '@/libs/supabase/cities';
+import { CafeList } from '@/components/cafe-directory';
+import { CityList } from '@/components/city/city-list';
 
 type Params = Promise<{ city: string }>
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
@@ -15,18 +16,21 @@ type Props = {
 
 // generate metadata
 export async function generateMetadata({ params }: Props) {
-  const city = (await params).city
+  const slug = (await params).city
+  const city = await getCityBySlug(slug);
+  const name = city?.name || 'deiner Stadt';
+
   return getSEOTags({
-    title: `Die besten Cafés in ${city}`,
-    description: `Entdecke die besten Cafés in ${city}, die sich am besten fürs Arbeiten oder Studieren eignen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt.`,
-    canonicalUrlRelative: `/city/${city}`,
+    title: `Die besten Cafés in ${name}`,
+    description: `Entdecke die besten Cafés in ${name}, die sich am besten fürs Arbeiten oder Studieren eignen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt.`,
+    canonicalUrlRelative: `/city/${slug}`,
   });
 }
 
 export async function generateStaticParams() {
-  const cafes = await getCafes();
-  return Object.keys(cafes).map((city) => ({
-    city: city.toLowerCase(),
+  const cities = await getCities({ limit: 100 });
+  return cities.map((city) => ({
+    city: city.slug,
   }));
 }
 
@@ -34,6 +38,7 @@ export default async function CityPage({ params }: Props) {
   const citySlug = (await params).city
   const city = await getCityBySlug(citySlug);
   const cafes = await getCafesByCity(citySlug) || [];
+  const cities = await getCities({ limit: 3, offset: 0, excludeSlug: citySlug });
   
 
   if (!city || !city.name) {
@@ -43,14 +48,16 @@ export default async function CityPage({ params }: Props) {
   return (
     <main className="flex-1 bg-background">
       <CityHero city={city} cafeCount={cafes.length} />
-      
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cafes.map((cafe) => (
-            <CafeCard key={cafe.name} cafe={cafe} />
-          ))}
-        </div>
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-2xl font-semibold">
+          Entdecke {cafes.length} sorgfältig {cafes.length === 1 ? 'ausgewähltes Cafe' : 'ausgewählten Cafes'} in {city.name}.
+        </h2>
+        <p className="text-muted-foreground">Finde den passenden Ort um zu Arbeiten oder mit deinen Kommilitonen zu lernen.</p>
       </div>
+
+      <CafeList cafes={cafes} />
+
+      <CityList title="Finde Cafes in anderen Städten" cities={cities} showMoreButton={true} />
     </main>
   );
 }

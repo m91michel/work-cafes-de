@@ -39,10 +39,10 @@ export async function generateMetadata({ params }: Props) {
 
 // Required for static site generation
 export async function generateStaticParams() {
-  const cafes = await getCafes();
-  const allCafes = Object.values(cafes).flat();
-  
-  return allCafes.map((cafe) => ({
+  const cafes = await getCafes({ limit: 1000 });
+  // Don't forget that supabase returns max 1000 rows
+
+  return cafes.map((cafe) => ({
     slug: cafe.slug,
   }));
 }
@@ -74,7 +74,7 @@ export default async function CafePage({ params }: Props) {
           <h2 className="text-2xl font-semibold mb-6">Weitere Cafés in {cafe.city}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {relatedCafes.map((cafe) => (
-              <CafeCard key={cafe.id} cafe={cafe} />
+              <CafeCard key={cafe.slug} cafe={cafe} />
             ))}
           </div>
         </div>

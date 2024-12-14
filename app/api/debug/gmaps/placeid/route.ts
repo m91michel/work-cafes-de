@@ -32,20 +32,20 @@ export async function GET(req: NextRequest) {
   for (const cafe of cafes) {
     console.log(`processing ${cafe.name} ${cafe.address}`);
 
-    const response = await searchInGoogleMaps(cafe);
+    const mapsCandidates = await searchInGoogleMaps(`${cafe.name} ${cafe.address}`);
 
-    if (!response) {
+    if (!mapsCandidates) {
       console.log(`No response from Google Maps API for ${cafe.name}`);
       continue;
     }
-    if (response.candidates.length !== 1) {
+    if (mapsCandidates.length !== 1) {
       console.log(`Multiple candidates found for ${cafe.name}`);
-      if (showLogs) console.log(`Google Places API response:`, JSON.stringify(response.candidates, null, 2));
+      if (showLogs) console.log(`Google Places API response:`, JSON.stringify(mapsCandidates, null, 2));
       await supabase
         .from("cafes")
         .update({
           maps_data: {
-            ...response,
+            ...mapsCandidates,
           },
           processed: {
             maps_data: true,
@@ -54,12 +54,12 @@ export async function GET(req: NextRequest) {
         })
         .eq("id", cafe.id);
 
-      await processMultipleCafes(response.candidates);
+      await processMultipleCafes(mapsCandidates);
       continue;
     }
 
-    const placeId = response.candidates[0].place_id;
-    if (showLogs) console.log(`placeId: ${placeId}, data: ${JSON.stringify(response.candidates[0], null, 2)}`);
+    const placeId = mapsCandidates[0].place_id;
+    if (showLogs) console.log(`placeId: ${placeId}, data: ${JSON.stringify(mapsCandidates[0], null, 2)}`);
 
     const placeDetails = await getPlaceDetails(placeId);
 
@@ -76,9 +76,9 @@ export async function GET(req: NextRequest) {
     const filename = `${cafe.slug}-thumb.jpg`;
     const bunnyUrl = await uploadImagesToBunny(photoUrls[0], filename, 'cafes');
 
-    const formattedAddress = response.candidates[0].formatted_address;
-    const lat_long = `${response.candidates[0].geometry.location.lat},${response.candidates[0].geometry.location.lng}`;
-    const rating = response.candidates[0].rating;
+    const formattedAddress = mapsCandidates[0].formatted_address;
+    const lat_long = `${mapsCandidates[0].geometry.location.lat},${mapsCandidates[0].geometry.location.lng}`;
+    const rating = mapsCandidates[0].rating;
     
     const { error } = await supabase
       .from("cafes")
@@ -90,7 +90,7 @@ export async function GET(req: NextRequest) {
         preview_image: bunnyUrl,
         google_rating: rating,
         maps_data: {
-          ...response.candidates[0],
+          ...mapsCandidates[0],
           photos: photoUrls,
         }
       })

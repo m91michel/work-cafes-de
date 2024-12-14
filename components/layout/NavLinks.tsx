@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const menuItems = [
-  { href: "/", label: "Home" },
+  { href: "/", label: "Startseite" },
   { href: "/ueber-uns", label: "Über uns" }
 ];
 
