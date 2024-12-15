@@ -22,7 +22,7 @@ export function CitySelector({ cities }: CitySelectorProps) {
           key={city.slug}
           variant="outline"
           onClick={() => {
-            router.push(`/city/${city.slug}`);
+            router.push(`/cities/${city.slug}`);
           }}
         >
           {city.name}

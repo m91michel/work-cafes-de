@@ -47,13 +47,17 @@ export async function GET(req: NextRequest) {
       continue;
     }
 
-    const photoUrls: string[] = placeDetails.photos.map((photo: any) => {
+    const photos = placeDetails.photos || [];
+    const photoUrls: string[] = photos.map((photo: any) => {
       return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
     });
     if (showLogs) console.log(`photoUrls: ${JSON.stringify(photoUrls, null, 2)}`);
 
-    const filename = `${cafe.slug}-thumb.jpg`;
-    const bunnyUrl = await uploadImagesToBunny(photoUrls[0], filename, 'cafes');
+    let bunnyUrl;
+    if (photoUrls.length > 0) {
+      const filename = `${cafe.slug}-thumb.jpg`;
+      bunnyUrl = await uploadImagesToBunny(photoUrls[0], filename, 'cafes');
+    }
 
     const formattedAddress = placeDetails.formatted_address;
     const lat_long = `${placeDetails.geometry.location.lat},${placeDetails.geometry.location.lng}`;

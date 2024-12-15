@@ -46,7 +46,10 @@ async function main() {
             }
 
             const slug = generateSlug(`${citySlug}-${cafe.name}`);
-            const openHours = await processOpenHours(cafe.open_hours);
+            let openHours = cafe.open_hours;
+            if (!openHours) {
+                openHours = await processOpenHours(cafe.open_hours);
+            }
             const mapsCandidates = await searchInGoogleMaps(`${cafe.name} ${cafe.address}`);
 
             const placeId = mapsCandidates?.[0]?.place_id;

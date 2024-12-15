@@ -61,17 +61,23 @@ function getLinkType(link: string) {
 
 function formatLinkName(link: string) {
   if (link.includes("instagram")) {
-    const handle = link.split("instagram.com/")[1];
-    return `@${handle.replace("/", "")}`;
+    let handle = link.split("instagram.com/")[1];
+    return `@${formatHandle(handle)}`;
   } else if (link.includes("facebook")) {
     const handle = link.split("facebook.com/")[1];
-    return `@${handle}`;
+    return `@${formatHandle(handle)}`;
+  } else if (link.includes("tripadvisor")) {
+    return `Tripadvisor`;
   }
 
   return link
     .replace(/https?:\/\//, "")
     .replace(/^www\./, "")
     .replace(/\/$/, ""); // keeping the trailing slash removal
+}
+
+function formatHandle(handle: string) {
+  return handle.replace("/", "").replace(/\?.*$/, ""); // remove query params
 }
 
 function getLinkIcon(type: string, className?: string) {

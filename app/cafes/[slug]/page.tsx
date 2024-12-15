@@ -15,7 +15,7 @@ type Props = {
   searchParams: SearchParams
 }
 
-export const revalidate = 0;
+export const revalidate = 1;
 
 // generate metadata
 export async function generateMetadata({ params }: Props) {
@@ -26,14 +26,14 @@ export async function generateMetadata({ params }: Props) {
     return getSEOTags({
       title: `Café nicht gefunden | ${config.appName}`,
       description: `Café nicht gefunden`,
-      canonicalUrlRelative: `/cafe/${slug}`,
+      canonicalUrlRelative: `/cafes/${slug}`,
     });
   }
   
   return getSEOTags({
     title: `${cafe.name} | Cafés zum Arbeiten`,
     description: `Das ${cafe.name} in ${cafe.city} ist ein idealer Ort zum Arbeiten, Studieren oder sich auszutauschen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt.`,
-    canonicalUrlRelative: `/cafe/${slug}`,
+    canonicalUrlRelative: `/cafes/${slug}`,
   });
 }
 

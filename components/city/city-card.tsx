@@ -13,7 +13,7 @@ type Props = {
 
 export function CityCard({ city }: Props) {
   return (
-    <Link href={`/city/${city.slug}`} className="block">
+    <Link href={`/cities/${city.slug}`} className="block">
       <div className="relative overflow-hidden rounded-lg aspect-[4/3] group">
         {city.preview_image && (
           <Image

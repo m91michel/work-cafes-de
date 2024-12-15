@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props) {
   return getSEOTags({
     title: `Die besten Cafés in ${name}`,
     description: `Entdecke die besten Cafés in ${name}, die sich am besten fürs Arbeiten oder Studieren eignen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt.`,
-    canonicalUrlRelative: `/city/${slug}`,
+    canonicalUrlRelative: `/cities/${slug}`,
   });
 }
 

@@ -7,11 +7,11 @@ const currentYear = new Date().getFullYear();
 
 const cities = [
   { name: "Berlin", slug: "berlin" },
-  { name: "München", slug: "munich" },
+  { name: "München", slug: "muenchen" },
   { name: "Hamburg", slug: "hamburg" },
   { name: "Frankfurt", slug: "frankfurt-am-main" },
   { name: "Stuttgart", slug: "stuttgart" },
-  { name: "Köln", slug: "cologne" },
+  { name: "Köln", slug: "koeln" },
 ];
 
 const legalLinks = [
@@ -41,7 +41,7 @@ export function Footer() {
               {cities.map((city) => (
                 <li key={city.slug}>
                   <Link
-                    href={`/city/${city.slug}`}
+                    href={`/cities/${city.slug}`}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
                     Cafés zum Arbeiten in {city.name}

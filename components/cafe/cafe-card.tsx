@@ -13,7 +13,7 @@ interface CafeCardProps {
 export function CafeCard({ cafe }: CafeCardProps) {
 
   return (
-    <Link href={`/cafe/${cafe.slug}`}>
+    <Link href={`/cafes/${cafe.slug}`}>
       <Card className="overflow-hidden hover:shadow-lg transition-shadow">
         <div className="relative h-48">
           {cafe.preview_image && (

@@ -20,7 +20,8 @@ const unsplashCredits = [
   'Photo by Jasper Kortmann: https://www.pexels.com/photo/view-of-cologne-cathedral-and-hohenzollern-bridge-29693403/',
   'Photo by Pixabay: https://www.pexels.com/photo/view-of-skyscrapers-against-cloudy-sky-258642/',
   'Image by <a href="https://pixabay.com/users/maxmann-665103/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2890738">Th G</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2890738">Pixabay</a>',
- 
+  'Bild von <a href="https://pixabay.com/de/users/waldnob-9842518/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6935921">Norbert Waldhausen</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6935921">Pixabay</a>',
+  'Bild von <a href="https://pixabay.com/de/users/schaerfsystem-130387/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=745365">Caro Sodar</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=745365">Pixabay</a>'
 ]
 
 const Imprint = () => {
