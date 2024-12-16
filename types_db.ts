@@ -30,6 +30,7 @@ export type Database = {
           processed_at: string | null
           seating_comfort: string | null
           slug: string | null
+          status: string
           updated_at: string | null
           wifi_qualitity: string | null
         }
@@ -53,6 +54,7 @@ export type Database = {
           processed_at?: string | null
           seating_comfort?: string | null
           slug?: string | null
+          status?: string
           updated_at?: string | null
           wifi_qualitity?: string | null
         }
@@ -76,6 +78,7 @@ export type Database = {
           processed_at?: string | null
           seating_comfort?: string | null
           slug?: string | null
+          status?: string
           updated_at?: string | null
           wifi_qualitity?: string | null
         }

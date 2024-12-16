@@ -21,6 +21,7 @@ export async function updateCafeCount() {
         const { count = 0 } = await supabase
         .from('cafes')
         .select('name, slug, city_slug', { count: 'exact' })
+        .eq('status', 'PUBLISHED')
         .eq('city_slug', city.slug)
 
         console.log(`Updating ${city.name} with ${count} cafes`);

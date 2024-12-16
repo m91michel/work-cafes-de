@@ -11,6 +11,7 @@ export async function getCafes(
   const { data, error } = await supabase
     .from("cafes")
     .select("*, cities(name, slug)")
+    .eq('status', 'PUBLISHED')
     .range(offset, offset + limit - 1)
     .order("created_at", { ascending: false });
 
@@ -53,6 +54,7 @@ export async function getCafesByCity(
     .from("cafes")
     .select("*")
     .eq("city_slug", citySlug)
+    .eq('status', 'PUBLISHED')
     .neq("slug", excludeSlug)
     .range(offset, offset + limit - 1)
     .order("created_at", { ascending: false });
