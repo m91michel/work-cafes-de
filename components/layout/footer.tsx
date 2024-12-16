@@ -2,16 +2,18 @@ import { Coffee, Github } from "lucide-react";
 import Link from "next/link";
 import config, { domainName } from "@/config/config";
 import { SiInstagram, SiX } from "@icons-pack/react-simple-icons";
+import { getCities } from "@/libs/supabase/cities";
 
 const currentYear = new Date().getFullYear();
 
-const cities = [
-  { name: "Berlin", slug: "berlin" },
-  { name: "München", slug: "muenchen" },
-  { name: "Hamburg", slug: "hamburg" },
-  { name: "Frankfurt", slug: "frankfurt-am-main" },
-  { name: "Stuttgart", slug: "stuttgart" },
-  { name: "Köln", slug: "koeln" },
+const resources = [
+  { name: "Alle Cafés", href: "/cafes" },
+  { name: "Alle Städte", href: "/cities" },
+];
+
+const aboutLinks = [
+  { name: "Über uns", href: "/ueber-uns" },
+  { name: "Support", href: `mailto:${config.mailgun.supportEmail}` },
 ];
 
 const legalLinks = [
@@ -19,11 +21,17 @@ const legalLinks = [
   { name: "Impressum", href: "/impressum" },
 ];
 
-export function Footer() {
+export async function Footer() {
+  const cities = (await getCities({ limit: 20, offset: 0 })).map((city) => ({
+    name: city.name,
+    slug: city.slug,
+  }));
+
   return (
     <footer className="border-t bg-secondary/30">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Coffee className="w-6 h-6" />
@@ -33,6 +41,56 @@ export function Footer() {
               Wir helfen dir, die besten Cafés zum Arbeiten in Deutschland zu
               finden.
             </p>
+            <p className="text-sm text-muted-foreground">Build with ☕️ by <Link href="https://mathias.rocks" target="_blank" className="text-primary hover:text-primary/80 transition-colors">Mathias Michel</Link></p>
+            {/* <div>
+              <h3 className="font-semibold mb-4">Folge uns</h3>
+              <div className="flex items-center gap-4">
+                <Link
+                  href="#twitter"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <SiX className="w-5 h-5" />
+                </Link>
+                <Link
+                  href="#instagram"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <SiInstagram className="w-5 h-5" />
+                </Link>
+              </div>
+            </div> */}
+          </div>
+
+          <div>
+            <h3 className="font-semibold mb-4">Ressourcen</h3>
+            <ul className="space-y-2">
+              {resources.map((resource) => (
+                <li key={resource.href}>
+                  <Link
+                    href={resource.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {resource.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-semibold mb-4">Über uns</h3>
+            <ul className="space-y-2">
+              {aboutLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>
@@ -48,55 +106,7 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link
-                  href="/cities"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Alle Städte
-                </Link>
-              </li>
             </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-4">Ressourcen</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/ueber-uns"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Über uns
-                </Link>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${config.mailgun.supportEmail}`}
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Support
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-4">Folge uns</h3>
-            <div className="flex items-center gap-4">
-              <Link
-                href="#twitter"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <SiX className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#instagram"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <SiInstagram className="w-5 h-5" />
-              </Link>
-            </div>
           </div>
         </div>
 

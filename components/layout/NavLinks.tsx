@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 
 const menuItems = [
   { href: "/", label: "Startseite" },
+  { href: "/cafes", label: "Cafés" },
+  { href: "/cities", label: "Städte" },
   { href: "/ueber-uns", label: "Über uns" }
 ];
 

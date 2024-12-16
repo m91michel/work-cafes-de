@@ -7,6 +7,7 @@ import config from "@/config/config";
 import { getCafeBySlug, getCafes, getCafesByCity } from "@/libs/supabase/cafes";
 import { CafeCard } from "@/components/cafe/cafe-card";
 import { CafeRatingCard } from "@/components/cafe/rating";
+import CafeBreadcrumb from "@/components/cafe/cafe-breadcrumb";
 
 type Params = Promise<{ slug: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
@@ -62,8 +63,9 @@ export default async function CafePage({ params }: Props) {
   return (
     <main className="flex-1 bg-background">
       <CafeHero cafe={cafe} />
+      <CafeBreadcrumb cafe={cafe} className="py-6"/>
 
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 pb-12">
         <div className="grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
             <CafeDetails cafe={cafe} />
