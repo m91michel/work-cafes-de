@@ -4,6 +4,8 @@ import { CitySelector } from "@/components/ui/city-selector";
 import { getSEOTags } from "@/libs/seo";
 import { getCafes } from "@/libs/supabase/cafes";
 import { getCities } from "@/libs/supabase/cities";
+import { FAQSection } from "@/components/faq";
+import { faqs } from "@/config/faq";
 
 export const revalidate = 5;
 
@@ -41,6 +43,8 @@ export default async function Home() {
         title="Finde ein Cafe zum Arbeiten in deiner Stadt"
         showMoreButton={true}
       />
+
+      <FAQSection faqs={faqs} />
     </main>
   );
 }
