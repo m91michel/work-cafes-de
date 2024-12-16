@@ -70,14 +70,19 @@ function formatLinkName(link: string) {
     return `Tripadvisor`;
   }
 
-  return link
-    .replace(/https?:\/\//, "")
-    .replace(/^www\./, "")
-    .replace(/\/$/, ""); // keeping the trailing slash removal
+  return formatToDomain(link);
 }
 
 function formatHandle(handle: string) {
   return handle.replace("/", "").replace(/\?.*$/, ""); // remove query params
+}
+
+function formatToDomain(link: string) {
+  // just keep https://domain.de/path/slug -> domain.de
+  return link
+    .replace(/https?:\/\//, "")
+    .replace(/^www\./, "")
+    .replace(/\/[^/]*$/, ""); // everything after TLD
 }
 
 function getLinkIcon(type: string, className?: string) {

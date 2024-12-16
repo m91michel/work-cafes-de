@@ -1,5 +1,5 @@
-import { Cafe } from "@/libs/types";
 import { Badge } from "../ui/badge";
+import { ReactNode } from "react";
 
 function getSeatingComfort(value?: string | null) {
   if (value === "Comfortable") {
@@ -7,17 +7,18 @@ function getSeatingComfort(value?: string | null) {
   } else if (value === "Very Comfortable") {
     return "Sehr Komfortabel";
   } else if (value === "Slightly Uncomfortable") {
-    return "Leicht unkomfortabel";
+    return "Unkomfortabel";
   }
 
-  return "Nicht angegeben";
+  return "Unbekannt";
 }
 
 type Props = {
     value?: string | null;
+    icon?: ReactNode | string;
 }
-export function SeatingComfortBadge({ value }: Props) {
-  return <Badge>{getSeatingComfort(value)}</Badge>;
+export function SeatingComfortBadge({ value, icon }: Props) {
+  return <Badge>{icon} {getSeatingComfort(value)}</Badge>;
 }
 
 function getWifiQualitity(value?: string | null) {
@@ -32,13 +33,13 @@ function getWifiQualitity(value?: string | null) {
   return "Unbekannt";
 }
 
-export function WifiQualitityBadge({ value }: Props) {
-  return <Badge>{getWifiQualitity(value)}</Badge>;
+export function WifiQualitityBadge({ value, icon }: Props) {
+  return <Badge>{icon}{getWifiQualitity(value)}</Badge>;
 }
 
 function getAmbiance(value?: string | null) {
   if (value === "Quiet and Cozy") {
-    return "Leise und gemütlich";
+    return "Leise";
   } else if (value === "Lively") {
     return "Lebhaft";
   } else if (value === "Noisy") {
@@ -48,6 +49,6 @@ function getAmbiance(value?: string | null) {
   return "Unbekannt";
 }
 
-export function AmbianceBadge({ value }: Props) {
-  return <Badge>{getAmbiance(value)}</Badge>;
+export function AmbianceBadge({ value, icon }: Props) {
+  return <Badge>{icon} {getAmbiance(value)}</Badge>;
 }
