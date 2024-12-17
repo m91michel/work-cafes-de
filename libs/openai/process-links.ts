@@ -9,7 +9,7 @@ In case one link is not valid, remove it from the list.
 
 export async function adjustLinks(cafe: Cafe) {
   const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY || '',
   });
 
   try {
