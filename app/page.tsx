@@ -36,6 +36,7 @@ export default async function Home() {
       <CafeList
         cafes={cafes}
         title="Die besten Cafés zum Arbeiten in Deutschland"
+        showMoreButton={true}
       />
 
       <CityList
