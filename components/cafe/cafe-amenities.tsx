@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Wifi, Volume2, Armchair } from 'lucide-react';
 import Link from 'next/link';
 import { Cafe } from '@/libs/types';
-import { AmbianceBadge, SeatingComfortBadge, WifiQualitityBadge } from './cafe-badges';
+import { AmbianceBadge, SeatingComfortBadge, WifiQualityBadge } from './cafe-badges';
 import { ReportButton } from './ReportButton';
 
 interface CafeAmenitiesProps {
@@ -21,7 +21,7 @@ export function CafeAmenities({ cafe }: CafeAmenitiesProps) {
             <Wifi className="h-5 w-5 text-muted-foreground" />
             <div>
               <h3 className="font-medium">WiFi Qualität</h3>
-              <WifiQualitityBadge value={cafe.wifi_qualitity} />
+              <WifiQualityBadge value={cafe.wifi_qualitity} />
             </div>
           </div>
 

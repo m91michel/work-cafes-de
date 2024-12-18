@@ -1,54 +1,94 @@
-import { Badge } from "../ui/badge";
+import { Badge, BadgeProps } from "../ui/badge";
 import { ReactNode } from "react";
+
+type Props = {
+  value?: string | null;
+  icon?: ReactNode | string;
+}
+
+function getWifiQuality(value?: string | null) {
+    if (value === "Excellent") {
+      return {
+        text: "Sehr Gut",
+        variant: "success"
+      };
+    } else if (value === "Average") {
+      return {
+        text: "Mittel",
+        variant: "warning"
+      };
+    } else if (value === "Poor") {
+      return {
+        text: "Schlecht",
+        variant: "destructive"
+      };
+    }
+
+  return {
+    text: "Unbekannt",
+    variant: "default"
+  };
+}
+
+export function WifiQualityBadge({ value, icon }: Props) {
+  const { text, variant } = getWifiQuality(value);
+
+  return <Badge variant={variant as BadgeProps["variant"]}>{icon}{text}</Badge>;
+}
 
 function getSeatingComfort(value?: string | null) {
   if (value === "Comfortable") {
-    return "Komfortabel";
+    return {
+      text: "Komfortabel",
+      variant: "success"
+    };
   } else if (value === "Very Comfortable") {
-    return "Sehr Komfortabel";
+    return {
+      text: "Sehr Komfortabel",
+      variant: "success"
+    };
   } else if (value === "Slightly Uncomfortable") {
-    return "Unkomfortabel";
+    return {
+      text: "Unkomfortabel",
+      variant: "destructive"
+    };
   }
 
-  return "Unbekannt";
-}
-
-type Props = {
-    value?: string | null;
-    icon?: ReactNode | string;
+  return {
+    text: "Unbekannt",
+    variant: "default"
+  };
 }
 export function SeatingComfortBadge({ value, icon }: Props) {
-  return <Badge>{icon} {getSeatingComfort(value)}</Badge>;
-}
-
-function getWifiQualitity(value?: string | null) {
-    if (value === "Excellent") {
-      return "Gut";
-    } else if (value === "Average") {
-      return "Sehr Gut";
-    } else if (value === "Poor") {
-      return "Schlecht";
-    }
-  
-  return "Unbekannt";
-}
-
-export function WifiQualitityBadge({ value, icon }: Props) {
-  return <Badge>{icon}{getWifiQualitity(value)}</Badge>;
+  const { text, variant } = getSeatingComfort(value);
+  return <Badge variant={variant as BadgeProps["variant"]}>{icon}{text}</Badge>;
 }
 
 function getAmbiance(value?: string | null) {
   if (value === "Quiet and Cozy") {
-    return "Leise";
+    return {
+      text: "Leise",
+      variant: "success"
+    };
   } else if (value === "Lively") {
-    return "Lebhaft";
+    return {
+      text: "Lebhaft",
+      variant: "warning"
+    };
   } else if (value === "Noisy") {
-    return "Laut";
+    return {
+      text: "Laut",
+      variant: "destructive"
+    };
   }
 
-  return "Unbekannt";
+  return {
+    text: "Unbekannt",
+    variant: "default"
+  };
 }
 
 export function AmbianceBadge({ value, icon }: Props) {
-  return <Badge>{icon} {getAmbiance(value)}</Badge>;
+  const { text, variant } = getAmbiance(value);
+  return <Badge variant={variant as BadgeProps["variant"]}>{icon}{text}</Badge>;
 }

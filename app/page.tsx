@@ -6,6 +6,8 @@ import { getCafes, getCafesCount } from "@/libs/supabase/cafes";
 import { getCities, getCitiesCount } from "@/libs/supabase/cities";
 import { FAQSection } from "@/components/faq";
 import { faqs } from "@/config/faq";
+import { About } from "@/components/sections/About";
+import { Gradient } from "@/components/general/gradient";
 
 export const revalidate = 5;
 
@@ -27,7 +29,7 @@ export default async function Home() {
       <div className="max-w-7xl mx-auto px-4 pt-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">
-            Finde ein Café zum Arbeiten in deiner Stadt
+            Finde ein <Gradient>Café zum Arbeiten</Gradient> in deiner Stadt
           </h1>
           <p className="text-xl text-muted-foreground">
             Entdecke die besten Cafés zum Arbeiten in Deutschland! Finde den perfekten Ort zum Studieren, Arbeiten oder Kaffeetrinken in deiner Stadt.
@@ -48,8 +50,10 @@ export default async function Home() {
         showMoreButton={true}
         buttonText="Entdecke alle Städte"
       />
-
+  
       <FAQSection faqs={faqs} />
+
+      <About />
     </main>
   );
 }

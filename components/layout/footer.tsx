@@ -41,7 +41,7 @@ export async function Footer() {
               Wir helfen dir, die besten Cafés zum Arbeiten in Deutschland zu
               finden.
             </p>
-            <p className="text-sm text-muted-foreground">Build with ☕️ by <Link href="https://mathias.rocks" target="_blank" className="text-primary hover:text-primary/80 transition-colors">Mathias Michel</Link></p>
+            <p className="text-sm text-muted-foreground">Build with ☕️ by <Link href="https://mathias.rocks" target="_blank" className="hover:text-primary transition-colors">Mathias Michel</Link></p>
             {/* <div>
               <h3 className="font-semibold mb-4">Folge uns</h3>
               <div className="flex items-center gap-4">

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Cafe } from '@/libs/types';
 import { DefaultCafeImage } from './Image';
-import { AmbianceBadge, SeatingComfortBadge, WifiQualitityBadge } from './cafe-badges';
+import { AmbianceBadge, SeatingComfortBadge, WifiQualityBadge } from './cafe-badges';
 
 
 interface CafeCardProps {
@@ -35,7 +35,7 @@ export function CafeCard({ cafe }: CafeCardProps) {
           
           <div className="flex gap-2 text-sm flex-wrap">
             <div className="flex items-center gap-1">
-              <WifiQualitityBadge value={cafe.wifi_qualitity} icon={<Wifi className="h-4 w-4 mr-1" />} />
+              <WifiQualityBadge value={cafe.wifi_qualitity} icon={<Wifi className="h-4 w-4 mr-1" />} />
             </div>
             <div className="flex items-center gap-1">
               <SeatingComfortBadge value={cafe.seating_comfort} icon={<Armchair className="h-4 w-4 mr-1" />} />
