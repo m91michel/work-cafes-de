@@ -1,4 +1,3 @@
-import { Cafe } from "@/libs/types";
 import OpenAI from "openai";
 
 const PROMPT = `Du bist ein hilfreicher Assistent, der einen Fließtext mit Öffnungszeiten formatiert. Deine Aufgabe ist es, die Öffnungszeiten von einem Cafe zu formatieren.
@@ -21,7 +20,7 @@ Beispiel:
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
-export async function processOpenHours(cafe: Cafe) {
+export async function processOpenHours(openHours: string): Promise<string | undefined> {
   try {
     const response = await openai.beta.chat.completions.parse({
       model: "gpt-4o-mini",
@@ -30,7 +29,7 @@ export async function processOpenHours(cafe: Cafe) {
           role: "system",
           content: PROMPT,
         },
-        { role: "user", content: `Open hours for ${cafe.name}: ${cafe.open_hours}` },
+        { role: "user", content: `Open hours: ${openHours}` },
       ],
       response_format: {
         type: "json_schema",
@@ -55,13 +54,13 @@ export async function processOpenHours(cafe: Cafe) {
     );
 
     if (!response_json.open_hours) {
-      console.log(`No open hours found for ${cafe.name}`);
-      return null;
+      console.log(`No open hours found`);
+      return;
     }
 
     return response_json.open_hours;
   } catch (error) {
     console.error(error);
-    return null;
+    return;
   }
 }

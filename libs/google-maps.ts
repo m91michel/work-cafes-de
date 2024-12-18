@@ -54,6 +54,7 @@ export async function getPlaceDetails(placeId: string) {
         params: {
           place_id: placeId,
           fields: "photos,formatted_address,name,rating,opening_hours,geometry",
+          language: "de",
           key: GOOGLE_MAPS_API_KEY,
         },
       }

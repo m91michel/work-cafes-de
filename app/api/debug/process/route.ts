@@ -30,7 +30,12 @@ export async function GET() {
   }
 
   for (const cafe of cafes) {
-    const hours = await processOpenHours(cafe as Cafe);
+    if (!cafe.open_hours) {
+      console.log(`No open hours found for ${cafe.name}`);
+      continue;
+    }
+
+    const hours = await processOpenHours(cafe.open_hours);
 
     console.log(hours);
 
