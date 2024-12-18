@@ -8,6 +8,7 @@ import { FAQSection } from "@/components/faq";
 import { faqs } from "@/config/faq";
 import { About } from "@/components/sections/About";
 import { Gradient } from "@/components/general/gradient";
+import { Hero } from "@/components/sections/Hero";
 
 export const revalidate = 5;
 
@@ -25,7 +26,7 @@ export default async function Home() {
   const cafesButtonText = cafesCount ? `Entdecke ${cafesCount} Cafés` : "Entdecke alle Cafés";
 
   return (
-    <main className="flex-1 bg-background">
+    <main className="flex-1">
       <div className="max-w-7xl mx-auto px-4 pt-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">

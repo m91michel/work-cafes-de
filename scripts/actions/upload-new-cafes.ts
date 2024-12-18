@@ -46,10 +46,6 @@ export async function uploadNewCafes() {
             }
 
             const slug = generateSlug(`${citySlug}-${cafe.name}`);
-            let openHours = cafe.open_hours;
-            if (!openHours) {
-                openHours = await processOpenHours(cafe.open_hours);
-            }
             const mapsCandidates = await searchInGoogleMaps(`${cafe.name} ${cafe.address}`);
 
             const placeId = mapsCandidates?.[0]?.place_id;
@@ -64,7 +60,6 @@ export async function uploadNewCafes() {
                 seating_comfort: cafe.seating_comfort,
                 ambiance: cafe.ambiance,
                 food_content: cafe.food_and_drinks,
-                open_hours: openHours,
                 slug: slug,
                 google_place_id: placeId,
                 status: 'NEW'

@@ -3,6 +3,8 @@ import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
 import { uploadImagesToBunny } from "@/libs/bunny";
 import { getPlaceDetails } from "@/libs/google-maps";
+import { Cafe } from "@/libs/types";
+import { processOpenHours } from "@/libs/openai/process-open-hours";
 
 export const dynamic = "force-dynamic";
 
@@ -32,19 +34,20 @@ export async function GET(req: NextRequest) {
   }
 
   for (const cafe of cafes) {
-    console.log(`processing ${cafe.name} ${cafe.address}`);
+    console.log(`⚡️ processing ${cafe.name} ${cafe.address}`);
 
     const placeId = cafe.google_place_id;
     if (!placeId) {
       console.log(`No place id found for ${cafe.name}`);
+      await setCafeStatus(cafe, 'PROCESSED');
       continue;
     }
 
     const placeDetails = await getPlaceDetails(placeId);
-    console.log(`placeDetails: ${JSON.stringify(placeDetails, null, 2)}`);
 
     if (!placeDetails) {
       console.log(`No place details found for ${cafe.name}`);
+      await setCafeStatus(cafe, 'PROCESSED');
       continue;
     }
 
@@ -63,6 +66,12 @@ export async function GET(req: NextRequest) {
     const formattedAddress = placeDetails.formatted_address;
     const lat_long = `${placeDetails.geometry.location.lat},${placeDetails.geometry.location.lng}`;
     const rating = placeDetails.rating;
+    const weekdayText = placeDetails.opening_hours?.weekday_text;
+    let openHours = weekdayText?.join("\n");
+
+    if (openHours) {
+      openHours = await processOpenHours(openHours);
+    }
     
     const { error } = await supabase
       .from("cafes")
@@ -73,16 +82,21 @@ export async function GET(req: NextRequest) {
         lat_long: lat_long,
         preview_image: bunnyUrl,
         google_rating: rating,
+        open_hours: openHours,
         maps_data: {
           ...placeDetails,
-          photos: photoUrls,
+          photos: photoUrls
+        },
+        processed: {
+          ...(typeof cafe.processed === 'object' && cafe.processed !== null ? cafe.processed : {}),
+          open_hours_at: new Date().toISOString(),
         },
         status: 'PROCESSED'
       })
       .eq("id", cafe.id);
 
     if (error) {
-      console.log(`Error updating cafe: ${cafe.name}`, error);
+      console.log(`⚠️ Error updating cafe: ${cafe.name}`, error);
     }
   }
 
@@ -98,4 +112,15 @@ export async function GET(req: NextRequest) {
     processed: processedCafes.length,
     data: processedCafes
   });
+}
+
+async function setCafeStatus(cafe: Pick<Cafe, 'slug' | 'name'>, status: 'PROCESSED' | 'PUBLISHED') {
+  const { error } = await supabase
+    .from("cafes")
+    .update({ status })
+    .eq("slug", cafe.slug || "");
+
+  if (error) {
+    console.log(`⚠️ Error updating cafe: ${cafe.name}`, error);
+  }
 }
