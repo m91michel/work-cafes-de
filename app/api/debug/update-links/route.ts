@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
 import { adjustLinks } from "@/libs/openai/process-links";
+import { Cafe } from "@/libs/types";
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0

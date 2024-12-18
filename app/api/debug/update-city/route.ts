@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
 import { updateImageUrl } from "./_helpers";
+import { Cafe } from "@/libs/types";
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -34,7 +35,7 @@ export async function GET() {
   }
 
   for (const cafe of cafes) {
-    await updateImageUrl(cafe)
+    await updateImageUrl(cafe as Cafe)
   }
 
   const processedCafes = cafes.map(cafe => ({
