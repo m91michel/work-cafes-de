@@ -1,7 +1,9 @@
 import { Database } from "@/types_db";
 
+export type CafeStatus = 'NEW' | 'PUBLISHED' | 'PROCESSED' | 'CLOSED';
 
 export type Cafe = Database['cafeforwork']['Tables']['cafes']['Row'] & {
+  status?: CafeStatus;
   cities?: {
     name?: string | null;
     slug?: string | null;

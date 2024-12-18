@@ -12,7 +12,8 @@ const supabase = createClient<Database>(supabaseUrl, supabaseKey, { db: { schema
 async function main() {
     const { data } = await supabase
         .from('cafes')
-        .select('name, slug, city:cities(slug, name)');
+        .select('name, slug')
+        .eq('status', 'PROCESSED');
     
     if (!data) {
         console.error('No cafes found');
@@ -20,14 +21,12 @@ async function main() {
     }
 
     for (const cafe of data) {
-        const slug = generateSlug(`${cafe.city?.slug}-${cafe.name}`);
-        console.log(`Processing ${cafe.name}`, { slug, old_slug: cafe.slug });
+        console.log(`Processing ${cafe.name}`, { slug: cafe.slug });
 
         const { error } = await supabase
             .from('cafes')
-            .update({ slug })
-            .eq('name', cafe.name || '')
-            .eq('city_slug', cafe.city?.slug || '');
+            .update({ status: 'PUBLISHED' })
+            .eq('slug', cafe.slug || '');
 
         if (error) {
             console.error(`Error updating slug for ${cafe.name}: ${error}`);

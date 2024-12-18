@@ -23,6 +23,7 @@ export async function GET(req: NextRequest) {
     .select("*")
     .is("preview_image", null)
     .neq("google_place_id", null)
+    .eq("status", "NEW")
     .order("created_at", { ascending: false })
     .limit(limit);
 
@@ -75,7 +76,8 @@ export async function GET(req: NextRequest) {
         maps_data: {
           ...placeDetails,
           photos: photoUrls,
-        }
+        },
+        status: 'PROCESSED'
       })
       .eq("id", cafe.id);
 

@@ -9,6 +9,7 @@ import { Cafe } from '../libs/types';
 import { generateSlug } from '../libs/utils';
 import { searchInGoogleMaps } from '../libs/google-maps';
 import { processOpenHours } from '../libs/openai/process-open-hours';
+import { readCsv } from './utils/csv';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
@@ -16,7 +17,8 @@ const supabase = createClient<Database>(supabaseUrl, supabaseKey, { db: { schema
 
 async function main() {
     try {
-        const cafes = await readCsv<any>('../data/new-cafes.csv');
+        const cafes = await readCsv<any>('../data/new_cafes.csv');
+        console.log(cafes[0]);
 
         for (const cafe of cafes) {
             console.log(`Processing ${cafe.name} in ${cafe.city}`);
@@ -67,6 +69,7 @@ async function main() {
                 open_hours: openHours,
                 slug: slug,
                 google_place_id: placeId,
+                status: 'NEW'
             }
             console.log(cafeEntry);
 
@@ -80,23 +83,6 @@ async function main() {
     } catch (error) {
         console.error('Error processing CSV file:', error);
     }
-}
-
-async function readCsv<T>(filePath: string): Promise<T[]> {
-    const rows: T[] = [];
-
-    return new Promise((resolve, reject) => {
-        fs.createReadStream(filePath)
-            .pipe(csv({ mapHeaders: ({ header }) => header.trim() }))
-            .on('data', (row) => rows.push(row))
-            .on('end', () => {
-                console.log('CSV file successfully processed count:', rows.length);
-                resolve(rows);
-            })
-            .on('error', (error) => {
-                reject(error);
-            });
-    });
 }
 
 main().catch(console.error);

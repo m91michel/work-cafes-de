@@ -7,7 +7,7 @@
     "cafes": "ts-node run-cafes.ts",
     "upsert-cities": "ts-node upsert-cities.ts",
     "update-cafe-count": "ts-node update-cafe-count.ts",
-    "upload-cafes": "ts-node upload-cafes.ts && ts-node update-cafe-count.ts",
+    "upload-cafes": "ts-node upload-cafes.ts",
     "action": "ts-node action.ts"
   },
   "dependencies": {
