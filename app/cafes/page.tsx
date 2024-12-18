@@ -10,8 +10,8 @@ import { faqs } from "@/config/faq";
 export const revalidate = 5;
 
 export const metadata = getSEOTags({
-  title: `Finde die besten Cafés zum Arbeiten in Deutschland`,
-  description: `Finde die besten Cafés zum Arbeiten in Deutschland. Finde einen Platz zum Studieren, Arbeiten oder Treffen in deiner Stadt.`,
+  title: `Entdecke die besten Cafés zum Arbeiten in Deutschland`,
+  description: "Entdecke die besten Cafés zum Arbeiten in Deutschland! Finde ideale Orte für Kaffee und Produktivität mit unserer umfassenden Liste der Hotspots.",
   canonicalUrlRelative: "/cafes",
 });
 

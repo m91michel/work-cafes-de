@@ -14,6 +14,7 @@ module.exports = {
     "/apple-icon.*",
     "/icon.*",
     "/server-sitemap.xml",
+    "/manifest*",
     "/signin",
     "/api/*",
     "/unsubscribe",

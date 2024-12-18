@@ -39,3 +39,17 @@ export async function getCityBySlug(slug: string): Promise<City | null> {
 
   return data;
 }
+
+export async function getCitiesCount(): Promise<number | null> {
+  const { error, count } = await supabase
+    .from("cities")
+    .select("name, slug", { count: 'exact' })
+    .gte('cafes_count', 1);
+
+  if (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+
+  return count;
+}

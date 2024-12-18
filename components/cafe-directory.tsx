@@ -11,9 +11,10 @@ interface Props {
   cafes: Cafe[];
   className?: string;
   showMoreButton?: boolean;
+  buttonText?: string;
 }
 
-export function CafeList({ title, cafes, className, showMoreButton }: Props) {
+export function CafeList({ title, cafes, className, showMoreButton, buttonText }: Props) {
   return (
     <section className={cn("max-w-7xl mx-auto px-4 py-12", className)}>
       {title && <h2 className="text-2xl font-semibold mb-6">{title}</h2>}
@@ -26,7 +27,7 @@ export function CafeList({ title, cafes, className, showMoreButton }: Props) {
         <div className="flex justify-center mt-6">
         <Button variant="default" asChild>
           <Link href="/cafes">
-            Mehr Cafés anzeigen
+            {buttonText || "Mehr Cafés anzeigen"}
           </Link>
         </Button>
       </div>

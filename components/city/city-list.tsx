@@ -9,9 +9,10 @@ type Props = {
   cities: City[];
   suggestCityCard?: boolean;
   showMoreButton?: boolean;
+  buttonText?: string;
 }
 
-export function CityList({ title, cities, showMoreButton = false, suggestCityCard = false }: Props) {
+export function CityList({ title, cities, showMoreButton = false, suggestCityCard = false, buttonText }: Props) {
     return (
       <section className="max-w-7xl mx-auto px-4 py-12">
         {title && <h2 className="text-2xl font-semibold mb-6">{title}</h2>}
@@ -40,7 +41,7 @@ export function CityList({ title, cities, showMoreButton = false, suggestCityCar
           <div className="flex justify-center mt-6">
             <Button variant="default" asChild>
               <Link href="/cities">
-                Alle Städte anzeigen
+                {buttonText || "Alle Städte anzeigen"}
               </Link>
             </Button>
           </div>

@@ -8,9 +8,9 @@ type GetCafeProps = {
 export async function getCafes(
   { limit = 100, offset = 0 }: GetCafeProps = { limit: 100, offset: 0 }
 ): Promise<Cafe[]> {
-  const { data, error } = await supabase
+  const { data, error, count } = await supabase
     .from("cafes")
-    .select("*, cities(name, slug)")
+    .select("*, cities(name, slug)", { count: 'exact' })
     .eq('status', 'PUBLISHED')
     .range(offset, offset + limit - 1)
     .order("created_at", { ascending: false });
@@ -19,6 +19,7 @@ export async function getCafes(
     console.error("Error fetching data:", error);
     return [];
   }
+  console.log(count);
 
   return data as Cafe[];
 }
@@ -66,4 +67,19 @@ export async function getCafesByCity(
 
   // @ts-ignore
   return data;
+}
+
+
+export async function getCafesCount(): Promise<number | null> {
+  const { error, count } = await supabase
+    .from("cafes")
+    .select("name, slug", { count: 'exact' })
+    .eq('status', 'PUBLISHED');
+
+  if (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+
+  return count;
 }
