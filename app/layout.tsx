@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { getSEOTags } from "@/libs/seo";
 import Script from "next/script";
 import { isProd } from "@/libs/environment";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,6 +35,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <Toaster />
       </body>
     </html>
   );

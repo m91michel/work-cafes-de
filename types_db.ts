@@ -143,6 +143,38 @@ export type Database = {
         }
         Relationships: []
       }
+      user_report: {
+        Row: {
+          cafe_slug: string | null
+          created_at: string
+          email: string | null
+          id: number
+          text: string | null
+        }
+        Insert: {
+          cafe_slug?: string | null
+          created_at?: string
+          email?: string | null
+          id?: number
+          text?: string | null
+        }
+        Update: {
+          cafe_slug?: string | null
+          created_at?: string
+          email?: string | null
+          id?: number
+          text?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_report_cafe_slug_fkey"
+            columns: ["cafe_slug"]
+            isOneToOne: false
+            referencedRelation: "cafes"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
