@@ -1,7 +1,3 @@
-import * as dotenv from 'dotenv'
-dotenv.config({ path: '../.env.local' }) // or just .env, depending on your env file name
-
-import { generateSlug } from '../libs/utils';
 import { Database } from '@/types_db';
 import { createClient } from '@supabase/supabase-js';
 
@@ -9,7 +5,7 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const supabase = createClient<Database>(supabaseUrl, supabaseKey, { db: { schema: 'cafeforwork' } });
 
-async function main() {
+export async function publishCafes() {
     const { data } = await supabase
         .from('cafes')
         .select('name, slug')
@@ -33,5 +29,3 @@ async function main() {
         }
     }
 }
-
-main().catch(console.error);

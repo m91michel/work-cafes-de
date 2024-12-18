@@ -8,7 +8,7 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const supabase = createClient<Database>(supabaseUrl, supabaseKey, { db: { schema: 'cafeforwork' } });
 
-export async function updateCafeCount() {
+export async function updateCountForCities() {
     const { data } = await supabase.from('cities').select('name, slug');
     console.log(data);
 
@@ -30,5 +30,3 @@ export async function updateCafeCount() {
 
     console.log(`Cafes count updated successfully for ${data.length} cities`);
 }
-
-updateCafeCount().catch(console.error); 

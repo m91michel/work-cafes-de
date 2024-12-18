@@ -3,19 +3,17 @@ dotenv.config({ path: '../.env.local' }) // or just .env, depending on your env 
 
 import { Database } from '@/types_db';
 import { createClient } from '@supabase/supabase-js';
-import fs from 'fs';
-import csv from 'csv-parser';
-import { Cafe } from '../libs/types';
-import { generateSlug } from '../libs/utils';
-import { searchInGoogleMaps } from '../libs/google-maps';
-import { processOpenHours } from '../libs/openai/process-open-hours';
-import { readCsv } from './utils/csv';
+import { Cafe } from '../../libs/types';
+import { generateSlug } from '../../libs/utils';
+import { searchInGoogleMaps } from '../../libs/google-maps';
+import { processOpenHours } from '../../libs/openai/process-open-hours';
+import { readCsv } from '../utils/csv';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const supabase = createClient<Database>(supabaseUrl, supabaseKey, { db: { schema: 'cafeforwork' } });
 
-async function main() {
+export async function uploadNewCafes() {
     try {
         const cafes = await readCsv<any>('../data/new_cafes.csv');
         console.log(cafes[0]);
@@ -84,5 +82,3 @@ async function main() {
         console.error('Error processing CSV file:', error);
     }
 }
-
-main().catch(console.error);

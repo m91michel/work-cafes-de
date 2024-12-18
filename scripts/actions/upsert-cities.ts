@@ -3,7 +3,7 @@ dotenv.config({ path: "../.env.local" });
 
 import { createClient } from "@supabase/supabase-js";
 import { Database } from "@/types_db";
-import { readCsv } from "./utils/csv";
+import { readCsv } from "../utils/csv";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
@@ -11,7 +11,7 @@ const supabase = createClient<Database>(supabaseUrl, supabaseKey, {
   db: { schema: "cafeforwork" },
 });
 
-async function upsertCities() {
+export async function upsertNewCities() {
   const cities = await readCsv<any>("../data/cities.csv");
 
   for (const city of cities) {
@@ -45,4 +45,3 @@ async function upsertCities() {
   }
 }
 
-upsertCities().catch(console.error);
