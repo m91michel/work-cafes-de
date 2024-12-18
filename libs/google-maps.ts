@@ -68,3 +68,13 @@ export async function getPlaceDetails(placeId: string) {
     return null;
   }
 }
+
+export const locationLink = (query?: string | null, placeId?: string | null) => {
+  if (!query || !placeId) return "";
+  return `https://www.google.com/maps/search/?api=1&query=${query}&query_place_id=${placeId}`;
+};
+
+export const directionLink = (query?: string | null, placeId?: string | null) => {
+  if (!query || !placeId) return "";
+  return `https://www.google.com/maps/dir/?api=1&destination=${query}&query_place_id=${placeId}`;
+};

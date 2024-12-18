@@ -1,8 +1,9 @@
 import { Card } from "@/components/ui/card";
-import { Clock, LinkIcon, MapPin } from "lucide-react";
+import { Clock, ExternalLink, LinkIcon, MapPin } from "lucide-react";
 import { Cafe } from "@/libs/types";
 import { CafeLinks } from "./links";
 import Link from "next/link";
+import { directionLink } from "@/libs/google-maps";
 
 interface CafeDetailsProps {
   cafe: Cafe;
@@ -15,7 +16,7 @@ export function CafeDetails({ cafe }: CafeDetailsProps) {
       {hours.length == 0 && <br />}
     </div>
   ));
-  const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${cafe.name}&query_place_id=${cafe.google_place_id}`;
+  const googleMapsLink = directionLink(cafe.name, cafe.google_place_id);
 
   return (
     <Card className="p-6">
@@ -34,7 +35,7 @@ export function CafeDetails({ cafe }: CafeDetailsProps) {
                 target="_blank"
                 className="text-primary hover:text-primary/80 transition-colors"
               >
-                Google Maps
+                Wegbeschreibung <ExternalLink className="w-4 h-4 inline" />
               </Link>
             </p>
           </div>
