@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import supabase from "@/libs/supabase/supabaseClient";
+import { sendMessage } from "@/libs/telegram";
 
 export async function POST(request: Request) {
   const { email, name, message, cafeSlug } = await request.json();
@@ -20,6 +21,7 @@ export async function POST(request: Request) {
         console.log({ error })
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
+    await sendMessage(`${name} hat einen Report erstellt für ${cafeSlug}: ${message}`);
 
     return NextResponse.json({ message: "Report submitted successfully" }, { status: 200 });
   } catch (error) {
