@@ -31,9 +31,9 @@ export function Header() {
       </div>
 
       {isMenuOpen && (
-        <nav className="absolute top-full left-0 w-full bg-white border-t md:hidden">
+        <nav className="absolute top-full left-0 w-full bg-white border-t z-10 md:hidden">
           <div className="max-w-7xl mx-auto px-4 py-2">
-            <NavLinks />
+            <NavLinks onClick={() => setIsMenuOpen(false)} />
           </div>
         </nav>
       )}
