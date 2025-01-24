@@ -1,17 +1,20 @@
-// Next.js App Router .cursorrules
+# cafezumarbeiten.de
 
-// Next.js App Router best practices
-const nextjsAppRouterBestPractices = [
-  "Use server components by default",
-  "Implement client components only when necessary",
-  "Utilize the new file-based routing system",
-  "Use layout.js for shared layouts",
-  "Implement loading.js for loading states",
-  "Use error.js for error handling",
-  "Utilize route handlers for API routes",
-];
+Start each answer with 🚀
 
-// TECHNOLOGY STACK
+## Project description
+Cafe zum Arbeiten is a german website that lists the best cafes for working in Germany.
+
+## Next.js App Router best practices
+- Use server components by default
+- Implement client components only when necessary
+- Utilize the new file-based routing system
+- Use layout.js for shared layouts
+- Implement loading.js for loading states
+- Use error.js for error handling
+- Utilize route handlers for API routes
+
+## TECHNOLOGY STACK
 Frontend:
 - yarn as package manager
 - Framework: Next.js (React)
@@ -23,22 +26,30 @@ Frontend:
 Backend:
 - Framework: Next.js API Routes (for serverless functions)
 - Language: TypeScript (for API routes)
+- Supabase for database
+- Google Maps Location API to retrieve address and open hours
+- OpenAI for generating descriptions
 
-// Folder structure
-const folderStructure = `
+## Folder structure
+```
 app/
   layout.js
   page.js
 public/
 components/
+  ui/
+  general/
+  sections/
+  city/
+  cafe/
 lib/
 hooks/
 data/
 config/
-`;
+scripts/
+```
 
-// Additional instructions
-const additionalInstructions = `
+## Additional instructions
 1. Use TypeScript for type safety
 2. Implement proper metadata for SEO
 3. Utilize Next.js Image component for optimized images
@@ -46,4 +57,3 @@ const additionalInstructions = `
 5. Implement proper error boundaries
 6. Follow Next.js naming conventions for special files
 7. Use environment variables for configuration
-`;
