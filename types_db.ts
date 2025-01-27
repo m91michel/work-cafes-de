@@ -16,6 +16,7 @@ export type Database = {
           city: string | null
           city_slug: string | null
           created_at: string | null
+          filtered_reviews: Json | null
           food_content: string | null
           google_place_id: string | null
           google_rating: number | null
@@ -41,6 +42,7 @@ export type Database = {
           city?: string | null
           city_slug?: string | null
           created_at?: string | null
+          filtered_reviews?: Json | null
           food_content?: string | null
           google_place_id?: string | null
           google_rating?: number | null
@@ -66,6 +68,7 @@ export type Database = {
           city?: string | null
           city_slug?: string | null
           created_at?: string | null
+          filtered_reviews?: Json | null
           food_content?: string | null
           google_place_id?: string | null
           google_rating?: number | null
