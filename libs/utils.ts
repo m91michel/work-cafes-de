@@ -18,3 +18,14 @@ export function parseUrls(string: string): string[] {
   const urls = string.match(/(https?:\/\/[^\s]+)/g);
   return urls ? urls.map(url => url.trim()) : [];
 }
+
+export const extractToken = (authValue?: string | null) => {
+  if (!authValue) return null;
+
+  const startsWith = "Bearer "
+  if (authValue && authValue.startsWith(startsWith)) {
+    return authValue.substring(startsWith.length, authValue.length);
+  }
+    
+  return null;
+};

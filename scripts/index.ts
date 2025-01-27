@@ -7,10 +7,11 @@ import { updateCountForCities } from "./actions/update-cafe-count";
 import { uploadNewCafes } from "./actions/upload-new-cafes";
 import { upsertNewCities } from "./actions/upsert-cities";
 import { updateOpenHours } from "./actions/update-open-hours";
+import { googleMapsActions } from "./actions/google-maps";
 
 type CommandAction = () => Promise<void>;
 
-interface Command {
+export interface Command {
   name: string;
   key: string;
   action: CommandAction;
@@ -42,6 +43,7 @@ const commands: Command[] = [
     key: "update-open-hours",
     action: updateOpenHours,
   },
+  ...googleMapsActions,
 ];
 
 async function main() {

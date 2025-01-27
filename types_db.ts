@@ -19,6 +19,7 @@ export type Database = {
           food_content: string | null
           google_place_id: string | null
           google_rating: number | null
+          google_reviews: Json | null
           id: string
           lat_long: string | null
           links: string | null
@@ -43,6 +44,7 @@ export type Database = {
           food_content?: string | null
           google_place_id?: string | null
           google_rating?: number | null
+          google_reviews?: Json | null
           id?: string
           lat_long?: string | null
           links?: string | null
@@ -67,6 +69,7 @@ export type Database = {
           food_content?: string | null
           google_place_id?: string | null
           google_rating?: number | null
+          google_reviews?: Json | null
           id?: string
           lat_long?: string | null
           links?: string | null
@@ -149,6 +152,7 @@ export type Database = {
           created_at: string
           email: string | null
           id: number
+          name: string | null
           text: string | null
         }
         Insert: {
@@ -156,6 +160,7 @@ export type Database = {
           created_at?: string
           email?: string | null
           id?: number
+          name?: string | null
           text?: string | null
         }
         Update: {
@@ -163,6 +168,7 @@ export type Database = {
           created_at?: string
           email?: string | null
           id?: number
+          name?: string | null
           text?: string | null
         }
         Relationships: [
