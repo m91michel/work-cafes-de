@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
   const result = await fetchOutscraperResult(results_location);
 
-  const { reviews_data = [], ...locationData } = result.data;
+  const { reviews_data = [], ...locationData } = result.data[0];
 
   const workingReviews = (reviews_data ?? []).filter((review: OutscraperReview) =>
     containsWorkingKeywords(review.review_text)

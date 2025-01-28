@@ -54,7 +54,7 @@ export async function outscraperReviewsTask(params?: OutscraperReviewsParams) {
 type OutscraperRequestBody = {
     id: string;
     status: string;
-    data: OutscraperRequestData;
+    data: OutscraperRequestData[];
 };
 
 type OutscraperRequestData = {
