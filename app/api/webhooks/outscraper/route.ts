@@ -96,7 +96,7 @@ const mapOutscraperReviewToSupabaseReview = (
     source: "Google Maps",
     source_url: review.review_link,
     text: review.review_text,
-    created_at: dayjs(review.review_datetime_utc).toISOString(),
+    published_at: dayjs(review.review_datetime_utc).toISOString(),
     source_id: review.review_id,
   };
 };

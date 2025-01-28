@@ -159,6 +159,7 @@ export type Database = {
           created_at: string
           id: string
           language: string | null
+          published_at: string | null
           rating: number | null
           source: string | null
           source_id: string | null
@@ -172,6 +173,7 @@ export type Database = {
           created_at?: string
           id?: string
           language?: string | null
+          published_at?: string | null
           rating?: number | null
           source?: string | null
           source_id?: string | null
@@ -185,6 +187,7 @@ export type Database = {
           created_at?: string
           id?: string
           language?: string | null
+          published_at?: string | null
           rating?: number | null
           source?: string | null
           source_id?: string | null
