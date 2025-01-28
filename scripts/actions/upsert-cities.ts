@@ -15,7 +15,7 @@ export async function upsertNewCities() {
   const cities = await readCsv<any>("../data/cities.csv");
 
   for (const city of cities) {
-    console.log(`Processing ${city.name} in ${city.country}`);
+    console.log(`⚡️ Processing ${city.name} in ${city.country}`);
 
     const { data: existingCity } = await supabase
       .from("cities")
@@ -24,7 +24,7 @@ export async function upsertNewCities() {
       .single();
 
     if (existingCity) {
-      console.log(`City ${city.name} already exists in ${city.country}`);
+      console.log(`✅ City ${city.name} already exists in ${city.country}`);
       continue;
     }
 
@@ -38,9 +38,9 @@ export async function upsertNewCities() {
       .select("name");
 
     if (error) {
-      console.error("Error upserting cities:", error);
+      console.error("❌ Error upserting city:", error);
     } else {
-      console.log("Cities upserted successfully:", data);
+      console.log("✅ City upserted successfully:", data);
     }
   }
 }
