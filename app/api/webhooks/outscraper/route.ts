@@ -1,7 +1,11 @@
-import { fetchOutscraperResult, OutscraperReview } from "@/libs/apis/outscraper";
+import {
+  fetchOutscraperResult,
+  OutscraperReview,
+} from "@/libs/apis/outscraper";
 import { NextRequest, NextResponse } from "next/server";
 import { containsWorkingKeywords } from "../../_utils/reviews";
 import supabase from "@/libs/supabase/supabaseClient";
+import { Database } from "@/types_db";
 
 /* Example request body
 {
@@ -33,18 +37,36 @@ export async function POST(request: NextRequest) {
 
   const { reviews_data = [], ...locationData } = result.data[0];
 
-  const workingReviews = (reviews_data ?? []).filter((review: OutscraperReview) =>
-    containsWorkingKeywords(review.review_text)
-  );
-
   console.log(locationData);
 
+  // Get cafe id
+  const { data: cafeData } = await supabase
+    .from("cafes")
+    .select("id, google_place_id")
+    .eq("google_place_id", locationData.place_id)
+    .maybeSingle();
+
+  // Insert reviews
+  for (const review of reviews_data) {
+    const { error } = await supabase
+      .from("reviews")
+      .upsert({
+        cafe_id: cafeData?.id,
+        ...mapOutscraperReviewToSupabaseReview(review),
+      }, {
+        onConflict: 'text,source'
+      })
+
+    if (error) {
+      console.error("Error inserting review", error);
+    }
+  }
+
+  // Update cafe review count
   const { error } = await supabase
     .from("cafes")
     .update({
-      google_reviews: reviews_data,
-      filtered_reviews: workingReviews,
-      processed_at: new Date().toISOString(),
+      review_count: reviews_data.length || 0,
     })
     .eq("google_place_id", locationData.place_id);
 
@@ -54,3 +76,19 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({ message: "success" });
 }
+
+type SupabaseReview = Partial<
+  Database["cafeforwork"]["Tables"]["reviews"]["Row"]
+>;
+const mapOutscraperReviewToSupabaseReview = (
+  review: OutscraperReview
+): SupabaseReview => {
+  return {
+    author_name: review.author_name,
+    language: review.language,
+    rating: review.rating,
+    source: "Google Maps",
+    source_url: review.author_url,
+    text: review.review_text,
+  };
+};

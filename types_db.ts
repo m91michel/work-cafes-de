@@ -30,6 +30,7 @@ export type Database = {
           preview_image: string | null
           processed: Json | null
           processed_at: string | null
+          review_count: number
           seating_comfort: string | null
           slug: string | null
           status: string
@@ -56,6 +57,7 @@ export type Database = {
           preview_image?: string | null
           processed?: Json | null
           processed_at?: string | null
+          review_count?: number
           seating_comfort?: string | null
           slug?: string | null
           status?: string
@@ -82,6 +84,7 @@ export type Database = {
           preview_image?: string | null
           processed?: Json | null
           processed_at?: string | null
+          review_count?: number
           seating_comfort?: string | null
           slug?: string | null
           status?: string
@@ -148,6 +151,53 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
+      }
+      reviews: {
+        Row: {
+          author_name: string | null
+          cafe_id: string | null
+          created_at: string
+          id: string
+          language: string | null
+          rating: number | null
+          source: string | null
+          source_url: string | null
+          text: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          author_name?: string | null
+          cafe_id?: string | null
+          created_at?: string
+          id?: string
+          language?: string | null
+          rating?: number | null
+          source?: string | null
+          source_url?: string | null
+          text?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          author_name?: string | null
+          cafe_id?: string | null
+          created_at?: string
+          id?: string
+          language?: string | null
+          rating?: number | null
+          source?: string | null
+          source_url?: string | null
+          text?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_cafe_id_fkey"
+            columns: ["cafe_id"]
+            isOneToOne: false
+            referencedRelation: "cafes"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_report: {
         Row: {

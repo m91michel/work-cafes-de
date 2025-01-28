@@ -2,7 +2,8 @@ import { getPlaceDetails, searchInGoogleMaps } from "../../libs/google-maps";
 import { input } from "@inquirer/prompts";
 import { Command } from "..";
 import { outscraperReviewsTask } from "../../libs/apis/outscraper";
-import { reviewKeywords } from "@/app/api/_utils/reviews";
+import { reviewKeywords } from "../../app/api/_utils/reviews";
+import { fetchScrapingdogGoogleMapsReviews } from "../../libs/apis/scrapingdog";
 
 const searchForPlace = async () => {
     const query = await input({
@@ -40,8 +41,18 @@ export const googleMapsActions: Command[] = [
             const placeId = await input({
                 message: 'Enter the place id',
             })
-            const keywords = reviewKeywords.join("|")
-            const reviews = await outscraperReviewsTask({ id: placeId, keywords });
+            const reviews = await outscraperReviewsTask({ id: placeId, keywords: 'wifi' });
+            console.log(reviews);
+        },
+    },
+    {
+        name: "Scrapingdog: Trigger Task",
+        key: "scrapingdog-trigger-task",
+        action: async () => {
+            const placeId = await input({
+                message: 'Enter the place id',
+            })
+            const reviews = await fetchScrapingdogGoogleMapsReviews({ data_id: placeId });
             console.log(reviews);
         },
     }
