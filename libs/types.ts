@@ -15,3 +15,5 @@ export type CityData = {
 };
 
 export type City = Database['cafeforwork']['Tables']['cities']['Row'];
+
+export type Review = Database['cafeforwork']['Tables']['reviews']['Row'];

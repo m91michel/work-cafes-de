@@ -1,6 +1,6 @@
 import { CafeHero } from "@/components/cafe/cafe-hero";
 import { CafeDetails } from "@/components/cafe/cafe-details";
-import { CafeAmenities } from "@/components/cafe/cafe-amenities";
+import { CafeAmenities, CafeFurtherButtons, DebugInfo } from "@/components/cafe/cafe-section-blocks";
 import { notFound } from "next/navigation";
 import { getSEOTags } from "@/libs/seo";
 import config from "@/config/config";
@@ -8,6 +8,9 @@ import { getCafeBySlug, getCafes, getCafesByCity } from "@/libs/supabase/cafes";
 import { CafeCard } from "@/components/cafe/cafe-card";
 import { CafeRatingCard } from "@/components/cafe/rating";
 import CafeBreadcrumb from "@/components/cafe/cafe-breadcrumb";
+import { getReviewsById } from "@/libs/supabase/reviews";
+import { isDev } from "@/libs/environment";
+import { CafeReviews } from "@/components/cafe/cafe-reviews";
 
 type Params = Promise<{ slug: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
@@ -55,6 +58,7 @@ export default async function CafePage({ params }: Props) {
     limit: 3,
     excludeSlug: slug,
   });
+  const reviews = await getReviewsById(cafe?.id);
 
   if (!cafe) {
     notFound();
@@ -73,7 +77,13 @@ export default async function CafePage({ params }: Props) {
           <div>
             <CafeRatingCard rating={cafe.google_rating} />
             <CafeAmenities cafe={cafe} />
+            <CafeFurtherButtons cafe={cafe} />
+            {isDev && <DebugInfo cafe={cafe} />}
           </div>
+        </div>
+
+        <div className="mt-12">
+          <CafeReviews cafe={cafe} />
         </div>
 
         <div className="mt-12">

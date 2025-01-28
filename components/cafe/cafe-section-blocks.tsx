@@ -6,11 +6,11 @@ import { Cafe } from '@/libs/types';
 import { AmbianceBadge, SeatingComfortBadge, WifiQualityBadge } from './cafe-badges';
 import { ReportButton } from './ReportButton';
 
-interface CafeAmenitiesProps {
+interface Props {
   cafe: Cafe;
 }
 
-export function CafeAmenities({ cafe }: CafeAmenitiesProps) {
+export function CafeAmenities({ cafe }: Props) {
   return (
     <>
       <Card className="p-6">
@@ -43,8 +43,13 @@ export function CafeAmenities({ cafe }: CafeAmenitiesProps) {
           </div>
         </div>
       </Card>
+    </>
+  );
+}
 
-      <div className="mt-6 flex gap-3 flex-wrap">
+export function CafeFurtherButtons({ cafe }: Props) {
+  return (
+    <div className="mt-6 flex gap-3 flex-wrap">
         <Button asChild variant="outline">
           <Link href={`/cities/${cafe.city_slug}`}>
             Weitere Cafes in {cafe.city}
@@ -58,6 +63,14 @@ export function CafeAmenities({ cafe }: CafeAmenitiesProps) {
         
         <ReportButton cafe={cafe} text="Cafe melden"/>
       </div>
-    </>
+  );
+}
+
+export function DebugInfo({ cafe }: Props) {
+  return (
+    <div>
+      <p>{cafe.id}</p>
+      <p>{cafe.google_place_id}</p>
+    </div>
   );
 }
