@@ -161,6 +161,7 @@ export type Database = {
           language: string | null
           rating: number | null
           source: string | null
+          source_id: string | null
           source_url: string | null
           text: string | null
           updated_at: string | null
@@ -173,6 +174,7 @@ export type Database = {
           language?: string | null
           rating?: number | null
           source?: string | null
+          source_id?: string | null
           source_url?: string | null
           text?: string | null
           updated_at?: string | null
@@ -185,6 +187,7 @@ export type Database = {
           language?: string | null
           rating?: number | null
           source?: string | null
+          source_id?: string | null
           source_url?: string | null
           text?: string | null
           updated_at?: string | null

@@ -64,16 +64,20 @@ type OutscraperRequestData = {
     reviews_data: OutscraperReview[];
 }
 export type OutscraperReview = {
-    author_name: string;
+    google_id: string;
+    review_id: string;
+    author_title: string;
     author_url: string;
     review_text: string;
     profile_photo_url: string;
-    rating: number;
-    relative_time_description: string;
-    time: number;
+    review_rating: number;
+    review_link: string;
+    review_datetime_utc: string;
+    review_timestamp: number;
     translated: boolean;
     language: string;
     original_language: string;
+    review_questions: Record<string, string>;
 };
 // example: https://api.app.outscraper.com/requests/a-44cab432-54db-4d56-b81c-f97b51bee451
 export async function fetchOutscraperResult(url: string) {
