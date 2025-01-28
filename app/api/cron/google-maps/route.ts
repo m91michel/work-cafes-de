@@ -2,12 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
 import { extractToken } from "@/libs/utils";
-import { getPlaceDetails, Review } from "@/libs/google-maps";
+import { Review } from "@/libs/google-maps";
+import { OutscraperReview, outscraperReviewsTask } from "@/libs/apis/outscraper";
+import { containsWorkingKeywords, reviewKeywords } from "../../_utils/reviews";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const LIMIT = 10;
+const LIMIT = 1;
 
 export async function GET(request: NextRequest) {
   const token = extractToken(request.headers.get("Authorization"));
@@ -24,7 +26,7 @@ export async function GET(request: NextRequest) {
     .from("cafes")
     .select("id, google_place_id, name, address")
     .not("google_place_id", "is", null)
-    .is("google_reviews", null)
+    .eq("filtered_reviews", [])
     .order("created_at", { ascending: false })
     .limit(limit);
 
@@ -40,52 +42,16 @@ export async function GET(request: NextRequest) {
       continue;
     }
 
-    const englishPlaceDetails = await getPlaceDetails(cafe.google_place_id, { language: "en" });
-    const germanPlaceDetails = await getPlaceDetails(cafe.google_place_id, { language: "de" });
+    const task = await outscraperReviewsTask({
+      id: cafe.google_place_id,
+      keywords: reviewKeywords.join("|"),
+      async: true,
+    });
 
-    if (!englishPlaceDetails?.reviews) {
-      console.log(`No english place details found for ${cafe.name}`);
-    }
-    if (!germanPlaceDetails?.reviews) {
-      console.log(`No german place details found for ${cafe.name}`);
-    }
-
-    const englishReviews = englishPlaceDetails.reviews || [];
-    const germanReviews = germanPlaceDetails.reviews || [];
-
-    const reviews = [...englishReviews, ...germanReviews];
-    const workingReviews = reviews.filter(containsWorkingKeywords);
-
-    console.log(reviews);
-
-    const { error } = await supabase
-      .from("cafes")
-      .update({
-        google_reviews: reviews,
-        filtered_reviews: workingReviews,
-        processed_at: new Date().toISOString(),
-      })
-      .eq("id", cafe.id);
-
-    if (error) {
-      console.error("Error updating cafe", error);
-    }
+    console.log("✅ Task created for", cafe.name, task);
   }
 
   console.log(`⚡️ finished processing ${cafes.length} cafes`);
 
   return NextResponse.json({ message: "success", cafes });
-}
-
-function containsWorkingKeywords(review: Review) {
-  const keywords = [
-    // English terms
-    "working", "wifi", "internet", "free", "free wifi", "free internet",
-    // German terms
-    "arbeiten", "internet", "kostenlos", "kostenloses wifi", "kostenloses internet",
-    "steckdosen", "arbeitsplatz"
-  ];
-  return keywords.some(keyword => 
-    review.text?.toLowerCase().includes(keyword.toLowerCase())
-  );
 }
