@@ -75,7 +75,6 @@ export type OutscraperReview = {
     review_datetime_utc: string;
     review_timestamp: number;
     translated: boolean;
-    language: string;
     original_language: string;
     review_questions: Record<string, string>;
 };

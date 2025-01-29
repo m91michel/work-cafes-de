@@ -50,9 +50,9 @@ export default async function CityPage({ params }: Props) {
       <CityHero city={city} cafeCount={cafes.length} />
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-2xl font-semibold">
-          Entdecke {cafes.length} sorgfältig {cafes.length === 1 ? 'ausgewähltes Cafe' : 'ausgewählten Cafes'} in {city.name}.
+          Entdecke {cafes.length} sorgfältig {cafes.length === 1 ? 'ausgewähltes Cafe' : 'ausgewählte Cafes'} in {city.name}.
         </h2>
-        <p className="text-muted-foreground">Finde den passenden Ort um zu Arbeiten oder mit deinen Kommilitonen zu lernen.</p>
+        <p className="text-muted-foreground">Finde den passenden Ort um zu arbeiten, lesen oder mit deinen Kommilitonen zu lernen.</p>
       </div>
 
       <CafeList cafes={cafes} />

@@ -41,9 +41,9 @@ export async function POST(request: NextRequest) {
   console.log(`⚡️ reviews_data.length`, reviews_data.length);
 
   // Get cafe id
-  const { data: cafeData } = await supabase
+  const { data: cafe } = await supabase
     .from("cafes")
-    .select("id, google_place_id,review_count")
+    .select("id, google_place_id,review_count,processed")
     .eq("google_place_id", locationData.place_id)
     .maybeSingle();
 
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
   for (const review of reviews_data) {
     const { error } = await supabase.from("reviews").upsert(
       {
-        cafe_id: cafeData?.id,
+        cafe_id: cafe?.id,
         ...mapOutscraperReviewToSupabaseReview(review),
       },
       {
@@ -70,12 +70,17 @@ export async function POST(request: NextRequest) {
     reviewCountAdded++;
   }
 
-  const reviewCount = (cafeData?.review_count || 0) + reviewCountAdded;
+  const reviewCount = (cafe?.review_count || 0) + reviewCountAdded;
+  const processed = {
+    ...(typeof cafe?.processed === 'object' && cafe?.processed !== null ? cafe?.processed : {}),
+    google_reviews_at: dayjs().toISOString(),
+  };
   // Update cafe review count
   const { error } = await supabase
     .from("cafes")
     .update({
       review_count: reviewCount,
+      processed,
     })
     .eq("google_place_id", locationData.place_id);
 
@@ -89,14 +94,36 @@ export async function POST(request: NextRequest) {
 const mapOutscraperReviewToSupabaseReview = (
   review: OutscraperReview
 ): Partial<Review> => {
+  let text: Partial<Review> = {};
+
+  switch (review.original_language) {
+    case "en":
+      text = {
+        text_en: review.review_text,
+      };
+      break;
+    case "de":
+      text = {
+        text_de: review.review_text,
+      };
+      break;
+    default:
+      text = {
+        text_other: review.review_text,
+      };
+      break;
+  }
+
   return {
     author_name: review.author_title,
-    language: review.language,
+    author_url: review.author_url,
+    author_image: review.profile_photo_url,
+    language: review.original_language?.toLowerCase(),
     rating: review.review_rating,
     source: "Google Maps",
     source_url: review.review_link,
-    text: review.review_text,
     published_at: dayjs(review.review_datetime_utc).toISOString(),
     source_id: review.review_id,
+    ...text,
   };
 };

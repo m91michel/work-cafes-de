@@ -154,7 +154,9 @@ export type Database = {
       }
       reviews: {
         Row: {
+          author_image: string | null
           author_name: string | null
+          author_url: string | null
           cafe_id: string | null
           created_at: string
           id: string
@@ -164,11 +166,15 @@ export type Database = {
           source: string | null
           source_id: string | null
           source_url: string | null
-          text: string | null
+          text_de: string | null
+          text_en: string | null
+          text_other: string | null
           updated_at: string | null
         }
         Insert: {
+          author_image?: string | null
           author_name?: string | null
+          author_url?: string | null
           cafe_id?: string | null
           created_at?: string
           id?: string
@@ -178,11 +184,15 @@ export type Database = {
           source?: string | null
           source_id?: string | null
           source_url?: string | null
-          text?: string | null
+          text_de?: string | null
+          text_en?: string | null
+          text_other?: string | null
           updated_at?: string | null
         }
         Update: {
+          author_image?: string | null
           author_name?: string | null
+          author_url?: string | null
           cafe_id?: string | null
           created_at?: string
           id?: string
@@ -192,7 +202,9 @@ export type Database = {
           source?: string | null
           source_id?: string | null
           source_url?: string | null
-          text?: string | null
+          text_de?: string | null
+          text_en?: string | null
+          text_other?: string | null
           updated_at?: string | null
         }
         Relationships: [
