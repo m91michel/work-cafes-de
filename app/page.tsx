@@ -2,8 +2,8 @@ import { CafeList } from "@/components/cafe-directory";
 import { CityList } from "@/components/city/city-list";
 import { CitySelector } from "@/components/ui/city-selector";
 import { getSEOTags } from "@/libs/seo";
-import { getCafes, getCafesCount } from "@/libs/supabase/cafes";
-import { getCities, getCitiesCount } from "@/libs/supabase/cities";
+import { getBestCafes, getCafesCount } from "@/libs/supabase/cafes";
+import { getCities } from "@/libs/supabase/cities";
 import { FAQSection } from "@/components/faq";
 import { faqs } from "@/config/faq";
 import { About } from "@/components/sections/About";
@@ -19,7 +19,7 @@ export const metadata = getSEOTags({
 });
 
 export default async function Home() {
-  const cafes = await getCafes({ limit: 6, offset: 0 });
+  const cafes = await getBestCafes({ limit: 6, offset: 0 });
   const cities = await getCities({ limit: 6, offset: 0 });
   const cafesCount = await getCafesCount();
 

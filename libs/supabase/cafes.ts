@@ -13,7 +13,29 @@ export async function getCafes(
     .select("*, cities(name, slug)", { count: 'exact' })
     .eq('status', 'PUBLISHED')
     .range(offset, offset + limit - 1)
-    .order("created_at", { ascending: false });
+    .not('google_rating', 'is', null)
+    .order("google_rating", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+  console.log(count);
+
+  return data as Cafe[];
+}
+
+export async function getBestCafes(
+  { limit = 100, offset = 0 }: GetCafeProps = { limit: 100, offset: 0 }
+): Promise<Cafe[]> {
+  const { data, error, count } = await supabase
+    .from("cafes")
+    .select("*, cities(name, slug)", { count: 'exact' })
+    .eq('status', 'PUBLISHED')
+    .range(offset, offset + limit - 1)
+    .not('google_rating', 'is', null)
+    .gte("review_count", 3)
+    .order("google_rating", { ascending: false });
 
   if (error) {
     console.error("Error fetching data:", error);
