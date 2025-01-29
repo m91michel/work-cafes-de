@@ -3,6 +3,7 @@ import Link from "next/link";
 import config, { domainName } from "@/config/config";
 import { SiInstagram, SiX } from "@icons-pack/react-simple-icons";
 import { getCities } from "@/libs/supabase/cities";
+import { isGerman } from "@/libs/environment";
 
 const currentYear = new Date().getFullYear();
 
@@ -78,7 +79,7 @@ export async function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Über uns</h3>
+            <h3 className="font-semibold mb-4">{isGerman ? "Über uns" : "About us"}</h3>
             <ul className="space-y-2">
               {aboutLinks.map((link) => (
                 <li key={link.href}>
@@ -94,7 +95,7 @@ export async function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Die besten Cafés</h3>
+            <h3 className="font-semibold mb-4">{isGerman ? "Die besten Cafés" : "The best Cafés"}</h3>
             <ul className="space-y-2">
               {cities.map((city) => (
                 <li key={city.slug}>

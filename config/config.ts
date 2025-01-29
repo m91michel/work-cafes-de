@@ -1,16 +1,22 @@
+import { isGerman } from "@/libs/environment";
 
-export const domainName = "cafezumarbeiten.de";
+export const domainDe = "cafezumarbeiten.de";
+export const domainEn = "work-in-cafe.com";
+export const domainName = isGerman ? domainDe : domainEn;
+export const alternateDomainName = isGerman ? domainEn : domainDe;
 export const baseUrl = `https://${domainName}`;
-export const appName = "Cafés zum Arbeiten";
+export const appName = isGerman ? "Cafés zum Arbeiten" : "Work in Café";
 
 export const submitFormUrl = "https://tally.so/r/mB81VA";
+
+const descriptionDe = "Finde den perfekten Arbeitsplatz für deine Bedürfnisse. Entdecken Sie Orte, Einrichtungen und Bewertungen, um deinen Arbeitsalltag zu genießen.";
+const descriptionEn = "Find the perfect work place for your needs. Discover places where you can work and drink a good coffee.";
 
 const config = {
     // REQUIRED
     appName: appName,
     // REQUIRED: a short description of your app for SEO tags (can be overwritten)
-    appDescription:
-      "Finde den perfekten Arbeitsplatz für deine Bedürfnisse. Entdecken Sie Orte, Einrichtungen und Bewertungen, um deinen Arbeitsalltag zu genießen.",
+    appDescription: isGerman ? descriptionDe : descriptionEn,
     // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
     domainName: domainName,
     founderName: "Mathias",

@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { Wifi, Power, Volume2, Armchair, Star } from "lucide-react";
+import { Wifi, Volume2, Armchair, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Cafe } from "@/libs/types";

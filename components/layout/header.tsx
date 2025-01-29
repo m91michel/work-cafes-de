@@ -4,6 +4,7 @@ import { Coffee, Menu } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { NavLinks } from "./NavLinks";
+import config from "@/config/config";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,7 +17,7 @@ export function Header() {
           className="flex items-center gap-2 hover:opacity-90 transition-opacity"
         >
           <Coffee className="h-6 w-6" />
-          <span className="font-semibold text-lg">Café zum Arbeiten</span>
+          <span className="font-semibold text-lg">{config.appName}</span>
         </Link>
 
         <div className="flex items-center md:hidden">

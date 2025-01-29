@@ -1,11 +1,16 @@
 import Link from "next/link";
 import { getSEOTags } from "@/libs/seo";
-import config from "@/config/config";
+import config, { alternateDomainName } from "@/config/config";
+import { isEnglish } from "@/libs/environment";
+import { notFound } from "next/navigation";
 
 export const metadata = getSEOTags({
   title: `Impressum | ${config.appName}`,
   description: `Impressum für ${config.appName}`,
   canonicalUrlRelative: "/impressum",
+  alternates: {
+    canonical: `https://${alternateDomainName}/privacy`,
+  },
 });
 
 const lastUpdated = "2024-12-11";
@@ -36,6 +41,11 @@ const unsplashCredits = [
 ]
 
 const Imprint = () => {
+
+  if (isEnglish) {
+    notFound();
+  }
+
   return (
     <section className="max-w-7xl mx-auto px-8 py-16 md:py-32">
       <div className="prose leading-relaxed whitespace-pre-wrap mx-auto">

@@ -2,7 +2,7 @@ import { getSEOTags } from "@/libs/seo";
 import config, { baseUrl } from "@/config/config";
 import dayjs from "dayjs";
 import { notFound } from "next/navigation";
-import { isEnglish } from "@/libs/environment";
+import { isGerman } from "@/libs/environment";
 
 // CHATGPT PROMPT TO GENERATE YOUR PRIVACY POLICY — replace with your own data 👇
 
@@ -28,9 +28,9 @@ import { isEnglish } from "@/libs/environment";
 // Please write a simple privacy policy for my site. Add the current date.  Do not add or explain your reasoning. Answer:
 
 export const metadata = getSEOTags({
-  title: `Datenschutz | ${config.appName}`,
-  description: `Datenschutz für ${config.appName}`,
-  canonicalUrlRelative: "/datenschutz",
+  title: `Privacy Policy | ${config.appName}`,
+  description: `Privacy Policy for ${config.appName}`,
+  canonicalUrlRelative: "/privacy",
   alternates: {
     canonical: "https://cafezumarbeiten.de/datenschutz",
   },
@@ -39,7 +39,7 @@ export const metadata = getSEOTags({
 const lastUpdated = "2024-12-08";
 const PrivacyPolicy = () => {
 
-  if (isEnglish) {
+  if (isGerman) {
     notFound();
   }
 
@@ -47,7 +47,7 @@ const PrivacyPolicy = () => {
     <main className="max-w-7xl mx-auto px-8 py-16 md:py-32">
       <div className="max-w-2xl mx-auto p-5">
         <h1 className="text-3xl font-extrabold pb-6">
-          Datenschutz für {config.appName}
+          Privacy Policy for {config.appName}
         </h1>
 
         <pre
@@ -55,41 +55,40 @@ const PrivacyPolicy = () => {
           style={{ fontFamily: "sans-serif" }}
         >
 {`
-Letzte Aktualisierung: ${dayjs(lastUpdated).format("DD.MM.YYYY")}
+Last updated: ${dayjs(lastUpdated).format("YYYY-MM-DD")}
 
-Willkommen bei ${config.appName}!
+Welcome to ${config.appName}!
 
-Diese Datenschutzerklärung beschreibt, wie wir Informationen sammeln, nutzen und schützen, wenn Sie unsere Website ${baseUrl} nutzen.
+This privacy policy describes how we collect, use, and protect information when you use our website ${baseUrl}.
 
-Erhebung von Daten
+Collection of Data
 
-Wir erfassen die folgenden Daten:
-	•	Persönliche Daten: Name und E-Mail-Adresse, die Sie uns für die Kontaktaufnahme per E-Mail bereitstellen.
-	•	Nicht-personenbezogene Daten: Informationen, die durch Web-Cookies gesammelt werden, um die Benutzerfreundlichkeit unserer Website zu verbessern.
+We collect the following data:
+    • Personal Data: Name and email address that you provide to contact us via email.
+    • Non-Personal Data: Information collected through web cookies to improve the user-friendliness of our website.
 
-Zweck der Datenerhebung
+Purpose of Data Collection
 
-Die von Ihnen bereitgestellten Daten werden ausschließlich zur Kontaktaufnahme verwendet.
+The data you provide is used solely for contacting you.
 
-Weitergabe von Daten
+Sharing of Data
 
-Wir geben Ihre Daten nicht an Dritte weiter.
+We do not share your data with third parties.
 
-Datenschutz bei Kindern
+Privacy for Children
 
-Wir sammeln keine Daten von Kindern unter 13 Jahren.
+We do not collect data from children under 13 years of age.
 
-Aktualisierungen der Datenschutzerklärung
+Updates to the Privacy Policy
 
-Diese Datenschutzerklärung kann gelegentlich aktualisiert werden. Über wesentliche Änderungen informieren wir Sie per E-Mail.
+This privacy policy may occasionally be updated. We will inform you of significant changes via email.
 
-Kontakt
+Contact
 
-Wenn Sie Fragen oder Bedenken zu unserer Datenschutzerklärung haben, kontaktieren Sie uns bitte unter:
-E-Mail: privacy@${config.domainName}
+If you have questions or concerns about our privacy policy, please contact us at:
+Email: privacy@${config.domainName}
 
-Vielen Dank, dass Sie Café zum Arbeiten nutzen!
-
+Thank you for using Café for Work!
 
 `}
 
