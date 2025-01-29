@@ -46,7 +46,11 @@ export async function outscraperReviewsTask(params?: OutscraperReviewsParams) {
         }
     });
 
-    console.log(response.config.url);
+    console.log('starting outscraper task with params:', {
+        id,
+        keywords,
+        reviewsLimit
+    });
 
     return response.data;
 }
@@ -67,9 +71,9 @@ export type OutscraperReview = {
     google_id: string;
     review_id: string;
     author_title: string;
-    author_url: string;
+    author_link: string;
+    author_image: string;
     review_text: string;
-    profile_photo_url: string;
     review_rating: number;
     review_link: string;
     review_datetime_utc: string;

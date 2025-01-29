@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
   console.log(`⚡️ reviews_data.length`, reviews_data.length);
 
   // Get cafe id
-  const { data: cafe } = await supabase
+  const { data: cafe, error: cafeError } = await supabase
     .from("cafes")
     .select("id, google_place_id,review_count,processed")
     .eq("google_place_id", locationData.place_id)
@@ -49,8 +49,20 @@ export async function POST(request: NextRequest) {
 
   let reviewCountAdded = 0;
 
+  console.log(`⚡️ cafe`, cafe);
+
+  if (cafeError) {
+    console.error("Error fetching cafe", cafeError);
+  }
+
+  if (!cafe) {
+    console.error("Cafe not found", locationData.place_id);
+    return NextResponse.json({ message: "Cafe not found" });
+  }
+
   // Insert reviews
   for (const review of reviews_data) {
+    console.log(`⚡️ processing review from ${review.author_title}`, review.review_id);
     const { error } = await supabase.from("reviews").upsert(
       {
         cafe_id: cafe?.id,
@@ -63,7 +75,7 @@ export async function POST(request: NextRequest) {
     );
 
     if (error) {
-      console.error("Error inserting review", error);
+      console.error(`Error inserting review from ${review.author_title} ${review.review_id}`, error);
       continue;
     }
 
@@ -109,15 +121,15 @@ const mapOutscraperReviewToSupabaseReview = (
       break;
     default:
       text = {
-        text_other: review.review_text,
+        text_original: review.review_text,
       };
       break;
   }
 
   return {
     author_name: review.author_title,
-    author_url: review.author_url,
-    author_image: review.profile_photo_url,
+    author_url: review.author_link,
+    author_image: review.author_image,
     language: review.original_language?.toLowerCase(),
     rating: review.review_rating,
     source: "Google Maps",

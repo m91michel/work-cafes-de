@@ -168,7 +168,7 @@ export type Database = {
           source_url: string | null
           text_de: string | null
           text_en: string | null
-          text_other: string | null
+          text_original: string | null
           updated_at: string | null
         }
         Insert: {
@@ -186,7 +186,7 @@ export type Database = {
           source_url?: string | null
           text_de?: string | null
           text_en?: string | null
-          text_other?: string | null
+          text_original?: string | null
           updated_at?: string | null
         }
         Update: {
@@ -204,7 +204,7 @@ export type Database = {
           source_url?: string | null
           text_de?: string | null
           text_en?: string | null
-          text_other?: string | null
+          text_original?: string | null
           updated_at?: string | null
         }
         Relationships: [

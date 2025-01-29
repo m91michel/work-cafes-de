@@ -93,8 +93,12 @@ function getReviewText(review: Review) {
         text = review.text_de;
     } else if (review.text_en) {
         text = review.text_en;
-    } else if (review.text_other) {
-        text = review.text_other;
+    } else if (review.text_original) {
+        text = review.text_original;
+    }
+
+    if (text.length === 0) {
+        return "";
     }
 
     // Replace newlines with <br /> tags
