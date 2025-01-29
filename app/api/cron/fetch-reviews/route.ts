@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
 import { extractToken } from "@/libs/utils";
-import { Review } from "@/libs/google-maps";
-import { OutscraperReview, outscraperReviewsTask } from "@/libs/apis/outscraper";
-import { containsWorkingKeywords, reviewKeywords } from "../../_utils/reviews";
+import { outscraperReviewsTask } from "@/libs/apis/outscraper";
+import dayjs from "dayjs";
+import { Cafe } from "@/libs/types";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -26,12 +26,16 @@ export async function GET(request: NextRequest) {
     .from("cafes")
     .select("id, google_place_id, name, address, review_count, processed")
     .not("google_place_id", "is", null)
+    .is("processed->google_reviews_at", null)
     .eq("review_count", 0)
     .limit(limit);
 
   if (!cafes || error) {
     console.error("Error fetching cafes", error);
-    return NextResponse.json({ error: "Error fetching cafes" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Error fetching cafes" },
+      { status: 500 }
+    );
   }
 
   for (const cafe of cafes) {
@@ -45,6 +49,8 @@ export async function GET(request: NextRequest) {
     if (cafe.processed?.google_reviews_at) {
       console.log(`Skipping ${cafe.name} because it as already been processed`);
       continue;
+    } else {
+      await setProcessed(cafe);
     }
 
     const keywords = ["working", "wifi", "arbeiten", "wlan"];
@@ -59,7 +65,25 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  console.log(`⚡️ finished processing ${cafes.length} cafes`);
+  console.log(`✅ finished processing ${cafes.length} cafes`);
 
   return NextResponse.json({ message: "success", cafes });
+}
+
+async function setProcessed(cafe?: Pick<Cafe, "id" | "processed">) {
+  if (!cafe) return;
+
+  const processed = {
+    ...(typeof cafe?.processed === "object" && cafe?.processed !== null
+      ? cafe?.processed
+      : {}),
+    google_reviews_at: dayjs().toISOString(),
+  };
+
+  return await supabase
+    .from("cafes")
+    .update({
+      processed,
+    })
+    .eq("id", cafe.id);
 }

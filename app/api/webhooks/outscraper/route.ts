@@ -100,6 +100,8 @@ export async function POST(request: NextRequest) {
     console.error("Error updating cafe", error);
   }
 
+  console.log(`✅ finished processing ${reviews_data.length} reviews`);
+
   return NextResponse.json({ message: "success" });
 }
 
