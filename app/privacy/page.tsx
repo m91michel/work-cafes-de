@@ -1,5 +1,5 @@
 import { getSEOTags } from "@/libs/seo";
-import config, { baseUrl } from "@/config/config";
+import config, { alternateDomainName, baseUrl, domainDe, domainEn, domainName } from "@/config/config";
 import dayjs from "dayjs";
 import { notFound } from "next/navigation";
 import { isGerman } from "@/libs/environment";
@@ -31,8 +31,13 @@ export const metadata = getSEOTags({
   title: `Privacy Policy | ${config.appName}`,
   description: `Privacy Policy for ${config.appName}`,
   canonicalUrlRelative: "/privacy",
+  keywords: `privacy, policy, ${config.appName}`,
   alternates: {
-    canonical: "https://cafezumarbeiten.de/datenschutz",
+    canonical: `https://${domainDe}/datenschutz`,
+    languages: {
+      en: `https://${domainEn}/privacy`,
+      de: `https://${domainDe}/datenschutz`,
+    },
   },
 });
 

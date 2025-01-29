@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { localhost } from "./environment";
+import { locale, localhost } from "./environment";
 import config, { baseUrl } from "@/config/config";
 
 // These are all the SEO tags you can add to your pages.
@@ -50,7 +50,7 @@ export const getSEOTags = ({
       //     height: 660,
       //   },
       // ],
-      locale: "de_DE",
+      locale: locale,
       type: "website",
       ...openGraph,
     },
