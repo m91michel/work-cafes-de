@@ -94,6 +94,7 @@ export async function POST(request: NextRequest) {
       .update({
         review_count: reviewCount,
         processed,
+        processed_at: dayjs().toISOString(),
       })
       .eq("google_place_id", locationData.place_id);
 

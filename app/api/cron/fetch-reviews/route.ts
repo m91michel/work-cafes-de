@@ -86,6 +86,7 @@ async function setProcessed(cafe?: Pick<Cafe, "id" | "processed">) {
     .from("cafes")
     .update({
       processed,
+      processed_at: dayjs().toISOString(),
     })
     .eq("id", cafe.id);
 }
