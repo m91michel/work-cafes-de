@@ -47,12 +47,14 @@ export const googleMapsActions: Command[] = [
       const placeId = await input({
         message: "Enter the place id",
       });
-      for (const keyword of reviewKeywords) {
+      const keywords = ["working", "wifi", "arbeiten", "wlan"];
+
+      for (const keyword of keywords) {
         const reviews = await outscraperReviewsTask({
           id: placeId,
           keywords: keyword,
         });
-        console.log(reviews);
+        console.log("location url: ", reviews.location_url);
       }
     },
   },
