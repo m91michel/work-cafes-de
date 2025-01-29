@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
-import { uploadImagesToBunny } from "@/libs/bunny";
+import { uploadImageToBunny } from "@/libs/bunny";
 import { getPlaceDetails } from "@/libs/google-maps";
 import { Cafe } from "@/libs/types";
 import { processOpenHours } from "@/libs/openai/process-open-hours";
@@ -60,7 +60,7 @@ export async function GET(req: NextRequest) {
     let bunnyUrl;
     if (photoUrls.length > 0) {
       const filename = `${cafe.slug}-thumb.jpg`;
-      bunnyUrl = await uploadImagesToBunny(photoUrls[0], filename, 'cafes');
+      bunnyUrl = await uploadImageToBunny(photoUrls[0], filename, 'cafes');
     }
 
     const formattedAddress = placeDetails.formatted_address;

@@ -5,7 +5,7 @@ const PULL_ZONE = process.env.BUNNY_PULL_ZONE || "";
 const STORAGE_ZONE = process.env.BUNNY_STORAGE_ZONE || "";
 const API_KEY = process.env.BUNNY_API_KEY || "";
 
-export async function uploadImagesToBunny(photoUrl: string, filename: string, folder?: string) {
+export async function uploadImageToBunny(photoUrl: string, filename: string, folder?: string) {
   try {
     const response = await axios.get(photoUrl, { responseType: "arraybuffer" });
     const buffer = Buffer.from(response.data, "binary");

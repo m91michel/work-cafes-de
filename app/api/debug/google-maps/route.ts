@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
-import axios from "axios";
-import FormData from "form-data";
-import { Cafe } from "@/libs/types";
-import { uploadImagesToBunny } from "@/libs/bunny";
+import { uploadImageToBunny } from "@/libs/bunny";
 import { getPlaceDetails } from "@/libs/google-maps";
 
 export const dynamic = "force-dynamic";
@@ -59,7 +56,7 @@ export async function GET() {
     });
 
     const filename = `${cafe.name}-${cafe.address}.jpg`;
-    const bunnyImageUrls = await uploadImagesToBunny(photoUrls, filename, 'cafes');
+    const bunnyImageUrl = await uploadImageToBunny(photoUrls[0], filename, 'cafes');
 
     const formattedAddress = response.candidates[0].formatted_address;
     const lat_long = `${response.candidates[0].geometry.location.lat},${response.candidates[0].geometry.location.lng}`;
@@ -72,7 +69,7 @@ export async function GET() {
         address: formattedAddress,
         lat_long: lat_long,
         maps_data: response.candidates[0],
-        bunny_image_urls: bunnyImageUrls,
+        preview_image: bunnyImageUrl,
       })
       .eq("id", cafe.id);
 

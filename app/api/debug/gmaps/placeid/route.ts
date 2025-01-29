@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
-import { uploadImagesToBunny } from "@/libs/bunny";
+import { uploadImageToBunny } from "@/libs/bunny";
 import { getPlaceDetails, GoogleMapsCandidate, searchInGoogleMaps } from "@/libs/google-maps";
 
 export const dynamic = "force-dynamic";
@@ -74,7 +74,7 @@ export async function GET(req: NextRequest) {
     if (showLogs) console.log(`photoUrls: ${JSON.stringify(photoUrls, null, 2)}`);
 
     const filename = `${cafe.slug}-thumb.jpg`;
-    const bunnyUrl = await uploadImagesToBunny(photoUrls[0], filename, 'cafes');
+    const bunnyUrl = await uploadImageToBunny(photoUrls[0], filename, 'cafes');
 
     const formattedAddress = mapsCandidates[0].formatted_address;
     const lat_long = `${mapsCandidates[0].geometry.location.lat},${mapsCandidates[0].geometry.location.lng}`;
