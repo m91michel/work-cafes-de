@@ -30,6 +30,12 @@ export async function outscraperReviewsTask(params?: OutscraperReviewsParams) {
         return null;
     }
 
+    console.log('starting outscraper task with params:', {
+        id,
+        keywords,
+        reviewsLimit
+    });
+
     const response = await axios.get('https://api.app.outscraper.com/maps/reviews-v3', {
         params: {
             query: id,
@@ -46,11 +52,7 @@ export async function outscraperReviewsTask(params?: OutscraperReviewsParams) {
         }
     });
 
-    console.log('starting outscraper task with params:', {
-        id,
-        keywords,
-        reviewsLimit
-    });
+    console.log('outscraper task id:', response.data.id);
 
     return response.data;
 }
