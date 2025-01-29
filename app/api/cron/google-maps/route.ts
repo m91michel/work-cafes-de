@@ -30,6 +30,7 @@ export async function GET(request: NextRequest) {
     .select("*")
     .not("google_place_id", "is", null)
     .eq("status", "NEW")
+    .is("processed->google_details_at", null)
     .order("created_at", { ascending: false })
     .limit(limit);
 
@@ -62,6 +63,7 @@ export async function GET(request: NextRequest) {
     if (photoUrls.length > 0) {
       const filename = `${cafe.slug}-thumb.jpg`;
       bunnyUrl = await uploadImageToBunny(photoUrls[0], filename, 'cafes');
+      console.log(`📸 uploaded image for ${cafe.name}`);
     }
 
     const formattedAddress = placeDetails.formatted_address;
@@ -72,6 +74,7 @@ export async function GET(request: NextRequest) {
 
     if (openHours) {
       openHours = await processOpenHours(openHours);
+      console.log(`📅 processed open hours for ${cafe.name}`);
     }
 
     const processed = {
@@ -95,7 +98,7 @@ export async function GET(request: NextRequest) {
           ...placeDetails,
           photos: photoUrls
         },
-        status: 'PROCESSED'
+        // status: 'PROCESSED'
       })
       .eq("id", cafe.id);
 
