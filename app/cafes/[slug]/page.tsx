@@ -15,6 +15,8 @@ import CafeBreadcrumb from "@/components/cafe/cafe-breadcrumb";
 import { getReviewsById } from "@/libs/supabase/reviews";
 import { isDev } from "@/libs/environment";
 import { CafeReviews } from "@/components/cafe/cafe-reviews";
+import { FAQSection } from "@/components/faq";
+import { faqs } from "@/config/faq";
 
 type Params = Promise<{ slug: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
@@ -99,6 +101,9 @@ export default async function CafePage({ params }: Props) {
               <CafeCard key={cafe.slug} cafe={cafe} />
             ))}
           </div>
+        </div>
+        <div className="mt-12">
+          <FAQSection faqs={faqs} />
         </div>
       </div>
     </main>
