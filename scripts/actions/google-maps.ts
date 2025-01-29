@@ -1,4 +1,4 @@
-import { getPlaceDetails, searchInGoogleMaps } from "../../libs/google-maps";
+import { getPlaceDetails, searchInGoogleMaps, searchPlaces } from "../../libs/google-maps";
 import { input } from "@inquirer/prompts";
 import { Command } from "..";
 import { outscraperReviewsTask } from "../../libs/apis/outscraper";
@@ -34,6 +34,17 @@ export const googleMapsActions: Command[] = [
     name: "🔍 Google Maps: Search for Place",
     key: "google-maps-search",
     action: searchForPlace,
+  },
+  {
+    name: "🔍 Google Maps: Search for Places",
+    key: "google-maps-search-places",
+    action: async () => {
+      const query = await input({
+        message: "Enter the search query",
+      });
+      const places = await searchPlaces(query);
+      console.log(places);
+    },
   },
   {
     name: "🌐 Google Maps: Get Place Details",

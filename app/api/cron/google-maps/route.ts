@@ -30,6 +30,7 @@ export async function GET(request: NextRequest) {
     .select("*")
     .not("google_place_id", "is", null)
     .eq("status", "NEW")
+    .gte("review_count", 1) // only process cafes with at least 1 review
     .is("processed->google_details_at", null)
     .order("created_at", { ascending: false })
     .limit(limit);

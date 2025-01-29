@@ -116,3 +116,32 @@ export const directionLink = (
   if (!query || !placeId) return "";
   return `https://www.google.com/maps/dir/?api=1&destination=${query}&query_place_id=${placeId}`;
 };
+
+export async function searchPlaces(
+  query: string
+): Promise<GoogleMapsCandidate[] | null> {
+  try {
+    const response = await axios.get(
+      "https://maps.googleapis.com/maps/api/place/textsearch/json",
+      {
+        params: {
+          query: query,
+          fields: "place_id,photos,formatted_address,name,rating,opening_hours,geometry",
+          key: GOOGLE_MAPS_API_KEY,
+        },
+      }
+    );
+
+    const data = response.data;
+
+    if (!data || !data.results || data.results.length === 0) {
+      console.log(`No Google Maps data found for ${query}:`, data);
+      return null;
+    }
+
+    return data.results;
+  } catch (error) {
+    console.error(`Error fetching data from Google Places API:`, error);
+    return null;
+  }
+}
