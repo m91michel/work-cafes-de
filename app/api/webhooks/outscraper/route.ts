@@ -37,70 +37,72 @@ export async function POST(request: NextRequest) {
 
   const result = await fetchOutscraperResult(results_location);
 
-  const { reviews_data = [], ...locationData } = result.data[0];
-  console.log(`⚡️ reviews_data.length`, reviews_data.length);
+  for (const [index, location] of (result.data || []).entries()) {
+    const { reviews_data = [], ...locationData } = location;
+    console.log(`⚡️ processing review from ${locationData.place_id} (${index+1}/${result.data.length}) with ${reviews_data.length} reviews`);
+  
+    // Get cafe id
+    const { data: cafe, error: cafeError } = await supabase
+      .from("cafes")
+      .select("id, name,google_place_id,review_count,processed")
+      .eq("google_place_id", locationData.place_id)
+      .maybeSingle();
 
-  // Get cafe id
-  const { data: cafe, error: cafeError } = await supabase
-    .from("cafes")
-    .select("id, google_place_id,review_count,processed")
-    .eq("google_place_id", locationData.place_id)
-    .maybeSingle();
+    let reviewCountAdded = 0;
 
-  let reviewCountAdded = 0;
+    console.log(`⚡️ cafe`, cafe);
 
-  console.log(`⚡️ cafe`, cafe);
+    if (cafeError) {
+      console.error("Error fetching cafe", cafeError);
+    }
 
-  if (cafeError) {
-    console.error("Error fetching cafe", cafeError);
-  }
-
-  if (!cafe) {
-    console.error("Cafe not found", locationData.place_id);
-    return NextResponse.json({ message: "Cafe not found" });
-  }
-
-  // Insert reviews
-  for (const review of reviews_data) {
-    console.log(`⚡️ processing review from ${review.author_title}`, review.review_id);
-    const { error } = await supabase.from("reviews").upsert(
-      {
-        cafe_id: cafe?.id,
-        ...mapOutscraperReviewToSupabaseReview(review),
-      },
-      {
-        onConflict: "source_id",
-        ignoreDuplicates: true,
-      }
-    );
-
-    if (error) {
-      console.error(`Error inserting review from ${review.author_title} ${review.review_id}`, error);
+    if (!cafe) {
+      console.error("Cafe not found", locationData.place_id);
       continue;
     }
 
-    reviewCountAdded++;
+    // Insert reviews
+    for (const review of reviews_data) {
+      console.log(`⚡️ processing review from ${review.author_title}`, review.review_id);
+      const { error } = await supabase.from("reviews").upsert(
+        {
+          cafe_id: cafe?.id,
+          ...mapOutscraperReviewToSupabaseReview(review),
+        },
+        {
+          onConflict: "source_id",
+          ignoreDuplicates: true,
+        }
+      );
+
+      if (error) {
+        console.error(`Error inserting review from ${review.author_title} ${review.review_id}`, error);
+        continue;
+      }
+
+      reviewCountAdded++;
+    }
+
+    const reviewCount = (cafe?.review_count || 0) + reviewCountAdded;
+    const processed = {
+      ...(typeof cafe?.processed === 'object' && cafe?.processed !== null ? cafe?.processed : {}),
+      google_reviews_at: dayjs().toISOString(),
+    };
+    // Update cafe review count
+    const { error } = await supabase
+      .from("cafes")
+      .update({
+        review_count: reviewCount,
+        processed,
+      })
+      .eq("google_place_id", locationData.place_id);
+
+    if (error) {
+      console.error("Error updating cafe", error);
+    }
+
+    console.log(`✅ ${cafe?.name} finished processing ${reviews_data.length} reviews`);
   }
-
-  const reviewCount = (cafe?.review_count || 0) + reviewCountAdded;
-  const processed = {
-    ...(typeof cafe?.processed === 'object' && cafe?.processed !== null ? cafe?.processed : {}),
-    google_reviews_at: dayjs().toISOString(),
-  };
-  // Update cafe review count
-  const { error } = await supabase
-    .from("cafes")
-    .update({
-      review_count: reviewCount,
-      processed,
-    })
-    .eq("google_place_id", locationData.place_id);
-
-  if (error) {
-    console.error("Error updating cafe", error);
-  }
-
-  console.log(`✅ finished processing ${reviews_data.length} reviews`);
 
   return NextResponse.json({ message: "success" });
 }
