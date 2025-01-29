@@ -1,6 +1,10 @@
 import { CafeHero } from "@/components/cafe/cafe-hero";
 import { CafeDetails } from "@/components/cafe/cafe-details";
-import { CafeAmenities, CafeFurtherButtons, DebugInfo } from "@/components/cafe/cafe-section-blocks";
+import {
+  CafeAmenities,
+  CafeFurtherButtons,
+  DebugInfo,
+} from "@/components/cafe/cafe-section-blocks";
 import { notFound } from "next/navigation";
 import { getSEOTags } from "@/libs/seo";
 import config from "@/config/config";
@@ -67,7 +71,7 @@ export default async function CafePage({ params }: Props) {
   return (
     <main className="flex-1 bg-background">
       <CafeHero cafe={cafe} />
-      <CafeBreadcrumb cafe={cafe} className="py-6"/>
+      <CafeBreadcrumb cafe={cafe} className="py-6" />
 
       <div className="max-w-7xl mx-auto px-4 pb-12">
         <div className="grid md:grid-cols-3 gap-8">
@@ -80,10 +84,10 @@ export default async function CafePage({ params }: Props) {
             <CafeFurtherButtons cafe={cafe} />
             {isDev && <DebugInfo cafe={cafe} />}
           </div>
-        </div>
 
-        <div className="mt-12">
-          <CafeReviews cafe={cafe} />
+          <div className="md:col-span-2">
+            <CafeReviews cafe={cafe} />
+          </div>
         </div>
 
         <div className="mt-12">

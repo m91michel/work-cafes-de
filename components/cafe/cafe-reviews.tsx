@@ -2,6 +2,7 @@ import { getReviewsById } from "@/libs/supabase/reviews";
 import { Cafe, Review } from "@/libs/types";
 import { Card } from "../ui/card";
 import dayjs from "dayjs";
+import { reviewKeywords } from "@/app/api/_utils/reviews";
 
 interface Props {
   cafe: Cafe;
@@ -77,10 +78,38 @@ export function CafeReview({ review }: CafeReviewProps) {
         
         <p className="text-base leading-relaxed text-foreground/80"
           dangerouslySetInnerHTML={{
-            __html: review.text?.replace(/\n/g, "<br />") || "",
+            __html: getReviewText(review),
           }}
         />
       </div>
     </div>
   );
+}
+
+function getReviewText(review: Review) {
+    // Get text in the correct language
+    let text = "";
+    if (review.text_de) {
+        text = review.text_de;
+    } else if (review.text_en) {
+        text = review.text_en;
+    } else if (review.text_other) {
+        text = review.text_other;
+    }
+
+    // Replace newlines with <br /> tags
+    text = text.replace(/\n/g, "<br />");
+
+    // Highlight keywords
+    text = highlightKeywords(text, reviewKeywords);
+
+    return text;
+}
+
+function highlightKeywords(text: string, keywords: string[]) {
+    // Highlight keywords in the text
+    keywords.forEach((keyword) => {
+        text = text.replace(new RegExp(keyword, "gi"), `<strong class="font-bold">${keyword}</strong>`);
+    });
+    return text;
 }
