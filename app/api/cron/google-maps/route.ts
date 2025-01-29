@@ -2,12 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
 import { extractToken } from "@/libs/utils";
-import { Review } from "@/libs/google-maps";
-import { OutscraperReview, outscraperReviewsTask } from "@/libs/apis/outscraper";
-import { containsWorkingKeywords, reviewKeywords } from "../../_utils/reviews";
+import { outscraperReviewsTask } from "@/libs/apis/outscraper";
+import { reviewKeywords } from "../../_utils/reviews";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
+export const maxDuration = 60;
 
 const LIMIT = 1;
 
