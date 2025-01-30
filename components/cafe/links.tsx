@@ -23,7 +23,7 @@ export function CafeLinks({ cafe }: Props) {
 export function CafeLink({ link }: { link: string }) {
   const external = link.startsWith("http");
   const externalProps = external
-    ? { target: "_blank", rel: "noopener noreferrer" }
+    ? { target: "_blank", rel: "noopener noreferrer nofollow" }
     : {};
 
   const type = getLinkType(link);

@@ -20,6 +20,7 @@ module.exports = {
     "/unsubscribe",
     "/app/*",
     "/dashboard/*",
+    "/privacy",
   ],
   // robotsTxtOptions: {
   //   additionalSitemaps: [
