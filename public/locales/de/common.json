@@ -1,0 +1,24 @@
+{
+  "navigation": {
+    "home": "Startseite",
+    "cities": "Städte",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "help": "Hilfe",
+    "privacy": "Datenschutz",
+    "imprint": "Impressum"
+  },
+  "actions": {
+    "search": "Suchen",
+    "filter": "Filtern",
+    "submit": "Absenden",
+    "cancel": "Abbrechen",
+    "close": "Schließen",
+    "open": "Öffnen",
+    "share": "Teilen"
+  },
+  "meta": {
+    "title": "Cafés zum Arbeiten",
+    "description": "Finde die besten Cafés zum Arbeiten in Deutschland"
+  }
+} 

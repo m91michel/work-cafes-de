@@ -1,0 +1,39 @@
+{
+  "details": {
+    "wifi": "WiFi",
+    "power": "Power Outlets",
+    "seating": "Seating",
+    "noise": "Noise Level",
+    "food": "Food & Drinks",
+    "hours": "Opening Hours",
+    "address": "Address",
+    "rating": "Rating"
+  },
+  "filters": {
+    "wifi_quality": {
+      "label": "WiFi Quality",
+      "excellent": "Excellent",
+      "good": "Good",
+      "fair": "Fair",
+      "poor": "Poor"
+    },
+    "seating_comfort": {
+      "label": "Seating Comfort",
+      "very_comfortable": "Very Comfortable",
+      "comfortable": "Comfortable",
+      "moderate": "Moderate",
+      "uncomfortable": "Uncomfortable"
+    },
+    "noise_level": {
+      "label": "Noise Level",
+      "quiet": "Quiet",
+      "moderate": "Moderate",
+      "noisy": "Noisy"
+    }
+  },
+  "status": {
+    "open": "Open",
+    "closed": "Closed",
+    "opening_soon": "Opening Soon"
+  }
+} 

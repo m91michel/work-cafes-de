@@ -4,8 +4,9 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { getSEOTags } from "@/libs/seo";
 import Script from "next/script";
-import { isProd } from "@/libs/environment";
+import { isProd, isGerman } from "@/libs/environment";
 import { Toaster } from "@/components/ui/toaster";
+import '@/libs/i18n/config';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de">
+    <html lang={isGerman ? 'de' : 'en'}>
       {isProd && (
         <>
           <Script

@@ -1,0 +1,39 @@
+{
+  "details": {
+    "wifi": "WLAN",
+    "power": "Steckdosen",
+    "seating": "Sitzplätze",
+    "noise": "Lautstärke",
+    "food": "Essen & Getränke",
+    "hours": "Öffnungszeiten",
+    "address": "Adresse",
+    "rating": "Bewertung"
+  },
+  "filters": {
+    "wifi_quality": {
+      "label": "WLAN-Qualität",
+      "excellent": "Ausgezeichnet",
+      "good": "Gut",
+      "fair": "Ausreichend",
+      "poor": "Schlecht"
+    },
+    "seating_comfort": {
+      "label": "Sitzkomfort",
+      "very_comfortable": "Sehr bequem",
+      "comfortable": "Bequem",
+      "moderate": "Mittelmäßig",
+      "uncomfortable": "Unbequem"
+    },
+    "noise_level": {
+      "label": "Lautstärke",
+      "quiet": "Ruhig",
+      "moderate": "Moderat",
+      "noisy": "Laut"
+    }
+  },
+  "status": {
+    "open": "Geöffnet",
+    "closed": "Geschlossen",
+    "opening_soon": "Öffnet bald"
+  }
+} 
