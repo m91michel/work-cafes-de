@@ -1,12 +1,12 @@
-import { Cafe } from "../types";
+import { Cafe, CafeStatus } from "../types";
 import supabase from "./supabaseClient";
 
-type GetCafeProps = {
+type BaseFilters = {
   limit?: number;
   offset?: number;
 };
 export async function getCafes(
-  { limit = 100, offset = 0 }: GetCafeProps = { limit: 100, offset: 0 }
+  { limit = 100, offset = 0 }: BaseFilters = { limit: 100, offset: 0 }
 ): Promise<Cafe[]> {
   const { data, error, count } = await supabase
     .from("cafes")
@@ -26,7 +26,7 @@ export async function getCafes(
 }
 
 export async function getBestCafes(
-  { limit = 100, offset = 0 }: GetCafeProps = { limit: 100, offset: 0 }
+  { limit = 100, offset = 0 }: BaseFilters = { limit: 100, offset: 0 }
 ): Promise<Cafe[]> {
   const { data, error, count } = await supabase
     .from("cafes")
@@ -36,6 +36,24 @@ export async function getBestCafes(
     .not('google_rating', 'is', null)
     .gte("review_count", 3)
     .order("google_rating", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+  console.log(count);
+
+  return data as Cafe[];
+}
+
+export async function getAllCafes(
+  { limit = 100, offset = 0 }: BaseFilters = { limit: 100, offset: 0 }
+): Promise<Cafe[]> {
+  const { data, error, count } = await supabase
+    .from("cafes")
+    .select("*, cities(name, slug)", { count: 'exact' })
+    .range(offset, offset + limit - 1)
+    .order("created_at", { ascending: false });
 
   if (error) {
     console.error("Error fetching data:", error);
