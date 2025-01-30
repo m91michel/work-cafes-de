@@ -118,17 +118,28 @@ export const directionLink = (
   return `https://www.google.com/maps/dir/?api=1&destination=${query}&query_place_id=${placeId}`;
 };
 
+type SearchPlacesOptions = {
+  language?: string;
+  type?: string; // eg. cafe
+  location?: string; // eg. 49.4747642,10.9872371
+};
+
 // search for multiple places
 export async function searchPlaces(
-  query: string
-): Promise<GoogleMapsCandidate[] | null> {
+  query: string,
+  options?: SearchPlacesOptions
+): Promise<GoogleMapsPlace[] | null> {
+  const { language, type = "cafe", location } = options || {};
   try {
     const response = await axios.get(
       "https://maps.googleapis.com/maps/api/place/textsearch/json",
       {
         params: {
           query: query,
-          fields: "place_id,photos,formatted_address,name,rating,opening_hours,geometry",
+          type: type,
+          // radius - TODO: Check if this is needed
+          language: language,
+          location: location,
           key: GOOGLE_MAPS_API_KEY,
         },
       }
@@ -146,4 +157,32 @@ export async function searchPlaces(
     console.error(`Error fetching data from Google Places API:`, error);
     return null;
   }
+}
+
+export type GoogleMapsPlace = {
+  business_status?: string;
+  formatted_address?: string;
+  geometry?: {
+    location?: {
+      lat?: number;
+      lng?: number;
+    };
+  };
+  icon?: string;
+  icon_background_color?: string;
+  icon_mask_base_uri?: string;
+  name?: string;
+  opening_hours?: {
+    open_now?: boolean;
+  };
+  photos?: any[];
+  place_id?: string; // eg. ChIJzQjSIBxVn0cRAq1JBsrBUzE
+  plus_code?: {
+    compound_code?: string; // FXFP+WV Fürth
+    global_code?: string; // 8FXGFXFP+WV
+  };
+  rating?: number;
+  reference?: string;
+  types?: string[];
+  user_ratings_total?: number;
 }

@@ -29,3 +29,11 @@ export const extractToken = (authValue?: string | null) => {
     
   return null;
 };
+
+// Axios Helper function to get full URL with params
+export function getFullUrl(config: any): string {
+  const url = new URL(config.url);
+  const params = new URLSearchParams(config.params);
+  url.search = params.toString();
+  return url.toString();
+}
