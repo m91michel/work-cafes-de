@@ -97,7 +97,7 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ message: "success" });
 }
 
-export function isInCity(place: GoogleMapsPlace, cityName: string): boolean {
+function isInCity(place: GoogleMapsPlace, cityName: string): boolean {
   if (!place.formatted_address) return false;
   
   // Convert to lowercase and remove special characters for comparison
