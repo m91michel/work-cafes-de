@@ -26,6 +26,7 @@ export type GoogleMapsCandidate = {
   reviews?: Review[];
 };
 
+// search for one place
 export async function searchInGoogleMaps(
   query: string
 ): Promise<GoogleMapsCandidate[] | null> {
@@ -117,6 +118,7 @@ export const directionLink = (
   return `https://www.google.com/maps/dir/?api=1&destination=${query}&query_place_id=${placeId}`;
 };
 
+// search for multiple places
 export async function searchPlaces(
   query: string
 ): Promise<GoogleMapsCandidate[] | null> {

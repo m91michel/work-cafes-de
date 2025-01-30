@@ -5,7 +5,7 @@ import { select } from "@inquirer/prompts";
 import { publishCafes } from "./actions/cafe-actions";
 import { updateCountForCities } from "./actions/update-cafe-count";
 import { uploadNewCafes } from "./actions/upload-new-cafes";
-import { upsertNewCities } from "./actions/upsert-cities";
+import { citiesCommands, upsertNewCities } from "./actions/upsert-cities";
 import { updateOpenHours } from "./actions/update-open-hours";
 import { googleMapsActions } from "./actions/google-maps";
 
@@ -18,25 +18,16 @@ export interface Command {
 }
 
 const commands: Command[] = [
+  ...citiesCommands,
   {
     name: "☕️ Cafes: Publish Cafes (Process → Published)",
     key: "publish-cafes",
     action: publishCafes,
   },
   {
-    name: "🏙️ Cities: Update Cafe Count",
-    key: "update-cafe-count",
-    action: updateCountForCities,
-  },
-  {
     name: "💾 Cafes: Upload New Cafes",
     key: "upload-cafes",
     action: uploadNewCafes,
-  },
-  {
-    name: "🏙️ Cities: Upsert New Cities",
-    key: "upsert-cities",
-    action: upsertNewCities,
   },
   {
     name: "🕒 Cafes: Update Open Hours",
