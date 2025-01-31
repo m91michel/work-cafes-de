@@ -16,7 +16,7 @@ export async function PATCH(
   if (isProd) {
     return NextResponse.json(
       { error: "This API route is not available in production" },
-      { status: 403 }
+      { status: 404 }
     );
   }
 
@@ -24,10 +24,10 @@ export async function PATCH(
     const { status } = await request.json();
 
     // Validate status
-    const validStatuses = ["NEW", "PROCESSED", "PUBLISHED", "CLOSED"];
+    const validStatuses = ["NEW", "PROCESSED", "PUBLISHED", "CLOSED", "NOT_FRIENDLY"];
     if (!validStatuses.includes(status)) {
       return NextResponse.json(
-        { error: "Invalid status" },
+        { error: `Status ${status} is not valid` },
         { status: 400 }
       );
     }
@@ -55,7 +55,7 @@ export async function PATCH(
   } catch (error) {
     console.error("Error in status update route:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Internal server error to update status" },
       { status: 500 }
     );
   }

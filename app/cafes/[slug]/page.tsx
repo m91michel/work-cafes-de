@@ -12,11 +12,11 @@ import { getCafeBySlug, getCafes, getCafesByCity } from "@/libs/supabase/cafes";
 import { CafeCard } from "@/components/cafe/cafe-card";
 import { CafeRatingCard } from "@/components/cafe/rating";
 import CafeBreadcrumb from "@/components/cafe/cafe-breadcrumb";
-import { getReviewsById } from "@/libs/supabase/reviews";
-import { isDev } from "@/libs/environment";
+import { isDev, language } from "@/libs/environment";
 import { CafeReviews } from "@/components/cafe/cafe-reviews";
 import { FAQSection } from "@/components/faq";
 import { faqs } from "@/config/faq";
+import initTranslations from "@/libs/i18n/config";
 
 type Params = Promise<{ slug: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
@@ -58,13 +58,13 @@ export async function generateStaticParams() {
 }
 
 export default async function CafePage({ params }: Props) {
+  const { t } = await initTranslations(language, ['cafe']);
   const slug = (await params).slug;
   const cafe = await getCafeBySlug(slug);
   const relatedCafes = await getCafesByCity(cafe?.city_slug || "", {
     limit: 3,
     excludeSlug: slug,
   });
-  const reviews = await getReviewsById(cafe?.id);
 
   if (!cafe) {
     notFound();
@@ -85,6 +85,9 @@ export default async function CafePage({ params }: Props) {
             <CafeAmenities cafe={cafe} />
             <CafeFurtherButtons cafe={cafe} />
             {isDev && <DebugInfo cafe={cafe} />}
+            {isDev && <div className="mt-12">
+              {t("reviews.title")}
+            </div>}
           </div>
 
           <div className="md:col-span-2">

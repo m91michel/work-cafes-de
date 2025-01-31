@@ -101,6 +101,9 @@ function CafeActions({ cafe }: CafeActionsProps) {
           <DropdownMenuItem onClick={() => handleStatusChange("CHECKED")}>
             CHECKED
           </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleStatusChange("NOT_FRIENDLY")}>
+            NOT_FRIENDLY
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

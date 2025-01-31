@@ -35,5 +35,14 @@
     "open": "Open",
     "closed": "Closed",
     "opening_soon": "Opening Soon"
+  },
+  "reviews": {
+    "title": "Reviews"
+  },
+  "meta": {
+    "title": "Cafes to work in",
+    "slug": {
+      "description": "{{name}} in {{city}} is a great place to work, study or exchange. We have checked the reviews and selected the best cafes for you."
+    }
   }
 } 

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useTranslations } from "@/hooks/use-translations";
 import Paths from "@/libs/paths";
+import { useTranslations } from "@/hooks/use-translations";
 
 const menuItems = [
   { href: Paths.home, key: "navigation.home" },

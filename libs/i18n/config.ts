@@ -1,29 +1,46 @@
-'use client';
+import { createInstance } from 'i18next';
+import { initReactI18next } from 'react-i18next/initReactI18next';
+import resourcesToBackend from 'i18next-resources-to-backend';
+import { language } from '../environment';
 
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import Backend from 'i18next-http-backend';
-import { language } from '@/libs/environment';
+const i18nConfig = {
+  locales: ['de', 'en'],
+  defaultLocale: language,
+};
 
-// Don't want to use this?
-// Have a look at the Quick start guide 
-// for passing in lng and translations on init
+export default async function initTranslations(
+  locale: string,
+  namespaces: string[],
+  i18nInstance?: any,
+  resources?: any
+) {
+  i18nInstance = i18nInstance || createInstance();
 
-const i18nInstance = i18n
-  .use(Backend)
-  .use(initReactI18next) // passes i18n down to react-i18next
-  .init({
-    lng: language, // Use the environment variable to determine language
-    fallbackLng: language,
-    supportedLngs: ['de', 'en'],
-    defaultNS: 'common',
-    ns: ['common', 'cafe', 'city'],
-    interpolation: {
-      escapeValue: false, // react already safes from xss
-    },
-    react: {
-      useSuspense: false // This is important for SSR
-    }
+  i18nInstance.use(initReactI18next);
+
+  if (!resources) {
+    i18nInstance.use(
+      resourcesToBackend(
+        (language: string, namespace: string) =>
+          import(`../../public/locales/${language}/${namespace}.json`)
+      )
+    );
+  }
+
+  await i18nInstance.init({
+    lng: locale,
+    resources,
+    fallbackLng: i18nConfig.defaultLocale,
+    supportedLngs: i18nConfig.locales,
+    defaultNS: namespaces[0],
+    fallbackNS: namespaces[0],
+    ns: namespaces,
+    preload: resources ? [] : i18nConfig.locales
   });
 
-export default i18n; 
+  return {
+    i18n: i18nInstance,
+    resources: i18nInstance.services.resourceStore.data,
+    t: i18nInstance.t
+  };
+}
