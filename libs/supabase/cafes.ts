@@ -20,7 +20,6 @@ export async function getCafes(
     console.error("Error fetching data:", error);
     return [];
   }
-  console.log(count);
 
   return data as Cafe[];
 }
@@ -41,7 +40,6 @@ export async function getBestCafes(
     console.error("Error fetching data:", error);
     return [];
   }
-  console.log(count);
 
   return data as Cafe[];
 }
@@ -59,7 +57,6 @@ export async function getAllCafes(
     console.error("Error fetching data:", error);
     return [];
   }
-  console.log(count);
 
   return data as Cafe[];
 }

@@ -4,7 +4,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { getSEOTags } from "@/libs/seo";
 import Script from "next/script";
-import { isProd, isGerman } from "@/libs/environment";
+import { isProd, language } from "@/libs/environment";
 import { Toaster } from "@/components/ui/toaster";
 import { I18nProvider } from "@/components/providers/i18n-provider";
 
@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang={isGerman ? 'de' : 'en'}>
+    <html lang={language}>
       {isProd && (
         <>
           <Script

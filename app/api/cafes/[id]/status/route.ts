@@ -1,11 +1,17 @@
 import { NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
+import type { NextRequest } from "next/server";
+
+type Params = Promise<{ id: string }>
 
 export async function PATCH(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest, 
+  segmentData: { params: Params }
 ) {
+  const params = await segmentData.params
+  const id = params.id
+
   // Disable in production
   if (isProd) {
     return NextResponse.json(
@@ -33,7 +39,7 @@ export async function PATCH(
         status,
         updated_at: new Date().toISOString(),
       })
-      .eq("id", params.id)
+      .eq("id", id)  // Using awaited id
       .select()
       .single();
 
