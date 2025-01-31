@@ -1,53 +1,61 @@
 import config from '@/config/config';
-import { isEnglish } from '@/libs/environment';
+import { isEnglish, isGerman } from '@/libs/environment';
 import { getSEOTags } from '@/libs/seo';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 
 export const metadata = getSEOTags({
   title: `Über uns | ${config.appName}`,
-  description: `Wie die Idee zu ${config.appName} entstand und wie ich als Entwickler und Designer die Plattform entwickelt habe.`, // Should be 100-160 characters
+  description: `Entdecke, wie ${config.appName} dir hilft, die besten Cafés zum Arbeiten und Lernen in Deutschland zu finden.`,
   canonicalUrlRelative: "/ueber-uns",
 });
 
 export default function AboutPage() {
-  if (isEnglish) {
+  if (!isGerman) {
     return notFound();
   }
 
   const aboutContent = `
-## Unser Ziel
+## Unsere Mission
 
-Wir möchten, dass du weniger Zeit mit der Suche und mehr Zeit mit produktivem Arbeiten verbringst. Egal, ob du Freelancer, Student oder einfach auf der Suche nach einem inspirierenden Arbeitsort bist – wir sind hier, um dir zu helfen.
+Wir glauben, dass die Suche nach einem guten Café zum Arbeiten einfach sein sollte. Ob du Freelancer bist, für deine Prüfungen lernst oder einfach gerne in entspannter Atmosphäre arbeitest – wir helfen dir, schnell das passende Café zu finden.
 
-Aus eigener Erfahrung weiß ich, wie zeitaufwendig es sein kann, laptopfreundliche Cafés auf Google Maps zu finden. Die Suche nach den besten Arbeitsplätzen in Cafés erfordert oft das Durchsehen von Bildern und Bewertungen. Dabei bleibt die Frage, ob das Café wirklich für produktives Arbeiten geeignet ist, oft unbeantwortet.
+## Wie alles begann
 
-Mit "Café zum Arbeiten" möchte ich dir eine Plattform bieten, die dir genau diese Arbeit abnimmt. Hier findest du gezielt Cafés, die sich ideal zum Arbeiten oder Studieren eignen. Ob du eine ruhige Arbeitsatmosphäre, gutes WLAN oder einfach eine angenehme Umgebung suchst – ich helfe dir, die besten Optionen zu entdecken.
+Als Remote Worker kenne ich das Problem: Man verbringt mehr Zeit damit, ein geeignetes Café zu suchen, als dort tatsächlich zu arbeiten. Zwischen den vielen Google-Bewertungen und Fotos ist es schwer zu erkennen, ob ein Café wirklich laptop-freundlich ist und ob man dort in Ruhe ein paar Stunden arbeiten kann.
 
-Um dir die Auswahl zu erleichtern, habe ich Bewertungen analysiert und Informationen zur Lautstärke, Arbeitsatmosphäre und Ausstattung der Cafés gesammelt. So kannst du dich ganz auf deine Arbeit konzentrieren und musst keine Zeit mit der Suche verschwenden.
+Genau deshalb gibt es jetzt ${config.appName}. Statt stundenlang zu suchen und vor verschlossenen Türen zu stehen, findest du hier Cafés, die bereits von anderen Digital Nomads, Studierenden und Remote Workern getestet wurden.
 
-## Über mich
+## Über den Gründer
 
-Ich bin Mathias Michel, ein leidenschaftlicher Softwareentwickler mit einem breiten Spektrum an Fähigkeiten. In meinen Nebenprojekten kombiniere ich meine Erfahrung in Entwicklung, Marketing, Design und Business-Strategie, um nützliche Tools und Plattformen zu schaffen.
+Hi! Ich bin Mathias Michel, Softwareentwickler und Café-Enthusiast. Neben dem Programmieren und der Suche nach den gemütlichsten Cafés entwickle ich Tools, die den digitalen Alltag einfacher machen. Eines davon ist [RewriteBar](https://rewritebar.com), eine macOS-App, mit der du deine Texte mithilfe von KI optimieren kannst.
 
-Die Idee für diese Plattform entstand aus einem persönlichen Problem: Ich wollte einen Ort finden, an dem ich produktiv arbeiten kann, ohne lange suchen zu müssen. Daraus wurde "Café zum Arbeiten" – eine Lösung, die ich nun mit anderen teilen möchte.
+## Was uns besonders macht
 
-Neben diesem Projekt habe ich auch [RewriteBar](https://rewritebar.com) entwickelt, eine macOS-App, die dir hilft, Texte schnell und effizient mit KI zu optimieren. Ich liebe es, Projekte zu schaffen, die das Leben ein kleines bisschen einfacher machen.
+Wir listen nicht einfach irgendwelche Cafés – wir konzentrieren uns auf das, was für dich beim mobilen Arbeiten wirklich wichtig ist:
 
-## Was du hier findest
+- Handverlesene Cafés, die Laptop-Nutzer willkommen heißen
+- Verlässliche Infos zu WLAN-Qualität und Steckdosen
+- Details zur Lautstärke und Arbeitsatmosphäre
+- Tipps zu Stoßzeiten und den besten Arbeitszeiten
+- Ehrliche Erfahrungsberichte von anderen Nutzern
 
-- Eine kuratierte Auswahl der besten Cafés zum Arbeiten in Deutschland.
-- Detaillierte Informationen zu jedem Café: WLAN-Qualität, Lautstärke, Arbeitsatmosphäre und mehr.
-- Kategorien wie „Beste Cafés in München“ oder „Cafés in [Stadt]“, um dir die Suche zu erleichtern.
+## Aktueller Stand & Zukunftspläne
 
-## Aktueller Stand
+Wir bauen unsere Datenbank mit laptop-freundlichen Cafés in ganz Deutschland stetig aus. Auch wenn noch nicht alle Städte vertreten sind, kommen regelmäßig neue Locations dazu.
 
-Die Seite befindet sich noch im Aufbau. Daher sind aktuell noch nicht alle Städte aufgelistet. Wir arbeiten kontinuierlich daran, das Angebot zu erweitern und noch mehr Cafés in ganz Deutschland aufzunehmen.
+Für die Zukunft planen wir:
+- Eine Community-Funktion für Bewertungen und Erfahrungsaustausch
+- Aktuelle Updates zur Café-Auslastung
+- Bessere Kartenintegration für einfachere Navigation
+- Personalisierte Café-Empfehlungen
 
-In Zukunft könnte es auch möglich sein, dass Nutzer selbst die Cafés auf Arbeitsfreundlichkeit bewerten und ihre Erfahrungen teilen können. So würde die Plattform noch lebendiger und hilfreicher werden.
+## Mach mit!
 
-Viel Spaß beim Entdecken der besten Cafés! Wenn du Feedback oder Vorschläge hast, melde dich gerne bei uns unter [kontakt@cafezumarbeiten.de](mailto:kontakt@cafezumarbeiten.de).
-  `;
+Du kennst ein tolles Café, das noch nicht bei uns gelistet ist? Oder hast Ideen, wie wir die Plattform noch besser machen können? Schreib uns einfach an [kontakt@cafezumarbeiten.de](mailto:kontakt@cafezumarbeiten.de).
+
+Gemeinsam bauen wir den besten Guide für laptop-freundliche Cafés in Deutschland!
+`;
 
   return (
     <main className="flex-1 bg-background">

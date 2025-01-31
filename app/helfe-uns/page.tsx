@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import config, { baseUrl, domainDe, submitFormUrl } from '@/config/config';
-import { isEnglish } from '@/libs/environment';
+import { isGerman } from '@/libs/environment';
 import { getSEOTags } from '@/libs/seo';
 import { Share2, PlusCircle } from 'lucide-react';
 import Link from 'next/link';
@@ -8,14 +8,14 @@ import { notFound } from 'next/navigation';
 
 export const metadata = getSEOTags({
   title: `Unterstütze uns | ${config.appName}`,
-  description: `Unterstütze uns, indem du diese Seite mit Freunden teilst.`, // 100-160 characters
+  description: `Hilf uns dabei, die beste Plattform für arbeitnehmerfreundliche Cafés in Deutschland aufzubauen.`, // 100-160 characters
   canonicalUrlRelative: "/helfe-uns",
 });
 
-const tweetText = `Du suchst nach einem Café zum Arbeiten? Dann schau doch mal auf Cafés zum Arbeiten vorbei.`;
+const tweetText = `Entdecke die besten laptop-freundlichen Cafés in Deutschland auf ${config.appName} - Dein Guide für entspanntes Arbeiten im Café!`;
 
 export default function ContributePage() {
-  if (isEnglish) {
+  if (!isGerman) {
     return notFound();
   }
 
@@ -23,21 +23,21 @@ export default function ContributePage() {
   return (
     <main className="flex-1 bg-background">
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-center mb-12">Du möchtest diese Seite unterstützen?</h1>
+        <h1 className="text-4xl font-bold text-center mb-12">Hilf uns, die besten Cafés zu finden</h1>
         
         <div className="grid md:grid-cols-2 gap-8">
           {/* Suggest New Listing */}
           <div className="bg-card rounded-lg p-6 border">
             <div className="flex items-center gap-3 mb-4">
               <PlusCircle className="h-6 w-6 text-primary" />
-              <h2 className="text-2xl font-semibold">Café vorschlagen</h2>
+              <h2 className="text-2xl font-semibold">Café empfehlen</h2>
             </div>
             <p className="text-muted-foreground mb-6">
-              Du kennst ein Cafe, was noch nicht auf dieser Seite ist? Dann schlage es uns vor!
+              Du kennst ein gemütliches Café, in dem du gerne mit deinem Laptop arbeitest? Teile deine Entdeckung und hilf anderen, die perfekte Location zum Arbeiten zu finden.
             </p>
             <Button asChild>
               <a href={submitFormUrl} target="_blank" rel="noopener noreferrer">
-                Cafe vorschlagen
+                Café vorschlagen
               </a>
             </Button>
           </div>
@@ -46,10 +46,10 @@ export default function ContributePage() {
           <div className="bg-card rounded-lg p-6 border">
             <div className="flex items-center gap-3 mb-4">
               <Share2 className="h-6 w-6 text-primary" />
-              <h2 className="text-2xl font-semibold">Mit Freunden teilen</h2>
+              <h2 className="text-2xl font-semibold">Weitersagen</h2>
             </div>
             <p className="text-muted-foreground mb-6">
-              Unterstütze uns, indem du diese Seite mit Freunden teilst.
+              Kennst du andere, die auch gerne im Café arbeiten? Teile unsere Plattform und hilf ihnen, die besten laptop-freundlichen Cafés in ihrer Nähe zu finden.
             </p>
             <div className="flex gap-4">
               <Button asChild variant="outline">
@@ -67,11 +67,11 @@ export default function ContributePage() {
               <h2 className="text-2xl font-semibold">Feedback geben</h2>
             </div>
             <p className="text-muted-foreground mb-6">
-              Du hast eine Idee wie man die Seite verbessern kann? Dann schreibe uns eine Mail.
+              Deine Meinung ist uns wichtig! Hast du Ideen oder Vorschläge, wie wir die Suche nach gemütlichen Cafés zum Arbeiten noch einfacher machen können?
             </p>
             <Button asChild>
               <a href={`mailto:feedback@${domainDe}`} target="_blank" rel="noopener noreferrer">
-                Feedback geben
+                Feedback senden
               </a>
             </Button>
           </div>
@@ -79,11 +79,11 @@ export default function ContributePage() {
 
         <div className="mt-12 text-center">
           <p className="text-muted-foreground mb-4">
-            Willst du wieder zu den Cafés gehen?
+            Lust auf neue Café-Entdeckungen?
           </p>
           <Button asChild variant="outline">
             <Link href="/">
-              Zurück zur Startseite
+              Cafés entdecken
             </Link>
           </Button>
         </div>

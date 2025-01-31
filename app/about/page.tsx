@@ -1,54 +1,62 @@
 import config from '@/config/config';
-import { isGerman, language } from '@/libs/environment';
+import { isEnglish, language } from '@/libs/environment';
 import { getSEOTags } from '@/libs/seo';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 
 export const metadata = getSEOTags({
   title: `About Us | ${config.appName}`,
-  description: `How the idea for ${config.appName} came about and how I developed the platform as a developer and designer.`, // Should be 100-160 characters
+  description: `Discover how ${config.appName} helps you find the perfect cafés for working and studying in Germany.`,
   canonicalUrlRelative: "/about",
 });
 
 export default function AboutPage() {
-  if (isGerman) {
+  if (!isEnglish) {
     console.log("wrong language", language);
     return notFound();
   }
 
   const aboutContent = `
-## Our Goal
+## Our Mission
 
-We want you to spend less time searching and more time working productively. Whether you're a freelancer, student, or simply looking for an inspiring place to work – we're here to help.
+We believe finding a great café to work from shouldn't be a time-consuming task. Whether you're a freelancer looking for your next workspace, a student preparing for exams, or just someone who enjoys working in a vibrant atmosphere – we're here to make your search easier.
 
-From personal experience, I know how time-consuming it can be to find laptop-friendly cafés on Google Maps. Searching for the best workspaces in cafés often requires sifting through images and reviews. The question of whether the café is really suitable for productive work often remains unanswered.
+## Why We Started This
 
-With "Café zum Arbeiten", I want to provide you with a platform that takes care of this work for you. Here you'll find cafés specifically suited for working or studying. Whether you're looking for a quiet work atmosphere, good WiFi, or simply a pleasant environment – I'll help you discover the best options.
+As a remote worker, I've spent countless hours searching for cafés with the right mix of atmosphere, WiFi, and comfort. The challenge wasn't just finding cafés – it was finding the right ones that welcome laptop users and provide a suitable environment for getting work done.
 
-To make your selection easier, I've analyzed reviews and collected information about noise levels, work atmosphere, and facilities in the cafés. This way, you can focus entirely on your work without wasting time searching.
+That's why I created ${config.appName}. Instead of spending time reading through countless reviews and visiting cafés only to find they're not laptop-friendly, you can now quickly find vetted spots that welcome digital nomads, students, and remote workers.
 
-## About Me
+## About the Creator
 
-I'm Mathias Michel, a passionate software developer with a broad spectrum of skills. In my side projects, I combine my experience in development, marketing, design, and business strategy to create useful tools and platforms.
+Hi! I'm Mathias Michel, a software developer who loves building tools that solve real problems. When I'm not coding or exploring new cafés, I'm working on projects that make digital life a bit easier. One of these is [RewriteBar](https://rewritebar.com), a macOS app that helps you enhance your writing with AI.
 
-The idea for this platform came from a personal problem: I wanted to find a place where I could work productively without having to search for long. This became "Café zum Arbeiten" – a solution that I now want to share with others.
+## What Makes Us Different
 
-Besides this project, I've also developed [RewriteBar](https://rewritebar.com), a macOS app that helps you quickly and efficiently optimize texts with AI. I love creating projects that make life a little bit easier.
+We don't just list any café – we focus on what matters to remote workers and students:
 
-## What You'll Find Here
+- Carefully selected cafés that welcome laptop users
+- Real information about WiFi quality and power outlets
+- Details about noise levels and working atmosphere
+- Insights about peak hours and best times to visit
+- First-hand experiences from other remote workers
 
-- A curated selection of the best cafés for working in Germany.
-- Detailed information about each café: WiFi quality, noise level, work atmosphere, and more.
-- Categories like "Best Cafés in Munich" or "Cafés in [City]" to make your search easier.
+## Current Status & Future Plans
 
-## Current Status
+We're actively growing our database of laptop-friendly cafés across Germany. While we haven't covered every city yet, we're constantly adding new locations and improving our existing listings.
 
-The site is still under construction. Therefore, not all cities are currently listed. We're continuously working on expanding the offering and including more cafés throughout Germany.
+Looking ahead, we're exploring features like:
+- Community reviews from fellow remote workers
+- Real-time updates about café availability
+- Integration with maps for easier navigation
+- Personalized recommendations based on your preferences
 
-In the future, it might also be possible for users to rate the cafés themselves for work-friendliness and share their experiences. This would make the platform even more vibrant and helpful.
+## Get Involved
 
-Have fun discovering the best cafés! If you have feedback or suggestions, feel free to contact us at [contact@cafezumarbeiten.de](mailto:kontakt@cafezumarbeiten.de).
-  `;
+Found a great café that's not on our list? Have suggestions for making the platform better? We'd love to hear from you! Drop us a line at [contact@cafezumarbeiten.de](mailto:contact@cafezumarbeiten.de).
+
+Together, we can build the most comprehensive guide to laptop-friendly cafés in Germany.
+`;
 
   return (
     <main className="flex-1 bg-background">
