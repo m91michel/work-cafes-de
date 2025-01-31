@@ -1,11 +1,15 @@
+'use client';
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "@/hooks/use-translations";
+import Paths from "@/libs/paths";
 
 const menuItems = [
-  { href: "/", label: "Startseite" },
-  { href: "/cafes", label: "Cafés" },
-  { href: "/cities", label: "Städte" },
-  { href: "/ueber-uns", label: "Über uns" }
+  { href: Paths.home, key: "navigation.home" },
+  { href: Paths.cafes, key: "navigation.cafes" },
+  { href: Paths.cities, key: "navigation.cities" },
+  { href: Paths.about, key: "navigation.about" }
 ];
 
 type Props = {
@@ -14,6 +18,8 @@ type Props = {
 };
 
 export function NavLinks({ className, onClick }: Props) {
+  const { t } = useTranslations();
+
   return (
     <div className={className}>
       {menuItems.map((item) => (
@@ -23,12 +29,12 @@ export function NavLinks({ className, onClick }: Props) {
           className="py-2 block text-base font-medium text-muted-foreground hover:text-primary transition-colors"
           onClick={onClick}
         >
-          {item.label}
+          {t(item.key)}
         </Link>
       ))}
       <Button asChild variant="default" className="mt-2 md:mt-0 md:ml-4">
-        <Link href="/helfe-uns" onClick={onClick}>
-          Helfe uns
+        <Link href={Paths.helpUs} onClick={onClick}>
+          {t('navigation.help_us')}
         </Link>
       </Button>
     </div>

@@ -2,9 +2,11 @@
   "navigation": {
     "home": "Home",
     "cities": "Cities",
+    "cafes": "Cafes",
     "about": "About",
     "contact": "Contact",
     "help": "Help",
+    "help_us": "Help us",
     "privacy": "Privacy",
     "imprint": "Imprint"
   },

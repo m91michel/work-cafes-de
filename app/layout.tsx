@@ -6,7 +6,7 @@ import { getSEOTags } from "@/libs/seo";
 import Script from "next/script";
 import { isProd, isGerman } from "@/libs/environment";
 import { Toaster } from "@/components/ui/toaster";
-import '@/libs/i18n/config';
+import { I18nProvider } from "@/components/providers/i18n-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,10 +33,12 @@ export default function RootLayout({
         </>
       )}
       <body className={`${inter.className} min-h-screen flex flex-col`}>
-        <Header />
-        {children}
-        <Footer />
-        <Toaster />
+        <I18nProvider>
+          <Header />
+          {children}
+          <Footer />
+          <Toaster />
+        </I18nProvider>
       </body>
     </html>
   );
