@@ -10,40 +10,6 @@ const supabase = createClient<Database>(supabaseUrl, supabaseKey, {
   db: { schema: "cafeforwork" },
 });
 
-export async function upsertNewCities() {
-  const cities = await readCsv<any>("../data/cities.csv");
-
-  for (const city of cities) {
-    console.log(`⚡️ Processing ${city.name} in ${city.country}`);
-
-    const { data: existingCity } = await supabase
-      .from("cities")
-      .select("name, slug")
-      .eq("slug", city.slug)
-      .single();
-
-    if (existingCity) {
-      console.log(`✅ City ${city.name} already exists in ${city.country}`);
-      continue;
-    }
-
-    // Upsert cities into the Supabase database
-    const { data, error } = await supabase
-      .from("cities")
-      .update({
-        ...city,
-        population: city.population ? parseInt(city.population) : null,
-      })
-      .select("name");
-
-    if (error) {
-      console.error("❌ Error upserting city:", error);
-    } else {
-      console.log(`✅ ${city.name} updated successfully`);
-    }
-  }
-}
-
 export const citiesCommands: Command[] = [
   {
     name: "🏙️ Cities: Update Cafe Count",
@@ -51,9 +17,9 @@ export const citiesCommands: Command[] = [
     action: updateCountForCities,
   },
   {
-    name: "🏙️ Cities: Upsert New Cities",
+    name: "🏙️ Cities: Upsert Cities from CSV",
     key: "upsert-cities",
-    action: upsertNewCities,
+    action: upsertCitiesFromCsv,
   },
   {
     name: "🏙️ Cities: Migration",
@@ -86,3 +52,36 @@ export const citiesCommands: Command[] = [
     },
   },
 ];
+
+export async function upsertCitiesFromCsv() {
+  const cities = await readCsv<any>("../data/cities.csv");
+
+  for (const city of cities) {
+    console.log(`⚡️ Processing ${city.name} in ${city.country}`);
+
+
+
+    // Upsert cities into the Supabase database
+    const { error } = await supabase
+      .from("cities")
+      .upsert({
+        slug: city.slug,
+        name: city.name,
+        country: city.country,
+        country_code: city.country_code,
+        description_long: city.description_long || '',
+        description_short: city.description_short || '',
+        state: city.state,
+        state_code: city.state_code,
+        population: city.population ? parseInt(city.population) : 0,
+        cafes_count: 0,
+      }, { onConflict: 'slug' })
+      .select("name");
+
+    if (error) {
+      console.error("❌ Error upserting city:", error);
+    } else {
+      console.log(`✅ ${city.name} updated successfully`);
+    }
+  }
+}

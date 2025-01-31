@@ -3,9 +3,8 @@ dotenv.config({ path: "../.env.local" }); // or just .env, depending on your env
 
 import { select } from "@inquirer/prompts";
 import { publishCafes } from "./actions/cafe-actions";
-import { updateCountForCities } from "./actions/update-cafe-count";
 import { uploadNewCafes } from "./actions/upload-new-cafes";
-import { citiesCommands, upsertNewCities } from "./actions/upsert-cities";
+import { citiesCommands } from "./actions/upsert-cities";
 import { updateOpenHours } from "./actions/update-open-hours";
 import { googleMapsActions } from "./actions/google-maps";
 
