@@ -1,5 +1,7 @@
 import config from '@/config/config';
+import { isEnglish } from '@/libs/environment';
 import { getSEOTags } from '@/libs/seo';
+import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 
 export const metadata = getSEOTags({
@@ -9,6 +11,10 @@ export const metadata = getSEOTags({
 });
 
 export default function AboutPage() {
+  if (isEnglish) {
+    return notFound();
+  }
+
   const aboutContent = `
 ## Unser Ziel
 
