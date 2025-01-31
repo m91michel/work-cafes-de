@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
     }
 
     const prompt = await createCityImagePrompt(city.name);
-    console.log(`⚡️ generating image for ${city.name} (${prompt})`);
+    console.log(`⚡️ generating image for ${city.name} prompt: <start>${prompt}<end>`);
     const imageUrl = await createReplicateImage(prompt);
 
     if (imageUrl) {
