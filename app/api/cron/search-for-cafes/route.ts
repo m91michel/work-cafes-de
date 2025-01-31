@@ -90,7 +90,7 @@ export async function GET(request: NextRequest) {
 
       await supabase
         .from("cities")
-        .update({ status: "PROCESSED" })
+        .update({ status: "PROCESSING" })
         .eq("slug", city.slug);
 
       console.log(`🎉 processed ${place.name} (${data?.id})`);
