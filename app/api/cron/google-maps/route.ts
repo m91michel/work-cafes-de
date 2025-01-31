@@ -99,7 +99,7 @@ export async function GET(request: NextRequest) {
           ...placeDetails,
           photos: photoUrls
         },
-        // status: 'PROCESSED'
+        status: 'PROCESSED'
       })
       .eq("id", cafe.id);
 
