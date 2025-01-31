@@ -2,7 +2,6 @@ import { getPlaceDetails, searchInGoogleMaps, searchPlaces } from "../../libs/go
 import { input } from "@inquirer/prompts";
 import { Command } from "..";
 import { outscraperReviewsTask } from "../../libs/apis/outscraper";
-import { reviewKeywords } from "../../app/api/_utils/reviews";
 import { fetchScrapingdogGoogleMapsReviews } from "../../libs/apis/scrapingdog";
 import { Database } from "@/types_db";
 import { createClient } from "@supabase/supabase-js";
@@ -58,6 +57,7 @@ export const googleMapsActions: Command[] = [
       const placeId = await input({
         message: "Enter the place id",
       });
+      // also consider laptop
       const keywords = ["working", "wifi", "arbeiten", "wlan"];
 
       for (const keyword of keywords) {

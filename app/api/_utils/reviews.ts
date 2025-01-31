@@ -2,9 +2,9 @@
 
 export const reviewKeywords = [
     // English terms
-    "working", "wifi", "internet", "plug", "reading",
+    "working", "wifi", "internet", "outlet", "reading",
     // German terms
-    "arbeiten", "wlan", "lesen", "steckdosen", "arbeitsplatz"
+    "arbeiten", "wlan", "lesen", "steckdosen", "arbeitsplatz", "laptop"
 ];
 
 

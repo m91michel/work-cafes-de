@@ -55,7 +55,7 @@ export async function GET(request: NextRequest) {
       await setProcessed(cafe);
     }
 
-    const keywords = ["working", "wifi", "arbeiten", "wlan"];
+    const keywords = ["working", "wifi", "arbeiten", "wlan", "laptop"];
     for (const keyword of keywords) {
       await outscraperReviewsTask({
         id: cafe.google_place_id,
