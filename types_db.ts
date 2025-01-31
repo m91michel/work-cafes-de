@@ -34,6 +34,7 @@ export type Database = {
           seating_comfort: string | null
           slug: string | null
           status: string
+          tripadvisor_id: string | null
           updated_at: string | null
           wifi_qualitity: string | null
         }
@@ -61,6 +62,7 @@ export type Database = {
           seating_comfort?: string | null
           slug?: string | null
           status?: string
+          tripadvisor_id?: string | null
           updated_at?: string | null
           wifi_qualitity?: string | null
         }
@@ -88,6 +90,7 @@ export type Database = {
           seating_comfort?: string | null
           slug?: string | null
           status?: string
+          tripadvisor_id?: string | null
           updated_at?: string | null
           wifi_qualitity?: string | null
         }
