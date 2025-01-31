@@ -26,6 +26,7 @@ export async function GET(request: NextRequest) {
     .from("cities")
     .select("*")
     .eq("status", "NEW")
+    .order("population", { ascending: false })
     .limit(limit);
 
   if (cities === null || cities === undefined || error) {
