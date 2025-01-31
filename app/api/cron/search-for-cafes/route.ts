@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
 import { extractToken, generateSlug } from "@/libs/utils";
-import { GoogleMapsCandidate, GoogleMapsPlace, searchPlaces } from "@/libs/google-maps";
+import { GoogleMapsPlace, searchPlaces } from "@/libs/google-maps";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -87,6 +87,11 @@ export async function GET(request: NextRequest) {
         console.error("⚠️ Error inserting cafe", error);
         continue;
       }
+
+      await supabase
+        .from("cities")
+        .update({ status: "PROCESSED" })
+        .eq("slug", city.slug);
 
       console.log(`🎉 processed ${place.name} (${data?.id})`);
     }

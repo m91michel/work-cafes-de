@@ -22,7 +22,7 @@ export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-  }) {
+}) {
   const { resources } = await initTranslations(language, namespaces, null, null);
 
   return (
