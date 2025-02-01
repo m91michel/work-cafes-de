@@ -1,8 +1,6 @@
-import * as dotenv from 'dotenv';
-dotenv.config({ path: '../.env.local' });
-
 import { createClient } from '@supabase/supabase-js';
 import { Database } from '@/types_db';
+import { updateCafeCount } from '../../libs/supabase/cities';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
@@ -10,7 +8,6 @@ const supabase = createClient<Database>(supabaseUrl, supabaseKey, { db: { schema
 
 export async function updateCountForCities() {
     const { data } = await supabase.from('cities').select('name, slug');
-    console.log(data);
 
     if (!data) {
         console.error('No cities found');
@@ -18,14 +15,7 @@ export async function updateCountForCities() {
     }
 
     for (const city of data) {
-        const { count = 0 } = await supabase
-        .from('cafes')
-        .select('name, slug, city_slug', { count: 'exact' })
-        .eq('status', 'PUBLISHED')
-        .eq('city_slug', city.slug)
-
-        console.log(`Updating ${city.name} with ${count} cafes`);
-        await supabase.from('cities').update({ cafes_count: count }).eq('slug', city.slug);
+        await updateCafeCount(city.slug);
     }
 
     console.log(`Cafes count updated successfully for ${data.length} cities`);

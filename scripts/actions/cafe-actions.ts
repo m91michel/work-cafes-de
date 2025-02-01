@@ -1,6 +1,7 @@
 import { Database } from '@/types_db';
 import { createClient } from '@supabase/supabase-js';
 import { input } from '@inquirer/prompts';
+import { updateCafeCount } from '@/libs/supabase/cities';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
@@ -36,22 +37,7 @@ export async function publishCafes() {
         }
     }
 
-    // get total count of cafes
-    const { count } = await supabase
-        .from('cafes')
-        .select('slug', { count: 'exact' })
-        .eq('city_slug', citySlug)
-        .eq('status', 'PUBLISHED');
-
-    // Update the city count
-    const { error } = await supabase
-        .from('cities')
-        .update({ cafes_count: count })
-        .eq('slug', citySlug);
-
-    if (error) {
-        console.error(`Error updating city count for ${citySlug}: ${error}`);
-    }
+    await updateCafeCount(citySlug);
 
     console.log(`✅ Published ${data.length} cafes`);
 }

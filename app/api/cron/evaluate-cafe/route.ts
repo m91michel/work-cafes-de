@@ -5,6 +5,7 @@ import { extractToken } from "@/libs/utils";
 import { Review } from "@/libs/types";
 import { AIReview, analyzeReviews } from "@/libs/openai/analyze-reviews";
 import dayjs from "dayjs";
+import { updateCafeCount } from "@/libs/supabase/cities";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -83,6 +84,8 @@ export async function GET(request: NextRequest) {
         console.error(`⚠️ Error updating cafe: ${cafe.name}`, updateError);
         continue;
       }
+
+      await updateCafeCount(cafe.city_slug);
 
       console.log(`🎉 processed ${cafe.name}`);
     } else {
