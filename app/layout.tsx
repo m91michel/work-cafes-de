@@ -11,7 +11,7 @@ import initTranslations from "@/libs/i18n/config";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const namespaces = ["common", "cafe", "city"];
+const namespaces = ["common", "cafe", "city", "home"];
 
 export const metadata = getSEOTags({
   title: `Cafés zum Arbeiten`,
@@ -22,8 +22,8 @@ export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
-  const { resources } = await initTranslations(language, namespaces, null, null);
+  }) {
+  const { resources } = await initTranslations(namespaces, language, null, null);
 
   return (
     <html lang={language}>

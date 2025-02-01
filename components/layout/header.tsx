@@ -4,11 +4,11 @@ import { Coffee, Menu } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { NavLinks } from "./NavLinks";
-import { useTranslations } from "@/hooks/use-translations";
+import { useCTranslation } from "@/hooks/use-translations";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { t } = useTranslations();
+  const { t } = useCTranslation();
 
   return (
     <header className="border-b relative">

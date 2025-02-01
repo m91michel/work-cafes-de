@@ -73,7 +73,6 @@ export async function getCafeBySlug(slug: string): Promise<Cafe | null> {
     return null;
   }
 
-  // @ts-ignore
   return data;
 }
 
@@ -95,14 +94,13 @@ export async function getCafesByCity(
     .eq('status', 'PUBLISHED')
     .neq("slug", excludeSlug)
     .range(offset, offset + limit - 1)
-    .order("created_at", { ascending: false });
+    .order("review_count", { ascending: false });
 
   if (error) {
     console.error("Error fetching data:", error);
     return [];
   }
 
-  // @ts-ignore
   return data;
 }
 

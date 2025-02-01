@@ -6,14 +6,14 @@ import { notFound } from "next/navigation";
 import { address, lastUpdated, unsplashCredits } from "@/config/imprint";
 
 export const metadata = getSEOTags({
-  title: `Impressum | ${config.appName}`,
-  description: `Impressum für ${config.appName}`,
-  canonicalUrlRelative: "/impressum",
+  title: `Imprint | ${config.appName}`,
+  description: `Imprint for ${config.appName}`,
+  canonicalUrlRelative: "/imprint",
   alternates: {
     canonical: `https://${domainDe}/impressum`,
     languages: {
       "de": `https://${domainDe}/impressum`,
-      "en": `https://${domainEn}/impressum`,
+      "en": `https://${domainEn}/imprint`,
     },
   },
 });

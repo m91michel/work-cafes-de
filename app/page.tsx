@@ -7,54 +7,81 @@ import { getCities } from "@/libs/supabase/cities";
 import { FAQSection } from "@/components/faq";
 import { faqs } from "@/config/faq";
 import { About } from "@/components/sections/About";
-import { Gradient } from "@/components/general/gradient";
-import { Hero } from "@/components/sections/Hero";
+import initTranslations from "@/libs/i18n/config";
+import { Cafe, City } from "@/libs/types";
 
 export const revalidate = 5;
 
-export const metadata = getSEOTags({
-  title: `Finde die besten Cafés zum produktiven Arbeiten in Deutschland`,
-  description: `Entdecke die besten Cafés zum Arbeiten in Deutschland! Finde den perfekten Ort zum Studieren, Arbeiten oder Kaffeetrinken in deiner Stadt.`,
-  canonicalUrlRelative: "/",
-});
+export async function generateMetadata() {
+  const { t } = await initTranslations(['common']);
+  return getSEOTags({
+    title: t('meta.title'),
+    description: t('meta.description'),
+    canonicalUrlRelative: "/",
+  });
+}
 
-export default async function Home() {
-  const cafes = await getBestCafes({ limit: 6, offset: 0 });
-  const cities = await getCities({ limit: 6, offset: 0 });
-  const cafesCount = await getCafesCount();
+interface HomeContentProps {
+  cafes: Cafe[];
+  cities: City[];
+  cafesCount: number | null;
+}
 
-  const cafesButtonText = cafesCount ? `Entdecke ${cafesCount} Cafés` : "Entdecke alle Cafés";
+async function HomeContent({ cafes, cities, cafesCount }: HomeContentProps) {
+  const { t } = await initTranslations(['home']);
+  
+  const cafesButtonText = cafesCount != null
+    ? t('cafes.buttonText_count', { count: cafesCount })
+    : t('cafes.buttonText');
 
   return (
     <main className="flex-1">
       <div className="max-w-7xl mx-auto px-4 pt-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">
-            Finde ein <Gradient>Café zum Arbeiten</Gradient> in deiner Stadt
-          </h1>
+          <h1 
+            className="text-4xl font-bold mb-4"
+            dangerouslySetInnerHTML={{ __html: t('hero.title') }}
+          />
           <p className="text-xl text-muted-foreground">
-            Entdecke die besten Cafés zum Arbeiten in Deutschland! Finde den perfekten Ort zum Studieren, Arbeiten oder Kaffeetrinken in deiner Stadt.
+            {t('hero.subtitle')}
           </p>
         </div>
-        { cities && <CitySelector cities={cities} /> }
+        {cities && <CitySelector cities={cities} />}
       </div>
       <CafeList
         cafes={cafes}
-        title="Die besten Cafés zum Arbeiten in Deutschland"
+        title={t('cafes.title')}
         showMoreButton={true}
         buttonText={cafesButtonText}
       />
 
       <CityList
         cities={cities}
-        title="Finde ein Cafe zum Arbeiten in deiner Stadt"
+        title={t('cities.title')}
         showMoreButton={true}
-        buttonText="Entdecke alle Städte"
+        buttonText={t('cities.buttonText')}
       />
   
       <FAQSection faqs={faqs} />
 
       <About />
     </main>
+  );
+}
+
+export default async function Home() {
+  // const { resources } = await initTranslations(['home', 'common']);
+  const cafes = await getBestCafes({ limit: 6, offset: 0 });
+  const cities = await getCities({ limit: 6, offset: 0 });
+  const cafesCount = await getCafesCount();
+
+  return (
+
+      <HomeContent 
+        cafes={cafes}
+        cities={cities}
+        cafesCount={cafesCount}
+      />
+    
   );
 }

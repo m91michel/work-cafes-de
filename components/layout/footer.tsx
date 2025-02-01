@@ -1,25 +1,25 @@
 import { Coffee, Github } from "lucide-react";
 import Link from "next/link";
 import config, { domainName } from "@/config/config";
-import { SiInstagram, SiX } from "@icons-pack/react-simple-icons";
 import { getCities } from "@/libs/supabase/cities";
 import { isGerman } from "@/libs/environment";
+import Paths from "@/libs/paths";
 
 const currentYear = new Date().getFullYear();
 
 const resources = [
-  { name: "Alle Cafés", href: "/cafes" },
-  { name: "Alle Städte", href: "/cities" },
+  { name: "Alle Cafés", href: Paths.cafes },
+  { name: "Alle Städte", href: Paths.cities },
 ];
 
 const aboutLinks = [
-  { name: "Über uns", href: "/ueber-uns" },
+  { name: "Über uns", href: Paths.about },
   { name: "Support", href: `mailto:${config.mailgun.supportEmail}` },
 ];
 
 const legalLinks = [
-  { name: "Datenschutz", href: "/datenschutz" },
-  { name: "Impressum", href: "/impressum" },
+  { name: "Datenschutz", href: Paths.privacy },
+  { name: "Impressum", href: Paths.imprint },
 ];
 
 export async function Footer() {

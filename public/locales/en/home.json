@@ -1,0 +1,15 @@
+{
+  "hero": {
+    "title": "Find a <highlight>Work-Friendly Cafe</highlight> in Your City",
+    "subtitle": "Discover the best cafes for working in Germany! Find the perfect place to study, work, or enjoy coffee in your city."
+  },
+  "cafes": {
+    "title": "The Best Work-Friendly Cafes in Germany",
+    "buttonText_count": "Discover {{count}} Cafes",
+    "buttonText": "Discover All Cafes"
+  },
+  "cities": {
+    "title": "Find a Work-Friendly Cafe in Your City",
+    "buttonText": "Discover All Cities"
+  }
+} 

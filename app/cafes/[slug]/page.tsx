@@ -12,7 +12,7 @@ import { getCafeBySlug, getCafes, getCafesByCity } from "@/libs/supabase/cafes";
 import { CafeCard } from "@/components/cafe/cafe-card";
 import { CafeRatingCard } from "@/components/cafe/rating";
 import CafeBreadcrumb from "@/components/cafe/cafe-breadcrumb";
-import { isDev, language } from "@/libs/environment";
+import { isDev } from "@/libs/environment";
 import { CafeReviews } from "@/components/cafe/cafe-reviews";
 import { FAQSection } from "@/components/faq";
 import { faqs } from "@/config/faq";
@@ -58,7 +58,7 @@ export async function generateStaticParams() {
 }
 
 export default async function CafePage({ params }: Props) {
-  const { t } = await initTranslations(language, ['cafe']);
+  const { t } = await initTranslations(['cafe']);
   const slug = (await params).slug;
   const cafe = await getCafeBySlug(slug);
   const relatedCafes = await getCafesByCity(cafe?.city_slug || "", {

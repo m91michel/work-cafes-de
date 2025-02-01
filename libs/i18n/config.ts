@@ -9,8 +9,8 @@ const i18nConfig = {
 };
 
 export default async function initTranslations(
-  locale: string,
   namespaces: string[],
+  locale: string = language,
   i18nInstance?: any,
   resources?: any
 ) {
