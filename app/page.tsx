@@ -5,7 +5,6 @@ import { getSEOTags } from "@/libs/seo";
 import { getBestCafes, getCafesCount } from "@/libs/supabase/cafes";
 import { getCities } from "@/libs/supabase/cities";
 import { FAQSection } from "@/components/faq";
-import { faqs } from "@/config/faq";
 import { About } from "@/components/sections/About";
 import initTranslations from "@/libs/i18n/config";
 import { Cafe, City } from "@/libs/types";
@@ -64,7 +63,7 @@ async function HomeContent({ cafes, cities, cafesCount }: HomeContentProps) {
         buttonText={t('cities.buttonText')}
       />
   
-      <FAQSection faqs={faqs} />
+      <FAQSection />
 
       <About />
     </main>

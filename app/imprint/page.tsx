@@ -7,7 +7,7 @@ import { address, lastUpdated, unsplashCredits } from "@/config/imprint";
 
 export const metadata = getSEOTags({
   title: `Imprint | ${config.appName}`,
-  description: `Imprint for ${config.appName}`,
+  description: `Legal notice and imprint for ${config.appName}`,
   canonicalUrlRelative: "/imprint",
   alternates: {
     canonical: `https://${domainDe}/impressum`,
@@ -18,78 +18,75 @@ export const metadata = getSEOTags({
   },
 });
 
-const Impressum = () => {
+const Imprint = () => {
 
-  if (isEnglish) {
+  if (!isEnglish) {
     notFound();
   }
 
   return (
     <section className="max-w-7xl mx-auto px-8 py-16 md:py-32">
       <div className="prose leading-relaxed whitespace-pre-wrap mx-auto">
-        <h1>Impressum für {config.appName}</h1>
-        <p>Letzte Aktualisierung: {lastUpdated}</p>
+        <h1>Imprint for {config.appName}</h1>
+        <p>Last updated: {lastUpdated}</p>
         <p>
           Website Name: {config.appName}
           <br />
           Website URL: <Link href={baseUrl}>{baseUrl}</Link>
         </p>
 
-        <h2>Verantwortlich für den Inhalt nach § 5 TMG</h2>
+        <h2>Responsible for content according to § 5 TMG</h2>
         <p>
           Name: Mathias Michel
           <br />
-          Adresse: {address}
+          Address: {address}
           <br />
-          E-Mail: {config.mailgun.supportEmail}
+          Email: {config.mailgun.supportEmail}
         </p>
-        <h2>Haftungsausschluss</h2>
+        <h2>Disclaimer</h2>
         <p>
-        Der Inhalt dieser Website wurde mit größter Sorgfalt erstellt.
-          Jedoch können wir keine Gewähr für die Genauigkeit, Vollständigkeit
-          oder Aktualität des Inhalts übernehmen. Als Diensteanbieter sind
-          wir gemäß § 7 Abs. 1 TMG für unseren eigenen Inhalt auf diesen
-          Seiten verantwortlich. Nach § 8 bis 10 TMG sind wir jedoch nicht
-          verpflichtet, übermittelte oder gespeicherte Informationen Dritter
-          zu überwachen oder zu untersuchen, die auf eine rechtswidrige
-          Tätigkeit hinweisen. Die Pflicht zur Entfernung oder Sperrung der
-          Nutzung von Informationen nach den allgemeinen Gesetzen bleibt
-          unberührt. Eine Haftung in diesem Zusammenhang besteht jedoch nur
-          von der Zeit der Kenntnis einer konkreten Rechtsverletzung.
+          The content of this website has been created with the utmost care.
+          However, we cannot guarantee the accuracy, completeness,
+          or timeliness of the content. As a service provider, we are
+          responsible for our own content on these pages according to § 7
+          Para. 1 TMG. According to §§ 8 to 10 TMG, however, we are not
+          obligated to monitor transmitted or stored third-party information
+          or to investigate circumstances that indicate illegal activity.
+          The obligation to remove or block the use of information according
+          to general laws remains unaffected. However, liability in this
+          regard is only possible from the time of knowledge of a specific
+          legal violation.
         </p>
-        <h2>Haftung für Links</h2>
+        <h2>Liability for Links</h2>
         <p>
-          Diese Website enthält Links zu externen Websites, über die wir keinen
-          Einfluss haben. Daher können wir keine Verantwortung für deren
-          Inhalt übernehmen. Der jeweilige Anbieter oder Betreiber der
-          verlinkten Seiten ist immer für den Inhalt dieser Seiten verantwortlich.
-          Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf
-          mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren
-          zum Zeitpunkt der Verlinkung nicht erkennbar. Jedoch ist eine
-          regelmäßige Überprüfung der verlinkten Seiten ohne konkrete
-          Anhaltspunkte für eine Rechtsverletzung nicht zumutbar. Bei
-          Bekanntwerden von Rechtsverletzungen werden wir derartige Links
-          unverzüglich entfernen.
+          This website contains links to external websites over which we have
+          no control. Therefore, we cannot accept any responsibility for their
+          content. The respective provider or operator is always responsible
+          for the content of the linked pages. The linked pages were checked
+          for possible legal violations at the time of linking. Illegal content
+          was not recognizable at the time of linking. However, permanent
+          monitoring of the content of the linked pages is not reasonable
+          without concrete evidence of a violation of law. If we become aware
+          of any legal violations, we will remove such links immediately.
         </p>
-        <h2>Urheberrecht</h2>
+        <h2>Copyright</h2>
         <p>
-          Der Inhalt und die Werke auf diesen Seiten unterliegen dem deutschen
-          Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und
-          jede Art der Nutzung außerhalb der Grenzen des Urheberrechts
-          bedürfen der schriftlichen Zustimmung des jeweiligen Autors oder
-          Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten,
-          nicht kommerziellen Gebrauch gestattet. Insofern der Inhalt dieser
-          Seite nicht vom Betreiber erstellt wurde, sind die Urheberrechte
-          Dritter zu beachten. Insbesondere sind Inhalte Dritter als solche
-          zu kennzeichnen. Sollten Sie dennoch rechtswidrige Inhalte bemerken,
-          bitten wir Sie, uns unverzüglich zu informieren. Bei Bekanntwerden von
-          Rechtsverletzungen werden wir derartige Inhalte unverzüglich entfernen.
+          The content and works on these pages are subject to German copyright law.
+          The reproduction, editing, distribution, and any kind of exploitation
+          outside the limits of copyright law require the written consent of
+          the respective author or creator. Downloads and copies of this page
+          are only permitted for private, non-commercial use. Insofar as the
+          content on this page was not created by the operator, the copyrights
+          of third parties are respected. In particular, third-party content
+          is marked as such. Should you nevertheless become aware of any
+          copyright infringement, please inform us accordingly. If we become
+          aware of any infringements, we will remove such content immediately.
         </p>
-        <h2>Datenschutzerklärung</h2>
+        <h2>Privacy Policy</h2>
         <p>
-          Bitte lesen Sie unsere <Link href="/datenschutz">Datenschutzerklärung</Link>
+          Please read our <Link href="/privacy">Privacy Policy</Link>
         </p>
-        <h2>Bildquellen</h2>
+        <h2>Image Credits</h2>
         <ul className="list-disc list-inside">
           {unsplashCredits.map((credit, index) => (
             <li key={index} dangerouslySetInnerHTML={{ __html: credit }} />
@@ -100,4 +97,4 @@ const Impressum = () => {
   );
 };
 
-export default Impressum;
+export default Imprint;

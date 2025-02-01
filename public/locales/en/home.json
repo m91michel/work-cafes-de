@@ -15,5 +15,19 @@
   "about": {
     "title": "<highlight>About</highlight> Cafe for Work",
     "description": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help."
+  },
+  "faq": {
+    "title": "Frequently Asked <highlight>Questions</highlight>",
+    "description": "Here you can find answers to the most frequently asked questions about Cafe for Work.",
+    "criteria.question": "Criteria for the best cafes",
+    "criteria.answer": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help.",
+    "update.question": "How often is the cafe directory updated?",
+    "update.answer": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help.",
+    "suggest.question": "Can I suggest a cafe to be added to this website?",
+    "suggest.answer": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help.",
+    "notAllCities.question": "Why are not all cities listed?",
+    "notAllCities.answer": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help.",
+    "remove.question": "Can I also report a cafe to be removed from the list?",
+    "remove.answer": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help."
   }
 } 

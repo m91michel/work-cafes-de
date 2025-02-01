@@ -5,7 +5,6 @@ import { getSEOTags } from "@/libs/seo";
 import { getCafes } from "@/libs/supabase/cafes";
 import { getCities } from "@/libs/supabase/cities";
 import { FAQSection } from "@/components/faq";
-import { faqs } from "@/config/faq";
 
 export const revalidate = 5;
 
@@ -36,7 +35,7 @@ export default async function CafeIndex() {
         title="Alle Cafés zum Arbeiten auf unserer Website"
       />
 
-      <FAQSection faqs={faqs} />
+      <FAQSection />
 
       <section className="max-w-7xl mx-auto px-4 py-12">
         <h2 className="text-2xl font-bold mb-4 text-center">

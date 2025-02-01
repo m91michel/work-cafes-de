@@ -15,5 +15,19 @@
   "about": {
     "title": "<1>Über</1> Café zum Arbeiten",
     "description": "Wir möchten, dass du weniger Zeit mit der Suche und mehr Zeit mit produktivem Arbeiten verbringst. Egal, ob du Freelancer, Student oder einfach auf der Suche nach einem inspirierenden Arbeitsort bist – wir sind hier, um dir zu helfen."
+  },
+  "faq": {
+    "title": "Häufig gestellte <highlight>Fragen</highlight>",
+    "description": "Hier findest du Antworten auf die häufigsten Fragen zu Café zum Arbeiten.",
+    "criteria.question": "Kriterien für die besten Cafés",
+    "criteria.answer": "Wir möchten, dass du weniger Zeit mit der Suche und mehr Zeit mit produktivem Arbeiten verbringst. Egal, ob du Freelancer, Student oder einfach auf der Suche nach einem inspirierenden Arbeitsort bist – wir sind hier, um dir zu helfen.",
+    "update.question": "Wie oft wird das Café-Verzeichnis aktualisiert?",
+    "update.answer": "Wir möchten, dass du weniger Zeit mit der Suche und mehr Zeit mit produktivem Arbeiten verbringst. Egal, ob du Freelancer, Student oder einfach auf der Suche nach einem inspirierenden Arbeitsort bist – wir sind hier, um dir zu helfen.",
+    "suggest.question": "Kann ich ein Café vorschlagen, das auf dieser Website aufgenommen werden soll?",
+    "suggest.answer": "Wir möchten, dass du weniger Zeit mit der Suche und mehr Zeit mit produktivem Arbeiten verbringst. Egal, ob du Freelancer, Student oder einfach auf der Suche nach einem inspirierenden Arbeitsort bist – wir sind hier, um dir zu helfen.",
+    "notAllCities.question": "Warum sind nicht alle Städte aufgelistet?",
+    "notAllCities.answer": "Wir möchten, dass du weniger Zeit mit der Suche und mehr Zeit mit produktivem Arbeiten verbringst. Egal, ob du Freelancer, Student oder einfach auf der Suche nach einem inspirierenden Arbeitsort bist – wir sind hier, um dir zu helfen.",
+    "remove.question": "Kann ich auch ein Cafe melden, das von der Liste entfernt werden soll?",
+    "remove.answer": "Wir möchten, dass du weniger Zeit mit der Suche und mehr Zeit mit produktivem Arbeiten verbringst. Egal, ob du Freelancer, Student oder einfach auf der Suche nach einem inspirierenden Arbeitsort bist – wir sind hier, um dir zu helfen."
   }
 } 

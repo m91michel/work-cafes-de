@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/accordion";
 import { cn } from "@/libs/utils";
 import { Gradient } from "./general/gradient";
+import { useCTranslation } from "@/hooks/use-translations";
+import { TransHighlight } from "./general/translation";
 
 const accordionTriggerStyles = cn(
   "flex flex-1 items-center justify-between py-4 px-2 text-sm font-medium transition-all",
@@ -26,22 +28,25 @@ type FAQ = {
   answer: string;
 };
 type Props = {
-  faqs: FAQ[];
+  faqsIds?: string[];
+  namespace?: string;
+  values?: Record<string, string>;
 };
+const defaultIds = ['criteria', 'update', 'suggest', 'notAllCities', 'remove'];
 
-export function FAQSection({ faqs = [] }: Props) {
+export function FAQSection({ faqsIds = defaultIds, namespace = 'home', values = {} }: Props) {
+  const { t } = useCTranslation(namespace);
+
   return (
     <section className="w-full max-w-3xl mx-auto py-12 px-4">
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-        Häufig gestellte{" "}
-        <Gradient>Fragen</Gradient>
+        <TransHighlight i18nKey={`${namespace}:faq.title`} />
       </h2>
       <p className="text-lg md:text-xl text-center text-muted-foreground mb-8">
-        Hier findest du Antworten auf die häufigsten Fragen zu Café zum
-        Arbeiten.
+        {t(`${namespace}:faq.description`)}
       </p>
       <Accordion type="single" collapsible className="w-full">
-        {faqs.map((faq, index) => (
+        {faqsIds.map((faqId, index) => (
           <AccordionItem
             key={index}
             value={`item-${index}`}
@@ -50,12 +55,12 @@ export function FAQSection({ faqs = [] }: Props) {
             <AccordionTrigger
               className={accordionTriggerStyles}
               data-umami-event="faq-item-clicked"
-              data-umami-event-element={faq.question}
+              data-umami-event-element={faqId}
             >
-              {faq.question}
+              {t(`faq.${faqId}.question`, values)}
             </AccordionTrigger>
             <AccordionContent className={accordionContentStyles}>
-              {faq.answer}
+              {t(`faq.${faqId}.answer`, values)}
             </AccordionContent>
           </AccordionItem>
         ))}

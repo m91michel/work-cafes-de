@@ -15,7 +15,6 @@ import CafeBreadcrumb from "@/components/cafe/cafe-breadcrumb";
 import { isDev } from "@/libs/environment";
 import { CafeReviews } from "@/components/cafe/cafe-reviews";
 import { FAQSection } from "@/components/faq";
-import { faqs } from "@/config/faq";
 import initTranslations from "@/libs/i18n/config";
 
 type Params = Promise<{ slug: string }>;
@@ -106,7 +105,7 @@ export default async function CafePage({ params }: Props) {
           </div>
         </div>
         <div className="mt-12">
-          <FAQSection faqs={faqs} />
+          <FAQSection />
         </div>
       </div>
     </main>
