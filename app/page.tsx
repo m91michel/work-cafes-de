@@ -9,6 +9,7 @@ import { faqs } from "@/config/faq";
 import { About } from "@/components/sections/About";
 import initTranslations from "@/libs/i18n/config";
 import { Cafe, City } from "@/libs/types";
+import { TransHighlight } from "@/components/general/translation";
 
 export const revalidate = 5;
 
@@ -40,8 +41,9 @@ async function HomeContent({ cafes, cities, cafesCount }: HomeContentProps) {
         <div className="text-center mb-12">
           <h1 
             className="text-4xl font-bold mb-4"
-            dangerouslySetInnerHTML={{ __html: t('hero.title') }}
-          />
+          >
+            <TransHighlight i18nKey="home:hero.title" />
+          </h1>
           <p className="text-xl text-muted-foreground">
             {t('hero.subtitle')}
           </p>

@@ -1,6 +1,6 @@
 {
  "meta": {
-  "title": "Cafes in %city%",
-  "description": "Find the best cafes to work from in %city%"
+  "title": "Cafes in {{city}}",
+  "description": "Find the best cafes to work from in {{city}}"
  }
 } 

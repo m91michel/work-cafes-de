@@ -11,5 +11,9 @@
   "cities": {
     "title": "Find a Work-Friendly Cafe in Your City",
     "buttonText": "Discover All Cities"
+  },
+  "about": {
+    "title": "<highlight>About</highlight> Cafe for Work",
+    "description": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help."
   }
 } 

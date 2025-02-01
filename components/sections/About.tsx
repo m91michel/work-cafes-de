@@ -1,6 +1,9 @@
+"use client";
+
 // import pilot from "../assets/pilot.png";
-import { Gradient } from "../general/gradient";
+import { useCTranslation } from "@/hooks/use-translations";
 import { Statistics } from "./Statistics";
+import { TransHighlight } from "../general/translation";
 
 const aboutStats = [
   {
@@ -14,6 +17,7 @@ const aboutStats = [
 ];
 
 export const About = () => {
+  const { t } = useCTranslation('home');
   return (
     <section id="about" className="max-w-7xl mx-auto py-24 sm:py-32 px-4">
       <div className="bg-muted/50 border rounded-lg py-12">
@@ -26,13 +30,10 @@ export const About = () => {
           <div className="bg-green-0 flex flex-col justify-between w-2/3">
             <div className="pb-6">
               <h2 className="text-3xl md:text-4xl font-bold">
-                <Gradient>Über</Gradient>{" "}Café zum Arbeiten
+                <TransHighlight i18nKey="about.title" namespace="home" />
               </h2>
               <p className="text-xl text-muted-foreground mt-4">
-                Wir möchten, dass du weniger Zeit mit der Suche und mehr Zeit
-                mit produktivem Arbeiten verbringst. Egal, ob du Freelancer,
-                Student oder einfach auf der Suche nach einem inspirierenden
-                Arbeitsort bist – wir sind hier, um dir zu helfen.
+                {t('about.description')}
               </p>
             </div>
           </div>
