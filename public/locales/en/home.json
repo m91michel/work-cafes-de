@@ -9,11 +9,11 @@
     "buttonText": "Discover All Cafes"
   },
   "cities": {
-    "title": "Find a Work-Friendly Cafe in Your City",
+    "title": "Find a <highlight>Work-Friendly Cafe</highlight> in Your City",
     "buttonText": "Discover All Cities"
   },
   "about": {
-    "title": "<highlight>About</highlight> Cafe for Work",
+    "title": "<highlight>About</highlight> this website",
     "description": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help."
   },
   "faq": {

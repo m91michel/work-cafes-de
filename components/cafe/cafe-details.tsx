@@ -4,12 +4,13 @@ import { Cafe } from "@/libs/types";
 import { CafeLinks } from "./links";
 import Link from "next/link";
 import { directionLink } from "@/libs/google-maps";
+import { TranslationProps } from "@/libs/types";
 
-interface CafeDetailsProps {
+interface CafeDetailsProps extends TranslationProps {
   cafe: Cafe;
 }
 
-export function CafeDetails({ cafe }: CafeDetailsProps) {
+export function CafeDetails({ cafe, t }: CafeDetailsProps) {
   const openingHours = cafe.open_hours?.split("\n").map((hours, index) => (
     <div key={index} className="text-sm">
       {hours}
@@ -20,14 +21,14 @@ export function CafeDetails({ cafe }: CafeDetailsProps) {
 
   return (
     <Card className="p-6">
-      <h2 className="text-2xl font-semibold mb-6">Über dieses Café</h2>
+      <h2 className="text-2xl font-semibold mb-6">{t("details.title")}</h2>
 
       <div className="grid gap-6">
         <div className="flex items-start gap-3">
           <MapPin className="h-5 w-5 text-muted-foreground mt-1" />
 
           <div>
-            <h3 className="font-medium">Adresse</h3>
+            <h3 className="font-medium">{t("details.address")}</h3>
             <p className="text-muted-foreground">
               {cafe.address}{" "}
               <Link
@@ -35,7 +36,7 @@ export function CafeDetails({ cafe }: CafeDetailsProps) {
                 target="_blank"
                 className="text-primary hover:text-primary/80 transition-colors"
               >
-                Wegbeschreibung <ExternalLink className="w-4 h-4 inline" />
+                {t("details.directions")} <ExternalLink className="w-4 h-4 inline" />
               </Link>
             </p>
           </div>
@@ -46,10 +47,9 @@ export function CafeDetails({ cafe }: CafeDetailsProps) {
             <Clock className="h-5 w-5 text-muted-foreground mt-1" />
           </div>
           <div>
-            <h3 className="font-medium">Essen</h3>
+            <h3 className="font-medium">{t("details.food")}</h3>
             <div className="text-muted-foreground">
-              {cafe.food_content ||
-                "Wir können leider keine Informationen zu Essen für dieses Cafe finden."}
+              {cafe.food_content || t("details.no_food_content")}
             </div>
           </div>
         </div>
@@ -59,10 +59,9 @@ export function CafeDetails({ cafe }: CafeDetailsProps) {
             <Clock className="h-5 w-5 text-muted-foreground mt-1" />
           </div>
           <div>
-            <h3 className="font-medium">Öffnungszeiten</h3>
+            <h3 className="font-medium">{t("details.hours")}</h3>
             <div className="text-muted-foreground">
-              {openingHours ||
-                "Wir können leider keine Öffnungszeiten für dieses Cafe finden."}
+              {openingHours || t("details.no_hours_content")}
             </div>
           </div>
         </div>
@@ -71,10 +70,10 @@ export function CafeDetails({ cafe }: CafeDetailsProps) {
           <LinkIcon className="h-5 w-5 text-muted-foreground mt-1" />
 
           <div className="w-full">
-            <h3 className="font-medium">Links</h3>
+            <h3 className="font-medium">{t("details.links")}</h3>
             {cafe.links && <CafeLinks cafe={cafe} />}
             {!cafe.links && (
-              <p className="text-muted-foreground">Keine Links verfügbar</p>
+              <p className="text-muted-foreground">{t("details.no_links_content")}</p>
             )}
           </div>
         </div>

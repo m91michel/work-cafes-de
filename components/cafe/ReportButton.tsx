@@ -4,20 +4,21 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ReportModal } from "./ReportModal";
 import { Cafe } from "@/libs/types";
+import { useCTranslation } from "@/hooks/use-translations";
 
 interface ReportButtonProps {
   cafe: Cafe;
-  text?: string;
   className?: string;
 }
 
-export function ReportButton({ cafe, text, className }: ReportButtonProps) {
+export function ReportButton({ cafe, className }: ReportButtonProps) {
   const [isReportModalOpen, setReportModalOpen] = useState(false);
+  const { t } = useCTranslation('cafe');
 
   return (
     <>
       <Button onClick={() => setReportModalOpen(true)} variant="outline" className={className}>
-        {text || "Melden"}
+        {t('report.buttons.report')}
       </Button>
       <ReportModal
         isOpen={isReportModalOpen}

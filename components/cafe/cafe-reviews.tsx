@@ -1,9 +1,10 @@
 import { getReviewsById } from "@/libs/supabase/reviews";
-import { Cafe, Review } from "@/libs/types";
+import { Cafe, Review, TranslationProps } from "@/libs/types";
 import { Card } from "../ui/card";
 import dayjs from "dayjs";
 import { reviewKeywords } from "@/app/api/_utils/reviews";
 import Link from "next/link";
+import initTranslations from "@/libs/i18n/config";
 
 interface Props {
   cafe: Cafe;
@@ -11,6 +12,7 @@ interface Props {
 
 export async function CafeReviews({ cafe }: Props) {
   const reviews = await getReviewsById(cafe?.id);
+  const { t } = await initTranslations(['cafe']);
 
   if (reviews?.length === 0) {
     // Temporarily hide reviews
@@ -19,43 +21,42 @@ export async function CafeReviews({ cafe }: Props) {
 
   return (
     <Card className="p-6">
-      <h2 className="text-2xl font-semibold mb-3">Ausgewählte Bewertungen</h2>
+      <h2 className="text-2xl font-semibold mb-3">{t('reviews.title')}</h2>
       <p className="text-sm text-muted-foreground/80 mb-6">
-        Hier findest du ausgewählte Bewertungen, die wir für ein gutes Cafe zum
-        Arbeiten als relevant betrachten.
+        {t('reviews.description')}
       </p>
 
       {reviews.length > 0 ? (
         <div className="flex flex-col divide-y divide-border">
           {reviews.map((review) => (
-            <CafeReview key={review.id} review={review} />
+            <CafeReview key={review.id} review={review} t={t} />
           ))}
         </div>
       ) : (
-        <EmptyReviews />
+        <EmptyReviews t={t} />
       )}
     </Card>
   );
 }
 
-function EmptyReviews() {
+function EmptyReviews({ t }: TranslationProps) {
+
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center">
       <div className="text-4xl mb-4">📝</div>
-      <h3 className="text-lg font-medium mb-2">Noch keine Bewertungen</h3>
+      <h3 className="text-lg font-medium mb-2">{t('reviews.no_reviews')}</h3>
       <p className="text-sm text-muted-foreground max-w-sm">
-        Für dieses Café wurden noch keine Bewertungen hinzugefügt. Besuche das
-        Café und teile deine Erfahrungen!
+        {t('reviews.no_reviews_description')}
       </p>
     </div>
   );
 }
 
-interface CafeReviewProps {
+interface CafeReviewProps extends TranslationProps {
   review: Review;
 }
 
-export function CafeReview({ review }: CafeReviewProps) {
+export function CafeReview({ review, t }: CafeReviewProps) {
   return (
     <div className="py-6 first:pt-0 last:pb-0 hover:bg-accent/5 transition-colors">
       <div className="flex flex-col gap-4">

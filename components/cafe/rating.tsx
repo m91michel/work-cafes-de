@@ -2,6 +2,7 @@
 
 import { Star, StarHalf } from 'lucide-react'
 import { Card } from '../ui/card';
+import { useCTranslation } from '@/hooks/use-translations';
 
 interface RatingProps {
   rating?: number | null
@@ -9,21 +10,25 @@ interface RatingProps {
 }
 
 export function CafeRatingCard({ rating }: { rating: number | null }) {
+  const { t } = useCTranslation('cafe');
+
   return (
     <Card className="p-6 mb-6">
-      <h2 className="text-2xl font-semibold mb-3">Bewertung</h2>
+      <h2 className="text-2xl font-semibold mb-3">{t('rating.title')}</h2>
 
       <div className="space-y-5">
         <Rating rating={rating} />
-        <p className="text-sm text-muted-foreground">Quelle: Google</p>
+        <p className="text-sm text-muted-foreground">{t('rating.source')}</p>
       </div>
     </Card>
   );
 }
 
 export function Rating({ rating, className = '' }: RatingProps) {
+  const { t } = useCTranslation('cafe');
+
   if (!rating) {
-    return <p>Keine Bewertung</p>
+    return <p>{t('rating.no_rating')}</p>
   }
 
   const roundedRating = Math.round(rating * 2) / 2

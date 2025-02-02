@@ -38,10 +38,11 @@ export async function generateMetadata({ params }: Props) {
       canonicalUrlRelative: `/cafes/${slug}`,
     });
   }
+  const { t } = await initTranslations(['cafe']);
 
   return getSEOTags({
-    title: `${cafe.name} | Cafés zum Arbeiten`,
-    description: `Das ${cafe.name} in ${cafe.city} ist ein idealer Ort zum Arbeiten, Studieren oder sich auszutauschen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt.`,
+    title: `${cafe.name} | ${config.appName}`,
+    description: t('meta.slug.description', { name: cafe.name, city: cafe.city }),
     canonicalUrlRelative: `/cafes/${slug}`,
   });
 }
@@ -77,16 +78,13 @@ export default async function CafePage({ params }: Props) {
       <div className="max-w-7xl mx-auto px-4 pb-12">
         <div className="grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
-            <CafeDetails cafe={cafe} />
+            <CafeDetails cafe={cafe} t={t} />
           </div>
           <div>
             <CafeRatingCard rating={cafe.google_rating} />
             <CafeAmenities cafe={cafe} />
             <CafeFurtherButtons cafe={cafe} />
             {isDev && <DebugInfo cafe={cafe} />}
-            {isDev && <div className="mt-12">
-              {t("reviews.title")}
-            </div>}
           </div>
 
           <div className="md:col-span-2">
@@ -96,7 +94,7 @@ export default async function CafePage({ params }: Props) {
 
         <div className="mt-12">
           <h2 className="text-2xl font-semibold mb-6">
-            Weitere Cafés in {cafe.city}
+            {t('more_cafes.title', { city: cafe.city })}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {relatedCafes.map((cafe) => (

@@ -1,34 +1,60 @@
 {
   "details": {
-    "wifi": "WiFi",
-    "power": "Power Outlets",
-    "seating": "Seating",
-    "noise": "Noise Level",
-    "food": "Food & Drinks",
-    "hours": "Opening Hours",
+    "title": "About this Cafe",
     "address": "Address",
-    "rating": "Rating"
-  },
-  "filters": {
+    "directions": "Directions",
+    "food": "Food & Drinks",
+    "no_food_content": "We couldn't find any information about food for this cafe.",
+    "hours": "Opening Hours",
+    "links": "Links",
+    "amenities": "Amenities",
     "wifi_quality": {
       "label": "WiFi Quality",
-      "excellent": "Excellent",
       "good": "Good",
-      "fair": "Fair",
-      "poor": "Poor"
+      "excellent": "Excellent",
+      "average": "Average",
+      "poor": "Poor",
+      "unknown": "Unknown"
     },
     "seating_comfort": {
       "label": "Seating Comfort",
-      "very_comfortable": "Very Comfortable",
+      "very-comfortable": "Very Comfortable",
       "comfortable": "Comfortable",
-      "moderate": "Moderate",
-      "uncomfortable": "Uncomfortable"
+      "slightly-uncomfortable": "Slightly Uncomfortable",
+      "uncomfortable": "Uncomfortable",
+      "unknown": "Unknown"
     },
-    "noise_level": {
-      "label": "Noise Level",
-      "quiet": "Quiet",
-      "moderate": "Moderate",
-      "noisy": "Noisy"
+    "ambiance": {
+      "label": "Ambiance",
+      "quiet-and-cozy": "Quiet and Cozy",
+      "lively": "Lively",
+      "noisy": "Noisy",
+      "unknown": "Unknown"
+    }
+  },
+  "report": {
+    "buttons": {
+      "report": "Report Cafe",
+      "cancel": "Cancel",
+      "send": "Send"
+    },
+    "title": "Report Cafe",
+    "form": {
+      "email": "Your Email",
+      "name": "Your Name",
+      "message": "Describe briefly what the problem is...",
+      "success": "Successfully sent",
+      "error": "An error occurred"
+    },
+    "toast": {
+      "success": {
+        "title": "Successfully sent",
+        "description": "Thank you for reporting! We will take care of your request immediately."
+      },
+      "error": {
+        "title": "An error occurred",
+        "description": "Please try again."
+      }
     }
   },
   "status": {
@@ -36,8 +62,22 @@
     "closed": "Closed",
     "opening_soon": "Opening Soon"
   },
+  "more_cafes": {
+    "title": "More Cafés in {{city}}",
+    "all_cities": "All Cities"
+  },
+  "rating": {
+    "title": "Rating",
+    "source": "Source: Google",
+    "no_rating": "No rating yet"
+  },
   "reviews": {
-    "title": "Reviews"
+    "title": "Work related reviews",
+    "description": "Here you can find selected reviews, that we consider to be relevant for a good cafe to work in.",
+    "google_title": "Google Reviews",
+    "no_reviews_title": "No reviews yet",
+    "no_reviews_description": "For this cafe, no reviews with relevant information were found.",
+    "source_hint": "Review from {{source}}"
   },
   "meta": {
     "title": "Cafes to work in",

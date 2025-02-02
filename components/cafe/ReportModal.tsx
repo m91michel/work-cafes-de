@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "../ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { useCTranslation } from "@/hooks/use-translations";
 
 interface ReportModalProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ interface FormInputs {
 export function ReportModal({ isOpen, onClose, cafeSlug }: ReportModalProps) {
   const { register, handleSubmit, reset } = useForm<FormInputs>();
   const { toast } = useToast();
+  const { t } = useCTranslation('cafe');
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     try {
@@ -37,24 +39,23 @@ export function ReportModal({ isOpen, onClose, cafeSlug }: ReportModalProps) {
 
       if (response.status !== 200) {
         toast({
-          title: "Es ist ein Fehler aufgetreten",
-          description: "Bitte versuche es erneut.",
+          title: t('report.toast.error.title'),
+          description: t('report.toast.error.description'),
         });
         return;
       }
 
       toast({
-        title: "Erfolgreich gesendet",
-        description:
-          "Vielen Dank fürs Melden! Wir werden uns umgehend um dein Anliegen kümmern.",
+        title: t('report.toast.success.title'),
+        description: t('report.toast.success.description'),
       });
       onClose();
       reset();
     } catch (error) {
       console.error("Error submitting report:", error);
       toast({
-        title: "Es ist ein Fehler aufgetreten",
-        description: "Bitte versuche es erneut.",
+        title: t('report.toast.error.title'),
+        description: t('report.toast.error.description'),
       });
     }
   };
@@ -63,30 +64,32 @@ export function ReportModal({ isOpen, onClose, cafeSlug }: ReportModalProps) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Cafe melden</DialogTitle>
+          <DialogTitle>{t('report.title')}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             {...register("email", { required: true })}
             type="email"
-            placeholder="Deine E-Mail"
+            placeholder={t('report.form.email')}
             className="mb-4"
           />
           <Input
             {...register("name", { required: true })}
-            placeholder="Dein Name"
+            placeholder={t('report.form.name')}
             className="mb-4"
           />
           <Textarea
             {...register("message", { required: true })}
-            placeholder="Beschreibe kurz was genau das Problem ist..."
+            placeholder={t('report.form.message')}
             className="mb-4"
           />
           <DialogFooter>
             <Button type="button" variant="secondary" onClick={onClose}>
-              Abbrechen
+              {t('report.buttons.cancel')}
             </Button>
-            <Button type="submit">Senden</Button>
+            <Button type="submit">
+              {t('report.buttons.send')}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

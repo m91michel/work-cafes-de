@@ -11,7 +11,6 @@ interface CitySelectorProps {
 
 export function CitySelector({ cities, showAllButton = false }: CitySelectorProps) {
   const router = useRouter();
-
   return (
     <div className="flex flex-wrap gap-3 justify-center">
       {showAllButton && (
@@ -28,7 +27,7 @@ export function CitySelector({ cities, showAllButton = false }: CitySelectorProp
             router.push(`/cities/${city.slug}`);
           }}
         >
-          {city.name}
+          {city.name} ({city.cafes_count || 0})
         </Button>
       ))}
     </div>

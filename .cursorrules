@@ -3,10 +3,16 @@
 Start each answer with 🚀
 
 ## Project description
-Cafe zum Arbeiten is a german website that lists the best cafes for working in Germany.
+This project is a website that lists the best cafes for working in Germany.
 
-## Requirements
+## Domains
+- German: cafezumarbeiten.de
+- English: awifi.place
+
+## Additional instructions
 - This project is a npm workspace. Use `-W` to install dependencies.
+- For translations, use the `useCTranslation` hook if the file has a "use client" directive.
+- Use `initTranslations` for translations in server components.
 
 ## Next.js App Router best practices
 - Use server components by default
@@ -23,7 +29,7 @@ Frontend:
 - Framework: Next.js 15 with react 19
 - Language: TypeScript
 - UI Components: shadcn/ui (based on Radix UI primitives)
-- Styling: Tailwind CSS
+- Styling: Tailwind CSS 3.4
 - Icons: Lucide React
 
 Backend:

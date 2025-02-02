@@ -1,34 +1,44 @@
 {
-  "details": {
-    "wifi": "WLAN",
-    "power": "Steckdosen",
-    "seating": "Sitzplätze",
-    "noise": "Lautstärke",
-    "food": "Essen & Getränke",
-    "hours": "Öffnungszeiten",
-    "address": "Adresse",
-    "rating": "Bewertung"
+  "index": {
+    "title": "Alle Cafés zum Arbeiten auf unserer Website",
+    "description": "Hier findest du eine Liste aller Cafés, die auf unserer Website verfügbar sind. Helfe uns, die Liste zu vervollständigen, indem du neue Cafés hinzufügst.",
+    "all_cities_title": "Eine Liste aller Städte auf unserer Website"
   },
-  "filters": {
+  "details": {
+    "title": "Über dieses Café",
+    "address": "Adresse",
+    "directions": "Wegbeschreibung",
+    "food": "Essen",
+    "no_food_content": "Wir konnten leider keine Informationen zu Essen für dieses Cafe finden.",
+    "hours": "Öffnungszeiten",
+    "no_hours_content": "Wir konnten leider keine Informationen zu Öffnungszeiten für dieses Cafe finden.",
+    "links": "Links",
+    "no_links_content": "Für dieses Cafe sind keine Links verfügbar.",
+    "amenities": "Ausstattung",
     "wifi_quality": {
       "label": "WLAN-Qualität",
       "excellent": "Ausgezeichnet",
       "good": "Gut",
       "fair": "Ausreichend",
-      "poor": "Schlecht"
+      "poor": "Schlecht",
+      "unknown": "Unbekannt",
+      "average": "Durchschnittlich"
     },
     "seating_comfort": {
       "label": "Sitzkomfort",
-      "very_comfortable": "Sehr bequem",
       "comfortable": "Bequem",
       "moderate": "Mittelmäßig",
-      "uncomfortable": "Unbequem"
+      "slightly-uncomfortable": "Leicht unbequem",
+      "uncomfortable": "Unbequem",
+      "very-comfortable": "Sehr bequem",
+      "unknown": "Unbekannt"
     },
-    "noise_level": {
-      "label": "Lautstärke",
-      "quiet": "Ruhig",
-      "moderate": "Moderat",
-      "noisy": "Laut"
+    "ambiance": {
+      "label": "Ambiente",
+      "quiet-and-cozy": "Ruhig und bequem",
+      "lively": "Lebhaft",
+      "noisy": "Laut",
+      "unknown": "Unbekannt"
     }
   },
   "status": {
@@ -36,13 +46,57 @@
     "closed": "Geschlossen",
     "opening_soon": "Öffnet bald"
   },
+  "more_cafes": {
+    "title": "Weitere Cafés in {{city}}",
+    "all_cities": "Alle Städte"
+  },
+  "report": {
+    "buttons": {
+      "report": "Cafe melden",
+      "cancel": "Abbrechen",
+      "send": "Senden"
+    },
+    "title": "Cafe melden",
+    "form": {
+      "email": "Deine E-Mail",
+      "name": "Dein Name",
+      "message": "Beschreibe kurz was genau das Problem ist...",
+      "success": "Erfolgreich gesendet",
+      "error": "Es ist ein Fehler aufgetreten"
+    },
+    "toast": {
+      "success": {
+        "title": "Erfolgreich gesendet",
+        "description": "Vielen Dank fürs Melden! Wir werden uns umgehend um dein Anliegen kümmern."
+      },
+      "error": {
+        "title": "Es ist ein Fehler aufgetreten",
+        "description": "Bitte versuche es erneut."
+      }
+    }
+  },
+  "rating": {
+    "title": "Bewertung",
+    "source": "Quelle: Google",
+    "no_rating": "Noch keine Bewertung"
+  },
   "reviews": {
-    "title": "Bewertungen"
+    "title": "Bewertungen",
+    "description": "Hier findest du ausgewählte Bewertungen, die wir anhand von bestimmten Keywords für dich herausgesucht haben.",
+    "google_title": "Google Bewertungen",
+    "source": "Quelle: Google",
+    "no_reviews_title": "Noch keine Bewertungen",
+    "no_reviews_description": "Für dieses Cafe wurden keine Bewertungen gefunden.",
+    "source_hint": "Bewertung von {{source}}"
   },
   "meta": {
     "title": "Cafés zum Arbeiten",
+    "show": {
+      "title": "{{name}} in {{city}}",
+      "description": "Entdecken Sie die besten Cafés zum Arbeiten in {{city}}. Wir haben die Bewertungen geprüft und die besten Cafés für Sie ausgewählt."
+    },
     "slug": {
-      "description": "{name} in {city} ist ein idealer Ort zum Arbeiten, Studieren oder sich auszutauschen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt."
+      "description": "{{name}} in {{city}} ist ein idealer Ort zum Arbeiten, Studieren oder sich auszutauschen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt."
     }
   }
 } 
