@@ -8,6 +8,7 @@ import { isProd, language } from "@/libs/environment";
 import { Toaster } from "@/components/ui/toaster";
 import TranslationProvider from "@/components/providers/i18n-provider";
 import initTranslations from "@/libs/i18n/config";
+import config from "@/config/config";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,8 +33,8 @@ export default async function RootLayout({
           <Script
             defer
             src="/stats/script.js"
-            data-website-id="51113768-3569-4f28-94d3-0104fac43fcf"
-            data-domains="cafezumarbeiten.de"
+            data-website-id={config.umami.id}
+            data-domains={config.umami.domain}
           />
         </>
       )}
