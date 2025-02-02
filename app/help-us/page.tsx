@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import config, { baseUrl, domainEn, submitFormUrl } from '@/config/config';
+import config, { baseUrl, domainDe, domainEn, submitFormUrl } from '@/config/config';
 import { isEnglish, language } from '@/libs/environment';
 import { getSEOTags } from '@/libs/seo';
 import { Share2, PlusCircle } from 'lucide-react';
@@ -9,7 +9,13 @@ import { notFound } from 'next/navigation';
 export const metadata = getSEOTags({
   title: `Support Us | ${config.appName}`,
   description: `Support us by sharing this page with your friends.`, // 100-160 characters
-  canonicalUrlRelative: "/help-us",
+  alternates: {
+    canonical: `https://${domainEn}/help-us`,
+    languages: {
+      "de": `https://${domainDe}/hilfe-uns`,
+      "en": `https://${domainEn}/help-us`,
+    },
+  },
 });
 
 const tweetText = `Discover the best work-friendly cafés in Germany at Work-Friendly Cafés - Your guide to productive spaces!`;

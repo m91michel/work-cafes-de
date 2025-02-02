@@ -30,10 +30,9 @@ import { isGerman } from "@/libs/environment";
 export const metadata = getSEOTags({
   title: `Privacy Policy | ${config.appName}`,
   description: `Privacy Policy for ${config.appName}`,
-  canonicalUrlRelative: "/privacy",
   keywords: `privacy, policy, ${config.appName}`,
   alternates: {
-    canonical: `https://${domainDe}/datenschutz`,
+    canonical: `https://${domainEn}/privacy`,
     languages: {
       en: `https://${domainEn}/privacy`,
       de: `https://${domainDe}/datenschutz`,

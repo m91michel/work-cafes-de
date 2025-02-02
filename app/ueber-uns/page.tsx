@@ -1,5 +1,5 @@
-import config from '@/config/config';
-import { isEnglish, isGerman } from '@/libs/environment';
+import config, { domainDe, domainEn } from '@/config/config';
+import { isGerman } from '@/libs/environment';
 import { getSEOTags } from '@/libs/seo';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
@@ -7,7 +7,13 @@ import ReactMarkdown from 'react-markdown';
 export const metadata = getSEOTags({
   title: `Über uns | ${config.appName}`,
   description: `Entdecke, wie ${config.appName} dir hilft, die besten Cafés zum Arbeiten und Lernen in Deutschland zu finden.`,
-  canonicalUrlRelative: "/ueber-uns",
+  alternates: {
+    canonical: `https://${domainDe}/ueber-uns`,
+    languages: {
+      "de": `https://${domainDe}/ueber-uns`,
+      "en": `https://${domainEn}/about-us`,
+    },
+  },
 });
 
 export default function AboutPage() {

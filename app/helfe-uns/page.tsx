@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import config, { baseUrl, domainDe, submitFormUrl } from '@/config/config';
+import config, { baseUrl, domainDe, domainEn, submitFormUrl } from '@/config/config';
 import { isGerman } from '@/libs/environment';
 import { getSEOTags } from '@/libs/seo';
 import { Share2, PlusCircle } from 'lucide-react';
@@ -9,7 +9,13 @@ import { notFound } from 'next/navigation';
 export const metadata = getSEOTags({
   title: `Unterstütze uns | ${config.appName}`,
   description: `Hilf uns dabei, die beste Plattform für arbeitnehmerfreundliche Cafés in Deutschland aufzubauen.`, // 100-160 characters
-  canonicalUrlRelative: "/helfe-uns",
+  alternates: {
+    canonical: `https://${domainDe}/helfe-uns`,
+    languages: {
+      "de": `https://${domainDe}/helfe-uns`,
+      "en": `https://${domainEn}/help-us`,
+    },
+  },
 });
 
 const tweetText = `Entdecke die besten laptop-freundlichen Cafés in Deutschland auf ${config.appName} - Dein Guide für entspanntes Arbeiten im Café!`;

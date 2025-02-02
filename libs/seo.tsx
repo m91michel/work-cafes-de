@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { locale, localhost } from "./environment";
-import config, { baseUrl } from "@/config/config";
+import config, { baseUrl, domainDe, domainEn, domainName } from "@/config/config";
 
 // These are all the SEO tags you can add to your pages.
 // It prefills data with default title/description/OG, etc.. and you can cusotmize it for each page.
@@ -66,7 +66,14 @@ export const getSEOTags = ({
 
     // If a canonical URL is given, we add it. The metadataBase will turn the relative URL into a fully qualified URL
     ...(canonicalUrlRelative && {
-      alternates: { canonical: canonicalUrlRelative },
+      alternates: {
+        canonical: canonicalUrlRelative,
+        languages: {
+          "de": `https://${domainDe}${canonicalUrlRelative}`,
+          "en": `https://${domainEn}${canonicalUrlRelative}`,
+          "x-default": `https://${domainName}${canonicalUrlRelative}`,
+        },
+      },
     }),
 
     ...metadata,

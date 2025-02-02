@@ -1,4 +1,4 @@
-import config from '@/config/config';
+import config, { domainDe, domainEn } from '@/config/config';
 import { isEnglish, language } from '@/libs/environment';
 import { getSEOTags } from '@/libs/seo';
 import { notFound } from 'next/navigation';
@@ -7,7 +7,13 @@ import ReactMarkdown from 'react-markdown';
 export const metadata = getSEOTags({
   title: `About Us | ${config.appName}`,
   description: `Discover how ${config.appName} helps you find the perfect cafés for working and studying in Germany.`,
-  canonicalUrlRelative: "/about",
+  alternates: {
+    canonical: `https://${domainEn}/about`,
+    languages: {
+      "de": `https://${domainDe}/ueber-uns`,
+      "en": `https://${domainEn}/about`,
+    },
+  },
 });
 
 export default function AboutPage() {

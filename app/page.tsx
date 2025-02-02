@@ -9,6 +9,7 @@ import { About } from "@/components/sections/About";
 import initTranslations from "@/libs/i18n/config";
 import { Cafe, City } from "@/libs/types";
 import { TransHighlight } from "@/components/general/translation";
+import { domainDe, domainEn, domainName } from "@/config/config";
 
 export const revalidate = 5;
 
@@ -17,7 +18,7 @@ export async function generateMetadata() {
   return getSEOTags({
     title: t('meta.title'),
     description: t('meta.description'),
-    canonicalUrlRelative: "/",
+    canonicalUrlRelative: '/'
   });
 }
 

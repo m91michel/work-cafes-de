@@ -8,7 +8,6 @@ import { address, lastUpdated, unsplashCredits } from "@/config/imprint";
 export const metadata = getSEOTags({
   title: `Impressum | ${config.appName}`,
   description: `Impressum für ${config.appName}`,
-  canonicalUrlRelative: "/impressum",
   alternates: {
     canonical: `https://${domainDe}/impressum`,
     languages: {
