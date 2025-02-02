@@ -7,7 +7,9 @@ const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const supabase = createClient<Database>(supabaseUrl, supabaseKey, { db: { schema: 'cafeforwork' } });
 
 export async function updateCountForCities() {
-    const { data } = await supabase.from('cities').select('name, slug');
+    const { data } = await supabase
+        .from('cities')
+        .select('name, slug, status');
 
     if (!data) {
         console.error('No cities found');
@@ -15,7 +17,7 @@ export async function updateCountForCities() {
     }
 
     for (const city of data) {
-        await updateCafeCount(city.slug);
+        await updateCafeCount({ ...city, status: city.status || 'PROCESSING' });
     }
 
     console.log(`Cafes count updated successfully for ${data.length} cities`);

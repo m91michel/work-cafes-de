@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
         continue;
       }
 
-      await updateCafeCount(cafe.city_slug);
+      await updateCafeCount(cafe);
 
       console.log(`🎉 processed ${cafe.name}`);
     } else {
