@@ -22,5 +22,17 @@
   "meta": {
     "title": "Cafés zum Arbeiten",
     "description": "Finde die besten Cafés zum Arbeiten in Deutschland"
+  },
+  "footer": {
+    "rights-reserved": "Alle Rechte vorbehalten.",
+    "resources": "Ressourcen",
+    "about": "Über uns",
+    "all-cafes": "Alle Cafés",
+    "all-cities": "Alle Städte",
+    "city-title": "Die besten Cafés",
+    "city-cafes": "Cafés zum Arbeiten in {{city}}",
+    "support": "Kontaktiere uns",
+    "privacy": "Datenschutz",
+    "imprint": "Impressum"
   }
 } 

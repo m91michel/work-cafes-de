@@ -22,5 +22,17 @@
   "meta": {
     "title": "Cafe for Work",
     "description": "Find the best cafes to work from in Germany"
+  },
+  "footer": {
+    "rights-reserved": "All rights reserved.",
+    "resources": "Resources",
+    "about": "About",
+    "all-cafes": "All Cafes",
+    "all-cities": "All Cities",
+    "city-title": "The best Cafes",
+    "city-cafes": "Cafes for Work in {{city}}",
+    "support": "Contact us",
+    "privacy": "Privacy",
+    "imprint": "Imprint"
   }
 } 
