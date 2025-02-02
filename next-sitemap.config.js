@@ -1,7 +1,13 @@
 /** @type {import('next-sitemap').IConfig} */
 // docs: https://www.npmjs.com/package/next-sitemap
 
-const siteUrl = process.env.SITE_URL || "https://cafezumarbeiten.de";
+const isGerman = process.env.NEXT_PUBLIC_LANGUAGE === "de";
+const fallbackUrl = isGerman ? "https://cafezumarbeiten.de" : "https://work-in-cafe.com";
+const siteUrl = process.env.SITE_URL || fallbackUrl;
+
+const excludeLocaleSpecificRoutes = isGerman
+  ? ["/privacy", "/imprint", "/about", "/help-us"]
+  : ["/datenschutz", "/impressum", "/ueber-uns", "/helfe-uns"];
 
 module.exports = {
   // REQUIRED: add your own domain name here
@@ -19,8 +25,9 @@ module.exports = {
     "/api/*",
     "/unsubscribe",
     "/app/*",
+    "/dashboard",
     "/dashboard/*",
-    "/privacy",
+    ...excludeLocaleSpecificRoutes,
   ],
   // robotsTxtOptions: {
   //   additionalSitemaps: [
