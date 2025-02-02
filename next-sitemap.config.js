@@ -2,7 +2,7 @@
 // docs: https://www.npmjs.com/package/next-sitemap
 
 const isGerman = process.env.NEXT_PUBLIC_LANGUAGE === "de";
-const fallbackUrl = isGerman ? "https://cafezumarbeiten.de" : "https://work-in-cafe.com";
+const fallbackUrl = isGerman ? "https://cafezumarbeiten.de" : "https://awifi.place";
 const siteUrl = process.env.SITE_URL || fallbackUrl;
 
 const excludeLocaleSpecificRoutes = isGerman

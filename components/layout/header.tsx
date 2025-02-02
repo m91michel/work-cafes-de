@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { NavLinks } from "./NavLinks";
 import { useCTranslation } from "@/hooks/use-translations";
+import { appName } from "@/config/config";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,7 +19,7 @@ export function Header() {
           className="flex items-center gap-2 hover:opacity-90 transition-opacity"
         >
           <Coffee className="h-6 w-6" />
-          <span className="font-semibold text-lg">{t('meta.title', { defaultValue: 'CafeZumArbeiten.de' })}</span>
+          <span className="font-semibold text-lg">{appName}</span>
         </Link>
 
         <div className="flex items-center md:hidden">
