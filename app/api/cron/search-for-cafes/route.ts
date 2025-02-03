@@ -35,12 +35,12 @@ export async function GET(request: NextRequest) {
   }
 
   for (const city of cities) {
-    if (!city.name) {
+    if (!city.name_de) {
       console.error("⚠️ City name is null", city);
       continue;
     }
 
-    const places = await searchPlaces(`cafe zum arbeiten in ${city.name}`, { type: "cafe" });
+    const places = await searchPlaces(`cafe zum arbeiten in ${city.name_de}`, { type: "cafe" });
 
     if (places === null || places === undefined) {
       console.error("⚠️ Error searching for cafes", places);
@@ -48,8 +48,8 @@ export async function GET(request: NextRequest) {
     }
 
     for (const place of places) {
-      if (!isInCity(place, city.name)) {
-        console.log(`⚠️ ${place.formatted_address} is not in ${city.name}`);
+      if (!isInCity(place, city.name_de)) {
+        console.log(`⚠️ ${place.formatted_address} is not in ${city.name_de}`);
         continue;
       }
 
@@ -70,7 +70,7 @@ export async function GET(request: NextRequest) {
         .upsert({
           name: place.name,
           city_slug: city.slug,
-          city: city.name,
+          city: city.name_de,
           address: formattedAddress,
           slug: slug,
           lat_long: lat_long,

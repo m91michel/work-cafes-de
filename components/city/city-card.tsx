@@ -18,7 +18,7 @@ export function CityCard({ city }: Props) {
         {city.preview_image && (
           <Image
             src={city.preview_image || ""}
-            alt={city.name || ""}
+            alt={city.name_de || ""}
             fill
             className="object-cover"
             sizes="(min-width: 1024px) 50vw, 100vw"
@@ -28,7 +28,7 @@ export function CityCard({ city }: Props) {
         <div className="absolute inset-0 bg-black/40 transition-opacity group-hover:bg-black/60" />
         <div className="absolute inset-0 p-6 flex flex-col">
           <div className="flex-1">
-            <h2 className="text-white text-4xl font-bold mb-2">{city.name}</h2>
+            <h2 className="text-white text-4xl font-bold mb-2">{city.name_de}</h2>
             <p className="text-white/90 text-xl">{city.state}</p>
             {city.description_short && (
               <p className="text-white/90 mt-4 line-clamp-4 opacity-0 transition-opacity group-hover:opacity-100">

@@ -7,7 +7,7 @@ interface CityHeroProps extends TranslationProps {
 }
 
 export function CityHero({ city, cafeCount, t }: CityHeroProps) {
-  const cityName = city.name || city.slug || ''
+  const cityName = city.name_de || city.slug || ''
   return (
     <div className="bg-card">
       <div className="max-w-7xl mx-auto px-4 py-12">

@@ -113,7 +113,8 @@ export type Database = {
           description_long: string | null
           description_short: string | null
           lat_long: string | null
-          name: string | null
+          name_de: string | null
+          name_en: string | null
           population: number | null
           preview_image: string | null
           slug: string
@@ -130,7 +131,8 @@ export type Database = {
           description_long?: string | null
           description_short?: string | null
           lat_long?: string | null
-          name?: string | null
+          name_de?: string | null
+          name_en?: string | null
           population?: number | null
           preview_image?: string | null
           slug: string
@@ -147,7 +149,8 @@ export type Database = {
           description_long?: string | null
           description_short?: string | null
           lat_long?: string | null
-          name?: string | null
+          name_de?: string | null
+          name_en?: string | null
           population?: number | null
           preview_image?: string | null
           slug?: string

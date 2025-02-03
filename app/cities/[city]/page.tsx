@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props) {
   const { t } = await initTranslations(['city']);
   const slug = (await params).city
   const city = await getCityBySlug(slug);
-  const name = city?.name || t('meta.show.your_city');
+  const name = city?.name_de || t('meta.show.your_city');
 
   return getSEOTags({
     title: t('meta.show.title', { name }),
@@ -44,7 +44,7 @@ export default async function CityPage({ params }: Props) {
   const cities = await getCities({ limit: 3, offset: 0, excludeSlug: citySlug });
   
 
-  if (!city || !city.name) {
+  if (!city || !city.name_de) {
     notFound();
   }
 
@@ -53,10 +53,10 @@ export default async function CityPage({ params }: Props) {
       <CityHero city={city} cafeCount={cafes.length} t={t} />
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-2xl font-semibold">
-          {t('hero.subtitle', { count: cafes.length, name: city.name })}
+          {t('hero.subtitle', { count: cafes.length, name: city.name_de })}
         </h2>
         <p className="text-muted-foreground">
-          {t('hero.description', { name: city.name })}
+          {t('hero.description', { name: city.name_de })}
         </p>
       </div>
 

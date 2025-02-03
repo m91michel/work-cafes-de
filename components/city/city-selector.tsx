@@ -20,7 +20,7 @@ export function CitySelector({ cities }: CitySelectorProps) {
             router.push(`/cities/${city.slug}`);
           }}
         >
-          {city.name} {city.cafes_count && `(${city.cafes_count})`}
+          {city.name_de} {city.cafes_count && `(${city.cafes_count})`}
         </Button>
       ))}
     </div>

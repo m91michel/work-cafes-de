@@ -10,7 +10,7 @@ export async function getCafes(
 ): Promise<Cafe[]> {
   const { data, error, count } = await supabase
     .from("cafes")
-    .select("*, cities(name, slug)", { count: 'exact' })
+    .select("*, cities(name_de, name_en, slug)", { count: 'exact' })
     .eq('status', 'PUBLISHED')
     .range(offset, offset + limit - 1)
     .not('google_rating', 'is', null)
@@ -29,7 +29,7 @@ export async function getBestCafes(
 ): Promise<Cafe[]> {
   const { data, error, count } = await supabase
     .from("cafes")
-    .select("*, cities(name, slug)", { count: 'exact' })
+    .select("*, cities(name_de, name_en, slug)", { count: 'exact' })
     .eq('status', 'PUBLISHED')
     .range(offset, offset + limit - 1)
     .not('google_rating', 'is', null)
@@ -49,7 +49,7 @@ export async function getAllCafes(
 ): Promise<Cafe[]> {
   const { data, error, count } = await supabase
     .from("cafes")
-    .select("*, cities(name, slug)", { count: 'exact' })
+    .select("*, cities(name_de, name_en, slug)", { count: 'exact' })
     .range(offset, offset + limit - 1)
     .order("created_at", { ascending: false });
 
@@ -64,7 +64,7 @@ export async function getAllCafes(
 export async function getCafeBySlug(slug: string): Promise<Cafe | null> {
   const { data, error } = await supabase
     .from("cafes")
-    .select("*, cities(name, slug)")
+    .select("*, cities(name_de, name_en, slug)")
     .eq("slug", slug)
     .single();
 

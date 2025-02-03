@@ -4,7 +4,7 @@ import { generateSlug } from "@/libs/utils"
 import { Cafe } from "@/libs/types"
 
 export async function generateSlugForCafe(cafe: Cafe, cities: City[]) {
-    const city_slug = cities?.find(city => city.name === mapTranslatedCities(cafe.city))?.slug
+    const city_slug = cities?.find(city => city.name_de === mapTranslatedCities(cafe.city))?.slug
     if (!city_slug) {
       console.log(`City not found for cafe: ${cafe.name} ${cafe.city}`)
       return

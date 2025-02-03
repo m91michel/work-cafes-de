@@ -33,7 +33,7 @@ export const citiesCommands: Command[] = [
       }
 
       for (const city of cities) {
-        console.log(`⚡️ Processing ${city.name} in ${city.country}`);
+        console.log(`⚡️ Processing ${city.name_de} in ${city.country}`);
         const { error } = await supabase
           .from("cities")
           .update({
@@ -57,16 +57,20 @@ export async function upsertCitiesFromCsv() {
   const cities = await readCsv<any>("../data/cities.csv");
 
   for (const city of cities) {
-    console.log(`⚡️ Processing ${city.name} in ${city.country}`);
+    console.log(`⚡️ Processing ${city.name_de} in ${city.country}`);
 
-
+    if (!city.name_de) {
+      console.error("❌ City name is null", city);
+      continue;
+    }
 
     // Upsert cities into the Supabase database
     const { error } = await supabase
       .from("cities")
       .upsert({
         slug: city.slug,
-        name: city.name,
+        name_de: city.name_de,
+        name_en: city.name_en,
         country: city.country,
         country_code: city.country_code,
         description_long: city.description_long || '',
