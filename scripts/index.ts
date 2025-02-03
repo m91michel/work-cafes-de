@@ -7,6 +7,7 @@ import { uploadNewCafes } from "./actions/upload-new-cafes";
 import { citiesCommands } from "./actions/upsert-cities";
 import { updateOpenHours } from "./actions/update-open-hours";
 import { googleMapsActions } from "./actions/google-maps";
+import { runMigrations } from "./actions/migrations";
 
 type CommandAction = () => Promise<void>;
 
@@ -34,6 +35,11 @@ const commands: Command[] = [
     action: updateOpenHours,
   },
   ...googleMapsActions,
+  {
+    name: "🪄 Run migrations",
+    key: "run-migrations",
+    action: runMigrations,
+  },
 ];
 
 async function main() {

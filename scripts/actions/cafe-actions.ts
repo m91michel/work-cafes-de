@@ -1,7 +1,7 @@
 import { Database } from '@/types_db';
 import { createClient } from '@supabase/supabase-js';
 import { input } from '@inquirer/prompts';
-import { updateCafeCount } from '@/libs/supabase/cities';
+import { updateCafeCount } from '../../libs/supabase/cities';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
