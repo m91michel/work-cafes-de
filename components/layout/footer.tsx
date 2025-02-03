@@ -27,7 +27,7 @@ const legalLinks = [
 export async function Footer() {
   const { t } = await initTranslations(["common"]);
   const cities = (await getCities({ limit: 20, offset: 0 })).map((city) => ({
-    name: city.name_de,
+    name: isGerman ? city.name_de : city.name_en,
     slug: city.slug,
   }));
 

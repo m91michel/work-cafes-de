@@ -1,3 +1,4 @@
+import { isGerman } from '@/libs/environment';
 import { City, TranslationProps } from '@/libs/types';
 import { MapPin } from 'lucide-react';
 
@@ -7,7 +8,10 @@ interface CityHeroProps extends TranslationProps {
 }
 
 export function CityHero({ city, cafeCount, t }: CityHeroProps) {
-  const cityName = city.name_de || city.slug || ''
+  const name = isGerman ? city.name_de : city.name_en;
+  const cityName = name || city.slug || '';
+  const description = isGerman ? city.description_long_de : city.description_long_en;
+  
   return (
     <div className="bg-card">
       <div className="max-w-7xl mx-auto px-4 py-12">
@@ -19,9 +23,9 @@ export function CityHero({ city, cafeCount, t }: CityHeroProps) {
         <h1 className="text-4xl font-bold mb-4">
           {t('hero.title', { count: cafeCount, name: cityName })}
         </h1>
-        {city.description_long_de && (
+        {description && (
           <p className="text-xl text-muted-foreground">
-            {city.description_long_de}
+            {description}
           </p>
         )}
       </div>
