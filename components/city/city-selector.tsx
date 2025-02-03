@@ -6,19 +6,12 @@ import { useRouter } from 'next/navigation';
 
 interface CitySelectorProps {
   cities: City[];
-  showAllButton?: boolean;
 }
 
-export function CitySelector({ cities, showAllButton = false }: CitySelectorProps) {
+export function CitySelector({ cities }: CitySelectorProps) {
   const router = useRouter();
   return (
     <div className="flex flex-wrap gap-3 justify-center">
-      {showAllButton && (
-        <Button>
-          Alle Städte
-        </Button>
-      )}
-      
       {cities.map((city) => (
         <Button
           key={city.slug}
@@ -27,7 +20,7 @@ export function CitySelector({ cities, showAllButton = false }: CitySelectorProp
             router.push(`/cities/${city.slug}`);
           }}
         >
-          {city.name} ({city.cafes_count || 0})
+          {city.name} {city.cafes_count && `(${city.cafes_count})`}
         </Button>
       ))}
     </div>

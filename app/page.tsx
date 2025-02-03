@@ -1,6 +1,6 @@
 import { CafeList } from "@/components/cafe-directory";
 import { CityList } from "@/components/city/city-list";
-import { CitySelector } from "@/components/ui/city-selector";
+import { CitySelector } from "@/components/city/city-selector";
 import { getSEOTags } from "@/libs/seo";
 import { getBestCafes, getCafesCount } from "@/libs/supabase/cafes";
 import { getCities } from "@/libs/supabase/cities";
@@ -62,6 +62,7 @@ async function HomeContent({ cafes, cities, cafesCount }: HomeContentProps) {
         title={t('cities.title')}
         showMoreButton={true}
         buttonText={t('cities.buttonText')}
+        t={t}
       />
   
       <FAQSection />

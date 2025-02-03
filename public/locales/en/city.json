@@ -1,6 +1,31 @@
 {
- "meta": {
-  "title": "Cafes in {{city}}",
-  "description": "Find the best cafes to work from in {{city}}"
- }
-} 
+  "index": {
+    "title": "Overview of all cities on Cafe zum Arbeiten",
+    "description": "Discover the best cities with cafes to work on our website."
+  },
+  "hero": {
+    "title": "Discover the {{count}} best cafes in {{name}}",
+    "cafe_count": "{{count}} cafes found",
+    "description": "Discover the best cafes to work in {{name}}, that are perfect for working or studying.",
+    "subtitle_one": "Discover {{count}} carefully selected Cafe in {{name}}.",
+    "subtitle_other": "Discover {{count}} carefully selected Cafes in {{name}}."
+  },
+  "more_cities": {
+    "title": "Find cafes in other cities",
+    "button_text": "Show all cities",
+    "suggest_title": "Your city is missing?",
+    "suggest_description": "Then suggest it to us, so we can prioritize it on our site.",
+    "suggest_button": "Suggest city"
+  },
+  "meta": {
+    "index": {
+      "title": "Overview of all cities on Cafe zum Arbeiten",
+      "description": "Discover the best cities with cafes to work on our website."
+    },
+    "show": {
+      "title": "The best cafes in {{name}}",
+      "your_city": "your city",
+      "description": "Discover the best cafes to work from in {{name}}, that are perfect for working or studying."
+    }
+  }
+}

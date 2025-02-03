@@ -20,17 +20,16 @@
       "excellent": "Ausgezeichnet",
       "good": "Gut",
       "fair": "Ausreichend",
+      "average": "Durchschnittlich",
       "poor": "Schlecht",
-      "unknown": "Unbekannt",
-      "average": "Durchschnittlich"
+      "unknown": "Unbekannt"
     },
     "seating_comfort": {
       "label": "Sitzkomfort",
+      "very-comfortable": "Sehr bequem",
       "comfortable": "Bequem",
-      "moderate": "Mittelmäßig",
       "slightly-uncomfortable": "Leicht unbequem",
       "uncomfortable": "Unbequem",
-      "very-comfortable": "Sehr bequem",
       "unknown": "Unbekannt"
     },
     "ambiance": {
@@ -40,11 +39,6 @@
       "noisy": "Laut",
       "unknown": "Unbekannt"
     }
-  },
-  "status": {
-    "open": "Geöffnet",
-    "closed": "Geschlossen",
-    "opening_soon": "Öffnet bald"
   },
   "more_cafes": {
     "title": "Weitere Cafés in {{city}}",
@@ -91,10 +85,6 @@
   },
   "meta": {
     "title": "Cafés zum Arbeiten",
-    "show": {
-      "title": "{{name}} in {{city}}",
-      "description": "Entdecken Sie die besten Cafés zum Arbeiten in {{city}}. Wir haben die Bewertungen geprüft und die besten Cafés für Sie ausgewählt."
-    },
     "slug": {
       "description": "{{name}} in {{city}} ist ein idealer Ort zum Arbeiten, Studieren oder sich auszutauschen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt."
     }

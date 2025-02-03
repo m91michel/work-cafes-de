@@ -1,6 +1,5 @@
 import { CafeList } from "@/components/cafe-directory";
-import { CityList } from "@/components/city/city-list";
-import { CitySelector } from "@/components/ui/city-selector";
+import { CitySelector } from "@/components/city/city-selector";
 import { getSEOTags } from "@/libs/seo";
 import { getCafes } from "@/libs/supabase/cafes";
 import { getCities } from "@/libs/supabase/cities";
@@ -34,7 +33,7 @@ export default async function CafeIndex() {
       </div>
       <CafeList
         cafes={cafes}
-        title="Alle Cafés zum Arbeiten auf unserer Website"
+        title={t('index.title')}
       />
 
       <FAQSection />

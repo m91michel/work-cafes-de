@@ -1,4 +1,9 @@
 {
+  "index": {
+    "title": "All cafes to work in on our website",
+    "description": "Here you can find a list of all cafes, that are available on our website. Help us to complete the list by adding new cafes.",
+    "all_cities_title": "A list of all cities on our website"
+  },
   "details": {
     "title": "About this Cafe",
     "address": "Address",
@@ -6,12 +11,15 @@
     "food": "Food & Drinks",
     "no_food_content": "We couldn't find any information about food for this cafe.",
     "hours": "Opening Hours",
+    "no_hours_content": "We couldn't find any information about opening hours for this cafe.",
     "links": "Links",
+    "no_links_content": "For this cafe, no links are available.",
     "amenities": "Amenities",
     "wifi_quality": {
       "label": "WiFi Quality",
-      "good": "Good",
       "excellent": "Excellent",
+      "good": "Good",
+      "fair": "Fair",
       "average": "Average",
       "poor": "Poor",
       "unknown": "Unknown"
@@ -31,6 +39,10 @@
       "noisy": "Noisy",
       "unknown": "Unknown"
     }
+  },
+  "more_cafes": {
+    "title": "More Cafés in {{city}}",
+    "all_cities": "All Cities"
   },
   "report": {
     "buttons": {
@@ -56,15 +68,6 @@
         "description": "Please try again."
       }
     }
-  },
-  "status": {
-    "open": "Open",
-    "closed": "Closed",
-    "opening_soon": "Opening Soon"
-  },
-  "more_cafes": {
-    "title": "More Cafés in {{city}}",
-    "all_cities": "All Cities"
   },
   "rating": {
     "title": "Rating",

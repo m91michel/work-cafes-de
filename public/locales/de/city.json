@@ -1,6 +1,31 @@
 {
- "meta": {
-  "title": "Cafés in {{city}}",
-  "description": "Finde die besten Cafés zum Arbeiten in {{city}}"
- }
-} 
+  "index": {
+    "title": "Übersicht zu allen Städten auf Cafe zum Arbeiten",
+    "description": "Entdecke die besten Städte mit Cafés zum Arbeiten auf unserer Website."
+  },
+  "hero": {
+    "title": "Die {{count}} besten Cafés in {{name}}",
+    "cafe_count": "{{count}} Cafés gefunden",
+    "subtitle_one": "Entdecke {{count}} sorgfältig ausgewähltes Cafe in {{name}}.",
+    "subtitle_other": "Entdecke {{count}} sorgfältig ausgewählte Cafes in {{name}}.",
+    "description": "Finde den passenden Ort um zu arbeiten, zu lesen oder mit deinen Kommilitonen zu lernen."
+  },
+  "more_cities": {
+    "title": "Finde Cafés in anderen Städten",
+    "button_text": "Alle Städte anzeigen",
+    "suggest_title": "Deine Stadt fehlt?",
+    "suggest_description": "Dann schlage sie uns vor, damit wir sie auf unserer Seite aufnehmen.",
+    "suggest_button": "Stadt vorschlagen"
+  },
+  "meta": {
+    "index": {
+      "title": "Übersicht zu allen Städten auf Cafe zum Arbeiten",
+      "description": "Entdecke die besten Städte mit Cafés zum Arbeiten auf unserer Website."
+    },
+    "show": {
+      "title": "Die besten Cafés in {{name}}",
+      "your_city": "deine Stadt",
+      "description": "Entdecken Sie die besten Cafés zum Arbeiten in {{name}}, die sich am besten fürs Arbeiten oder Studieren eignen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt."
+    }
+  }
+}

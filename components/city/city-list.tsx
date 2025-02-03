@@ -1,10 +1,10 @@
-import { City } from "@/libs/types";
+import { City, TranslationProps } from "@/libs/types";
 import { CityCard } from "./city-card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { PlusCircle } from "lucide-react";
 
-type Props = {
+interface Props extends TranslationProps {
   title?: string;
   cities: City[];
   suggestCityCard?: boolean;
@@ -20,6 +20,7 @@ export function CityList({
   showMoreButton = false,
   suggestCityCard = false,
   buttonText,
+  t,
 }: Props) {
   return (
     <section className="max-w-7xl mx-auto px-4 py-12">
@@ -32,10 +33,10 @@ export function CityList({
           <div className="bg-card rounded-lg p-6 border">
             <div className="flex items-center gap-3 mb-4">
               <PlusCircle className="h-6 w-6 text-primary" />
-              <h2 className="text-2xl font-semibold">Deine Stadt fehlt?</h2>
+              <h2 className="text-2xl font-semibold">{t('more_cities.suggest_title')}</h2>
             </div>
             <p className="text-muted-foreground mb-6">
-              Deine Stadt fehlt? Dann schlage sie uns vor, damit wir priorisiert Sie auf unserer Seite aufnehmen.
+              {t('more_cities.suggest_description')}
             </p>
             <Button asChild>
               <a
@@ -43,7 +44,7 @@ export function CityList({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Stadt vorschlagen
+                {t('more_cities.suggest_button')}
               </a>
             </Button>
           </div>
@@ -52,7 +53,7 @@ export function CityList({
       {showMoreButton && (
         <div className="flex justify-center mt-6">
           <Button variant="default" asChild>
-            <Link href="/cities">{buttonText || "Alle Städte anzeigen"}</Link>
+            <Link href="/cities">{buttonText || t('more_cities.button_text')}</Link>
           </Button>
         </div>
       )}

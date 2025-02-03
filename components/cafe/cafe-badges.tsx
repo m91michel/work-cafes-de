@@ -23,6 +23,10 @@ function getWifiQuality(value?: string | null) {
       return {
         variant: "destructive"
       };
+    case "Good":
+      return {
+        variant: "success"
+      };
     default:
       return {
         variant: "default"

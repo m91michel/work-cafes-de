@@ -6,6 +6,7 @@ import { getCafesByCity } from '@/libs/supabase/cafes';
 import { getCities, getCityBySlug } from '@/libs/supabase/cities';
 import { CafeList } from '@/components/cafe-directory';
 import { CityList } from '@/components/city/city-list';
+import initTranslations from '@/libs/i18n/config';
 
 type Params = Promise<{ city: string }>
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
@@ -16,13 +17,14 @@ type Props = {
 
 // generate metadata
 export async function generateMetadata({ params }: Props) {
+  const { t } = await initTranslations(['city']);
   const slug = (await params).city
   const city = await getCityBySlug(slug);
-  const name = city?.name || 'deiner Stadt';
+  const name = city?.name || t('meta.show.your_city');
 
   return getSEOTags({
-    title: `Die besten Cafés in ${name}`,
-    description: `Entdecke die besten Cafés in ${name}, die sich am besten fürs Arbeiten oder Studieren eignen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt.`,
+    title: t('meta.show.title', { name }),
+    description: t('meta.show.description', { name }),
     canonicalUrlRelative: `/cities/${slug}`,
   });
 }
@@ -35,6 +37,7 @@ export async function generateStaticParams() {
 }
 
 export default async function CityPage({ params }: Props) {
+  const { t } = await initTranslations(['city']);
   const citySlug = (await params).city
   const city = await getCityBySlug(citySlug);
   const cafes = await getCafesByCity(citySlug) || [];
@@ -47,17 +50,19 @@ export default async function CityPage({ params }: Props) {
 
   return (
     <main className="flex-1 bg-background">
-      <CityHero city={city} cafeCount={cafes.length} />
+      <CityHero city={city} cafeCount={cafes.length} t={t} />
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-2xl font-semibold">
-          Entdecke {cafes.length} sorgfältig {cafes.length === 1 ? 'ausgewähltes Cafe' : 'ausgewählte Cafes'} in {city.name}.
+          {t('hero.subtitle', { count: cafes.length, name: city.name })}
         </h2>
-        <p className="text-muted-foreground">Finde den passenden Ort um zu arbeiten, lesen oder mit deinen Kommilitonen zu lernen.</p>
+        <p className="text-muted-foreground">
+          {t('hero.description', { name: city.name })}
+        </p>
       </div>
 
       <CafeList cafes={cafes} />
 
-      <CityList title="Finde Cafes in anderen Städten" cities={cities} showMoreButton={true} />
+      <CityList title={t('more_cities.title')} cities={cities} showMoreButton={true} t={t} />
     </main>
   );
 }
