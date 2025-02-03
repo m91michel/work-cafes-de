@@ -45,7 +45,7 @@ export async function getCityBySlug(slug: string): Promise<City | null> {
 export async function getCitiesCount(): Promise<number | null> {
   const { error, count } = await supabase
     .from("cities")
-    .select("name, slug", { count: "exact" })
+    .select("name_de, slug", { count: "exact" })
     .gte("cafes_count", 1);
 
   if (error) {

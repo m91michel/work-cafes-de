@@ -110,8 +110,10 @@ export type Database = {
           country: string | null
           country_code: string | null
           created_at: string | null
-          description_long: string | null
-          description_short: string | null
+          description_long_de: string | null
+          description_long_en: string | null
+          description_short_de: string | null
+          description_short_en: string | null
           lat_long: string | null
           name_de: string | null
           name_en: string | null
@@ -128,8 +130,10 @@ export type Database = {
           country?: string | null
           country_code?: string | null
           created_at?: string | null
-          description_long?: string | null
-          description_short?: string | null
+          description_long_de?: string | null
+          description_long_en?: string | null
+          description_short_de?: string | null
+          description_short_en?: string | null
           lat_long?: string | null
           name_de?: string | null
           name_en?: string | null
@@ -146,8 +150,10 @@ export type Database = {
           country?: string | null
           country_code?: string | null
           created_at?: string | null
-          description_long?: string | null
-          description_short?: string | null
+          description_long_de?: string | null
+          description_long_en?: string | null
+          description_short_de?: string | null
+          description_short_en?: string | null
           lat_long?: string | null
           name_de?: string | null
           name_en?: string | null

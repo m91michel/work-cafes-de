@@ -35,8 +35,8 @@ export async function uploadNewCafes() {
 
             const { data: city } = await supabase
                 .from('cities')
-                .select('name, slug')
-                .eq('name', cafe.city)
+                .select('name_de, slug')
+                .eq('name_de', cafe.city)
                 .single();
 
             const citySlug = city?.slug;

@@ -9,7 +9,7 @@ const supabase = createClient<Database>(supabaseUrl, supabaseKey, { db: { schema
 export async function updateCountForCities() {
     const { data } = await supabase
         .from('cities')
-        .select('name, slug, status');
+        .select('name_de, slug, status');
 
     if (!data) {
         console.error('No cities found');

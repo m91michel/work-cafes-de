@@ -30,9 +30,9 @@ export function CityCard({ city }: Props) {
           <div className="flex-1">
             <h2 className="text-white text-4xl font-bold mb-2">{city.name_de}</h2>
             <p className="text-white/90 text-xl">{city.state}</p>
-            {city.description_short && (
+            {city.description_short_de && (
               <p className="text-white/90 mt-4 line-clamp-4 opacity-0 transition-opacity group-hover:opacity-100">
-                {city.description_short}
+                {city.description_short_de}
               </p>
             )}
           </div>

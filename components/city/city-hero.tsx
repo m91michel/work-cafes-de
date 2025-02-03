@@ -19,9 +19,9 @@ export function CityHero({ city, cafeCount, t }: CityHeroProps) {
         <h1 className="text-4xl font-bold mb-4">
           {t('hero.title', { count: cafeCount, name: cityName })}
         </h1>
-        {city.description_long && (
+        {city.description_long_de && (
           <p className="text-xl text-muted-foreground">
-            {city.description_long}
+            {city.description_long_de}
           </p>
         )}
       </div>

@@ -73,14 +73,16 @@ export async function upsertCitiesFromCsv() {
         name_en: city.name_en,
         country: city.country,
         country_code: city.country_code,
-        description_long: city.description_long || '',
-        description_short: city.description_short || '',
+        description_long_de: city.description_long_de || '',
+        description_long_en: city.description_long_en || '',
+        description_short_de: city.description_short_de || '',
+        description_short_en: city.description_short_en || '',
         state: city.state,
         state_code: city.state_code,
         population: city.population ? parseInt(city.population) : 0,
         cafes_count: 0,
       }, { onConflict: 'slug' })
-      .select("name");
+      .select("name_de");
 
     if (error) {
       console.error("❌ Error upserting city:", error);
