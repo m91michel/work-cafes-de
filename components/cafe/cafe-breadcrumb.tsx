@@ -1,6 +1,7 @@
 import React from "react";
 import { Cafe } from "@/libs/types";
 import MBreadcrumb from "../general/breadcrumb";
+import { isGerman } from "@/libs/environment";
 
 type Props = {
   cafe: Cafe;
@@ -8,9 +9,10 @@ type Props = {
 };
 
 function CafeBreadcrumb({ cafe, className }: Props) {
+  const cityName = isGerman ? cafe.cities?.name_de : cafe.cities?.name_en;
   const items = [
-    { label: "Startseite", href: "/cafes" },
-    { label: cafe.city || "", href: `/cities/${cafe.city_slug}` },
+    { label: isGerman ? "Startseite" : "Home", href: "/cafes" },
+    { label: cityName || cafe.city || "", href: `/cities/${cafe.city_slug}` },
     { label: cafe.name || "" },
   ];
 

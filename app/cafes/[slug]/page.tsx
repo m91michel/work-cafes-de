@@ -81,7 +81,7 @@ export default async function CafePage({ params }: Props) {
             <CafeDetails cafe={cafe} t={t} />
           </div>
           <div>
-            <CafeRatingCard rating={cafe.google_rating} />
+            <CafeRatingCard cafe={cafe} />
             <CafeAmenities cafe={cafe} />
             <CafeFurtherButtons cafe={cafe} />
             {isDev && <DebugInfo cafe={cafe} />}

@@ -1,8 +1,8 @@
 import { Cafe } from "@/libs/types";
 import { parseUrls } from "@/libs/utils";
 import { GlobeIcon } from "lucide-react";
-import Link from "next/link";
 import { SiFacebook, SiInstagram, SiTiktok, SiTripadvisor, SiYelp, SiYoutube } from "@icons-pack/react-simple-icons";
+import { MLink } from "../general/link";
 
 type Props = {
   cafe: Cafe;
@@ -21,20 +21,15 @@ export function CafeLinks({ cafe }: Props) {
 }
 
 export function CafeLink({ link }: { link: string }) {
-  const external = link.startsWith("http");
-  const externalProps = external
-    ? { target: "_blank", rel: "noopener noreferrer nofollow" }
-    : {};
-
   const type = getLinkType(link);
   const icon = getLinkIcon(type, "w-4 h-4");
 
   return (
     <li key={link}>
-      <Link href={link} {...externalProps} className="flex items-center gap-2">
+      <MLink href={link} className="flex items-center gap-2">
         {icon}
         {formatLinkName(link)}
-      </Link>
+      </MLink>
     </li>
   );
 }

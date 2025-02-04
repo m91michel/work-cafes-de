@@ -2,9 +2,9 @@ import { Card } from "@/components/ui/card";
 import { Clock, ExternalLink, LinkIcon, MapPin } from "lucide-react";
 import { Cafe } from "@/libs/types";
 import { CafeLinks } from "./links";
-import Link from "next/link";
 import { directionLink } from "@/libs/google-maps";
 import { TranslationProps } from "@/libs/types";
+import { MLink } from "../general/link";
 
 interface CafeDetailsProps extends TranslationProps {
   cafe: Cafe;
@@ -31,13 +31,12 @@ export function CafeDetails({ cafe, t }: CafeDetailsProps) {
             <h3 className="font-medium">{t("details.address")}</h3>
             <p className="text-muted-foreground">
               {cafe.address}{" "}
-              <Link
+              <MLink
                 href={googleMapsLink}
-                target="_blank"
                 className="text-primary hover:text-primary/80 transition-colors"
               >
                 {t("details.directions")} <ExternalLink className="w-4 h-4 inline" />
-              </Link>
+              </MLink>
             </p>
           </div>
         </div>
