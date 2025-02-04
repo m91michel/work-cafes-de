@@ -33,6 +33,7 @@ export async function getBestCafes(
     .eq('status', 'PUBLISHED')
     .range(offset, offset + limit - 1)
     .not('google_rating', 'is', null)
+    .not("food_content", "is", null)
     .gte("review_count", 3)
     .order("google_rating", { ascending: false });
 

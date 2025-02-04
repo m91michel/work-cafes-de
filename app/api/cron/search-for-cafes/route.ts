@@ -89,13 +89,13 @@ export async function GET(request: NextRequest) {
         continue;
       }
 
-      await supabase
+      console.log(`🎉 added ${place.name} (${data?.id})`);
+    }
+
+    await supabase
         .from("cities")
         .update({ status: "PROCESSING" })
         .eq("slug", city.slug);
-
-      console.log(`🎉 processed ${place.name} (${data?.id})`);
-    }
   }
 
   console.log(`✅ finished search for new cafes in ${cities.length} cities`);

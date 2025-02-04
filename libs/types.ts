@@ -5,7 +5,8 @@ export type CafeStatus = 'NEW' | 'PUBLISHED' | 'PROCESSED' | 'CLOSED';
 export type Cafe = Database['cafeforwork']['Tables']['cafes']['Row'] & {
   status?: CafeStatus | string | null;
   cities?: {
-    name?: string | null;
+    name_de?: string | null;
+    name_en?: string | null;
     slug?: string | null;
   } | null
 }

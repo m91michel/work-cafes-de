@@ -4,13 +4,14 @@ import { Card } from "@/components/ui/card";
 import { Wifi, Volume2, Armchair, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Cafe } from "@/libs/types";
+import { Cafe, City } from "@/libs/types";
 import { DefaultCafeImage } from "./Image";
 import {
   AmbianceBadge,
   SeatingComfortBadge,
   WifiQualityBadge,
 } from "./cafe-badges";
+import { isGerman } from "@/libs/environment";
 
 interface CafeCardProps {
   cafe: Cafe;
@@ -33,14 +34,7 @@ export function CafeCard({ cafe }: CafeCardProps) {
           {!cafe.preview_image && <DefaultCafeImage />}
         </Link>
 
-        {cafe.cities && (
-          <Link
-            href={`/cities/${cafe.cities?.slug}`}
-            className="absolute top-4 left-4 z-10 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-black/60 transition-colors"
-          >
-            {cafe.cities?.name}
-          </Link>
-        )}
+        <CityBadge city={cafe.cities} />
 
         <div className="absolute top-4 right-4 z-10 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1">
           <Star className="h-4 w-4 fill-current" />
@@ -78,4 +72,22 @@ export function CafeCard({ cafe }: CafeCardProps) {
       </div>
     </Card>
   );
+}
+
+type CityBadgeProps = {
+  city?: Cafe['cities']
+}
+function CityBadge({ city }: CityBadgeProps) {
+  if (city) {
+    const name = isGerman ? city.name_de : city.name_en;
+    return (
+      <Link
+        href={`/cities/${city.slug}`}
+        className="absolute top-4 left-4 z-10 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-black/60 transition-colors"
+      >
+        {name}
+      </Link>
+    );
+  }
+  return null;
 }
