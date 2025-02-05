@@ -70,8 +70,8 @@ export function CafeDetails({ cafe, t }: CafeDetailsProps) {
 
           <div className="w-full">
             <h3 className="font-medium">{t("details.links")}</h3>
-            {cafe.links && <CafeLinks cafe={cafe} />}
-            {!cafe.links && (
+            {cafe.links_text && <CafeLinks cafe={cafe} />}
+            {!cafe.links_text && (
               <p className="text-muted-foreground">{t("details.no_links_content")}</p>
             )}
           </div>

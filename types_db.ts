@@ -11,10 +11,12 @@ export type Database = {
     Tables: {
       cafes: {
         Row: {
+          about_content: string | null
           address: string | null
           ambiance: string | null
           city: string | null
           city_slug: string | null
+          coffee_content: string | null
           created_at: string | null
           filtered_reviews: Json | null
           food_content: string | null
@@ -23,7 +25,8 @@ export type Database = {
           google_reviews: Json | null
           id: string
           lat_long: string | null
-          links: string | null
+          links: Json | null
+          links_text: string | null
           maps_data: Json | null
           name: string | null
           open_hours: string | null
@@ -36,13 +39,17 @@ export type Database = {
           status: string
           tripadvisor_id: string | null
           updated_at: string | null
+          website_content: string | null
+          website_url: string | null
           wifi_qualitity: string | null
         }
         Insert: {
+          about_content?: string | null
           address?: string | null
           ambiance?: string | null
           city?: string | null
           city_slug?: string | null
+          coffee_content?: string | null
           created_at?: string | null
           filtered_reviews?: Json | null
           food_content?: string | null
@@ -51,7 +58,8 @@ export type Database = {
           google_reviews?: Json | null
           id?: string
           lat_long?: string | null
-          links?: string | null
+          links?: Json | null
+          links_text?: string | null
           maps_data?: Json | null
           name?: string | null
           open_hours?: string | null
@@ -64,13 +72,17 @@ export type Database = {
           status?: string
           tripadvisor_id?: string | null
           updated_at?: string | null
+          website_content?: string | null
+          website_url?: string | null
           wifi_qualitity?: string | null
         }
         Update: {
+          about_content?: string | null
           address?: string | null
           ambiance?: string | null
           city?: string | null
           city_slug?: string | null
+          coffee_content?: string | null
           created_at?: string | null
           filtered_reviews?: Json | null
           food_content?: string | null
@@ -79,7 +91,8 @@ export type Database = {
           google_reviews?: Json | null
           id?: string
           lat_long?: string | null
-          links?: string | null
+          links?: Json | null
+          links_text?: string | null
           maps_data?: Json | null
           name?: string | null
           open_hours?: string | null
@@ -92,6 +105,8 @@ export type Database = {
           status?: string
           tripadvisor_id?: string | null
           updated_at?: string | null
+          website_content?: string | null
+          website_url?: string | null
           wifi_qualitity?: string | null
         }
         Relationships: [

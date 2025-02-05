@@ -9,7 +9,7 @@ type Props = {
 };
 
 export function CafeLinks({ cafe }: Props) {
-  const links = parseUrls(cafe.links || "");
+  const links = parseUrls(cafe.links_text || "");
 
   return (
     <ul>

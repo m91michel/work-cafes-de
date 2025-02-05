@@ -88,7 +88,7 @@ export async function GET(request: NextRequest) {
         address: formattedAddress,
         lat_long: lat_long,
         google_rating: rating,
-        links: website,
+        website_url: website,
       })
       .eq("id", cafe.id);
 
