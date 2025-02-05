@@ -1,4 +1,4 @@
-import { getPlaceDetails, searchInGoogleMaps, searchPlaces } from "../../libs/google-maps";
+import { getGoogleMapsId, getPlaceDetails, searchPlaces } from "../../libs/google-maps";
 import { input } from "@inquirer/prompts";
 import { Command } from "..";
 import { outscraperReviewsTask } from "../../libs/apis/outscraper";
@@ -12,11 +12,11 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseKey, {
   db: { schema: "cafeforwork" },
 });
 
-const searchForPlace = async () => {
+const retrieveGoogleMapsId = async () => {
   const query = await input({
     message: "Enter the search query",
   });
-  const placeDetails = await searchInGoogleMaps(query);
+  const placeDetails = await getGoogleMapsId(query);
   console.log(placeDetails);
 };
 
@@ -30,9 +30,9 @@ const getDetails = async () => {
 
 export const googleMapsActions: Command[] = [
   {
-    name: "🔍 Google Maps: Search for Place",
-    key: "google-maps-search",
-    action: searchForPlace,
+    name: "🔍 Google Maps: Get Google Maps ID",
+    key: "google-maps-get-id",
+    action: retrieveGoogleMapsId,
   },
   {
     name: "🔍 Google Maps: Search for Places",

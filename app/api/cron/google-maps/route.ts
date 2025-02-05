@@ -71,6 +71,7 @@ export async function GET(request: NextRequest) {
     const lat_long = `${placeDetails.geometry.location.lat},${placeDetails.geometry.location.lng}`;
     const rating = placeDetails.rating;
     const weekdayText = placeDetails.opening_hours?.weekday_text;
+    const website = placeDetails.website && `Website: ${placeDetails.website}`;
     let openHours = weekdayText?.join("\n");
 
     if (openHours) {
@@ -95,6 +96,7 @@ export async function GET(request: NextRequest) {
         preview_image: bunnyUrl,
         google_rating: rating,
         open_hours: openHours,
+        links: website,
         maps_data: {
           ...placeDetails,
           photos: photoUrls

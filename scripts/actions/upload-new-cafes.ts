@@ -5,8 +5,7 @@ import { Database } from '@/types_db';
 import { createClient } from '@supabase/supabase-js';
 import { Cafe } from '../../libs/types';
 import { generateSlug } from '../../libs/utils';
-import { searchInGoogleMaps } from '../../libs/google-maps';
-import { processOpenHours } from '../../libs/openai/process-open-hours';
+import { getGoogleMapsId } from '../../libs/google-maps';
 import { readCsv } from '../utils/csv';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
@@ -46,7 +45,7 @@ export async function uploadNewCafes() {
             }
 
             const slug = generateSlug(`${citySlug}-${cafe.name}`);
-            const mapsCandidates = await searchInGoogleMaps(`${cafe.name} ${cafe.address}`);
+            const mapsCandidates = await getGoogleMapsId(`${cafe.name} ${cafe.address}`);
 
             const placeId = mapsCandidates?.[0]?.place_id;
 
