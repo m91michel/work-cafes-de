@@ -37,3 +37,20 @@ export function getFullUrl(config: any): string {
   url.search = params.toString();
   return url.toString();
 }
+
+// Format links to remove "Website: " prefix and removes any query params
+export function formatLinks(links?: string | null) {
+  if (!links) {
+    return null;
+  }
+
+  try {
+    // Remove "Website: " prefix if present
+    const cleanedLink = links.replace(/^Website:\s*/, '');
+    const url = new URL(cleanedLink);
+    return url.origin + url.pathname;
+  } catch (error) {
+    console.error('Invalid URL:', links);
+    return null;
+  }
+}
