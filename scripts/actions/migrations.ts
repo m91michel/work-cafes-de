@@ -2,6 +2,7 @@ import { select } from "@inquirer/prompts";
 import { Command } from "..";
 import { translateCity } from "../../libs/openai/translate-city";
 import { supabase } from "./google-maps";
+import { processLinks } from "../../libs/openai/process-links";
 
 const migrationsActions: Command[] = [
   {
@@ -39,6 +40,52 @@ const migrationsActions: Command[] = [
         }
         console.log(`✅ City ${city.name_de} translated to ${result.name_en}`);
       }
+    },
+  },
+  {
+    name: "🔗 Cafes: Migrate Links",
+    key: "migrate-links",
+    action: async () => {
+      const { data: cafes, error } = await supabase
+        .from("cafes")
+        .select("*")
+        .not("links_text", "is", null)
+        .is("website_url", null)
+        .eq("status", "PUBLISHED")
+        .order("created_at", { ascending: false })
+        .limit(100);
+        
+      if (error) {
+        console.error("Error fetching cafes:", error);
+        return;
+      }
+
+      for (const cafe of cafes) {
+        console.log(`Processing cafe ${cafe.name}`);
+        const result = await processLinks(cafe);
+        console.log(result);
+        if (!result) {
+          console.error("Error processing links:", cafe.name);
+          continue;
+        }
+        const { website, ...otherLinks } = result;
+        
+        const { error: updateError } = await supabase
+          .from("cafes")
+          .update({
+            links: otherLinks,
+            website_url: website,
+          })
+          .eq("id", cafe.id);
+        
+        if (updateError) {
+          console.error("Error updating cafe:", updateError);
+          continue;
+        }
+        console.log(`✅ Cafe ${cafe.name} links migrated`);
+      }
+
+      console.log(`✅ ${cafes.length} cafes migrated`);
     },
   },
 ];

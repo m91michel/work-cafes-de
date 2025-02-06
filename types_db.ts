@@ -11,15 +11,16 @@ export type Database = {
     Tables: {
       cafes: {
         Row: {
-          about_content: string | null
+          about_content: Json | null
           address: string | null
           ambiance: string | null
           city: string | null
           city_slug: string | null
-          coffee_content: string | null
+          coffee_content: Json | null
           created_at: string | null
           filtered_reviews: Json | null
           food_content: string | null
+          food_contents: Json | null
           google_place_id: string | null
           google_rating: number | null
           google_reviews: Json | null
@@ -44,15 +45,16 @@ export type Database = {
           wifi_qualitity: string | null
         }
         Insert: {
-          about_content?: string | null
+          about_content?: Json | null
           address?: string | null
           ambiance?: string | null
           city?: string | null
           city_slug?: string | null
-          coffee_content?: string | null
+          coffee_content?: Json | null
           created_at?: string | null
           filtered_reviews?: Json | null
           food_content?: string | null
+          food_contents?: Json | null
           google_place_id?: string | null
           google_rating?: number | null
           google_reviews?: Json | null
@@ -77,15 +79,16 @@ export type Database = {
           wifi_qualitity?: string | null
         }
         Update: {
-          about_content?: string | null
+          about_content?: Json | null
           address?: string | null
           ambiance?: string | null
           city?: string | null
           city_slug?: string | null
-          coffee_content?: string | null
+          coffee_content?: Json | null
           created_at?: string | null
           filtered_reviews?: Json | null
           food_content?: string | null
+          food_contents?: Json | null
           google_place_id?: string | null
           google_rating?: number | null
           google_reviews?: Json | null
