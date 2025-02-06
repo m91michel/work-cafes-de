@@ -47,7 +47,7 @@
     "@supabase/supabase-js": "^2.47.3",
     "@tanstack/react-table": "^8.20.6",
     "@types/lodash": "^4.17.13",
-    "@types/node": "22.10.9",
+    "@types/node": "22.10.10",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
     "autoprefixer": "10.4.20",
