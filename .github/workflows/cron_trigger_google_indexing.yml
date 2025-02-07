@@ -8,14 +8,22 @@ on:
   workflow_dispatch:
 
 env:
-  SITE_URL: 'cafezumarbeiten.de'
+  SITE_URL_DE: 'cafezumarbeiten.de'
+  SITE_URL_EN: 'awifi.place'
   GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
 
 jobs:
   google-indexing:
     runs-on: ubuntu-latest
     steps:
-      - uses: robingenz/action-google-indexing@v1.0.2
+      - name: Indexing ${{ env.SITE_URL_DE }}
+        uses: robingenz/action-google-indexing@v1.0.2
         with:
-          siteUrl: ${{ env.SITE_URL }}
+          siteUrl: ${{ env.SITE_URL_DE }}
+          gcpServiceAccountKey: ${{ env.GCP_SA_KEY }}
+
+      - name: Indexing ${{ env.SITE_URL_EN }}
+        uses: robingenz/action-google-indexing@v1.0.2
+        with:
+          siteUrl: ${{ env.SITE_URL_EN }}
           gcpServiceAccountKey: ${{ env.GCP_SA_KEY }}
