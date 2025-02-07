@@ -76,18 +76,24 @@ export default async function CafePage({ params }: Props) {
       <CafeBreadcrumb cafe={cafe} className="py-6" />
 
       <div className="max-w-7xl mx-auto px-4 pb-12">
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="md:col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Details - Box 1 */}
+          <div className="order-1 lg:order-1 lg:col-span-2 lg:row-span-2">
             <CafeDetails cafe={cafe} t={t} />
           </div>
-          <div>
-            <CafeRatingCard cafe={cafe} />
-            <CafeAmenities cafe={cafe} />
-            <CafeFurtherButtons cafe={cafe} />
-            {isDev && <DebugInfo cafe={cafe} />}
+
+          {/* Sidebar - Box 2 */}
+          <div className="order-2 lg:order-3 lg:col-span-1 lg:row-span-4">
+            <div className="sticky top-6">
+              <CafeRatingCard cafe={cafe} />
+              <CafeAmenities cafe={cafe} />
+              <CafeFurtherButtons cafe={cafe} />
+              {isDev && <DebugInfo cafe={cafe} />}
+            </div>
           </div>
 
-          <div className="md:col-span-2">
+          {/* Reviews - Box 3 */}
+          <div className="order-3 lg:order-3 lg:col-span-2 lg:row-span-2">
             <CafeReviews cafe={cafe} />
           </div>
         </div>
