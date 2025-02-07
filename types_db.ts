@@ -14,10 +14,11 @@ export type Database = {
           about_content: Json | null
           address: string | null
           ambiance: string | null
+          checked: string | null
           city: string | null
           city_slug: string | null
-          coffee_content: Json | null
           created_at: string | null
+          drinks_content: Json | null
           filtered_reviews: Json | null
           food_content: string | null
           food_contents: Json | null
@@ -43,15 +44,17 @@ export type Database = {
           website_content: string | null
           website_url: string | null
           wifi_qualitity: string | null
+          work_friendly_content: Json | null
         }
         Insert: {
           about_content?: Json | null
           address?: string | null
           ambiance?: string | null
+          checked?: string | null
           city?: string | null
           city_slug?: string | null
-          coffee_content?: Json | null
           created_at?: string | null
+          drinks_content?: Json | null
           filtered_reviews?: Json | null
           food_content?: string | null
           food_contents?: Json | null
@@ -77,15 +80,17 @@ export type Database = {
           website_content?: string | null
           website_url?: string | null
           wifi_qualitity?: string | null
+          work_friendly_content?: Json | null
         }
         Update: {
           about_content?: Json | null
           address?: string | null
           ambiance?: string | null
+          checked?: string | null
           city?: string | null
           city_slug?: string | null
-          coffee_content?: Json | null
           created_at?: string | null
+          drinks_content?: Json | null
           filtered_reviews?: Json | null
           food_content?: string | null
           food_contents?: Json | null
@@ -111,6 +116,7 @@ export type Database = {
           website_content?: string | null
           website_url?: string | null
           wifi_qualitity?: string | null
+          work_friendly_content?: Json | null
         }
         Relationships: [
           {
