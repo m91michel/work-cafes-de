@@ -7,6 +7,7 @@ import { getCities, getCityBySlug } from '@/libs/supabase/cities';
 import { CafeList } from '@/components/cafe-directory';
 import { CityList } from '@/components/city/city-list';
 import initTranslations from '@/libs/i18n/config';
+import { isGerman } from '@/libs/environment';
 
 type Params = Promise<{ city: string }>
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
@@ -20,7 +21,8 @@ export async function generateMetadata({ params }: Props) {
   const { t } = await initTranslations(['city']);
   const slug = (await params).city
   const city = await getCityBySlug(slug);
-  const name = city?.name_de || t('meta.show.your_city');
+  const dbName = isGerman ? city?.name_de : city?.name_en
+  const name = dbName || t('meta.show.your_city')
 
   return getSEOTags({
     title: t('meta.show.title', { name }),

@@ -3,7 +3,7 @@ import { CityList } from "@/components/city/city-list";
 import { CitySelector } from "@/components/city/city-selector";
 import { getSEOTags } from "@/libs/seo";
 import { getBestCafes, getCafesCount } from "@/libs/supabase/cafes";
-import { getCities } from "@/libs/supabase/cities";
+import { getCities, getCitiesCount } from "@/libs/supabase/cities";
 import { FAQSection } from "@/components/faq";
 import { About } from "@/components/sections/About";
 import initTranslations from "@/libs/i18n/config";
@@ -25,11 +25,12 @@ export async function generateMetadata() {
 interface HomeContentProps {
   cafes: Cafe[];
   cities: City[];
-  cafesCount: number | null;
 }
 
-async function HomeContent({ cafes, cities, cafesCount }: HomeContentProps) {
+async function HomeContent({ cafes, cities }: HomeContentProps) {
   const { t } = await initTranslations(['home']);
+  const cafesCount = await getCafesCount();
+  const citiesCount = await getCitiesCount();
   
   const cafesButtonText = cafesCount != null
     ? t('cafes.buttonText_count', { count: cafesCount })
@@ -67,7 +68,7 @@ async function HomeContent({ cafes, cities, cafesCount }: HomeContentProps) {
   
       <FAQSection />
 
-      <About />
+      <About cafeCount={cafesCount ?? 0} cityCount={citiesCount ?? 0} />
     </main>
   );
 }
@@ -76,14 +77,12 @@ export default async function Home() {
   // const { resources } = await initTranslations(['home', 'common']);
   const cafes = await getBestCafes({ limit: 6, offset: 0 });
   const cities = await getCities({ limit: 6, offset: 0 });
-  const cafesCount = await getCafesCount();
 
   return (
 
       <HomeContent 
         cafes={cafes}
         cities={cities}
-        cafesCount={cafesCount}
       />
     
   );

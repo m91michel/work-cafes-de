@@ -1,7 +1,7 @@
 import { cn } from "@/libs/utils";
 
 type Stats = {
-  quantity: string;
+  quantity: string | number;
   description: string;
 };
 

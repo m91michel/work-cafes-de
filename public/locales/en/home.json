@@ -14,7 +14,9 @@
   },
   "about": {
     "title": "<highlight>About</highlight> this website",
-    "description": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help."
+    "description": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help.",
+    "cafe_count": "Cafés",
+    "city_count": "Cities"
   },
   "faq": {
     "title": "Frequently Asked <highlight>Questions</highlight>",
