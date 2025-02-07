@@ -6,16 +6,34 @@
   },
   "details": {
     "title": "Über dieses Café",
+    "about": {
+      "title": "Über",
+      "no_content": "Wir konnten leider keine Informationen über dieses Cafe finden."
+    },
+    "food": {
+      "title": "Essen",
+      "no_content": "Wir konnten leider keine Informationen zu Essen für dieses Cafe finden."
+    },
+    "drinks": {
+      "title": "Getränke",
+      "no_content": "Wir konnten leider keine Informationen zu Getränken für dieses Cafe finden."
+    },
+    "work_friendly": {
+      "title": "Arbeits- und Laptop-freundlich",
+      "no_content": "Wir konnten leider keine Informationen zu Arbeits- und Laptop-freundlichkeit für dieses Cafe finden."
+    },
+    "hours": {
+      "title": "Öffnungszeiten",
+      "no_content": "Wir konnten leider keine Informationen zu Öffnungszeiten für dieses Cafe finden."
+    },
     "address": "Adresse",
     "directions": "Wegbeschreibung",
-    "food": "Essen",
-    "no_food_content": "Wir konnten leider keine Informationen zu Essen für dieses Cafe finden.",
-    "hours": "Öffnungszeiten",
-    "no_hours_content": "Wir konnten leider keine Informationen zu Öffnungszeiten für dieses Cafe finden.",
     "links": "Links",
     "no_links_content": "Für dieses Cafe sind keine Links verfügbar.",
     "amenities": "Ausstattung",
     "wifi_quality": {
+      "available": "Verfügbar",
+      "unavailable": "Nicht verfügbar",
       "label": "WLAN-Qualität",
       "excellent": "Ausgezeichnet",
       "good": "Gut",

@@ -6,17 +6,35 @@
   },
   "details": {
     "title": "About this Cafe",
+    "about": {
+      "title": "About",
+      "no_content": "We couldn't find any information about this cafe."
+    },
+    "food": {
+      "title": "Food",
+      "no_content": "We couldn't find any information about food for this cafe."
+    },
+    "drinks": {
+      "title": "Coffee & Drinks",
+      "no_content": "We couldn't find any information about coffee & drinks for this cafe."
+    },
+    "work_friendly": {
+      "title": "Work and Laptop Friendly",
+      "no_content": "We couldn't find any information about work-friendly features for this cafe."
+    },
+    "hours": {
+      "title": "Opening Hours",
+      "no_content": "We couldn't find any information about opening hours for this cafe."
+    },
     "address": "Address",
     "directions": "Directions",
-    "food": "Food & Drinks",
-    "no_food_content": "We couldn't find any information about food for this cafe.",
-    "hours": "Opening Hours",
-    "no_hours_content": "We couldn't find any information about opening hours for this cafe.",
     "links": "Links",
     "no_links_content": "For this cafe, no links are available.",
     "amenities": "Amenities",
     "wifi_quality": {
       "label": "WiFi Quality",
+      "available": "Available",
+      "unavailable": "Unavailable",
       "excellent": "Excellent",
       "good": "Good",
       "fair": "Fair",

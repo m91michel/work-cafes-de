@@ -8,7 +8,9 @@ import { Cafe } from '@/libs/types';
 import { AmbianceBadge, SeatingComfortBadge, WifiQualityBadge } from './cafe-badges';
 import { ReportButton } from './ReportButton';
 import { useCTranslation } from '@/hooks/use-translations';
-
+import { CheckCafeButton } from '@/components/dashboard/cafes/buttons/CheckCafeButton';
+import { Badge } from '../ui/badge';
+import { StatusDropdown } from '../dashboard/cafes/buttons/StatusDropdown';
 interface Props {
   cafe: Cafe;
 }
@@ -74,9 +76,18 @@ export function CafeFurtherButtons({ cafe }: Props) {
 
 export function DebugInfo({ cafe }: Props) {
   return (
-    <div>
-      <p>{cafe.id}</p>
-      <p>{cafe.google_place_id}</p>
-    </div>
+    <Card className="p-6 mt-6 space-y-6">
+      <h2 className="text-2xl font-semibold">Debug Info</h2>
+      <div>
+        <div>Status: <Badge variant={cafe.status === 'PUBLISHED' ? 'default' : 'secondary'}>{cafe.status || 'No status'}</Badge></div>
+        <div>Checked: <Badge variant={cafe.checked === 'CHECKED' ? 'default' : 'secondary'}>{cafe.checked || 'Not checked'}</Badge></div>
+        <CheckCafeButton cafe={cafe} title="Cafe checked" />
+        <StatusDropdown cafe={cafe} title="Update status" />
+      </div>
+      <div>
+        <p>ID: {cafe.id}</p>
+        <p>Google Place ID: {cafe.google_place_id}</p>
+      </div>
+    </Card>
   );
 }

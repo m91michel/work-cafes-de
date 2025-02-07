@@ -27,9 +27,17 @@ function getWifiQuality(value?: string | null) {
       return {
         variant: "success"
       };
+    case "Available":
+      return {
+        variant: "success"
+      };
+    case "Unavailable":
+      return {
+        variant: "destructive"
+      };
     default:
       return {
-        variant: "default"
+        variant: "warning"
       };
   }
 }
