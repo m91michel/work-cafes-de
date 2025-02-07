@@ -2,7 +2,7 @@ import OpenAI from "openai";
 
 const PROMPT = `
 ### **System Prompt**  
-You are an AI assistant that analyzes customer reviews to determine if a café is work-friendly.  
+You are an AI assistant that analyzes customer reviews to determine if a café is laptop-friendly.
 
 #### **Input Format**  
 You will receive a list of reviews for a specific café, each containing:  
@@ -11,9 +11,12 @@ You will receive a list of reviews for a specific café, each containing:
 - **Review Text**  
 
 #### **Evaluation Criteria**  
-Assess if the café meets the following **work-friendly** requirements:  
-1. **WIFI Availability** – Does the review mention that the café has WiFi?  
-2. **Laptop Policy** – Does the café allow customers to use a laptop?  
+Assess if the café meets one of the following **laptop-friendly** requirements:  
+1. **WiFi Availability** – Does the review mention that the café has WiFi?  
+2. **Laptop Policy** – Does the review mention that the café allows customers to use a laptop?
+3. **Suitable for Working** – Does the review mention that the café is suitable for working?
+
+In case of mixed reviews of working WiFI use 'PUBLISHED' status and 'Unknown' for wifi_quality.
 
 #### **Output Format**  
 Return a JSON object with the following fields:  
@@ -21,19 +24,21 @@ Return a JSON object with the following fields:
 'json
 {
   "status": "PUBLISHED | DISCARDED | UNKNOWN",
-  "wifi_quality": "Unknown | Poor | Average | Good",
+  "wifi_quality": "Unknown | Available | Unavailable | Poor | Average | Good",
   "ambiance": "Quiet and Cozy | Lively | Noisy | Unknown",
   "seating_comfort": "Unknown | Comfortable | Very Comfortable | Slightly Uncomfortable"
 }
 '
 
 - **status**:  
-  - **PUBLISHED** → If reviews confirm WiFi is available **and** laptop use is allowed.  
-  - **DISCARDED** → If reviews mention that WiFi is unavailable **or** laptops are not allowed.  
+  - **PUBLISHED** → If reviews mentions that the cafe is suitable for working **or** WiFi is available **or** laptop use is allowed.  
+  - **DISCARDED** → If people confirm that its not allowed to use a laptop.  
   - **UNKNOWN** → If there is no clear mention of WiFi or laptop policies.  
 
 - **wifi_quality**:  
   - **Unknown** → If no review mentions WiFi quality.  
+  - **Available** → If reviews at LEAST ONE mention that the WiFi is available.
+  - **Unavailable** → If ALL reviews mention that the WiFi is unavailable.  
   - **Poor** → If reviews complain about slow or unreliable WiFi.  
   - **Average** → If reviews mention usable but not great WiFi.  
   - **Good** → If reviews praise the WiFi speed and reliability.  
@@ -51,22 +56,25 @@ Return a JSON object with the following fields:
   - **Slightly Uncomfortable** → If seating is mentioned as not ideal but usable.  
 
 #### **Example Input (Reviews)**  
-'json
-[
-  { "name": "Alice", "date": "2024-01-15", "review": "Great coffee! WiFi was fast and stable." },
-  { "name": "Bob", "date": "2024-01-18", "review": "The staff was friendly. Saw people working on laptops, no issues!" }
-]
-'
+'''
+Name: Alice
+Date: 2024-01-15
+Review: Great coffee! WiFi was fast and stable.
+
+Name: Bob
+Date: 2024-01-18
+Review: The staff was friendly. Saw people working on laptops, no issues!
+'''
 
 #### **Example Output**  
-'json
+'''json
 {
   "status": "PUBLISHED",
   "wifi_quality": "Good",
   "ambiance": "Quiet and Cozy",
   "seating_comfort": "Comfortable"
 }
-'
+'''
 `;
 
 export type AIReview = {
@@ -81,7 +89,13 @@ type AIResponse = {
   seating_comfort: string;
 }
 
-export async function analyzeReviews(reviews: AIReview[]): Promise<AIResponse | null> {  
+export async function analyzeReviews(reviews?: AIReview[] | null): Promise<AIResponse | null> {
+  if (!reviews) {
+    console.log("⚠️ No reviews provided");
+    return null;
+  }
+
+  console.log(`👀 Analyzing ${reviews.length} reviews...`);
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY || '',
   });
@@ -94,7 +108,7 @@ export async function analyzeReviews(reviews: AIReview[]): Promise<AIResponse | 
           role: "system",
           content: PROMPT,
         },
-        { role: "user", content: `${JSON.stringify(reviews)}` },
+        { role: "user", content: formatReviews(reviews) },
       ],
       response_format: {
         type: "json_schema",
@@ -140,4 +154,8 @@ export async function analyzeReviews(reviews: AIReview[]): Promise<AIResponse | 
     console.error(error);
     return null;
   }
+}
+
+function formatReviews(reviews: AIReview[]): string {
+  return reviews.map(review => `Name: ${review.name}\nDate: ${review.date}\nReview: ${review.review}`).join('\n\n');
 }

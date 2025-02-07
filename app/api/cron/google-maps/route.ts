@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
-import { extractToken } from "@/libs/utils";
+import { extractToken, mergeObjects } from "@/libs/utils";
 import { getPlaceDetails } from "@/libs/google-maps";
 import { uploadImageToBunny } from "@/libs/bunny";
 import { processOpenHours } from "@/libs/openai/process-open-hours";
@@ -78,19 +78,14 @@ export async function GET(request: NextRequest) {
       openHours = await processOpenHours(openHours);
       console.log(`📅 processed open hours for ${cafe.name}`);
     }
-
-    const processed = {
-      ...(typeof cafe?.processed === "object" && cafe?.processed !== null
-        ? cafe?.processed
-        : {}),
-      google_details_at: dayjs().toISOString(),
-    };
     
     const { error } = await supabase
       .from("cafes")
       .update({
-        processed,
-        processed_at: new Date().toISOString(),
+        processed: mergeObjects(cafe?.processed, {
+          google_details_at: dayjs().toISOString(),
+        }),
+        processed_at: dayjs().toISOString(),
         address: formattedAddress,
         lat_long: lat_long,
         preview_image: bunnyUrl,

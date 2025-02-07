@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
-import { extractToken } from "@/libs/utils";
+import { extractToken, mergeObjects } from "@/libs/utils";
 import { outscraperReviewsTask } from "@/libs/apis/outscraper";
 import dayjs from "dayjs";
 import { Cafe } from "@/libs/types";
@@ -75,17 +75,12 @@ export async function GET(request: NextRequest) {
 async function setProcessed(cafe?: Pick<Cafe, "id" | "processed">) {
   if (!cafe) return;
 
-  const processed = {
-    ...(typeof cafe?.processed === "object" && cafe?.processed !== null
-      ? cafe?.processed
-      : {}),
-    google_reviews_at: dayjs().toISOString(),
-  };
-
   return await supabase
     .from("cafes")
     .update({
-      processed,
+      processed: mergeObjects(cafe?.processed, {
+        google_reviews_at: dayjs().toISOString(),
+      }),
       processed_at: dayjs().toISOString(),
     })
     .eq("id", cafe.id);

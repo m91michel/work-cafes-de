@@ -54,3 +54,16 @@ export function formatLinks(links?: string | null) {
     return null;
   }
 }
+
+export function mergeObjects(initialObject?: any | null, newObject?: Record<string, any> | null) {
+  if (!initialObject) {
+    return null;
+  }
+
+  return {
+    ...(typeof initialObject === "object" && initialObject !== null
+      ? initialObject
+      : {}),
+    ...newObject,
+  };
+}

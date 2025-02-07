@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
-import { extractToken } from "@/libs/utils";
+import { extractToken, mergeObjects } from "@/libs/utils";
 import { generateAboutContent } from "@/libs/openai/generate-about-content";
-
+import { getJinaContent } from "@/libs/apis/jinaAi";
+import { Cafe } from "@/libs/types";
+import dayjs from "dayjs";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
@@ -15,20 +17,23 @@ export async function GET(request: NextRequest) {
   const token = extractToken(request.headers.get("Authorization"));
   const searchParams = request.nextUrl.searchParams;
   const limit = Number(searchParams.get("limit") || LIMIT);
+  const force = searchParams.get("force") === "true";
 
   if (token !== process.env.CRON_JOB_KEY && isProd) {
     return NextResponse.json({ error: "Invalid token" }, { status: 401 });
   }
 
-  console.log(`⚡️ start processing cafes (limit: ${limit})`);
+  console.log(`⚡️ start processing cafes (limit: ${limit}, force: ${force})`);
 
-  const { data: cafes = [], error } = await supabase
+  const { data: cafes = [], error, count } = await supabase
     .from("cafes")
-    .select("*")
+    .select("*", { count: "exact" })
     .eq("status", "PUBLISHED")
-    .is("about_content", null)
-    .is("website_content", null)
-    .not("website_url", "is", null)
+    .is("work_friendly_content", null)
+    .is("processed->fetched_website_content_at", null)
+    .not("website_content", "is", null)
+    // .eq("id", "6175fbd2-1078-4d2b-b08b-208c57509faf")
+    // .not("website_url", "is", null)
     .limit(limit);
 
   if (cafes === null || cafes === undefined || error) {
@@ -36,18 +41,30 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Error fetching cafes" });
   }
 
-  let count = 0;
+  let processedCount = 0;
   for (const cafe of cafes) {
+    const timerLabel = `⚡️ ${cafe.name} (${cafe.id})`;
+    console.time(timerLabel);
     console.log(`⚡️ processing ${cafe.name} ${cafe.address}`);
 
-    // jina ai to get the content as markdown
-    // example: https://r.jina.ai/https://cafe-uetelier.de/
-    const content = await fetch(`https://r.jina.ai/${cafe.website_url}`).then(res => res.text());
+    let content: string | null = cafe.website_content;
+    if (!content || force) {
+      content = await getJinaContent(cafe.website_url);
+    }
+    
+    if (!content) {
+      console.log(`❌ content not found res: ${content}`);
+      console.timeEnd(timerLabel);
+      await setCafeAsProcessed(cafe);
+      continue;
+    }
 
-    const result = await generateAboutContent(cafe.name, content);
+    const result = await generateAboutContent(content, cafe.name, cafe.city);
 
     if (!result) {
       console.log(`❌ about not generated for ${cafe.name}`);
+      console.timeEnd(timerLabel);
+      await setCafeAsProcessed(cafe);
       continue;
     }
 
@@ -63,24 +80,49 @@ export async function GET(request: NextRequest) {
           de: result.food_content_de,
           en: result.food_content_en,
         },
-        coffee_content: {
-          de: result.coffee_content_de,
-          en: result.coffee_content_en,
+        drinks_content: {
+          de: result.drinks_content_de,
+          en: result.drinks_content_en,
         },
+        work_friendly_content: {
+          de: result.work_friendly_de,
+          en: result.work_friendly_en,
+        },
+        updated_at: dayjs().toISOString(),
+        processed: mergeObjects(cafe?.processed, {
+          fetched_website_content_at: dayjs().toISOString(),
+        }),
+        processed_at: dayjs().toISOString(),
       })
       .eq("id", cafe.id);
 
     if (updateError) {
       console.log(`❌ about not updated for ${cafe.name}`);
+      console.timeEnd(timerLabel);
       continue;
     }
 
     console.log(`✅ about generated for ${cafe.name}`);
-    count++;
+    console.timeEnd(timerLabel);
+    processedCount++;
   }
 
-  console.log(`✅ finished processing ${count}/${cafes.length} cafes`);
+  console.log(`✅ finished processing ${processedCount}/${cafes.length} cafes. ${count ? count - processedCount : 0} cafes left`);
 
   return NextResponse.json({ message: "success" });
 }
 
+async function setCafeAsProcessed(cafe: Cafe) {
+  const { error: updateError } = await supabase
+    .from("cafes")
+    .update({
+      processed: mergeObjects(cafe?.processed, {
+        fetched_website_content_at: dayjs().toISOString(),
+      }),
+    })
+    .eq("id", cafe.id);
+
+  if (updateError) {
+    console.log(`❌ about not updated for ${cafe.name}`);
+  }
+}

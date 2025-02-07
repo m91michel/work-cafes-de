@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
-import { extractToken, formatLinks } from "@/libs/utils";
+import { extractToken, formatLinks, mergeObjects } from "@/libs/utils";
 import { getPlaceDetails } from "@/libs/google-maps";
 import dayjs from "dayjs";
 
@@ -45,7 +45,9 @@ export async function GET(request: NextRequest) {
     }
 
     const fields = "type,url,website,formatted_address,name,rating,geometry";
-    const placeDetails = await getPlaceDetails(cafe.google_place_id, { fields });
+    const placeDetails = await getPlaceDetails(cafe.google_place_id, {
+      fields,
+    });
 
     if (!placeDetails) {
       console.error(`⚠️ No place details found for ${cafe.name}`);
@@ -55,7 +57,9 @@ export async function GET(request: NextRequest) {
     console.log(`⚡️ placeDetails: ${JSON.stringify(placeDetails)}`);
     const formattedAddress = placeDetails.formatted_address;
     if (formattedAddress !== cafe.address) {
-      console.log(`⚡️ address has changes: ${cafe.address} -> ${formattedAddress}`);
+      console.log(
+        `⚡️ address has changes: ${cafe.address} -> ${formattedAddress}`
+      );
     }
     const lat_long = `${placeDetails.geometry.location.lat},${placeDetails.geometry.location.lng}`;
     if (lat_long !== cafe.lat_long) {
@@ -67,24 +71,19 @@ export async function GET(request: NextRequest) {
       console.log(`⚡️ rating has changes: ${cafe.google_rating} -> ${rating}`);
     }
 
-    const website = formatLinks(placeDetails.website)
+    const website = formatLinks(placeDetails.website);
     console.log(`⚡️ placeDetails.website: ${placeDetails.website}`);
     if (website !== cafe.links) {
       console.log(`⚡️ links has changes: ${cafe.links} -> ${website}`);
     }
 
-    const processed = {
-      ...(typeof cafe?.processed === "object" && cafe?.processed !== null
-        ? cafe?.processed
-        : {}),
-      google_details_at: dayjs().toISOString(),
-    };
-    
     const { error } = await supabase
       .from("cafes")
       .update({
-        processed,
-        processed_at: new Date().toISOString(),
+        processed: mergeObjects(cafe?.processed, {
+          google_details_at: dayjs().toISOString(),
+        }),
+        processed_at: dayjs().toISOString(),
         address: formattedAddress,
         lat_long: lat_long,
         google_rating: rating,
@@ -95,7 +94,7 @@ export async function GET(request: NextRequest) {
     if (error) {
       console.error(`⚠️ Error updating cafe: ${cafe.name}`, error);
     }
-  
+
     console.log(`✅ finished processing ${cafe.name}`);
   }
 

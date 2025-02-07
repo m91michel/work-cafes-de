@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
-import { extractToken } from "@/libs/utils";
+import { extractToken, mergeObjects } from "@/libs/utils";
 import { Review } from "@/libs/types";
 import { AIReview, analyzeReviews } from "@/libs/openai/analyze-reviews";
 import dayjs from "dayjs";
@@ -25,12 +25,17 @@ export async function GET(request: NextRequest) {
 
   console.log(`⚡️ start processing cafes (limit: ${limit})`);
 
-  const { data: cafes = [], error } = await supabase
+  const {
+    data: cafes = [],
+    error,
+    count,
+  } = await supabase
     .from("cafes")
-    .select("*")
-    .eq("status", "PROCESSED")
+    .select("*", { count: "exact" })
+    .eq("status", "PUBLISHED")
     .is("processed->checked_reviews_at", null)
     .gte("review_count", 1)
+    .is("checked", null)
     .order("review_count", { ascending: false })
     .limit(limit);
 
@@ -40,6 +45,7 @@ export async function GET(request: NextRequest) {
   }
   console.log(cafes.length);
 
+  let processedCount = 0;
   for (const cafe of cafes) {
     console.log(`⚡️ processing ${cafe.name} ${cafe.address}`);
 
@@ -60,13 +66,6 @@ export async function GET(request: NextRequest) {
 
     console.log(aiResult);
 
-    const processed = {
-      ...(typeof cafe?.processed === "object" && cafe?.processed !== null
-        ? cafe?.processed
-        : {}),
-      checked_reviews_at: dayjs().toISOString(),
-    };
-
     if (aiResult?.status) {
       const { error: updateError } = await supabase
         .from("cafes")
@@ -75,8 +74,11 @@ export async function GET(request: NextRequest) {
           wifi_qualitity: aiResult.wifi_quality,
           ambiance: aiResult.ambiance,
           seating_comfort: aiResult.seating_comfort,
-          processed,
-          processed_at: new Date().toISOString(),
+          processed: mergeObjects(cafe?.processed, {
+            checked_reviews_at: dayjs().toISOString(),
+          }),
+          checked: "AUTOMATED",
+          processed_at: dayjs().toISOString(),
         })
         .eq("id", cafe.id);
 
@@ -87,6 +89,7 @@ export async function GET(request: NextRequest) {
 
       await updateCafeCount(cafe);
 
+      processedCount++;
       console.log(`🎉 processed ${cafe.name}`);
     } else {
       console.error(`⚠️ Error analyzing reviews: ${cafe.name}`);
@@ -94,7 +97,11 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  console.log(`✅ finished processing ${cafes.length} cafes`);
+  console.log(
+    `✅ finished processing ${processedCount}/${cafes.length} cafes. ${
+      count ? count - processedCount : 0
+    } cafes left`
+  );
 
   return NextResponse.json({ message: "success" });
 }
@@ -112,11 +119,11 @@ function prepareReviews(reviews: Review[]): AIReview[] {
 }
 
 function getReviewText(review: Review) {
-  if(review.text_en) {
+  if (review.text_en) {
     return review.text_en;
   }
 
-  if(review.text_de) {
+  if (review.text_de) {
     return review.text_de;
   }
 
