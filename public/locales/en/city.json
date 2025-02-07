@@ -1,7 +1,7 @@
 {
   "index": {
     "title": "Overview of all cities on Cafe zum Arbeiten",
-    "description": "Discover the best cities with cafes to work on our website."
+    "description": "Find the perfect cafe for mobile work in all of Germany. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
   },
   "hero": {
     "title": "Discover the {{count}} best cafes in {{name}}",
@@ -20,12 +20,12 @@
   "meta": {
     "index": {
       "title": "Overview of all cities on Cafe zum Arbeiten",
-      "description": "Discover the best cities with cafes to work on our website."
+      "description": "Find the perfect cafe for mobile work in all of Germany. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
     },
     "show": {
       "title": "The best cafes in {{name}}",
       "your_city": "your city",
-      "description": "Discover the best cafes to work from in {{name}}, that are perfect for working or studying."
+      "description": "Looking for work-friendly cafes in {{name}}? Discover our handpicked selection of cafes with WiFi, power outlets, and comfortable seating. Perfect for remote work, studying, and meetings."
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "index": {
     "title": "Übersicht zu allen Städten auf Cafe zum Arbeiten",
-    "description": "Entdecke die besten Städte mit Cafés zum Arbeiten auf unserer Website."
+    "description": "Finde das perfekte Café für mobiles Arbeiten in ganz Deutschland. Entdecke unsere kuratierte Liste von arbeitsfreundlichen Cafés mit WLAN, Steckdosen und gemütlicher Atmosphäre."
   },
   "hero": {
     "title": "Die {{count}} besten Cafés in {{name}}",
@@ -20,12 +20,12 @@
   "meta": {
     "index": {
       "title": "Übersicht zu allen Städten auf Cafe zum Arbeiten",
-      "description": "Entdecke die besten Städte mit Cafés zum Arbeiten auf unserer Website."
+      "description": "Finde das perfekte Café für mobiles Arbeiten in ganz Deutschland. Entdecke unsere kuratierte Liste von arbeitsfreundlichen Cafés mit WLAN, Steckdosen und gemütlicher Atmosphäre."
     },
     "show": {
       "title": "Die besten Cafés in {{name}}",
       "your_city": "deine Stadt",
-      "description": "Entdecken Sie die besten Cafés zum Arbeiten in {{name}}, die sich am besten fürs Arbeiten oder Studieren eignen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt."
+      "description": "Suchst du nach einem Café zum Arbeiten in {{name}}? Entdecke unsere handverlesenen Cafés mit schnellem WLAN, Steckdosen und gemütlichen Sitzplätzen. Perfekt für Remote-Arbeit, Studium oder um einfach raus zu gehen ."
     }
   }
 }
