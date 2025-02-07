@@ -93,7 +93,7 @@ export async function getCafesByCity(
     .select("*")
     .eq("city_slug", citySlug)
     .eq('status', 'PUBLISHED')
-    .neq("slug", excludeSlug)
+    .neq("slug", excludeSlug || "")
     .range(offset, offset + limit - 1)
     .order("review_count", { ascending: false });
 

@@ -15,7 +15,7 @@ export async function getCities(
     .from("cities")
     .select("*")
     .range(offset, offset + limit - 1)
-    .neq("slug", excludeSlug)
+    .neq("slug", excludeSlug || "")
     .gte("cafes_count", 1)
     .order("population", { ascending: false });
 
