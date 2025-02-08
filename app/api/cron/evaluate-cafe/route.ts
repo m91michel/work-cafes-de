@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
   } = await supabase
     .from("cafes")
     .select("*", { count: "exact" })
-    .eq("status", "PUBLISHED")
+    .eq("status", "PROCESSED")
     .is("processed->checked_reviews_at", null)
     .gte("review_count", 1)
     .is("checked", null)
