@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "../ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { useCTranslation } from "@/hooks/use-translations";
+import { useCTranslation } from "@/hooks/use-translation";
 
 interface ReportModalProps {
   isOpen: boolean;

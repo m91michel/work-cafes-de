@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { cn } from "@/libs/utils";
 import { Gradient } from "./general/gradient";
-import { useCTranslation } from "@/hooks/use-translations";
+import { useCTranslation } from "@/hooks/use-translation";
 import { TransHighlight } from "./general/translation";
 
 const accordionTriggerStyles = cn(

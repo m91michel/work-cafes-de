@@ -95,7 +95,7 @@ export async function getCafesByCity(
     .eq('status', 'PUBLISHED')
     .neq("slug", excludeSlug || "")
     .range(offset, offset + limit - 1)
-    .order("review_count", { ascending: false });
+    .order("google_rating", { ascending: false });
 
   if (error) {
     console.error("Error fetching data:", error);

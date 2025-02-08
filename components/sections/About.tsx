@@ -1,7 +1,7 @@
 "use client";
 
 // import pilot from "../assets/pilot.png";
-import { useCTranslation } from "@/hooks/use-translations";
+import { useCTranslation } from "@/hooks/use-translation";
 import { Statistics } from "./Statistics";
 import { TransHighlight } from "../general/translation";
 

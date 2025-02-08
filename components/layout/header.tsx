@@ -4,7 +4,7 @@ import { Coffee, Menu } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { NavLinks } from "./NavLinks";
-import { useCTranslation } from "@/hooks/use-translations";
+import { useCTranslation } from "@/hooks/use-translation";
 import { appName } from "@/config/config";
 
 export function Header() {

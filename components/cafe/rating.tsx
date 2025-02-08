@@ -2,7 +2,7 @@
 
 import { ExternalLink, Star, StarHalf } from "lucide-react";
 import { Card } from "../ui/card";
-import { useCTranslation } from "@/hooks/use-translations";
+import { useCTranslation } from "@/hooks/use-translation";
 import { locationLink } from "@/libs/google-maps";
 import { Cafe } from "@/libs/types";
 import { MLink } from "../general/link";

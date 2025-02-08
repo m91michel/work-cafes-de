@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ReportModal } from "./ReportModal";
 import { Cafe } from "@/libs/types";
-import { useCTranslation } from "@/hooks/use-translations";
+import { useCTranslation } from "@/hooks/use-translation";
 
 interface ReportButtonProps {
   cafe: Cafe;

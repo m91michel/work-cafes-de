@@ -1,6 +1,6 @@
 'use client';
 
-import { useCTranslation } from "@/hooks/use-translations";
+import { useCTranslation } from "@/hooks/use-translation";
 import { Badge, BadgeProps } from "../ui/badge";
 import { ReactNode } from "react";
 

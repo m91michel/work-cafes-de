@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Cafe } from '@/libs/types';
 import { AmbianceBadge, SeatingComfortBadge, WifiQualityBadge } from './cafe-badges';
 import { ReportButton } from './ReportButton';
-import { useCTranslation } from '@/hooks/use-translations';
+import { useCTranslation } from '@/hooks/use-translation';
 import { CheckCafeButton } from '@/components/dashboard/cafes/buttons/CheckCafeButton';
 import { Badge } from '../ui/badge';
 import { StatusDropdown } from '../dashboard/cafes/buttons/StatusDropdown';
