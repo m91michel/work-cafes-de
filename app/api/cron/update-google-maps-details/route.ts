@@ -28,6 +28,7 @@ export async function GET(request: NextRequest) {
     .select("*")
     .not("google_place_id", "is", null)
     .eq("status", "PUBLISHED")
+    .is("website_url", null)
     .is("links", null)
     .order("created_at", { ascending: false })
     .limit(limit);

@@ -29,11 +29,10 @@ export async function GET(request: NextRequest) {
     .from("cafes")
     .select("*", { count: "exact" })
     .eq("status", "PUBLISHED")
-    .is("work_friendly_content", null)
+    .not("website_url", "is", null)
+    // .not("website_content", "is", null)
     .is("processed->fetched_website_content_at", null)
-    .not("website_content", "is", null)
     // .eq("id", "6175fbd2-1078-4d2b-b08b-208c57509faf")
-    // .not("website_url", "is", null)
     .limit(limit);
 
   if (cafes === null || cafes === undefined || error) {

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
-import { extractToken, mergeObjects } from "@/libs/utils";
+import { extractToken, formatLinks, mergeObjects } from "@/libs/utils";
 import { getPlaceDetails } from "@/libs/google-maps";
 import { uploadImageToBunny } from "@/libs/bunny";
 import { processOpenHours } from "@/libs/openai/process-open-hours";
@@ -91,6 +91,7 @@ export async function GET(request: NextRequest) {
         preview_image: bunnyUrl,
         google_rating: rating,
         open_hours: openHours,
+        website_url: formatLinks(placeDetails.website),
         links: website,
         maps_data: {
           ...placeDetails,
