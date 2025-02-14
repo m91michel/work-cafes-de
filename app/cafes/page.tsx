@@ -1,12 +1,10 @@
-import { CafeList } from "@/components/cafe-directory";
 import { CitySelector } from "@/components/city/city-selector";
 import { getSEOTags } from "@/libs/seo";
 import { getCafes } from "@/libs/supabase/cafes";
 import { getCities } from "@/libs/supabase/cities";
 import { FAQSection } from "@/components/faq";
 import initTranslations from "@/libs/i18n/config";
-import { FiltersSection } from "@/components/cafe/filters/filters-section";
-
+import { AdvancedCafeList } from "@/components/cafe/lists/advanced-cafe-list";
 export const metadata = getSEOTags({
   title: `Entdecke die besten Cafés zum Arbeiten in Deutschland`,
   description: "Entdecke die besten Cafés zum Arbeiten in Deutschland! Finde ideale Orte für Kaffee und Produktivität mit unserer umfassenden Liste der Hotspots.",
@@ -33,9 +31,7 @@ export default async function CafesPage({ searchParams }: Props) {
     citySlug
   });
   const cities = await getCities({ limit: 100, offset: 0 });
-
-  console.log('cafes', cafes.length);
-
+  
   return (
     <main className="flex-1 bg-background">
       <div className="max-w-7xl mx-auto px-4 pt-12">
@@ -46,16 +42,11 @@ export default async function CafesPage({ searchParams }: Props) {
           <p className="text-xl text-muted-foreground">
             {t('index.description')}
           </p>
-          <p className="text-xl text-muted-foreground">
-            current city: {citySlug}
-          </p>
         </div>
 
-        <FiltersSection />
-
-        <CafeList
+        <AdvancedCafeList
           cafes={cafes}
-          title={t('index.title')}
+          cities={cities}
         />
 
         <FAQSection />

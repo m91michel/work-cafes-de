@@ -31,7 +31,6 @@ export function BaseFilterSelect({
   className = "w-48",
 }: BaseFilterSelectProps) {
   const { t } = useCTranslation('cafe');
-  const router = useRouter();
   const [value, setValue] = useQueryState(paramKey, {
     defaultValue: 'all',
     shallow: false,

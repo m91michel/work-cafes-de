@@ -2,7 +2,7 @@ import { CafeCard } from "@/components/cafe/cafe-card";
 import { Cafe } from "@/libs/types";
 import { cn } from "@/libs/utils";
 import Link from "next/link";
-import { Button } from "./ui/button";
+import { Button } from "../../ui/button";
 
 interface Props {
   title?: string;
@@ -13,7 +13,7 @@ interface Props {
   buttonText?: string;
 }
 
-export function CafeList({ title, subtitle, cafes, className, showMoreButton, buttonText }: Props) {
+export function SimpleCafeList({ title, subtitle, cafes, className, showMoreButton, buttonText }: Props) {
   return (
     <section className={cn("max-w-7xl mx-auto px-4 py-12", className)}>
       {title && <h2 className="text-2xl font-semibold mb-6">{title}</h2>}

@@ -1,5 +1,3 @@
-"use client";
-
 import { Card } from "@/components/ui/card";
 import { Wifi, Volume2, Armchair, Star } from "lucide-react";
 import Image from "next/image";

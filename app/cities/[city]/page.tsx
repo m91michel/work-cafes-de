@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getSEOTags } from '@/libs/seo';
 import { getCafesByCity } from '@/libs/supabase/cafes';
 import { getCities, getCityBySlug } from '@/libs/supabase/cities';
-import { CafeList } from '@/components/cafe-directory';
+import { SimpleCafeList } from '@/components/cafe/lists/simple-cafe-list';
 import { CityList } from '@/components/city/city-list';
 import initTranslations from '@/libs/i18n/config';
 import { isGerman } from '@/libs/environment';
@@ -62,7 +62,7 @@ export default async function CityPage({ params }: Props) {
         </p>
       </div>
 
-      <CafeList cafes={cafes} />
+      <SimpleCafeList cafes={cafes} />
 
       <CityList title={t('more_cities.title')} cities={cities} showMoreButton={true} t={t} />
     </main>

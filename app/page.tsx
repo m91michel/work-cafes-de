@@ -1,4 +1,4 @@
-import { CafeList } from "@/components/cafe-directory";
+import { SimpleCafeList } from "@/components/cafe/lists/simple-cafe-list";
 import { CityList } from "@/components/city/city-list";
 import { CitySelector } from "@/components/city/city-selector";
 import { getSEOTags } from "@/libs/seo";
@@ -63,14 +63,14 @@ async function HomeContent({ cafes, cities }: HomeContentProps) {
         </div>
         {cities && <CitySelector cities={cities} />}
       </div>
-      <CafeList
+      <SimpleCafeList
         cafes={cafes}
         title={t('cafes.title')}
         showMoreButton={true}
         buttonText={cafesButtonText}
       />
       
-      <CafeList
+      <SimpleCafeList
         cafes={newCafes}
         subtitle={t('cafes.new_cafes_subtitle')}
         title={t('cafes.new_cafes_title')}
