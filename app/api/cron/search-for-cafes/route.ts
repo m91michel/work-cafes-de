@@ -3,6 +3,7 @@ import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
 import { extractToken, generateSlug } from "@/libs/utils";
 import { GoogleMapsPlace, searchPlaces } from "@/libs/google-maps";
+import { sendMessage } from "@/libs/telegram";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -35,6 +36,7 @@ export async function GET(request: NextRequest) {
   }
 
   for (const city of cities) {
+    let duplicateCafes: string[] = [];
     if (!city.name_de) {
       console.error("⚠️ City name is null", city);
       continue;
@@ -93,10 +95,16 @@ export async function GET(request: NextRequest) {
 
       if (error) {
         console.error("⚠️ Error inserting cafe", error);
+        duplicateCafes.push(place.name || "");
         continue;
       }
 
       console.log(`🎉 processed ${place.name} (${data?.id})`);
+    }
+
+    if (duplicateCafes.length > 0) {
+      console.log(`⚠️ Duplicate cafes: ${duplicateCafes.length}`);
+      await sendMessage(`⚠️ Duplicate cafes in ${city.name_en}: \n\n- ${duplicateCafes.join("\n- ")}`);
     }
 
     await supabase
@@ -115,7 +123,10 @@ function isInCity(place: GoogleMapsPlace, cityName: string): boolean {
   
   // Convert to lowercase and remove special characters for comparison
   const normalizedAddress = place.formatted_address.toLowerCase();
-  const normalizedCity = cityName.toLowerCase();
+  const normalizedCity = cityName
+    .replace("City", "")
+    .trim()
+    .toLowerCase();
   
   return normalizedAddress.includes(normalizedCity);
 }

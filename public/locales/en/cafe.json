@@ -107,7 +107,7 @@
     }
   },
   "filters": {
-    "all": "All",
+    "all": "All Cities",
     "select_city": "Select city",
     "sorting": {
       "rating_desc": "Most Popular",
