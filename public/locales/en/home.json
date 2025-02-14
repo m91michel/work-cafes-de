@@ -1,35 +1,35 @@
 {
   "hero": {
-    "title": "Find a <highlight>Work-Friendly Cafe</highlight> in Your City",
-    "subtitle": "Discover the best cafes for working in Germany! Find the perfect place to study, work, or enjoy coffee in your city."
+    "title": "Find <highlight>Work-Friendly Cafes</highlight> in Your City",
+    "subtitle": "Discover cozy cafes perfect for remote work! We've curated spaces with great wifi, comfortable seating, and the right atmosphere for productivity."
   },
   "cafes": {
-    "title": "The Best Work-Friendly Cafes in Germany",
-    "buttonText_count": "Discover {{count}} Cafes",
-    "buttonText": "Discover All Cafes"
+    "title": "Work-Friendly Cafes Around the World",
+    "buttonText_count": "Explore {{count}} Cafes",
+    "buttonText": "View All Cafes"
   },
   "cities": {
-    "title": "Find a Work-Friendly Cafe in Your City",
-    "buttonText": "Discover All Cities"
+    "title": "Browse by City",
+    "buttonText": "View All Cities"
   },
   "about": {
-    "title": "<highlight>About</highlight> this website",
-    "description": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help.",
+    "title": "<highlight>About</highlight> A Wifi Place",
+    "description": "We carefully curate cafes based on verified customer reviews, focusing on spaces that are consistently rated as work-friendly. Our mission is to help digital nomads, freelancers, and students find their perfect workspace worldwide.",
     "cafe_count": "Cafés",
     "city_count": "Cities"
   },
   "faq": {
     "title": "Frequently Asked <highlight>Questions</highlight>",
-    "description": "Here you can find answers to the most frequently asked questions about Cafe for Work.",
-    "criteria.question": "Criteria for the best cafes",
-    "criteria.answer": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help.",
-    "update.question": "How often is the cafe directory updated?",
-    "update.answer": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help.",
-    "suggest.question": "Can I suggest a cafe to be added to this website?",
-    "suggest.answer": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help.",
-    "notAllCities.question": "Why are not all cities listed?",
-    "notAllCities.answer": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help.",
-    "remove.question": "Can I also report a cafe to be removed from the list?",
-    "remove.answer": "We want you to spend less time searching and more time working. Whether you're a freelancer, student, or just looking for an inspiring work spot – we're here to help."
+    "description": "Get answers to common questions about our cafe recommendations and selection process.",
+    "criteria.question": "How do you select the cafes?",
+    "criteria.answer": "We analyze verified customer reviews and ratings to identify cafes that meet our work-friendly criteria. We look for consistent mentions of reliable WiFi, adequate power outlets, comfortable seating, suitable noise levels, and a welcoming atmosphere for remote workers.",
+    "update.question": "How often do you update the listings?",
+    "update.answer": "Our directory is updated monthly with new cafes and regular checks of existing listings. We verify opening hours, amenities, and working conditions to ensure our information stays current and reliable.",
+    "suggest.question": "Can I recommend a cafe?",
+    "suggest.answer": "Absolutely! We welcome suggestions from our community. Use our submission form to recommend a cafe, and our team will review it based on our criteria before adding it to the directory.",
+    "notAllCities.question": "Why aren't all cities included?",
+    "notAllCities.answer": "We personally visit and verify each cafe before listing it. We're gradually expanding our coverage across the globe, prioritizing cities based on demand and the availability of suitable work-friendly cafes.",
+    "remove.question": "How can I report outdated information?",
+    "remove.answer": "If you notice any changes in a listed cafe or if it no longer meets work-friendly standards, please use our feedback form. We'll investigate and update our information accordingly."
   }
 } 
