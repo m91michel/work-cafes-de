@@ -6,7 +6,9 @@
   "cafes": {
     "title": "Die besten Cafés zum Arbeiten in Deutschland",
     "buttonText_count": "Entdecke {{count}} Cafés",
-    "buttonText": "Entdecke alle Cafés"
+    "buttonText": "Entdecke alle Cafés",
+    "new_cafes_title": "Neu hinzugefügte Cafés",
+    "new_cafes_subtitle": "Wir fügen neue Cafés täglich hinzu. Schau dir die neuesten Cafés an!"
   },
   "cities": {
     "title": "Finde ein Cafe zum Arbeiten in deiner Stadt",

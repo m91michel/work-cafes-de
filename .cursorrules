@@ -1,9 +1,12 @@
-# cafezumarbeiten.de
+# awifi.place / cafezumarbeiten.de
 
 Start each answer with 🚀
 
 ## Project description
-This project is a website that lists the best cafes for working in Germany.
+This project is a website that lists the best cafes for working. 
+- I add new cafes daily and I use google reviews to rate the cafes. The cafes are listed if people mention that they are good for working. 
+- Cafe owners can add their cafe to the list by contacting me. If someone wants to remove their cafe they can use the report button. 
+- This is a side project of Mathias Michel.
 
 ## CSV files
 - format numbers with out commas (e.g. 1.000.000 -> 1000000)
@@ -11,8 +14,8 @@ This project is a website that lists the best cafes for working in Germany.
 - Use "quotes" for long text with commas (e.g. "this is a long text, with a comma")
 
 ## Domains
-- German: cafezumarbeiten.de
 - English: awifi.place
+- German: cafezumarbeiten.de
 
 ## Additional instructions
 - This project is a npm workspace. Use `-W` to install dependencies.
@@ -20,6 +23,7 @@ This project is a website that lists the best cafes for working in Germany.
 - Use `initTranslations` for translations in server components.
 
 ## Next.js App Router best practices
+- Use app router
 - Use server components by default
 - Implement client components only when necessary
 - Utilize the new file-based routing system
@@ -47,6 +51,10 @@ Backend:
 ## Folder structure
 ```
 app/
+  api/
+    cron/ - cron jobs
+    cafes/ - cafes api
+    cities/ - cities api
   layout.js
   page.js
 public/

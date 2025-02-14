@@ -1,6 +1,6 @@
 {
   "index": {
-    "title": "All cafes to work in on our website",
+    "title": "Find the best cafes for working",
     "description": "Here you can find a list of all cafes, that are available on our website. Help us to complete the list by adding new cafes.",
     "all_cities_title": "A list of all cities on our website"
   },
@@ -105,5 +105,9 @@
     "slug": {
       "description": "{{name}} in {{city}} is a great place to work, study or exchange. We have checked the reviews and selected the best cafes for you."
     }
+  },
+  "filters": {
+    "all": "All",
+    "select_city": "Select city"
   }
 } 

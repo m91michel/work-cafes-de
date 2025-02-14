@@ -106,6 +106,10 @@
     "slug": {
       "description": "{{name}} in {{city}} ist ein idealer Ort zum Arbeiten, Studieren oder sich auszutauschen. Wir haben die Bewertungen geprüft und die besten Cafés für dich ausgewählt."
     }
+  },
+  "filters": {
+    "all": "Alle",
+    "select_city": "Stadt auswählen"
   }
 } 
 

@@ -2,16 +2,16 @@ import { CafeList } from "@/components/cafe-directory";
 import { CityList } from "@/components/city/city-list";
 import { CitySelector } from "@/components/city/city-selector";
 import { getSEOTags } from "@/libs/seo";
-import { getBestCafes, getCafesCount } from "@/libs/supabase/cafes";
+import { getBestCafes, getCafes, getCafesCount } from "@/libs/supabase/cafes";
 import { getCities, getCitiesCount } from "@/libs/supabase/cities";
 import { FAQSection } from "@/components/faq";
 import { About } from "@/components/sections/About";
 import initTranslations from "@/libs/i18n/config";
 import { Cafe, City } from "@/libs/types";
 import { TransHighlight } from "@/components/general/translation";
-import { domainDe, domainEn, domainName } from "@/config/config";
 
-export const revalidate = 5;
+// export const revalidate = 5; // dev
+export const revalidate = 28800; // 8 hours
 
 export async function generateMetadata() {
   const { t } = await initTranslations(['common']);
@@ -22,15 +22,27 @@ export async function generateMetadata() {
   });
 }
 
+export default async function Home() {
+  const cafes = await getBestCafes({ limit: 6, offset: 0 });
+  const cities = await getCities({ limit: 6, offset: 0 });
+
+  return (
+      <HomeContent 
+        cafes={cafes}
+        cities={cities}
+      />
+  );
+}
+
 interface HomeContentProps {
   cafes: Cafe[];
   cities: City[];
 }
-
 async function HomeContent({ cafes, cities }: HomeContentProps) {
   const { t } = await initTranslations(['home']);
   const cafesCount = await getCafesCount();
   const citiesCount = await getCitiesCount();
+  const newCafes = await getCafes({ limit: 6, offset: 0, sortBy: 'created_at', sortOrder: "desc" });
   
   const cafesButtonText = cafesCount != null
     ? t('cafes.buttonText_count', { count: cafesCount })
@@ -57,6 +69,14 @@ async function HomeContent({ cafes, cities }: HomeContentProps) {
         showMoreButton={true}
         buttonText={cafesButtonText}
       />
+      
+      <CafeList
+        cafes={newCafes}
+        subtitle={t('cafes.new_cafes_subtitle')}
+        title={t('cafes.new_cafes_title')}
+        showMoreButton={true}
+        buttonText={cafesButtonText}
+      />
 
       <CityList
         cities={cities}
@@ -70,20 +90,5 @@ async function HomeContent({ cafes, cities }: HomeContentProps) {
 
       <About cafeCount={cafesCount ?? 0} cityCount={citiesCount ?? 0} />
     </main>
-  );
-}
-
-export default async function Home() {
-  // const { resources } = await initTranslations(['home', 'common']);
-  const cafes = await getBestCafes({ limit: 6, offset: 0 });
-  const cities = await getCities({ limit: 6, offset: 0 });
-
-  return (
-
-      <HomeContent 
-        cafes={cafes}
-        cities={cities}
-      />
-    
   );
 }

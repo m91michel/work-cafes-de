@@ -6,7 +6,9 @@
   "cafes": {
     "title": "Work-Friendly Cafes Around the World",
     "buttonText_count": "Explore {{count}} Cafes",
-    "buttonText": "View All Cafes"
+    "buttonText": "View All Cafes",
+    "new_cafes_title": "Newly added cafes",
+    "new_cafes_subtitle": "We add new cafes daily. Check out the latest places!"
   },
   "cities": {
     "title": "Browse by City",

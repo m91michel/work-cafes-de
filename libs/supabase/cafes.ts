@@ -5,19 +5,27 @@ type BaseFilters = {
   limit?: number;
   offset?: number;
   citySlug?: string;
+  sortBy?: string;
+  sortOrder?: "asc" | "desc";
 };
 export async function getCafes(
-  { limit = 100, offset = 0, citySlug }: BaseFilters = { limit: 100, offset: 0 }
+  {
+    limit = 100,
+    offset = 0,
+    citySlug,
+    sortBy = "google_rating",
+    sortOrder = "desc",
+  }: BaseFilters = { limit: 100, offset: 0 }
 ): Promise<Cafe[]> {
   let query = supabase
     .from("cafes")
     .select("*, cities(name_de, name_en, slug)")
-    .eq('status', 'PUBLISHED')
-    .not('google_rating', 'is', null)
-    .order("google_rating", { ascending: false });
+    .eq("status", "PUBLISHED")
+    .not("google_rating", "is", null)
+    .order(sortBy, { ascending: sortOrder === "asc" });
 
   if (citySlug) {
-    query = query.eq('city_slug', citySlug);
+    query = query.eq("city_slug", citySlug);
   }
 
   const { data, error } = await query.range(offset, offset + limit - 1);
@@ -35,10 +43,10 @@ export async function getBestCafes(
 ): Promise<Cafe[]> {
   const { data, error, count } = await supabase
     .from("cafes")
-    .select("*, cities(name_de, name_en, slug)", { count: 'exact' })
-    .eq('status', 'PUBLISHED')
+    .select("*, cities(name_de, name_en, slug)", { count: "exact" })
+    .eq("status", "PUBLISHED")
     .range(offset, offset + limit - 1)
-    .not('google_rating', 'is', null)
+    .not("google_rating", "is", null)
     .not("food_content", "is", null)
     .gte("review_count", 3)
     .order("google_rating", { ascending: false });
@@ -56,7 +64,7 @@ export async function getAllCafes(
 ): Promise<Cafe[]> {
   const { data, error, count } = await supabase
     .from("cafes")
-    .select("*, cities(name_de, name_en, slug)", { count: 'exact' })
+    .select("*, cities(name_de, name_en, slug)", { count: "exact" })
     .range(offset, offset + limit - 1)
     .order("created_at", { ascending: false });
 
@@ -98,7 +106,7 @@ export async function getCafesByCity(
     .from("cafes")
     .select("*")
     .eq("city_slug", citySlug)
-    .eq('status', 'PUBLISHED')
+    .eq("status", "PUBLISHED")
     .neq("slug", excludeSlug || "")
     .range(offset, offset + limit - 1)
     .order("google_rating", { ascending: false });
@@ -111,12 +119,11 @@ export async function getCafesByCity(
   return data;
 }
 
-
 export async function getCafesCount(): Promise<number | null> {
   const { error, count } = await supabase
     .from("cafes")
-    .select("name, slug", { count: 'exact' })
-    .eq('status', 'PUBLISHED');
+    .select("name, slug", { count: "exact" })
+    .eq("status", "PUBLISHED");
 
   if (error) {
     console.error("Error fetching data:", error);
