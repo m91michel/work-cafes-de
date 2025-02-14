@@ -1,31 +1,31 @@
 {
   "index": {
-    "title": "Overview of all cities on Cafe zum Arbeiten",
-    "description": "Find the perfect cafe for mobile work in all of Germany. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
+    "title": "Overview Of All Cities With Work-Friendly Cafes",
+    "description": "Find the perfect cafe for mobile work in your city. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
   },
   "hero": {
-    "title": "Discover the {{count}} best cafes in {{name}}",
+    "title": "Discover The {{count}} Best Cafes In {{name}}",
     "cafe_count": "{{count}} cafes found",
     "description": "Discover the best cafes to work in {{name}}, that are perfect for working or studying.",
     "subtitle_one": "Discover {{count}} carefully selected Cafe in {{name}}.",
     "subtitle_other": "Discover {{count}} carefully selected Cafes in {{name}}."
   },
   "more_cities": {
-    "title": "Find cafes in other cities",
-    "button_text": "Show all cities",
+    "title": "Find Cafés In Other Cities",
+    "button_text": "Show All Cities",
     "suggest_title": "Your city is missing?",
     "suggest_description": "Then suggest it to us, so we can prioritize it on our site.",
     "suggest_button": "Suggest city"
   },
   "meta": {
     "index": {
-      "title": "Overview of all cities on Cafe zum Arbeiten",
-      "description": "Find the perfect cafe for mobile work in all of Germany. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
+      "title": "Overview Of All Cities With Work-Friendly Cafes",
+      "description": "Find the perfect cafe for mobile work in your city. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
     },
     "show": {
-      "title": "The best cafes in {{name}}",
+      "title": "Best Cafés For Working In {{name}}",
       "your_city": "your city",
-      "description": "Looking for work-friendly cafes in {{name}}? Discover our handpicked selection of cafes with WiFi, power outlets, and comfortable seating. Perfect for remote work, studying, and meetings."
+      "description": "Looking for work-friendly cafes in {{name}}? Discover our handpicked selection of laptop friendly cafes with WiFi."
     }
   }
 }
