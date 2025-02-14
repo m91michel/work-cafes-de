@@ -10,6 +10,7 @@ import {
   WifiQualityBadge,
 } from "./cafe-badges";
 import { isGerman } from "@/libs/environment";
+import { countryFlag } from "@/libs/utils";
 
 interface CafeCardProps {
   cafe: Cafe;
@@ -78,12 +79,14 @@ type CityBadgeProps = {
 function CityBadge({ city }: CityBadgeProps) {
   if (city) {
     const name = isGerman ? city.name_de : city.name_en;
+    const flag = countryFlag(city.country);
+    const labelWithFlag = flag ? `${flag} ${name}` : name;
     return (
       <Link
         href={`/cities/${city.slug}`}
         className="absolute top-4 left-4 z-10 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-black/60 transition-colors"
       >
-        {name}
+        {labelWithFlag}
       </Link>
     );
   }

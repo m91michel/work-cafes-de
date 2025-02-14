@@ -9,6 +9,7 @@ export type Cafe = Database['cafeforwork']['Tables']['cafes']['Row'] & {
     name_de?: string | null;
     name_en?: string | null;
     slug?: string | null;
+    country?: string | null;
   } | null
 }
 

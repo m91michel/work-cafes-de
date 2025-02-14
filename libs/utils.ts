@@ -67,3 +67,30 @@ export function mergeObjects(initialObject?: any | null, newObject?: Record<stri
     ...newObject,
   };
 }
+
+const countryFlags = {
+  "Germany": "🇩🇪",
+  "United States": "🇺🇸",
+  "United Kingdom": "🇬🇧",
+  "Canada": "🇨🇦",
+  "Australia": "🇦🇺",
+  "Switzerland": "🇨🇭",
+  "Austria": "🇦🇹",
+  "Netherlands": "🇳🇱",
+  "Belgium": "🇧🇪",
+  "France": "🇫🇷",
+  
+}
+export function countryFlag(country?: string | null): string | null {
+  if (!country) {
+    return null;
+  }
+
+  const flag = countryFlags[country as keyof typeof countryFlags];
+
+  if (!flag) {
+    return null;
+  }
+
+  return flag;
+}

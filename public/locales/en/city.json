@@ -13,7 +13,7 @@
   "more_cities": {
     "title": "Find Cafés In Other Cities",
     "button_text": "Show All Cities",
-    "suggest_title": "Your city is missing?",
+    "suggest_title": "Do Miss A City?",
     "suggest_description": "Then suggest it to us, so we can prioritize it on our site.",
     "suggest_button": "Suggest city"
   },

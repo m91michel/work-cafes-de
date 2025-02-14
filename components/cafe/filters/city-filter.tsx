@@ -4,7 +4,7 @@ import { City } from '@/libs/types';
 import { BaseFilterSelect } from './base-filter-select';
 import { useCTranslation } from '@/hooks/use-translation';
 import { isGerman } from '@/libs/environment';
-
+import { countryFlag } from '@/libs/utils';
 
 type CityFilterProps = {
   cities: City[];
@@ -15,9 +15,11 @@ export function CityFilter({ cities }: CityFilterProps) {
 
   const cityOptions = cities.map((city) => {
     const label = isGerman ? city.name_de : city.name_en;
+    const flag = countryFlag(city.country);
+    const labelWithFlag = flag ? `${flag} ${label}` : label;
     return {
       value: city.slug,
-      label: label || city.slug,
+      label: labelWithFlag || city.slug,
     };
   });
 

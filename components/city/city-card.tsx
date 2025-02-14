@@ -7,9 +7,10 @@ import Image from "next/image";
 import { DefaultCafeImage } from "../cafe/Image";
 import { Badge } from "../ui/badge";
 import { isGerman } from "@/libs/environment";
+import { countryFlag } from "@/libs/utils";
 
 type Props = {
-  city: City
+  city: City;
 };
 
 export function CityCard({ city }: Props) {
@@ -17,6 +18,9 @@ export function CityCard({ city }: Props) {
   const description = isGerman
     ? city.description_short_de
     : city.description_short_en;
+
+  const flag = countryFlag(city.country);
+  const country = flag ? `${flag} ${city.country}` : city.country;
 
   return (
     <Link href={`/cities/${city.slug}`} className="block">
@@ -42,14 +46,15 @@ export function CityCard({ city }: Props) {
               </p>
             )}
           </div>
-          {city.cafes_count && (
-            <div>
+          <div className="flex justify-between items-center gap-2">
+            <Badge variant="secondary">{country}</Badge>
+            {city.cafes_count && (
               <Badge variant="secondary">
                 <MapPin className="h-4 w-4 mr-1" />
                 {city.cafes_count} Cafés
               </Badge>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </Link>
