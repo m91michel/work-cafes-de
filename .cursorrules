@@ -5,6 +5,11 @@ Start each answer with 🚀
 ## Project description
 This project is a website that lists the best cafes for working in Germany.
 
+## CSV files
+- format numbers with out commas (e.g. 1.000.000 -> 1000000)
+- Use , as decimal separator
+- Use "quotes" for long text with commas (e.g. "this is a long text, with a comma")
+
 ## Domains
 - German: cafezumarbeiten.de
 - English: awifi.place

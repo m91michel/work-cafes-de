@@ -40,16 +40,23 @@ export async function GET(request: NextRequest) {
       continue;
     }
 
-    const places = await searchPlaces(`cafe zum arbeiten in ${city.name_de}`, { type: "cafe" });
-
+    const isGermany = city.country === "Germany";
+    const cityName = isGermany ? city.name_de : city.name_en;
+    if (!cityName) {
+      console.error("⚠️ City name is null", city);
+      continue;
+    }
+    const searchQuery = isGermany ? `cafe zum arbeiten in ${cityName}` : `cafe for working in ${cityName}`;
+    const places = await searchPlaces(searchQuery, { type: "cafe" });
+    
     if (places === null || places === undefined) {
       console.error("⚠️ Error searching for cafes", places);
       continue;
     }
 
     for (const place of places) {
-      if (!isInCity(place, city.name_de)) {
-        console.log(`⚠️ ${place.formatted_address} is not in ${city.name_de}`);
+      if (!isInCity(place, cityName)) {
+        console.log(`⚠️ ${place.formatted_address} is not in ${cityName}`);
         continue;
       }
 
@@ -89,7 +96,7 @@ export async function GET(request: NextRequest) {
         continue;
       }
 
-      console.log(`🎉 added ${place.name} (${data?.id})`);
+      console.log(`🎉 processed ${place.name} (${data?.id})`);
     }
 
     await supabase

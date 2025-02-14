@@ -9,28 +9,46 @@ export async function searchPlaces(
 ): Promise<GoogleMapsPlace[] | null> {
   const { language, type = "cafe", location } = options || {};
   try {
-    const response = await axios.get(
-      "https://maps.googleapis.com/maps/api/place/textsearch/json",
-      {
-        params: {
-          query: query,
-          type: type,
-          // radius - TODO: Check if this is needed
-          language: language,
-          location: location,
-          key: GOOGLE_MAPS_API_KEY,
-        },
+    let allResults: GoogleMapsPlace[] = [];
+    let pageToken: string | undefined;
+
+    // Make up to 3 requests to get all available results
+    for (let i = 0; i < 3; i++) {
+      const response = await axios.get(
+        "https://maps.googleapis.com/maps/api/place/textsearch/json",
+        {
+          params: {
+            query: query,
+            type: type,
+            language: language,
+            location: location,
+            pagetoken: pageToken, // Add pagetoken parameter
+            key: GOOGLE_MAPS_API_KEY,
+          },
+        }
+      );
+
+      const data = response.data;
+
+      if (!data || !data.results || data.results.length === 0) {
+        if (i === 0) {
+          console.log(`No Google Maps data found for ${query}:`, data);
+          return null;
+        }
+        break;
       }
-    );
 
-    const data = response.data;
+      allResults = [...allResults, ...data.results];
+      
+      // Get next page token if available
+      pageToken = data.next_page_token;
+      if (!pageToken) break;
 
-    if (!data || !data.results || data.results.length === 0) {
-      console.log(`No Google Maps data found for ${query}:`, data);
-      return null;
+      // Google requires a short delay before using the next_page_token
+      await new Promise(resolve => setTimeout(resolve, 2000));
     }
 
-    return data.results;
+    return allResults;
   } catch (error) {
     console.error(`Error fetching data from Google Places API:`, error);
     return null;

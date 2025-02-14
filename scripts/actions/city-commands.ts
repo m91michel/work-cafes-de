@@ -54,7 +54,7 @@ export const citiesCommands: Command[] = [
 ];
 
 export async function upsertCitiesFromCsv() {
-  const cities = await readCsv<any>("../data/cities.csv");
+  const cities = await readCsv<any>("../data/cities/usa-canada.csv");
 
   for (const city of cities) {
     console.log(`⚡️ Processing ${city.name_de} in ${city.country}`);
@@ -81,7 +81,7 @@ export async function upsertCitiesFromCsv() {
         state_code: city.state_code,
         population: city.population ? parseInt(city.population) : 0,
         cafes_count: 0,
-      }, { onConflict: 'slug' })
+      }, { onConflict: 'slug', ignoreDuplicates: true })
       .select("name_de");
 
     if (error) {
