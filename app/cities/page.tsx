@@ -4,7 +4,7 @@ import initTranslations from '@/libs/i18n/config';
 import { getSEOTags } from '@/libs/seo';
 import { getCities } from '@/libs/supabase/cities';
 
-export const revalidate = 0; // 24 hours
+export const revalidate = 28800; // 8 hours
 
 // generate metadata
 export async function generateMetadata() {

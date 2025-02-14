@@ -42,7 +42,7 @@ export default function ContributePage() {
               Du kennst ein gemütliches Café, in dem du gerne mit deinem Laptop arbeitest? Teile deine Entdeckung und hilf anderen, die perfekte Location zum Arbeiten zu finden.
             </p>
             <Button asChild>
-              <a href={submitFormUrl} target="_blank" rel="noopener noreferrer">
+              <a href={submitFormUrl} target="_blank" rel="noopener noreferrer" umami-event="suggest-cafe">
                 Café vorschlagen
               </a>
             </Button>
@@ -59,12 +59,12 @@ export default function ContributePage() {
             </p>
             <div className="flex gap-4">
               <Button asChild variant="outline">
-                <a href={tweetUrl} target="_blank" rel="noopener noreferrer">
+                <a href={tweetUrl} target="_blank" rel="noopener noreferrer" umami-event="share-on-twitter">
                   Auf Twitter teilen
                 </a>
               </Button>
             </div>
-          </div>
+          </div>  
 
           {/* Feedback */}
           <div className="bg-card rounded-lg p-6 border">
@@ -76,7 +76,7 @@ export default function ContributePage() {
               Deine Meinung ist uns wichtig! Hast du Ideen oder Vorschläge, wie wir die Suche nach gemütlichen Cafés zum Arbeiten noch einfacher machen können?
             </p>
             <Button asChild>
-              <a href={`mailto:feedback@${domainDe}`} target="_blank" rel="noopener noreferrer">
+              <a href={`mailto:feedback@${domainDe}`} target="_blank" rel="noopener noreferrer" umami-event="send-feedback">
                 Feedback senden
               </a>
             </Button>

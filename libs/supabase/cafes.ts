@@ -4,17 +4,23 @@ import supabase from "./supabaseClient";
 type BaseFilters = {
   limit?: number;
   offset?: number;
+  citySlug?: string;
 };
 export async function getCafes(
-  { limit = 100, offset = 0 }: BaseFilters = { limit: 100, offset: 0 }
+  { limit = 100, offset = 0, citySlug }: BaseFilters = { limit: 100, offset: 0 }
 ): Promise<Cafe[]> {
-  const { data, error, count } = await supabase
+  let query = supabase
     .from("cafes")
-    .select("*, cities(name_de, name_en, slug)", { count: 'exact' })
+    .select("*, cities(name_de, name_en, slug)")
     .eq('status', 'PUBLISHED')
-    .range(offset, offset + limit - 1)
     .not('google_rating', 'is', null)
     .order("google_rating", { ascending: false });
+
+  if (citySlug) {
+    query = query.eq('city_slug', citySlug);
+  }
+
+  const { data, error } = await query.range(offset, offset + limit - 1);
 
   if (error) {
     console.error("Error fetching data:", error);

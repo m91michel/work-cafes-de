@@ -5,8 +5,7 @@ import { getCafes } from "@/libs/supabase/cafes";
 import { getCities } from "@/libs/supabase/cities";
 import { FAQSection } from "@/components/faq";
 import initTranslations from "@/libs/i18n/config";
-
-export const revalidate = 5;
+import { FiltersSection } from "@/components/cafe/filters/filters-section";
 
 export const metadata = getSEOTags({
   title: `Entdecke die besten Cafés zum Arbeiten in Deutschland`,
@@ -14,10 +13,28 @@ export const metadata = getSEOTags({
   canonicalUrlRelative: "/cafes",
 });
 
-export default async function CafeIndex() {
+type Params = Promise<{ slug: string }>
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+
+type Props = {
+  params: Params;
+  searchParams: SearchParams;
+};
+
+export const revalidate = 28800; // 8 hours
+
+export default async function CafesPage({ searchParams }: Props) {
   const { t } = await initTranslations(['cafe']);
-  const cafes = await getCafes({ limit: 1000, offset: 0 });
+  const _searchParams = await searchParams;
+  const citySlug = _searchParams.city as string | undefined;
+
+  const cafes = await getCafes({ 
+    limit: 1000,
+    citySlug
+  });
   const cities = await getCities({ limit: 100, offset: 0 });
+
+  console.log('cafes', cafes.length);
 
   return (
     <main className="flex-1 bg-background">
@@ -29,21 +46,27 @@ export default async function CafeIndex() {
           <p className="text-xl text-muted-foreground">
             {t('index.description')}
           </p>
+          <p className="text-xl text-muted-foreground">
+            current city: {citySlug}
+          </p>
         </div>
+
+        <FiltersSection />
+
+        <CafeList
+          cafes={cafes}
+          title={t('index.title')}
+        />
+
+        <FAQSection />
+
+        <section className="max-w-7xl mx-auto px-4 py-12">
+          <h2 className="text-2xl font-bold mb-4 text-center">
+            {t('index.all_cities_title')}
+          </h2>
+          {cities && <CitySelector cities={cities} />}
+        </section>
       </div>
-      <CafeList
-        cafes={cafes}
-        title={t('index.title')}
-      />
-
-      <FAQSection />
-
-      <section className="max-w-7xl mx-auto px-4 py-12">
-        <h2 className="text-2xl font-bold mb-4 text-center">
-          {t('index.all_cities_title')}
-        </h2>
-        {cities && <CitySelector cities={cities} />}
-      </section>
     </main>
   );
 }

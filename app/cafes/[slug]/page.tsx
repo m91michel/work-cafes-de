@@ -24,8 +24,6 @@ type Props = {
   searchParams: SearchParams;
 };
 
-export const revalidate = 1;
-
 // generate metadata
 export async function generateMetadata({ params }: Props) {
   const slug = (await params).slug;

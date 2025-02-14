@@ -43,7 +43,7 @@ export default function ContributePage() {
               Found a hidden gem that&apos;s perfect for working? Help others discover great workspaces by recommending your favorite café.
             </p>
             <Button asChild>
-              <a href={submitFormUrl} target="_blank" rel="noopener noreferrer">
+              <a href={submitFormUrl} target="_blank" rel="noopener noreferrer" umami-event="suggest-cafe">
                 Add a Recommendation
               </a>
             </Button>
@@ -60,7 +60,7 @@ export default function ContributePage() {
             </p>
             <div className="flex gap-4">
               <Button asChild variant="outline">
-                <a href={tweetUrl} target="_blank" rel="noopener noreferrer">
+                <a href={tweetUrl} target="_blank" rel="noopener noreferrer" umami-event="share-on-twitter">
                   Share on Twitter
                 </a>
               </Button>
@@ -77,7 +77,7 @@ export default function ContributePage() {
               Your feedback helps us improve. Have suggestions or ideas? We&apos;d love to hear how we can make your experience even better.
             </p>
             <Button asChild>
-              <a href={`mailto:feedback@${domainEn}`} target="_blank" rel="noopener noreferrer">
+              <a href={`mailto:feedback@${domainEn}`} target="_blank" rel="noopener noreferrer" umami-event="send-feedback">
                 Send Feedback
               </a>
             </Button>
