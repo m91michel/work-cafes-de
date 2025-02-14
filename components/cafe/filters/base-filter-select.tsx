@@ -8,8 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useCTranslation } from '@/hooks/use-translation';
-import { useRouter } from 'next/navigation';
 
 
 interface FilterOption {
@@ -21,6 +19,7 @@ interface BaseFilterSelectProps {
   paramKey: string;
   options: FilterOption[];
   placeholder: string;
+  defaultValue?: string;
   className?: string;
 }
 
@@ -29,31 +28,27 @@ export function BaseFilterSelect({
   options,
   placeholder,
   className = "w-48",
+  defaultValue,
 }: BaseFilterSelectProps) {
-  const { t } = useCTranslation('cafe');
   const [value, setValue] = useQueryState(paramKey, {
-    defaultValue: 'all',
+    defaultValue: defaultValue || '',
     shallow: false,
   });
 
   const handleValueChange = (newValue: string) => {
-    setValue(newValue === 'all' ? null : newValue);
-    // router.refresh();
+    setValue(newValue === defaultValue ? null : newValue);
   };
 
   return (
     <div className={className}>
       <Select
-        value={value || 'all'}
+        value={value || defaultValue}
         onValueChange={handleValueChange}
       >
         <SelectTrigger>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">
-            {t('filters.all')}
-          </SelectItem>
           {options.map(({ value, label }) => (
             <SelectItem key={value} value={value}>
               {label}

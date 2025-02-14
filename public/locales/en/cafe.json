@@ -108,6 +108,12 @@
   },
   "filters": {
     "all": "All",
-    "select_city": "Select city"
+    "select_city": "Select city",
+    "sorting": {
+      "rating_desc": "Most Popular",
+      "rating_asc": "Least Popular",
+      "created_at_desc": "Newest",
+      "created_at_asc": "Oldest"
+    }
   }
 } 

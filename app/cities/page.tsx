@@ -1,4 +1,3 @@
-import { CityCard } from '@/components/city/city-card';
 import { CityList } from '@/components/city/city-list';
 import initTranslations from '@/libs/i18n/config';
 import { getSEOTags } from '@/libs/seo';
@@ -18,12 +17,7 @@ export async function generateMetadata() {
 
 export default async function CityPage() {
   const { t } = await initTranslations(['city']);
-  const cities = await getCities();
-
-  if (!cities) {
-    return <div>Keine Städte gefunden</div>;
-  }
-
+  const cities = await getCities({ limit: 1000 });
 
   return (
     <main className="flex-1 bg-background">

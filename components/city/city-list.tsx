@@ -16,7 +16,7 @@ const suggestCityForm = "https://tally.so/r/w74zlP";
 
 export function CityList({
   title,
-  cities,
+  cities = [],
   showMoreButton = false,
   suggestCityCard = false,
   buttonText,
@@ -29,6 +29,13 @@ export function CityList({
         {cities.map((city) => (
           <CityCard key={city.slug} city={city} />
         ))}
+        {cities.length === 0 && (
+          <div className="bg-card rounded-lg p-6 border">
+            <p className="text-muted-foreground">
+              No cities found
+            </p>
+          </div>
+        )}
         {suggestCityCard && (
           <div className="bg-card rounded-lg p-6 border">
             <div className="flex items-center gap-3 mb-4">

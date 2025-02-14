@@ -109,7 +109,13 @@
   },
   "filters": {
     "all": "Alle",
-    "select_city": "Stadt auswählen"
+    "select_city": "Stadt auswählen",
+    "sorting": {
+      "rating_desc": "Beliebteste",
+      "rating_asc": "Unbeliebteste",
+      "created_at_desc": "Neueste",
+      "created_at_asc": "Älteste"
+    }
   }
 } 
 

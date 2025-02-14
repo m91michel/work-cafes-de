@@ -21,10 +21,16 @@ export function CityFilter({ cities }: CityFilterProps) {
     };
   });
 
+  const allOption = {
+    value: 'all',
+    label: t('filters.all'),
+  };
+
   return (
     <BaseFilterSelect
       paramKey="city"
-      options={cityOptions}
+      options={[allOption, ...cityOptions]}
+      defaultValue={allOption.value}
       placeholder={t('filters.select_city')}
     />
   );

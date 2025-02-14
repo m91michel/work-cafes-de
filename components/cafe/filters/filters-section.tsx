@@ -1,6 +1,7 @@
 import { City } from "@/libs/types";
 
 import { CityFilter } from "./city-filter";
+import { SortingOptions } from "./sorting-options";
 
 type Props = {
   cities: City[];
@@ -11,6 +12,7 @@ export function FiltersSection({ cities }: Props) {
     <div className="flex flex-wrap gap-4 justify-between mb-8">
       <CityFilter cities={cities} />
       {/* Add more filters here */}
+      <SortingOptions />
     </div>
   );
 }

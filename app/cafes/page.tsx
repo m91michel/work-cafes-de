@@ -25,12 +25,17 @@ export default async function CafesPage({ searchParams }: Props) {
   const { t } = await initTranslations(['cafe']);
   const _searchParams = await searchParams;
   const citySlug = _searchParams.city as string | undefined;
-
-  const cafes = await getCafes({ 
+  const sort = _searchParams.sort as string | undefined;
+  const sortBy = sort?.split('-')[0] || 'google_rating';
+  const sortOrder = sort?.split('-')[1] as 'asc' | 'desc' || 'desc';
+  
+  const cafes = await getCafes({
     limit: 1000,
-    citySlug
+    citySlug,
+    sortBy,
+    sortOrder
   });
-  const cities = await getCities({ limit: 100, offset: 0 });
+  const cities = await getCities({ limit: 1000, offset: 0 });
   
   return (
     <main className="flex-1 bg-background">
