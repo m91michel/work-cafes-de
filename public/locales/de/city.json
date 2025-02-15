@@ -1,13 +1,15 @@
 {
   "index": {
-    "title": "Übersicht zu allen Städten auf Cafe zum Arbeiten",
-    "description": "Finde das perfekte Café für mobiles Arbeiten in ganz Deutschland. Entdecke unsere kuratierte Liste von arbeitsfreundlichen Cafés mit WLAN, Steckdosen und gemütlicher Atmosphäre."
+    "title": "Übersicht zu allen Städten mit Cafe zum Arbeiten",
+    "title_with_country": "Die besten Cafés zum Arbeiten <highlight>in {{country}}</highlight>",
+    "description": "Finde das perfekte Café für mobiles Arbeiten in deiner Stadt. Entdecke unsere kuratierte Liste von arbeitsfreundlichen Cafés mit WLAN, Steckdosen und gemütlicher Atmosphäre.",
+    "description_with_country": "Finde das perfekte Café für mobiles Arbeiten in {{country}}. Entdecke unsere kuratierte Liste von arbeitsfreundlichen Cafés mit WLAN, Steckdosen und gemütlicher Atmosphäre."
   },
   "hero": {
     "title": "Die besten <highlight>zum Arbeiten</highlight> in {{name}}",
     "cafe_count": "{{count}} Cafés gefunden",
-    "subtitle_one": "Entdecke {{count}} sorgfältig ausgewähltes Cafe in {{name}}.",
-    "subtitle_other": "Entdecke {{count}} sorgfältig ausgewählte Cafes in {{name}}.",
+    "subtitle_one": "Entdecke {{count}} sorgfältig ausgewählte Cafés in {{name}}.",
+    "subtitle_other": "Entdecke {{count}} sorgfältig ausgewählte Cafés in {{name}}.",
     "description": "Finde den passenden Ort um zu arbeiten, zu lesen oder mit deinen Kommilitonen zu lernen."
   },
   "more_cities": {
@@ -20,7 +22,9 @@
   "meta": {
     "index": {
       "title": "Übersicht zu allen Städten auf Cafe zum Arbeiten",
-      "description": "Finde das perfekte Café für mobiles Arbeiten in ganz Deutschland. Entdecke unsere kuratierte Liste von arbeitsfreundlichen Cafés mit WLAN, Steckdosen und gemütlicher Atmosphäre."
+      "title_with_country": "Die besten Cafés zum Arbeiten in {{country}}",
+      "description": "Finde das perfekte Café für mobiles Arbeiten in ganz Deutschland. Entdecke unsere kuratierte Liste von arbeitsfreundlichen Cafés mit WLAN, Steckdosen und gemütlicher Atmosphäre.",
+      "description_with_country": "Finde das perfekte Café für mobiles Arbeiten in {{country}}. Entdecke unsere kuratierte Liste von arbeitsfreundlichen Cafés mit WLAN, Steckdosen und gemütlicher Atmosphäre."
     },
     "show": {
       "title": "Cafés zum Arbeiten in {{name}}",
@@ -31,10 +35,13 @@
   "filters": {
     "select_sort": "Sortieren nach",
     "sorting": {
-      "population_desc": "Population (Höchste zu Niedrigste)",
-      "population_asc": "Population (Niedrigste zu Höchste)",
-      "updated_at_desc": "Aktualisiert (Neueste zu Ältesten)",
-      "updated_at_asc": "Aktualisiert (Älteste zu Neuesten)"
+      "population_desc": "Nach Bevölkerung (Absteigend)",
+      "population_asc": "Nach Bevölkerung (Aufsteigend)",
+      "updated_at_desc": "Zuletzt aktualisiert",
+      "updated_at_asc": "Am ältesten aktualisiert"
+    },
+    "by-country": {
+      "all": "Alle Länder"
     }
   }
 }

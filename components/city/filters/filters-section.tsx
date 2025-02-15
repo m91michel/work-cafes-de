@@ -1,5 +1,5 @@
 import { SortingOption, SortingOptions } from "@/components/general/inputs/sorting-options";
-import { City } from "@/libs/types";
+import { CountryFilter } from "./country-filter";
 
 
 type Props = {
@@ -28,7 +28,7 @@ export function FiltersSection({ countries }: Props) {
   
   return (
     <div className="flex flex-wrap gap-4 justify-between mb-8">
-      <p>Country</p>
+      <CountryFilter countries={countries} />
       {/* Add more filters here */}
       <SortingOptions options={citySortingOptions} namespace="city" />
     </div>

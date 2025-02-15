@@ -1,7 +1,9 @@
 {
   "index": {
-    "title": "Overview Of All Cities With Work-Friendly Cafes",
-    "description": "Find the perfect cafe for mobile work in your city. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
+    "title": "<highlight>Best Cities</highlight> With Work-Friendly Cafes",
+    "title_with_country": "Best Cities With Work-Friendly Cafes <highlight>in {{country}}</highlight>",
+    "description": "Find the perfect cafe for mobile work in your city. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere.",
+    "description_with_country": "Find the perfect cafe for mobile work in {{country}}. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
   },
   "hero": {
     "title": "Best <highlight>Work-Friendly Cafes</highlight> In {{name}}",
@@ -19,8 +21,10 @@
   },
   "meta": {
     "index": {
-      "title": "Overview Of All Cities With Work-Friendly Cafes",
-      "description": "Find the perfect cafe for mobile work in your city. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
+      "title": "Best Cities With Work-Friendly Cafes",
+      "title_with_country": "Best Cities With Work-Friendly Cafes In {{country}}",
+      "description": "Find the perfect cafe for mobile work in your city. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere.",
+      "description_with_country": "Find the perfect cafe for mobile work in {{country}}. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
     },
     "show": {
       "title": "Best Work-Friendly Cafes In {{name}}",
@@ -31,10 +35,13 @@
   "filters": {
     "select_sort": "Select Sort",
     "sorting": {
-      "population_desc": "Population (High to Low)",
-      "population_asc": "Population (Low to High)",
-      "updated_at_desc": "Updated (Newest to Oldest)",
-      "updated_at_asc": "Updated (Oldest to Newest)"
+      "population_desc": "Highest Population",
+      "population_asc": "Lowest Population",
+      "updated_at_desc": "Latest Updated",
+      "updated_at_asc": "Oldest Updated"
+    },
+    "by-country": {
+      "all": "All Countries"
     }
   }
 }
