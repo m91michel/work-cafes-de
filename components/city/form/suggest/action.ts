@@ -7,7 +7,11 @@ export async function suggestCityAction(formData: FormData) {
   try {
     // Your server-side logic here
     const city = formData.get("city") as string;
+    const state = formData.get("state") as string;
     const countryCode = formData.get("country") as string;
+    const email = formData.get("email") as string;
+
+    console.log({ countryCode, formData });
 
     const { data: countryData } = await supabase
       .from("countries")
@@ -15,6 +19,17 @@ export async function suggestCityAction(formData: FormData) {
       .eq("code", countryCode)
       .single();
 
+    const { error: errorSuggestion } = await supabase
+      .from("user_suggestions")
+      .insert({
+        email: email,
+        record_type: "city",
+        slug: generateSlug(city),
+      });
+
+    if (errorSuggestion) {
+      console.error(errorSuggestion);
+    }
     const existingCity = await getCityByName(city);
 
     if (existingCity) {
@@ -31,6 +46,7 @@ export async function suggestCityAction(formData: FormData) {
         name_en: city || "",
         country: countryData?.name || "",
         country_code: countryCode,
+        state: state || "",
         slug: generateSlug(city),
         status: "UNKNOWN",
       })

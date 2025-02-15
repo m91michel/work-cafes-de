@@ -73,7 +73,7 @@ export function CountrySelectForm({ form, name, label, description }: InputProps
                       value={country.label}
                       key={country.value}
                       onSelect={() => {
-                        form.setValue("country", country.value);
+                        form.setValue(name, country.value);
                       }}
                     >
                       {country.label}

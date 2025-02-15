@@ -1,9 +1,10 @@
 import { City, TranslationProps } from "@/libs/types";
 import { CityCard } from "../city-card";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+
 import { PlusCircle } from "lucide-react";
 import Paths from "@/libs/paths";
+import { MLink } from "@/components/general/link";
 
 interface Props extends TranslationProps {
   title?: string;
@@ -48,13 +49,9 @@ export function CityList({
               {t('more_cities.suggest_description')}
             </p>
             <Button asChild>
-              <a
-                href={Paths.suggestCity}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <MLink href={Paths.suggestCity}>
                 {t('more_cities.suggest_button')}
-              </a>
+              </MLink>
             </Button>
           </div>
         )}
@@ -62,7 +59,7 @@ export function CityList({
       {showMoreButton && (
         <div className="flex justify-center mt-6">
           <Button variant="default" asChild>
-            <Link href="/cities">{buttonText || t('more_cities.button_text')}</Link>
+            <MLink href="/cities">{buttonText || t('more_cities.button_text')}</MLink>
           </Button>
         </div>
       )}

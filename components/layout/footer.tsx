@@ -4,7 +4,6 @@ import config, { appName, domainName } from "@/config/config";
 import { getCities } from "@/libs/supabase/cities";
 import { isGerman } from "@/libs/environment";
 import Paths from "@/libs/paths";
-import { Trans } from "react-i18next";
 import initTranslations from "@/libs/i18n/config";
 
 const currentYear = new Date().getFullYear();

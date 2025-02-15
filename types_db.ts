@@ -332,6 +332,33 @@ export type Database = {
           },
         ]
       }
+      user_suggestions: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          message: string | null
+          record_type: string | null
+          slug: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          record_type?: string | null
+          slug?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          record_type?: string | null
+          slug?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

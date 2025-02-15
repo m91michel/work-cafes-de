@@ -5,7 +5,7 @@ export const domainEn = "awifi.place";
 export const domainName = isGerman ? domainDe : domainEn;
 export const alternateDomainName = isGerman ? domainEn : domainDe;
 export const baseUrl = `https://${domainName}`;
-export const appName = isGerman ? "Cafés zum Arbeiten" : "A Wifi.Place";
+export const appName = isGerman ? "Café zum Arbeiten" : "A Wifi.Place";
 
 export const submitFormUrl = "https://tally.so/r/mB81VA";
 
@@ -18,7 +18,7 @@ const config = {
     // REQUIRED: a short description of your app for SEO tags (can be overwritten)
     appDescription: isGerman ? descriptionDe : descriptionEn,
     // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
-  domainName: domainName,
+    domainName: domainName,
     umami: {
       enabled: true,
       id: isGerman ? "51113768-3569-4f28-94d3-0104fac43fcf" : "ee9231d9-aa00-4d20-8dad-62238cfb51eb",

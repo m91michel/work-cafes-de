@@ -2,7 +2,7 @@
 
 import { Textarea } from "@/components/ui/textarea";
 import { UseFormReturn } from "react-hook-form";
-import { MyFormItem } from "./form-item";
+import { MyFormItem } from "../form-item";
 
 type InputProps = {
   form: UseFormReturn<any>;

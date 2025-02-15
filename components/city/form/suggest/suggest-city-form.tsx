@@ -1,17 +1,17 @@
 "use client";
 
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useCTranslation } from "@/hooks/use-translation";
 import { suggestCityAction } from "./action";
 import { Form } from "@/components/ui/form";
-import { MyInput } from "@/components/general/form/my-input";
-import { MyTextarea } from "@/components/general/form/my-textarea";
+import { MyInput } from "@/components/general/form/inputs/text-input";
 import { cn } from "@/libs/utils";
 import { FormReset, FormSubmit } from "@/components/general/form/buttons";
 import { useToast } from "@/hooks/use-toast";
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { CountrySelectForm } from "@/components/general/form/country-select";
+import { HiddenInput } from "@/components/general/form/inputs/hidden-input";
 
 interface FormProps {
   className?: string;
@@ -73,15 +73,18 @@ export function SuggestCityForm({ className }: FormProps) {
         <MyInput
           form={form}
           name="city"
+          required
           label={t("suggest.form.city")}
           placeholder={t("suggest.form.city_placeholder")}
         />
         <MyInput
           form={form}
           name="state"
+          required
           label={t("suggest.form.state")}
           placeholder={t("suggest.form.state_placeholder")}
         />
+        <HiddenInput form={form} name="country" />
         <CountrySelectForm
           form={form}
           name="country"
@@ -90,6 +93,7 @@ export function SuggestCityForm({ className }: FormProps) {
         <MyInput
           form={form}
           name="email"
+          type="email"
           label={t("suggest.form.email")}
           placeholder={t("suggest.form.email_placeholder")}
           description={t("suggest.form.email_description")}
