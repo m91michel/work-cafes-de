@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
   const { data: cities = [], error } = await supabase
     .from("cities")
     .select("*")
-    .eq("status", "NEW")
+    .eq("status", "READY")
     .order("population", { ascending: false })
     .limit(limit);
 

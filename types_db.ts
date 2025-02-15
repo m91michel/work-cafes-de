@@ -143,6 +143,7 @@ export type Database = {
           name_en: string | null
           population: number | null
           preview_image: string | null
+          processed_at: string | null
           slug: string
           state: string | null
           state_code: string | null
@@ -163,6 +164,7 @@ export type Database = {
           name_en?: string | null
           population?: number | null
           preview_image?: string | null
+          processed_at?: string | null
           slug: string
           state?: string | null
           state_code?: string | null
@@ -183,6 +185,7 @@ export type Database = {
           name_en?: string | null
           population?: number | null
           preview_image?: string | null
+          processed_at?: string | null
           slug?: string
           state?: string | null
           state_code?: string | null

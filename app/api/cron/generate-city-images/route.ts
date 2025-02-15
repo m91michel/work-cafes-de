@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
     .from("cities")
     .select("name_de, name_en, slug, status")
     .is("preview_image", null)
-    .eq("status", "NEW")
+    .eq("status", "READY")
     .order("population", { ascending: false })
     .limit(limit);
 
@@ -39,13 +39,14 @@ export async function GET(request: NextRequest) {
 
   let processed = 0;
   for (const city of cities) {
-    if (!city.name_de) {
+    const cityName = city.name_en || city.name_de;
+    if (!cityName) {
       console.error("⚠️ City name is null", city);
       continue;
     }
 
-    const prompt = await createCityImagePrompt(city.name_de);
-    console.log(`⚡️ generating image for ${city.name_de} prompt: <start>${prompt}<end>`);
+    const prompt = await createCityImagePrompt(cityName);
+    console.log(`⚡️ generating image for ${cityName} prompt: <start>${prompt}<end>`);
     const imageUrl = await createReplicateImage(prompt);
 
     if (imageUrl) {
@@ -62,16 +63,16 @@ export async function GET(request: NextRequest) {
           .eq("slug", city.slug);
 
         if (updateError) {
-          console.error(`⚠️ Error updating city ${city.name_de}:`, updateError);
+          console.error(`⚠️ Error updating city ${cityName}:`, updateError);
           continue;
         }
-        console.log(`🎉 processed ${city.name_de} (${bunnyUrl})`);
+        console.log(`🎉 processed ${cityName} (${bunnyUrl})`);
         processed++;
       } else {
-        console.error(`⚠️ Error uploading image for ${city.name_de}. Bunny URL is null`);
+        console.error(`⚠️ Error uploading image for ${cityName}. Bunny URL is null`);
       }
     } else {
-      console.error(`⚠️ Error generating image for ${city.name_de}. Image URL is null`);
+      console.error(`⚠️ Error generating image for ${cityName}. Image URL is null`);
     }
   }
 
