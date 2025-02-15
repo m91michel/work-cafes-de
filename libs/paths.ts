@@ -14,6 +14,7 @@ class Paths {
   static home = "/";
   static cafes = "/cafes";
   static cities = "/cities";
+  static suggestCity = "/cities/suggest";
 
   // Localized paths
   static about = Paths.getPath({

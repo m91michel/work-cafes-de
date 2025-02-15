@@ -45,7 +45,7 @@ export default async function CityPage({ searchParams }: Props) {
   const descriptionKey = country ? "index.description_with_country" : "index.description";
   return (
     <main className="flex-1 bg-background">
-      <div className="bg-card border-b">
+      <div className="bg-card">
         <div className="max-w-7xl mx-auto px-4 py-12">
           <h1 className="text-4xl font-bold mb-4">
             <TransHighlight

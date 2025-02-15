@@ -189,6 +189,47 @@ export type Database = {
           status?: string | null
           updated_at?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "cities_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      countries: {
+        Row: {
+          city_count: number
+          code: string
+          created_at: string
+          flag: string | null
+          latitude: string | null
+          longitude: string | null
+          name: string | null
+          status: string | null
+        }
+        Insert: {
+          city_count?: number
+          code: string
+          created_at?: string
+          flag?: string | null
+          latitude?: string | null
+          longitude?: string | null
+          name?: string | null
+          status?: string | null
+        }
+        Update: {
+          city_count?: number
+          code?: string
+          created_at?: string
+          flag?: string | null
+          latitude?: string | null
+          longitude?: string | null
+          name?: string | null
+          status?: string | null
+        }
         Relationships: []
       }
       reviews: {

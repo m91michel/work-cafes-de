@@ -5,6 +5,30 @@
     "description": "Find the perfect cafe for mobile work in your city. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere.",
     "description_with_country": "Find the perfect cafe for mobile work in {{country}}. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
   },
+  "suggest": {
+    "title": "Suggest A City",
+    "description": "Is your city missing? Suggest it to us, we will check it and add it to our site.",
+    "form": {
+      "city": "City *",
+      "city_placeholder": "New York City, London, Paris, etc.",
+      "country": "Country *",
+      "state": "State *",
+      "state_placeholder": "California, New York, etc.",
+      "email": "Email",
+      "email_placeholder": "your@email.com",
+      "email_description": "We will use this email to inform if we have successfully processed your city suggestion."
+    },
+    "toast": {
+      "success": {
+        "title": "City successfully submitted",
+        "description": "We will review your suggestion and get back to you soon."
+      },
+      "error": {
+        "title": "Something went wrong",
+        "description": "Please try again or contact us via email."
+      }
+    }
+  },
   "hero": {
     "title": "Best <highlight>Work-Friendly Cafes</highlight> In {{name}}",
     "cafe_count": "{{count}} Places Found",

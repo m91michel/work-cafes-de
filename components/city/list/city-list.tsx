@@ -3,6 +3,7 @@ import { CityCard } from "../city-card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { PlusCircle } from "lucide-react";
+import Paths from "@/libs/paths";
 
 interface Props extends TranslationProps {
   title?: string;
@@ -12,8 +13,6 @@ interface Props extends TranslationProps {
   buttonText?: string;
   filterSection?: React.ReactNode;
 };
-
-const suggestCityForm = "https://tally.so/r/w74zlP";
 
 export function CityList({
   title,
@@ -50,7 +49,7 @@ export function CityList({
             </p>
             <Button asChild>
               <a
-                href={suggestCityForm}
+                href={Paths.suggestCity}
                 target="_blank"
                 rel="noopener noreferrer"
               >
