@@ -5,19 +5,26 @@ type GetCafeProps = {
   limit?: number;
   offset?: number;
   excludeSlug?: string;
+  country?: string;
 };
 export async function getCities(
   props: GetCafeProps = { limit: 100, offset: 0 }
 ): Promise<City[]> {
-  const { limit = 100, offset = 0, excludeSlug } = props;
+  const { limit = 100, offset = 0, excludeSlug, country } = props;
 
-  const { data, error } = await supabase
+  let query = supabase
     .from("cities")
     .select("*")
     .range(offset, offset + limit - 1)
     .neq("slug", excludeSlug || "")
     .gte("cafes_count", 1)
     .order("population", { ascending: false });
+
+  if (country) {
+    query = query.eq("country", country);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.error("Error fetching data:", error);

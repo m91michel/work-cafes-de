@@ -1,5 +1,5 @@
 import { SimpleCafeList } from "@/components/cafe/lists/simple-cafe-list";
-import { CityList } from "@/components/city/city-list";
+import { CityList } from "@/components/city/list/city-list";
 import { CitySelector } from "@/components/city/city-selector";
 import { getSEOTags } from "@/libs/seo";
 import { getBestCafes, getCafes, getCafesCount } from "@/libs/supabase/cafes";

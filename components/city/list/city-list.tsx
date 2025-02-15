@@ -1,5 +1,5 @@
 import { City, TranslationProps } from "@/libs/types";
-import { CityCard } from "./city-card";
+import { CityCard } from "../city-card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { PlusCircle } from "lucide-react";

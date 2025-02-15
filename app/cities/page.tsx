@@ -1,4 +1,4 @@
-import { CityList } from '@/components/city/city-list';
+import { CityList } from '@/components/city/list/city-list';
 import initTranslations from '@/libs/i18n/config';
 import { getSEOTags } from '@/libs/seo';
 import { getCities } from '@/libs/supabase/cities';

@@ -53,3 +53,6 @@ public/_next-video
 # testimonials
 public/assets/testimonials/source/
 scripts/node_modules/
+
+# Data
+data/ignored

@@ -11,7 +11,7 @@
     "description": "Finde den passenden Ort um zu arbeiten, zu lesen oder mit deinen Kommilitonen zu lernen."
   },
   "more_cities": {
-    "title": "Finde Cafés in anderen Städten",
+    "title": "Weitere Städte in {{country}}",
     "button_text": "Alle Städte anzeigen",
     "suggest_title": "Deine Stadt fehlt?",
     "suggest_description": "Dann schlage sie uns vor, damit wir sie auf unserer Seite aufnehmen.",

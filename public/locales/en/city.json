@@ -11,9 +11,9 @@
     "description": "The cafes are selected based on reviews and ratings. Only cafe places that are suitable for working or studying are included. This means they have a laptop-friendly policy and provide WiFi."
   },
   "more_cities": {
-    "title": "Find Cafés In Other Cities",
-    "button_text": "Show All Cities",
-    "suggest_title": "Do Miss A City?",
+    "title": "Checkout Other Cities in {{country}}",
+    "button_text": "Check All Cities",
+    "suggest_title": "Do You Miss A City?",
     "suggest_description": "Then suggest it to us, so we can prioritize it on our site.",
     "suggest_button": "Suggest city"
   },
