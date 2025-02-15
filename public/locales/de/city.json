@@ -7,8 +7,7 @@
   },
   "suggest": {
     "title": "Stadt vorschlagen",
-    "description": "Schlage eine Stadt vor, damit wir sie auf unserer Seite aufnehmen.",
-    "button": "Stadt vorschlagen",
+    "description": "Deine Stadt fehlt? Schlage sie uns vor, damit wir sie auf unserer Seite aufnehmen.",
     "form": {
       "city": "Stadt *",
       "city_placeholder": "Berlin, Hamburg, München, etc.",
@@ -55,6 +54,10 @@
       "title": "Cafés zum Arbeiten in {{name}}",
       "your_city": "deine Stadt",
       "description": "Suchst du nach einem Café zum Arbeiten in {{name}}? Entdecke unsere handverlesenen Cafés mit schnellem WLAN, Steckdosen und gemütlichen Sitzplätzen. Perfekt für Remote-Arbeit, Studium oder um einfach raus zu gehen ."
+    },
+    "suggest": {
+      "title": "Stadt vorschlagen",
+      "description": "Deine Stadt fehlt? Schlage sie uns vor, damit wir sie auf unserer Seite aufnehmen."
     }
   },
   "filters": {
@@ -68,5 +71,15 @@
     "by-country": {
       "all": "Alle Länder"
     }
+  },
+  "faq": {
+    "title": "Häufig gestellte <highlight>Fragen</highlight>",
+    "description": "Wenn du Fragen hast, bitte kontaktiere uns per E-Mail.",
+    "city-added-order.question": "Wie wird die Reihenfolge der neuen Städte bestimmt?",
+    "city-added-order.answer": "Neue Städte werden derzeit basierend auf Größe und Bevölkerungszahl hinzugefügt. Wir werden weitere Städte basierend auf Nachfrage und der Verfügbarkeit arbeitsfreundlicher Cafés hinzufügen. Durch das Vorschlagen einer Stadt können wir diese aber priorisieren.",
+    "when-suggest.question": "Wann wird meine Stadt hinzugefügt?",
+    "when-suggest.answer": "Durch das Vorschlagen einer Stadt wird diese priorisiert verarbeitet. Es kann aber trotzdem ein paar Tage dauern, bis die Stadt auf unserer Seite veröffentlicht wird. Daher macht es Sinn eine E-Mail anzugeben, damit wir dich informieren können, wenn deine Stadt hinzugefügt wurde.",
+    "suggest-email.question": "Warum sollte ich eine E-Mail angeben?",
+    "suggest-email.answer": "Die Angabe einer E-Mail ist optional, aber es hilft uns, dich zu informieren, wenn wir deinen Vorschlag erfolgreich verarbeitet haben."
   }
 }

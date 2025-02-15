@@ -54,6 +54,10 @@
       "title": "Best Work-Friendly Cafes In {{name}}",
       "your_city": "your city",
       "description": "Looking for work-friendly cafes in {{name}}? Discover our handpicked selection of laptop friendly cafes with WiFi."
+    },
+    "suggest": {
+      "title": "Suggest A City",
+      "description": "Is your city missing? Suggest it to us, we will check it and add it to our site."
     }
   },
   "filters": {
@@ -67,5 +71,15 @@
     "by-country": {
       "all": "All Countries"
     }
+  },
+  "faq": {
+    "title": "Frequently Asked <highlight>Questions</highlight>",
+    "description": "If you have any questions, please contact us via email.",
+    "city-added-order.question": "What Is The Order How New Cities Are Added?",
+    "city-added-order.answer": "New cities are currently added based on size and population. We will add more cities based on demand and the availability of suitable work-friendly cafes. But you can suggest a city and we will prioritize it.",
+    "when-suggest.question": "When Will My City Be Added?",
+    "when-suggest.answer": "We will add your city as soon as possible. We will review your suggestion and get back to you soon.",
+    "suggest-email.question": "Why Should I Provide an Email?",
+    "suggest-email.answer": "Providing an email is optional, but it helps us to inform you if we have successfully processed your city suggestion."
   }
 }

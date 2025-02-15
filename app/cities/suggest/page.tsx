@@ -1,4 +1,5 @@
 import { SuggestCityForm } from "@/components/city/form/suggest/suggest-city-form";
+import { FAQSection } from "@/components/faq";
 import { TransHighlight } from "@/components/general/translation";
 import initTranslations from "@/libs/i18n/config";
 import { getSEOTags } from "@/libs/seo";
@@ -22,6 +23,8 @@ export async function generateMetadata({ searchParams }: Props) {
   });
 }
 
+const defaultIds = ['city-added-order', 'when-suggest', 'suggest-email'];
+
 export default async function CityPage({ searchParams }: Props) {
   const { t } = await initTranslations(["city"]);
   const _searchParams = await searchParams;
@@ -30,7 +33,7 @@ export default async function CityPage({ searchParams }: Props) {
   return (
     <main className="flex-1 bg-background">
       <div className="bg-card">
-        <div className="max-w-7xl mx-auto px-4 pt-12">
+        <div className="max-w-7xl mx-auto px-4 pt-12 text-center">
           <h1 className="text-4xl font-bold mb-4">
             <TransHighlight
               i18nKey={"suggest.title"}
@@ -47,7 +50,8 @@ export default async function CityPage({ searchParams }: Props) {
       </div>
 
       <section className="max-w-7xl mx-auto px-4 py-12">
-        <SuggestCityForm className="max-w-2xl" />
+        <SuggestCityForm className="max-w-2xl mx-auto" />
+        <FAQSection faqsIds={defaultIds} namespace="city" />
       </section>
     </main>
   );
