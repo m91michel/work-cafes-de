@@ -4,7 +4,7 @@
     "description": "Finde das perfekte Café für mobiles Arbeiten in ganz Deutschland. Entdecke unsere kuratierte Liste von arbeitsfreundlichen Cafés mit WLAN, Steckdosen und gemütlicher Atmosphäre."
   },
   "hero": {
-    "title": "Die {{count}} besten Cafés in {{name}}",
+    "title": "Die besten <highlight>zum Arbeiten</highlight> in {{name}}",
     "cafe_count": "{{count}} Cafés gefunden",
     "subtitle_one": "Entdecke {{count}} sorgfältig ausgewähltes Cafe in {{name}}.",
     "subtitle_other": "Entdecke {{count}} sorgfältig ausgewählte Cafes in {{name}}.",

@@ -4,11 +4,11 @@
     "description": "Find the perfect cafe for mobile work in your city. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
   },
   "hero": {
-    "title": "Discover The {{count}} Best Cafes In {{name}}",
-    "cafe_count": "{{count}} cafes found",
-    "description": "Discover the best cafes to work in {{name}}, that are perfect for working or studying.",
-    "subtitle_one": "Discover {{count}} carefully selected Cafe in {{name}}.",
-    "subtitle_other": "Discover {{count}} carefully selected Cafes in {{name}}."
+    "title": "Best <highlight>Work-Friendly Cafes</highlight> In {{name}}",
+    "cafe_count": "{{count}} Places Found",
+    "subtitle_one": "Discover {{count}} Carefully Selected Cafe In {{name}}.",
+    "subtitle_other": "Discover {{count}} Carefully Selected Cafes In {{name}}.",
+    "description": "The cafes are selected based on reviews and ratings. Only cafe places that are suitable for working or studying are included. This means they have a laptop-friendly policy and provide WiFi."
   },
   "more_cities": {
     "title": "Find Cafés In Other Cities",
@@ -23,7 +23,7 @@
       "description": "Find the perfect cafe for mobile work in your city. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
     },
     "show": {
-      "title": "Best Cafés For Working In {{name}}",
+      "title": "Best Work-Friendly Cafes In {{name}}",
       "your_city": "your city",
       "description": "Looking for work-friendly cafes in {{name}}? Discover our handpicked selection of laptop friendly cafes with WiFi."
     }

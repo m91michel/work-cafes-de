@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: Props) {
   const { t } = await initTranslations(['city']);
   const slug = (await params).city
   const city = await getCityBySlug(slug);
+
   const dbName = isGerman ? city?.name_de : city?.name_en
   const name = dbName || t('meta.show.your_city')
 
@@ -54,7 +55,7 @@ export default async function CityPage({ params }: Props) {
     <main className="flex-1 bg-background">
       <CityHero city={city} cafeCount={cafes.length} t={t} />
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-2xl font-semibold">
+        <h2 className="text-2xl font-semibold mb-4">
           {t('hero.subtitle', { count: cafes.length, name: city.name_de })}
         </h2>
         <p className="text-muted-foreground">

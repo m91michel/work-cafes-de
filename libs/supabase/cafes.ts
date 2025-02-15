@@ -119,11 +119,22 @@ export async function getCafesByCity(
   return data;
 }
 
-export async function getCafesCount(): Promise<number | null> {
-  const { error, count } = await supabase
+type CafesCountOptions = {
+  citySlug?: string;
+};
+export async function getCafesCount({
+  citySlug,
+}: CafesCountOptions = {}): Promise<number | null> {
+  let query = supabase
     .from("cafes")
     .select("name, slug", { count: "exact" })
     .eq("status", "PUBLISHED");
+
+  if (citySlug) {
+    query = query.eq("city_slug", citySlug);
+  }
+
+  const { error, count } = await query;
 
   if (error) {
     console.error("Error fetching data:", error);
