@@ -58,13 +58,17 @@ export async function GET(request: NextRequest) {
 
     const keywords = ["working", "wifi", "arbeiten", "wlan", "laptop"];
     for (const keyword of keywords) {
-      await outscraperReviewsTask({
+      const result = await outscraperReviewsTask({
         id: cafe.google_place_id,
         keywords: keyword,
         async: true,
       });
-
-      console.log(`✅ Task created for ${cafe.name} and keyword "${keyword}"`);
+      if (!result) {
+        console.error(`❌ Error fetching reviews for ${cafe.name}: ${error}`);
+        return NextResponse.json({ message: "error", cafes }, { status: 500 });
+      } else {
+        console.log(`✅ Task created for ${cafe.name} and keyword "${keyword}"`);
+      }
     }
   }
 

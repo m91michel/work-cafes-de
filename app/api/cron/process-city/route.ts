@@ -45,6 +45,7 @@ export async function GET(request: NextRequest) {
       console.error("⚠️ City name is null", city);
       continue;
     }
+    console.log(`⚡️ processing ${cityName} ${city.country} ${city.state}`);
 
     let description_short_de = null;
     let description_short_en = null;
@@ -53,7 +54,7 @@ export async function GET(request: NextRequest) {
 
     const result_en = await generateCityDescription(city, "de");
     if (!result_en) {
-      console.error(`⚠️ Error generating city description for ${city.name_en}`);
+      console.error(`⚠️ Error generating city description for ${cityName}`);
       setCityAsProcessed(city);
       continue;
     }
@@ -62,7 +63,7 @@ export async function GET(request: NextRequest) {
 
     const result_de = await generateCityDescription(city, "en");
     if (!result_de) {
-      console.error(`⚠️ Error generating city description for ${city.name_de}`);
+      console.error(`⚠️ Error generating city description for ${cityName}`);
       setCityAsProcessed(city);
       continue;
     }
@@ -85,10 +86,11 @@ export async function GET(request: NextRequest) {
       .eq("slug", city.slug);
 
     if (updateError) {
-      console.error(`⚠️ Error updating city ${city.name_de}:`, updateError);
+      console.error(`⚠️ Error updating city ${cityName}:`, updateError);
     }
 
     processed++;
+    console.log(`✅ finished ${cityName} ${city.country} ${city.state}`);
   }
 
   console.log(`✅ finished processing ${processed}/${cities.length} cities`);
