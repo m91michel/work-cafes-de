@@ -27,5 +27,14 @@
       "your_city": "your city",
       "description": "Looking for work-friendly cafes in {{name}}? Discover our handpicked selection of laptop friendly cafes with WiFi."
     }
+  },
+  "filters": {
+    "select_sort": "Select Sort",
+    "sorting": {
+      "population_desc": "Population (High to Low)",
+      "population_asc": "Population (Low to High)",
+      "updated_at_desc": "Updated (Newest to Oldest)",
+      "updated_at_asc": "Updated (Oldest to Newest)"
+    }
   }
 }

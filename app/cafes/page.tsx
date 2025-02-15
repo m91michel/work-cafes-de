@@ -5,6 +5,8 @@ import { getCities } from "@/libs/supabase/cities";
 import { FAQSection } from "@/components/faq";
 import initTranslations from "@/libs/i18n/config";
 import { AdvancedCafeList } from "@/components/cafe/lists/advanced-cafe-list";
+import { cafeSortingOptions } from "@/components/cafe/filters/filters-section";
+
 export const metadata = getSEOTags({
   title: `Entdecke die besten Cafés zum Arbeiten in Deutschland`,
   description: "Entdecke die besten Cafés zum Arbeiten in Deutschland! Finde ideale Orte für Kaffee und Produktivität mit unserer umfassenden Liste der Hotspots.",
@@ -25,7 +27,7 @@ export default async function CafesPage({ searchParams }: Props) {
   const { t } = await initTranslations(['cafe']);
   const _searchParams = await searchParams;
   const citySlug = _searchParams.city as string | undefined;
-  const sort = _searchParams.sort as string | undefined;
+  const sort = whiteListedSortParam(_searchParams.sort as string | undefined);
   const sortBy = sort?.split('-')[0] || 'google_rating';
   const sortOrder = sort?.split('-')[1] as 'asc' | 'desc' || 'desc';
   
@@ -65,4 +67,16 @@ export default async function CafesPage({ searchParams }: Props) {
       </div>
     </main>
   );
+}
+
+function whiteListedSortParam(sort?: string | undefined) {
+  if (!sort) {
+    return cafeSortingOptions[0].value;
+  }
+  const isIncluded = cafeSortingOptions.some((option) => option.value === sort);
+  
+  if (!isIncluded) {
+    return cafeSortingOptions[0].value;
+  }
+  return sort;
 }

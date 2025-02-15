@@ -10,6 +10,7 @@ interface Props extends TranslationProps {
   suggestCityCard?: boolean;
   showMoreButton?: boolean;
   buttonText?: string;
+  filterSection?: React.ReactNode;
 };
 
 const suggestCityForm = "https://tally.so/r/w74zlP";
@@ -20,11 +21,13 @@ export function CityList({
   showMoreButton = false,
   suggestCityCard = false,
   buttonText,
+  filterSection,
   t,
 }: Props) {
   return (
     <section className="max-w-7xl mx-auto px-4 py-12">
       {title && <h2 className="text-2xl font-semibold mb-6">{title}</h2>}
+      {filterSection && filterSection}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {cities.map((city) => (
           <CityCard key={city.slug} city={city} />

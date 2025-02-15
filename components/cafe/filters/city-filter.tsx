@@ -1,7 +1,7 @@
 'use client';
 
 import { City } from '@/libs/types';
-import { BaseFilterSelect } from './base-filter-select';
+import { BaseFilterSelect } from '@/components/general/inputs/base-filter-select';
 import { useCTranslation } from '@/hooks/use-translation';
 import { isGerman } from '@/libs/environment';
 import { countryFlag } from '@/libs/utils';

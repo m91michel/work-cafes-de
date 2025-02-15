@@ -6,11 +6,13 @@ type GetCafeProps = {
   offset?: number;
   excludeSlug?: string;
   country?: string;
+  sortBy?: string;
+  sortOrder?: string;
 };
 export async function getCities(
   props: GetCafeProps = { limit: 100, offset: 0 }
 ): Promise<City[]> {
-  const { limit = 100, offset = 0, excludeSlug, country } = props;
+  const { limit = 100, offset = 0, excludeSlug, country, sortBy = 'population', sortOrder = 'desc' } = props;
 
   let query = supabase
     .from("cities")
@@ -18,7 +20,7 @@ export async function getCities(
     .range(offset, offset + limit - 1)
     .neq("slug", excludeSlug || "")
     .gte("cafes_count", 1)
-    .order("population", { ascending: false });
+    .order(sortBy, { ascending: sortOrder === 'asc' });
 
   if (country) {
     query = query.eq("country", country);

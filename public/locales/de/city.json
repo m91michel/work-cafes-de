@@ -27,5 +27,14 @@
       "your_city": "deine Stadt",
       "description": "Suchst du nach einem Café zum Arbeiten in {{name}}? Entdecke unsere handverlesenen Cafés mit schnellem WLAN, Steckdosen und gemütlichen Sitzplätzen. Perfekt für Remote-Arbeit, Studium oder um einfach raus zu gehen ."
     }
+  },
+  "filters": {
+    "select_sort": "Sortieren nach",
+    "sorting": {
+      "population_desc": "Population (Höchste zu Niedrigste)",
+      "population_asc": "Population (Niedrigste zu Höchste)",
+      "updated_at_desc": "Aktualisiert (Neueste zu Ältesten)",
+      "updated_at_asc": "Aktualisiert (Älteste zu Neuesten)"
+    }
   }
 }

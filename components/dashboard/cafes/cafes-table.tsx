@@ -1,7 +1,7 @@
 "use client";
 
 import { Cafe } from "@/libs/types";
-import { DataTable } from "@/components/ui/data-table/data-table";
+import { DataTable } from "@/components/general/data-table/data-table";
 import { Badge } from "@/components/ui/badge";
 import {
   ColumnDef,
