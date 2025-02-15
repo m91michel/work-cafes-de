@@ -4,6 +4,7 @@ import supabase from "@/libs/supabase/supabaseClient";
 import { extractToken, generateSlug } from "@/libs/utils";
 import { GoogleMapsPlace, searchPlaces } from "@/libs/google-maps";
 import { sendMessage } from "@/libs/telegram";
+import { Cafe } from "@/libs/types";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -36,7 +37,7 @@ export async function GET(request: NextRequest) {
   }
 
   for (const city of cities) {
-    let duplicateCafes: string[] = [];
+    let cafesWithError: string[] = [];
     if (!city.name_de) {
       console.error("⚠️ City name is null", city);
       continue;
@@ -48,15 +49,17 @@ export async function GET(request: NextRequest) {
       console.error("⚠️ City name is null", city);
       continue;
     }
-    const searchQuery = isGermany ? `cafe zum arbeiten in ${cityName}` : `cafe for working in ${cityName}`;
+    const searchQuery = isGermany
+      ? `cafe zum arbeiten in ${cityName}`
+      : `cafe for working in ${cityName}`;
     const places = await searchPlaces(searchQuery, { type: "cafe" });
-    
+
     if (places === null || places === undefined) {
       console.error("⚠️ Error searching for cafes", places);
       continue;
     }
 
-    for (const place of places) {
+    for (const [index, place] of places.entries()) {
       if (!isInCity(place, cityName)) {
         console.log(`⚠️ ${place.formatted_address} is not in ${cityName}`);
         continue;
@@ -74,43 +77,86 @@ export async function GET(request: NextRequest) {
       const google_place_id = place.place_id;
       const slug = generateSlug(`${place.name}-${city.slug}`);
 
+      const attributes: Partial<Cafe> = {
+        name: place.name,
+        city_slug: city.slug,
+        city: city.name_de,
+        address: formattedAddress,
+        slug: slug,
+        lat_long: lat_long,
+        google_rating: rating,
+        google_place_id: google_place_id,
+      };
+
       const { data, error } = await supabase
         .from("cafes")
-        .upsert({
-          name: place.name,
-          city_slug: city.slug,
-          city: city.name_de,
-          address: formattedAddress,
-          slug: slug,
-          lat_long: lat_long,
-          google_rating: rating,
-          google_place_id: google_place_id,
-          status: "NEW",
-        }, {
-          onConflict: 'google_place_id',
-          ignoreDuplicates: true,
-        })
+        .upsert(
+          {
+            ...attributes,
+            status: "NEW",
+          },
+          {
+            onConflict: "google_place_id",
+            ignoreDuplicates: true,
+          }
+        )
         .select("id")
         .maybeSingle();
 
-      if (error) {
-        console.error("⚠️ Error inserting cafe", error);
-        duplicateCafes.push(place.name || "");
+      if (error && error.code === "23505") {
+        console.log(`💭 Handling key violation for cafe`, error);
+
+        const slug = generateSlug(`${place.name}-${city.slug}-${index}`);
+
+        const { error: duplicateError } = await supabase
+          .from("cafes")
+          .upsert(
+            {
+              ...attributes,
+              slug: slug,
+              status: "DUPLICATE",
+            },
+            {
+              onConflict: "google_place_id",
+              ignoreDuplicates: true,
+            }
+          )
+          .select("id")
+          .maybeSingle();
+
+        if (duplicateError) {
+          console.error("⚠️ Error inserting cafe", duplicateError);
+          cafesWithError.push(`✴️ ${place.name} (${slug})`);
+        } else {
+          console.log(`✴️ duplicate cafe ${place.name} (${slug})`);
+        }
+
+        continue;
+      } else if (error) {
+        console.error(
+          `⚠️ Unknown error inserting cafe ${place.name} in ${city.name_en}`,
+          error
+        );
+        cafesWithError.push(`❌ ${place.name} (${slug})`);
         continue;
       }
 
       console.log(`🎉 processed ${place.name} (${data?.id})`);
     }
 
-    if (duplicateCafes.length > 0) {
-      console.log(`⚠️ Duplicate cafes: ${duplicateCafes.length}`);
-      await sendMessage(`⚠️ Duplicate cafes in ${city.name_en}: \n\n- ${duplicateCafes.join("\n- ")}`);
+    if (cafesWithError.length > 0) {
+      console.log(`⚠️ Cafes with errors: ${cafesWithError.length}`);
+      await sendMessage(
+        `⚠️ Cafes with errors in ${city.name_en}: \n\n- ${cafesWithError.join(
+          "\n- "
+        )}`
+      );
     }
 
     await supabase
-        .from("cities")
-        .update({ status: "PROCESSING" })
-        .eq("slug", city.slug);
+      .from("cities")
+      .update({ status: "PROCESSING" })
+      .eq("slug", city.slug);
   }
 
   console.log(`✅ finished search for new cafes in ${cities.length} cities`);
@@ -120,13 +166,10 @@ export async function GET(request: NextRequest) {
 
 function isInCity(place: GoogleMapsPlace, cityName: string): boolean {
   if (!place.formatted_address) return false;
-  
+
   // Convert to lowercase and remove special characters for comparison
   const normalizedAddress = place.formatted_address.toLowerCase();
-  const normalizedCity = cityName
-    .replace("City", "")
-    .trim()
-    .toLowerCase();
-  
+  const normalizedCity = cityName.replace("City", "").trim().toLowerCase();
+
   return normalizedAddress.includes(normalizedCity);
 }
