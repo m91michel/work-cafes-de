@@ -59,14 +59,15 @@ export default async function CafePage({ params }: Props) {
   const { t } = await initTranslations(['cafe']);
   const slug = (await params).slug;
   const cafe = await getCafeBySlug(slug);
+
+  if (!cafe) {
+    return notFound();
+  }
+  
   const relatedCafes = await getCafesByCity(cafe?.city_slug || "", {
     limit: 3,
     excludeSlug: slug,
   });
-
-  if (!cafe) {
-    notFound();
-  }
 
   return (
     <main className="flex-1 bg-background">

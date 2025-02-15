@@ -20,7 +20,7 @@ export const metadata = getSEOTags({
 const Impressum = () => {
 
   if (isEnglish) {
-    notFound();
+    return notFound();
   }
 
   return (

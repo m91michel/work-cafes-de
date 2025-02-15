@@ -43,7 +43,7 @@ const lastUpdated = "2024-12-08";
 const PrivacyPolicy = () => {
 
   if (isEnglish) {
-    notFound();
+    return notFound();
   }
 
   return (

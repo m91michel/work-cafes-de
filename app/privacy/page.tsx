@@ -44,7 +44,7 @@ const lastUpdated = "2024-12-08";
 const PrivacyPolicy = () => {
 
   if (isGerman) {
-    notFound();
+    return notFound();
   }
 
   return (
