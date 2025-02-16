@@ -24,10 +24,10 @@ export async function GET(request: NextRequest) {
 
   console.log(`⚡️ start processing cities (limit: ${limit})`);
 
-  const { data: cities = [], error } = await supabase
+  const { data: cities = [], error, count } = await supabase
     .from("cities")
-    .select("*")
-    .is("preview_image", null)
+    .select("*", { count: "exact" })
+    .is("description_short_en", null)
     .eq("status", "NEW")
     .order("population", { ascending: false })
     .limit(limit);
@@ -93,7 +93,7 @@ export async function GET(request: NextRequest) {
     console.log(`✅ finished ${cityName} ${city.country} ${city.state}`);
   }
 
-  console.log(`✅ finished processing ${processed}/${cities.length} cities`);
+  console.log(`✅ finished processing ${processed}/${cities.length} cities (left: ${count})`);
 
   return NextResponse.json({ message: "success" });
 }

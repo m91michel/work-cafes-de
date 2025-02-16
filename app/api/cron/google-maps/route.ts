@@ -25,9 +25,9 @@ export async function GET(request: NextRequest) {
 
   console.log(`⚡️ start processing cafes (limit: ${limit})`);
 
-  const { data: cafes = [], error } = await supabase
+  const { data: cafes = [], error, count } = await supabase
     .from("cafes")
-    .select("*")
+    .select("*", { count: "exact" })
     .not("google_place_id", "is", null)
     .eq("status", "NEW")
     .gte("review_count", 1) // only process cafes with at least 1 review
@@ -108,7 +108,7 @@ export async function GET(request: NextRequest) {
     console.log(`🎉 processed ${cafe.name}`);
   }
 
-  console.log(`✅ finished processing ${cafes.length} cafes`);
+  console.log(`✅ finished processing ${cafes.length} cafes (left: ${count})`);
 
   return NextResponse.json({ message: "success" });
 }
