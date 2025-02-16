@@ -32,6 +32,7 @@ export async function GET(request: NextRequest) {
     .not("website_url", "is", null)
     // .not("website_content", "is", null)
     .is("processed->fetched_website_content_at", null)
+    .order("created_at", { ascending: true })
     // .eq("id", "6175fbd2-1078-4d2b-b08b-208c57509faf")
     .limit(limit);
 

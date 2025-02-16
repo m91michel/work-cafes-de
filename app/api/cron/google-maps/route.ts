@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
     .eq("status", "NEW")
     .gte("review_count", 1) // only process cafes with at least 1 review
     .is("processed->google_details_at", null)
-    .order("created_at", { ascending: false })
+    .order("created_at", { ascending: true })
     .limit(limit);
 
   if (cafes === null || cafes === undefined || error) {

@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
     .eq("status", "PUBLISHED")
     .is("website_url", null)
     .is("links", null)
-    .order("created_at", { ascending: false })
+    .order("created_at", { ascending: true })
     .limit(limit);
 
   if (cafes === null || cafes === undefined || error) {
