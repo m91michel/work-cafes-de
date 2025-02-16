@@ -2,21 +2,20 @@
 
 import { BaseFilterSelect } from '@/components/general/inputs/base-filter-select';
 import { useCTranslation } from '@/hooks/use-translation';
-import { countryFlag } from '@/libs/utils';
+import { Country } from '@/libs/types';
 
 type CountryFilterProps = {
-  countries: string[];
+  countries: Country[];
 };
 
 export function CountryFilter({ countries }: CountryFilterProps) {
   const { t } = useCTranslation('city');
 
   const countryOptions = countries.map((country) => {
-    const flag = countryFlag(country);
-    const labelWithFlag = flag ? `${flag} ${country}` : country;
+    const labelWithFlag = country.flag ? `${country.flag} ${country.name}` : country.name;
     return {
-      value: country,
-      label: labelWithFlag || country,
+      value: country.name || "-",
+      label: labelWithFlag || country.name || "-",
     };
   });
 

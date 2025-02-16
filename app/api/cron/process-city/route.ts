@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
     let description_long_de = null;
     let description_long_en = null;
 
-    const result_en = await generateCityDescription(city, "de");
+    const result_en = await generateCityDescription(city, "en");
     if (!result_en) {
       console.error(`⚠️ Error generating city description for ${cityName}`);
       setCityAsProcessed(city);
@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
     description_short_en = result_en.description_short;
     description_long_en = result_en.description_long;
 
-    const result_de = await generateCityDescription(city, "en");
+    const result_de = await generateCityDescription(city, "de");
     if (!result_de) {
       console.error(`⚠️ Error generating city description for ${cityName}`);
       setCityAsProcessed(city);

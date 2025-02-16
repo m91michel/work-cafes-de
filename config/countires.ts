@@ -1,4 +1,7 @@
-const countries = [
+import { Country } from "@/libs/types";
+
+type StaticCountryType = Pick<Country, "code" | "name" | "flag">;
+const countries: StaticCountryType[] = [
   {
     code: "AF",
     name: "Afghanistan",

@@ -94,14 +94,3 @@ export async function updateCafeCount(cafe?: Partial<Cafe>) {
     })
     .eq("slug", cafe.city_slug);
 }
-
-export async function getCountries(): Promise<string[]> {
-  // TODO: get countries from database
-  const countries = [
-    "Germany",
-    "United States",
-    "Canada",
-  ];
-
-  return Promise.resolve(countries);
-}

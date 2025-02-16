@@ -6,7 +6,8 @@ import { CityList } from "@/components/city/list/city-list";
 import { TransHighlight } from "@/components/general/translation";
 import initTranslations from "@/libs/i18n/config";
 import { getSEOTags } from "@/libs/seo";
-import { getCities, getCountries } from "@/libs/supabase/cities";
+import { getCities } from "@/libs/supabase/cities";
+import { getCountries } from "@/libs/supabase/countries";
 
 export const revalidate = 28800; // 8 hours
 
@@ -40,7 +41,7 @@ export default async function CityPage({ searchParams }: Props) {
   const sortBy = sort?.split("-")[0] || "population";
   const sortOrder = (sort?.split("-")[1] as "asc" | "desc") || "desc";
   const cities = await getCities({ limit: 1000, country, sortBy, sortOrder });
-  const countries = await getCountries();
+  const countries = await getCountries({ status: "ACTIVE" });
   const titleKey = country ? "index.title_with_country" : "index.title";
   const descriptionKey = country ? "index.description_with_country" : "index.description";
   return (

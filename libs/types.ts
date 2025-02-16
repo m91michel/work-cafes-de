@@ -24,3 +24,5 @@ export type Review = Database['cafeforwork']['Tables']['reviews']['Row'];
 export interface TranslationProps {
   t: (key: string, params?: Record<string, string | number>) => string;
 }
+
+export type Country = Database['cafeforwork']['Tables']['countries']['Row'];

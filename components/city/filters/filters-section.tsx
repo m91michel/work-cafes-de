@@ -1,9 +1,9 @@
 import { SortingOption, SortingOptions } from "@/components/general/inputs/sorting-options";
 import { CountryFilter } from "./country-filter";
-
+import { Country } from "@/libs/types";
 
 type Props = {
-  countries: string[];
+  countries: Country[];
 };
 
 export const citySortingOptions: SortingOption[] = [
