@@ -8,7 +8,7 @@ import {
 import { notFound } from "next/navigation";
 import { getSEOTags } from "@/libs/seo";
 import config from "@/config/config";
-import { getCafeBySlug, getCafes, getCafesByCity } from "@/libs/supabase/cafes";
+import { getCafeBySlug, getCafesByCity } from "@/libs/supabase/cafes";
 import { CafeCard } from "@/components/cafe/cafe-card";
 import { CafeRatingCard } from "@/components/cafe/rating";
 import CafeBreadcrumb from "@/components/cafe/cafe-breadcrumb";
@@ -16,6 +16,8 @@ import { isDev } from "@/libs/environment";
 import { CafeReviews } from "@/components/cafe/cafe-reviews";
 import { FAQSection } from "@/components/faq";
 import initTranslations from "@/libs/i18n/config";
+
+export const revalidate = 3600;
 
 type Params = Promise<{ slug: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
@@ -45,15 +47,15 @@ export async function generateMetadata({ params }: Props) {
   });
 }
 
-// Required for static site generation
-export async function generateStaticParams() {
-  const cafes = await getCafes({ limit: 1000 });
-  // Don't forget that supabase returns max 1000 rows
+// // Required for static site generation
+// export async function generateStaticParams() {
+//   const cafes = await getCafes({ limit: 1000 });
+//   // Don't forget that supabase returns max 1000 rows
 
-  return cafes.map((cafe) => ({
-    slug: cafe.slug,
-  }));
-}
+//   return cafes.map((cafe) => ({
+//     slug: cafe.slug,
+//   }));
+// }
 
 export default async function CafePage({ params }: Props) {
   const { t } = await initTranslations(['cafe']);
