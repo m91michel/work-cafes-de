@@ -1,4 +1,3 @@
-import countries from '@/config/countires';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -9,9 +8,13 @@ export function cn(...inputs: ClassValue[]) {
 export function generateSlug(string: string): string {
   return string.toLowerCase()
     .replace(/\s+/g, '-')
+    .replace(/ä/g, 'ae')
+    .replace(/ö/g, 'oe')
+    .replace(/ü/g, 'ue')
+    .replace(/ß/g, 'ss')
+    .replace(/[^a-z0-9-]/g, '') // remove any non-alphanumeric characters
     .replace(/-+/g, '-') // replace multiple dashes with a single dash
     .replace(/^-|-$/g, '') // remove dashes at the beginning and end
-    .replace(/[^a-z0-9-]/g, '');
 }
 
 // Returns a list of urls from a string
