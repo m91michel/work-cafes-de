@@ -2,7 +2,7 @@ import { isGerman } from '@/libs/environment';
 import { City, TranslationProps } from '@/libs/types';
 import { LocateIcon, MapPin } from 'lucide-react';
 import { TransHighlight } from '../general/translation';
-import { countryFlag } from '@/libs/utils';
+import { countryFlag } from '@/config/countires';
 
 interface CityHeroProps extends TranslationProps {
   city: City;

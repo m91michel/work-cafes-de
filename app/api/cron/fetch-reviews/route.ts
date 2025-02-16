@@ -24,9 +24,11 @@ export async function GET(request: NextRequest) {
 
   console.log(`⚡️ start processing cafes (limit: ${limit})`);
 
-  const { data: cafes = [], error } = await supabase
+  const { data: cafes = [], error, count } = await supabase
     .from("cafes")
-    .select("id, google_place_id, name, address, review_count, processed")
+    .select("id, google_place_id, name, address, review_count, processed", {
+      count: "exact",
+    })
     .not("google_place_id", "is", null)
     .is("processed->google_reviews_at", null)
     .eq("review_count", 0)
@@ -69,7 +71,7 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  console.log(`✅ finished processing ${cafes.length} cafes`);
+  console.log(`✅ finished processing ${cafes.length} cafes (left: ${count})`);
 
   return NextResponse.json({ message: "success", cafes });
 }

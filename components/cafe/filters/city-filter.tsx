@@ -4,7 +4,7 @@ import { City } from '@/libs/types';
 import { BaseFilterSelect } from '@/components/general/inputs/base-filter-select';
 import { useCTranslation } from '@/hooks/use-translation';
 import { isGerman } from '@/libs/environment';
-import { countryFlag } from '@/libs/utils';
+import { countryFlag } from '@/config/countires';
 
 type CityFilterProps = {
   cities: City[];

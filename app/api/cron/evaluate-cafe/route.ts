@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
     .is("processed->checked_reviews_at", null)
     .gte("review_count", 1)
     .is("checked", null)
-    .order("review_count", { ascending: false })
+    .order("created_at", { ascending: false })  
     .limit(limit);
 
   if (cafes === null || cafes === undefined || error) {

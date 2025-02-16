@@ -1,6 +1,25 @@
 import { Country } from "@/libs/types";
 
 type StaticCountryType = Pick<Country, "code" | "name" | "flag">;
+
+export function countryFlag(countryName?: string | null): string | null {
+  if (!countryName) {
+    return null;
+  }
+
+  const country = getCountryByName(countryName);
+  const flag = country?.flag;
+
+  if (!flag) {
+    return null;
+  }
+
+  return flag;
+}
+
+export function getCountryByName(name: string) {
+  return countries.find((country) => country.name === name);
+}
 const countries: StaticCountryType[] = [
   {
     code: "AF",

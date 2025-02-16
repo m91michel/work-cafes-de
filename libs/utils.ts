@@ -1,7 +1,6 @@
 import countries from '@/config/countires';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { Country } from './types';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -68,23 +67,4 @@ export function mergeObjects(initialObject?: any | null, newObject?: Record<stri
       : {}),
     ...newObject,
   };
-}
-
-export function countryFlag(countryName?: string | null): string | null {
-  if (!countryName) {
-    return null;
-  }
-
-  const country = getCountryByName(countryName);
-  const flag = country?.flag;
-
-  if (!flag) {
-    return null;
-  }
-
-  return flag;
-}
-
-export function getCountryByName(name: string) {
-  return countries.find((country) => country.name === name);
 }

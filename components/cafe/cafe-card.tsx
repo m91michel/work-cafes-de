@@ -10,7 +10,7 @@ import {
   WifiQualityBadge,
 } from "./cafe-badges";
 import { isGerman } from "@/libs/environment";
-import { countryFlag } from "@/libs/utils";
+import { countryFlag } from "@/config/countires";
 
 interface CafeCardProps {
   cafe: Cafe;

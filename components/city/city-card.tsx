@@ -7,7 +7,7 @@ import Image from "next/image";
 import { DefaultCafeImage } from "../cafe/Image";
 import { Badge } from "../ui/badge";
 import { isGerman } from "@/libs/environment";
-import { countryFlag } from "@/libs/utils";
+import { countryFlag } from "@/config/countires";
 
 type Props = {
   city: City;
