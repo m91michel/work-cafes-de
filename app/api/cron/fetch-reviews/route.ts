@@ -30,6 +30,8 @@ export async function GET(request: NextRequest) {
     .not("google_place_id", "is", null)
     .is("processed->google_reviews_at", null)
     .eq("review_count", 0)
+    .eq("city", "Shanghai")
+    .in("status", ["NEW", "DUPLICATE"])
     .order("created_at", { ascending: true })
     .limit(limit);
 
@@ -58,17 +60,13 @@ export async function GET(request: NextRequest) {
 
     const keywords = ["working", "wifi", "arbeiten", "wlan", "laptop"];
     for (const keyword of keywords) {
-      const result = await outscraperReviewsTask({
+      await outscraperReviewsTask({
         id: cafe.google_place_id,
         keywords: keyword,
         async: true,
       });
-      if (!result) {
-        console.error(`❌ Error fetching reviews for ${cafe.name}: ${error}`);
-        return NextResponse.json({ message: "error", cafes }, { status: 500 });
-      } else {
-        console.log(`✅ Task created for ${cafe.name} and keyword "${keyword}"`);
-      }
+
+      console.log(`✅ Task created for ${cafe.name} and keyword "${keyword}"`);
     }
   }
 

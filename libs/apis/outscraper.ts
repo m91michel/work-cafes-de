@@ -56,13 +56,13 @@ export async function outscraperReviewsTask(params?: OutscraperReviewsParams) {
       }
     );
 
-    console.log("outscraper task id:", response.data.id);
-    if (response.status !== 200) {
-      console.error("outscraper task error", response.data);
-      return null;
+    if (response.status === 200 || response.status === 202) {
+      console.log("outscraper task id:", response.data.id);
+      return response.data;
     }
 
-    return response.data;
+    console.log("outscraper task error", response.data, response.status);
+    return null;
   } catch (error) {
     console.error("error fetching outscraper reviews", error);
     return null;
