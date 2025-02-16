@@ -87,6 +87,28 @@
       }
     }
   },
+  "suggest": {
+    "title": "Cafe vorschlagen",
+    "description": "Dein Cafe fehlt? Schreib uns einfach eine E-Mail mit dem Namen und der Adresse deines Cafés und wir werden es auf unserer Website hinzufügen.",
+    "form": {
+      "name": "Dein Name",
+      "address": "Deine Adresse",
+      "email": "Deine E-Mail",
+      "message": "Beschreibe kurz was genau das Problem ist...",
+      "success": "Erfolgreich gesendet",
+      "error": "Es ist ein Fehler aufgetreten"
+    },
+    "toast": {
+      "success": {
+        "title": "Erfolgreich gesendet",
+        "description": "Vielen Dank fürs Melden! Wir werden uns umgehend um dein Anliegen kümmern."
+      },
+      "error": {
+        "title": "Es ist ein Fehler aufgetreten",
+        "description": "Bitte versuche es erneut."
+      }
+    }
+  },
   "rating": {
     "title": "Bewertung",
     "source": "Quelle: Google",

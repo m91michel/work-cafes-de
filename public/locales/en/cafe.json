@@ -87,6 +87,26 @@
       }
     }
   },
+  "suggest": {
+    "title": "Suggest a Cafe",
+    "description": "Your cafe is missing? Write us a simple email with the name and address of your cafe and we will add it to our website.",
+    "form": {
+      "name": "Your Name",
+      "address": "Your Address",
+      "email": "Your Email",
+      "message": "Describe briefly what the problem is..."
+    },
+    "toast": {
+      "success": {
+        "title": "Successfully sent",
+        "description": "Thank you for suggesting! We will take care of your request immediately."
+      },
+      "error": {
+        "title": "An error occurred",
+        "description": "Please try again."
+      }
+    }
+  },
   "rating": {
     "title": "Rating",
     "source": "Source: Google",
