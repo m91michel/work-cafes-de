@@ -20,6 +20,9 @@
     "cafe_count": "Cafés",
     "city_count": "Städte"
   },
+  "all_cities": {
+    "title": "Entdecke die besten Städte weltweit"
+  },
   "faq": {
     "title": "Häufig gestellte <highlight>Fragen</highlight>",
     "description": "Hier findest du Antworten auf die häufigsten Fragen zu Café zum Arbeiten.",
