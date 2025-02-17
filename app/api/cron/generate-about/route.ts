@@ -6,6 +6,7 @@ import { generateAboutContent } from "@/libs/openai/generate-about-content";
 import { getJinaContent } from "@/libs/apis/jinaAi";
 import { Cafe } from "@/libs/types";
 import dayjs from "dayjs";
+import { uniq } from "lodash";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
@@ -107,7 +108,7 @@ export async function GET(request: NextRequest) {
     processedCount++;
   }
 
-  const cities = cafes.map((cafe) => cafe.city_slug).join(", ");
+  const cities = uniq(cafes.map((cafe) => cafe.city_slug)).join(", ");
   const cafesLeft = count ? count - processedCount : 0;
 
   console.log(`✅ finished processing ${processedCount}/${cafes.length} cafes in ${cities}. ${cafesLeft} cafes left`);

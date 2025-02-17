@@ -5,6 +5,7 @@ import { extractToken } from "@/libs/utils";
 import { createCityImagePrompt } from "@/libs/openai/create-city-image-prompt";
 import { createReplicateImage } from "@/libs/replicate";
 import { uploadImageToBunny } from "@/libs/bunny";
+import { uniq } from "lodash";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -77,7 +78,7 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  const citySlugs = cities.map((city) => city.slug).join(", ");
+  const citySlugs = uniq(cities.map((city) => city.slug)).join(", ");
   console.log(`✅ finished generating ${processed} city images for ${citySlugs}`);
 
   return NextResponse.json({ message: "success" });

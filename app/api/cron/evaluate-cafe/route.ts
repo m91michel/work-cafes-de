@@ -6,6 +6,7 @@ import { Review } from "@/libs/types";
 import { AIReview, analyzeReviews } from "@/libs/openai/analyze-reviews";
 import dayjs from "dayjs";
 import { updateCafeCount } from "@/libs/supabase/cities";
+import { uniq } from "lodash";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -101,7 +102,7 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  const cities = cafes.map((cafe) => cafe.city_slug).join(", ");
+  const cities = uniq(cafes.map((cafe) => cafe.city_slug)).join(", ");
   const cafesLeft = count ? count - processedCount : 0;
 
   console.log(

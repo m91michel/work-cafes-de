@@ -5,6 +5,7 @@ import { extractToken, generateSlug } from "@/libs/utils";
 import { GoogleMapsPlace, searchPlaces } from "@/libs/google-maps";
 import { sendMessage } from "@/libs/telegram";
 import { Cafe } from "@/libs/types";
+import { uniq } from "lodash";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -168,7 +169,7 @@ export async function GET(request: NextRequest) {
       .eq("slug", city.slug);
   }
 
-  const cityNames = cities.map((city) => city.name_en).join(", ");
+  const cityNames = uniq(cities.map((city) => city.name_en)).join(", ");
   const citiesLeft = cityCount ? cityCount - cities.length : 0;
   console.log(`✅ finished search for new cafes in ${cityNames}. ${citiesLeft} cities left`);
 

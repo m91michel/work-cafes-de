@@ -5,6 +5,7 @@ import { extractToken, mergeObjects } from "@/libs/utils";
 import { outscraperReviewsTask } from "@/libs/apis/outscraper";
 import dayjs from "dayjs";
 import { Cafe } from "@/libs/types";
+import { uniq } from "lodash";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -71,7 +72,7 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  const cities = cafes.map((cafe) => cafe.city_slug).join(", ");
+  const cities = uniq(cafes.map((cafe) => cafe.city_slug)).join(", ");
 
   console.log(`✅ finished processing ${cafes.length} cafes (left: ${count}) in ${cities}`);
 
