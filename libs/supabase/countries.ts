@@ -29,3 +29,20 @@ export async function getCountries(
 
   return countries;
 }
+
+export async function getCountryByCode(code?: string | null): Promise<Country | null> {
+  if (!code) return null;
+
+  const { data: country, error } = await supabase
+    .from("countries")
+    .select("*")
+    .eq("code", code)
+    .single();
+
+  if (error) {
+    console.error("Error fetching country:", error);
+    return null;
+  }
+
+  return country;
+}

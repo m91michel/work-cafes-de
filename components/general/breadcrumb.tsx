@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { cn } from "@/libs/utils";
 
-type BreadcrumbItem = {
+export type BreadcrumbItem = {
   label: string;
   href?: string;
 };

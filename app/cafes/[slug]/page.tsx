@@ -16,6 +16,7 @@ import { isDev } from "@/libs/environment";
 import { CafeReviews } from "@/components/cafe/cafe-reviews";
 import { FAQSection } from "@/components/faq";
 import initTranslations from "@/libs/i18n/config";
+import { getCountryByCode } from "@/libs/supabase/countries";
 
 export const revalidate = 3600;
 
@@ -61,6 +62,7 @@ export default async function CafePage({ params }: Props) {
   const { t } = await initTranslations(['cafe']);
   const slug = (await params).slug;
   const cafe = await getCafeBySlug(slug);
+  const country = await getCountryByCode(cafe?.cities?.country_code);
 
   if (!cafe) {
     return notFound();
@@ -74,7 +76,7 @@ export default async function CafePage({ params }: Props) {
   return (
     <main className="flex-1 bg-background">
       <CafeHero cafe={cafe} />
-      <CafeBreadcrumb cafe={cafe} className="py-6" />
+      <CafeBreadcrumb cafe={cafe} country={country} className="py-6" />
 
       <div className="max-w-7xl mx-auto px-4 pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
