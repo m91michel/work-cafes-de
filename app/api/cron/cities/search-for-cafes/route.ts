@@ -36,16 +36,14 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Error fetching cafes" });
   }
 
-  let cafesAdded = 0;
   for (const city of cities) {
+    let cafesAdded = 0;
     let cafesWithError: string[] = [];
-    if (!city.name_de) {
-      console.error("⚠️ City name is null", city);
-      continue;
-    }
+
 
     const isGermany = city.country === "Germany";
     const cityName = isGermany ? city.name_de : city.name_en;
+
     if (!cityName) {
       console.error("⚠️ City name is null", city);
       continue;
@@ -155,6 +153,14 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    if (cafesAdded === 0) {
+      console.log(`⚠️ No cafes added for ${city.name_en}`);
+      await sendMessage(
+        `⚠️ No cafes added for ${city.name_en}: \n\n- ${cafesWithError.join(
+          "\n- "
+        )}`
+      );
+    }
     const status = cafesAdded > 0 ? "CHECK!" : "PROCESSING";
     await supabase
       .from("cities")

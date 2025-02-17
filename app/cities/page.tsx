@@ -24,7 +24,7 @@ export async function generateMetadata({ searchParams }: Props) {
   const { t } = await initTranslations(["city"]);
   const _searchParams = await searchParams;
   const country = _searchParams.country as string | undefined;
-  const titleKey = country ? "index.title_with_country" : "index.title";
+  const titleKey = country ? "meta.index.title_with_country" : "meta.index.title";
 
   return getSEOTags({
     title: t(titleKey, { country }),

@@ -27,8 +27,8 @@ export async function GET(request: NextRequest) {
   const { data: cities = [], error, count } = await supabase
     .from("cities")
     .select("*", { count: "exact" })
-    .eq("description_short_de", '')
-    // .eq("status", "NEW")
+    .is("description_short_en", null)
+    .in("status", ["NEW", "READY"])
     .order("population", { ascending: true })
     .limit(limit);
 
@@ -48,18 +48,18 @@ export async function GET(request: NextRequest) {
     console.log(`⚡️ processing ${cityName} ${city.country} ${city.state}`);
 
     let description_short_de = null;
-    // let description_short_en = null;
+    let description_short_en = null;
     let description_long_de = null;
-    // let description_long_en = null;
+    let description_long_en = null;
 
-    // const result_en = await generateCityDescription(city, "en");
-    // if (!result_en) {
-    //   console.error(`⚠️ Error generating city description for ${cityName}`);
-    //   setCityAsProcessed(city);
-    //   continue;
-    // }
-    // description_short_en = result_en.description_short;
-    // description_long_en = result_en.description_long;
+    const result_en = await generateCityDescription(city, "en");
+    if (!result_en) {
+      console.error(`⚠️ Error generating city description for ${cityName}`);
+      setCityAsProcessed(city);
+      continue;
+    }
+    description_short_en = result_en.description_short;
+    description_long_en = result_en.description_long;
 
     const result_de = await generateCityDescription(city, "de");
     if (!result_de) {
@@ -74,14 +74,13 @@ export async function GET(request: NextRequest) {
       .from("cities")
       .update({
         name_de: city.name_de || result_de.name,
-        // name_en: city.name_en || result_en.name,
-        // state: city.state || result_en.state,
+        name_en: city.name_en || result_en.name,
+        state: city.state || result_en.state,
         description_short_de,
-        // description_short_en,
+        description_short_en,
         description_long_de,
-        // description_long_en,
+        description_long_en,
         processed_at: dayjs().toISOString(),
-        // status: "READY",
       })
       .eq("slug", city.slug);
 

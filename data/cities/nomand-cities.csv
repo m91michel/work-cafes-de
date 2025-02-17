@@ -1,0 +1,108 @@
+name_en,state,country,population,slug,name_de,country_code,state_code
+Chiang Mai,Chiang Mai,Thailand,127240,chiang-mai,Chiang Mai,TH,50
+Bali,Bali,Indonesia,4317404,bali,Bali,ID,BA
+Lisbon,Lisbon,Portugal,544851,lisbon,Lissabon,PT,11
+Barcelona,Catalonia,Spain,1620343,barcelona,Barcelona,ES,CT
+Bangkok,Bangkok,Thailand,8280925,bangkok,Bangkok,TH,10
+Singapore,Singapore,Singapore,5685807,singapore,Singapur,SG,SG
+Seoul,Seoul,South Korea,9776000,seoul,Seoul,KR,11
+Amsterdam,North Holland,Netherlands,821752,amsterdam,Amsterdam,NL,NH
+Ho Chi Minh City,Ho Chi Minh,Vietnam,8993082,ho-chi-minh-city,Ho-Chi-Minh-Stadt,VN,SG
+Madrid,Madrid,Spain,3223334,madrid,Madrid,ES,MD
+Porto,Porto,Portugal,237591,porto,Porto,PT,13
+Valencia,Valencia,Spain,791413,valencia,Valencia,ES,VC
+Malaga,Andalusia,Spain,574654,malaga,Málaga,ES,AN
+Seville,Andalusia,Spain,688592,seville,Sevilla,ES,AN
+Copenhagen,Capital Region,Denmark,794128,copenhagen,Kopenhagen,DK,84
+Stockholm,Stockholm,Sweden,975551,stockholm,Stockholm,SE,AB
+Oslo,Oslo,Norway,693494,oslo,Oslo,NO,03
+Helsinki,Uusimaa,Finland,653835,helsinki,Helsinki,FI,01
+Tallinn,Harju,Estonia,437619,tallinn,Tallinn,EE,37
+Riga,Riga,Latvia,632614,riga,Riga,LV,RIX
+Vilnius,Vilnius,Lithuania,544386,vilnius,Vilnius,LT,VL
+Warsaw,Masovia,Poland,1765000,warsaw,Warschau,PL,MZ
+Krakow,Lesser Poland,Poland,779115,krakow,Krakau,PL,MA
+Prague,Prague,Czech Republic,1324277,prague,Prag,CZ,PR
+Budapest,Budapest,Hungary,1756000,budapest,Budapest,HU,BU
+Vienna,Vienna,Austria,1897491,vienna,Wien,AT,9
+Ljubljana,Central Slovenia,Slovenia,294054,ljubljana,Ljubljana,SI,LJ
+Zagreb,Zagreb,Croatia,769944,zagreb,Zagreb,HR,21
+Belgrade,Belgrade,Serbia,1688667,belgrade,Belgrad,RS,00
+Bucharest,Bucharest,Romania,2161000,bucharest,Bukarest,RO,B
+Sofia,Sofia City,Bulgaria,1307376,sofia,Sofia,BG,22
+Athens,Attica,Greece,664046,athens,Athen,GR,I
+Thessaloniki,Central Macedonia,Greece,325182,thessaloniki,Thessaloniki,GR,B
+Istanbul,Istanbul,Turkey,15460000,istanbul,Istanbul,TR,34
+Izmir,Izmir,Turkey,4367251,izmir,Izmir,TR,35
+Antalya,Antalya,Turkey,2548308,antalya,Antalya,TR,07
+Tbilisi,Tbilisi,Georgia,1184800,tbilisi,Tiflis,GE,TB
+Yerevan,Yerevan,Armenia,1075800,yerevan,Eriwan,AM,ER
+Baku,Baku,Azerbaijan,2300500,baku,Baku,AZ,BA
+Dubai,Dubai,United Arab Emirates,3331420,dubai,Dubai,AE,DU
+Abu Dhabi,Abu Dhabi,United Arab Emirates,1483000,abu-dhabi,Abu Dhabi,AE,AZ
+Muscat,Muscat,Oman,1720000,muscat,Maskat,OM,MA
+Tel Aviv,Tel Aviv,Israel,460613,tel-aviv,Tel Aviv,IL,TA
+Kuala Lumpur,Federal Territory,Malaysia,1982112,kuala-lumpur,Kuala Lumpur,MY,14
+Penang,Penang,Malaysia,1767000,penang,Penang,MY,07
+Jakarta,Jakarta,Indonesia,10562088,jakarta,Jakarta,ID,JK
+Yogyakarta,Special Region,Indonesia,422732,yogyakarta,Yogyakarta,ID,YO
+Manila,Metro Manila,Philippines,1846513,manila,Manila,PH,00
+Cebu,Central Visayas,Philippines,922611,cebu,Cebu,PH,07
+Taipei,Taipei,Taiwan,2646204,taipei,Taipeh,TW,TPE
+Kaohsiung,Kaohsiung,Taiwan,2773533,kaohsiung,Kaohsiung,TW,KHH
+Tokyo,Tokyo,Japan,37393129,tokyo,Tokio,JP,13
+Osaka,Osaka,Japan,19059856,osaka,Osaka,JP,27
+Fukuoka,Fukuoka,Japan,5104459,fukuoka,Fukuoka,JP,40
+Sapporo,Hokkaido,Japan,1952356,sapporo,Sapporo,JP,01
+Hanoi,Hanoi,Vietnam,8053663,hanoi,Hanoi,VN,HN
+Da Nang,Da Nang,Vietnam,1134310,da-nang,Da Nang,VN,DN
+Phnom Penh,Phnom Penh,Cambodia,2129371,phnom-penh,Phnom Penh,KH,12
+Siem Reap,Siem Reap,Cambodia,139458,siem-reap,Siem Reap,KH,17
+Vientiane,Vientiane,Laos,820940,vientiane,Vientiane,LA,VT
+Luang Prabang,Luang Prabang,Laos,55027,luang-prabang,Luang Prabang,LA,LP
+Yangon,Yangon,Myanmar,5160512,yangon,Yangon,MM,YGN
+Mandalay,Mandalay,Myanmar,1225546,mandalay,Mandalay,MM,MDY
+Colombo,Western,Sri Lanka,752993,colombo,Colombo,LK,1
+Kandy,Central,Sri Lanka,125400,kandy,Kandy,LK,2
+Kathmandu,Bagmati,Nepal,1442271,kathmandu,Kathmandu,NP,BA
+Pokhara,Gandaki,Nepal,446515,pokhara,Pokhara,NP,GA
+Mumbai,Maharashtra,India,12478447,mumbai,Mumbai,IN,MH
+Bangalore,Karnataka,India,8443675,bangalore,Bangalore,IN,KA
+Goa,Goa,India,1458545,goa,Goa,IN,GA
+Kochi,Kerala,India,677381,kochi,Kochi,IN,KL
+Male,Male,Maldives,133412,male,Male,MV,MLE
+Denpasar,Bali,Indonesia,897300,denpasar,Denpasar,ID,BA
+Seminyak,Bali,Indonesia,35000,seminyak,Seminyak,ID,BA
+Canggu,Bali,Indonesia,40000,canggu,Canggu,ID,BA
+Ubud,Bali,Indonesia,30000,ubud,Ubud,ID,BA
+Phuket,Phuket,Thailand,416582,phuket,Phuket,TH,83
+Koh Samui,Surat Thani,Thailand,62500,koh-samui,Ko Samui,TH,84
+Koh Phangan,Surat Thani,Thailand,12000,koh-phangan,Ko Pha-ngan,TH,84
+Pai,Mae Hong Son,Thailand,2284,pai,Pai,TH,58
+Hoi An,Quang Nam,Vietnam,120000,hoi-an,Hoi An,VN,QN
+Nha Trang,Khanh Hoa,Vietnam,535000,nha-trang,Nha Trang,VN,KH
+Dalat,Lam Dong,Vietnam,425000,dalat,Da Lat,VN,LD
+Penang,Penang,Malaysia,1767000,penang,Penang,MY,07
+Melaka,Malacca,Malaysia,579000,melaka,Malakka,MY,04
+Kota Kinabalu,Sabah,Malaysia,452940,kota-kinabalu,Kota Kinabalu,MY,12
+Kuching,Sarawak,Malaysia,570407,kuching,Kuching,MY,13
+Boracay,Western Visayas,Philippines,32267,boracay,Boracay,PH,06
+Siargao,Caraga,Philippines,23000,siargao,Siargao,PH,13
+El Nido,MIMAROPA,Philippines,41606,el-nido,El Nido,PH,17
+Coron,MIMAROPA,Philippines,51803,coron,Coron,PH,17
+Kyoto,Kyoto,Japan,1475183,kyoto,Kyoto,JP,26
+Kobe,Hyogo,Japan,1537272,kobe,Kobe,JP,28
+Nagoya,Aichi,Japan,2296014,nagoya,Nagoya,JP,23
+Okinawa,Okinawa,Japan,1453799,okinawa,Okinawa,JP,47
+Busan,Busan,South Korea,3359527,busan,Busan,KR,26
+Jeju,Jeju,South Korea,669300,jeju,Jeju,KR,41
+Daegu,Daegu,South Korea,2438031,daegu,Daegu,KR,27
+Incheon,Incheon,South Korea,2957026,incheon,Incheon,KR,28
+Taichung,Taichung,Taiwan,2816792,taichung,Taichung,TW,TXG
+Tainan,Tainan,Taiwan,1885252,tainan,Tainan,TW,TNN
+Hualien,Hualien,Taiwan,331945,hualien,Hualien,TW,HUA
+Taitung,Taitung,Taiwan,224470,taitung,Taitung,TW,TTT
+Funchal,Madeira,Portugal,111892,funchal,Funchal,PT,30
+Faro,Algarve,Portugal,64560,faro,Faro,PT,08
+Braga,Braga,Portugal,136885,braga,Braga,PT,03
+Aveiro,Aveiro,Portugal,80880,aveiro,Aveiro,PT,01
