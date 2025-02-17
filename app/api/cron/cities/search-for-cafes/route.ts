@@ -28,7 +28,8 @@ export async function GET(request: NextRequest) {
   const { data: cities = [], error, count: cityCount } = await supabase
     .from("cities")
     .select("*", { count: "exact" })
-    .eq("status", "READY")
+    // .eq("status", "READY")
+    .eq("slug", "vienna")
     .order("population", { ascending: false })
     .limit(limit);
 
@@ -40,6 +41,7 @@ export async function GET(request: NextRequest) {
   for (const city of cities) {
     let cafesAdded = 0;
     let cafesWithError: string[] = [];
+    let firstAddress = "";
 
 
     const isGermany = city.country === "Germany";
@@ -60,8 +62,9 @@ export async function GET(request: NextRequest) {
     }
 
     for (const [index, place] of places.entries()) {
-      if (!isInCity(place, cityName)) {
-        console.log(`⚠️ ${place.formatted_address} is not in ${cityName}`);
+      if (!isInCity(place, city.name_local || cityName)) {
+        console.log(`⚠️ ${place.formatted_address} is not in ${city.name_local || cityName}`);
+        firstAddress = place.formatted_address || "";
         continue;
       }
 
@@ -159,7 +162,7 @@ export async function GET(request: NextRequest) {
       await sendMessage(
         `⚠️ No cafes added for ${city.name_en}: \n\n- ${cafesWithError.join(
           "\n- "
-        )}`
+        )} \n\nAddress: ${firstAddress}`
       );
     }
     const status = cafesAdded > 0 ? "CHECK!" : "PROCESSING";

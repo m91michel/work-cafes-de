@@ -144,6 +144,7 @@ export type Database = {
           lat_long: string | null
           name_de: string | null
           name_en: string | null
+          name_local: string | null
           population: number | null
           preview_image: string | null
           processed_at: string | null
@@ -165,6 +166,7 @@ export type Database = {
           lat_long?: string | null
           name_de?: string | null
           name_en?: string | null
+          name_local?: string | null
           population?: number | null
           preview_image?: string | null
           processed_at?: string | null
@@ -186,6 +188,7 @@ export type Database = {
           lat_long?: string | null
           name_de?: string | null
           name_en?: string | null
+          name_local?: string | null
           population?: number | null
           preview_image?: string | null
           processed_at?: string | null
