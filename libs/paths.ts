@@ -23,9 +23,9 @@ class Paths {
     en: "/about",
   });
 
-  static helpUs = Paths.getPath({
+  static contribute = Paths.getPath({
     de: "/helfe-uns",
-    en: "/help-us",
+    en: "/contribute",
   });
 
   static privacy = Paths.getPath({

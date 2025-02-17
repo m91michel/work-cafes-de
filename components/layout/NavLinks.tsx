@@ -33,8 +33,8 @@ export function NavLinks({ className, onClick }: Props) {
         </Link>
       ))}
       <Button asChild variant="default" className="mt-2 md:mt-0 md:ml-4">
-        <Link href={Paths.helpUs} onClick={onClick}>
-          {t('navigation.help_us')}
+        <Link href={Paths.contribute} onClick={onClick}>
+          {t('navigation.contribute')}
         </Link>
       </Button>
     </div>

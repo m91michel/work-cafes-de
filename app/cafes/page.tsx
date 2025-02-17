@@ -32,12 +32,12 @@ export default async function CafesPage({ searchParams }: Props) {
   const sortOrder = sort?.split('-')[1] as 'asc' | 'desc' || 'desc';
   
   const cafes = await getCafes({
-    limit: 1000,
+    limit: 100,
     citySlug,
     sortBy,
     sortOrder
   });
-  const cities = await getCities({ limit: 1000, offset: 0 });
+  const cities = await getCities({ limit: 100, offset: 0 });
   
   return (
     <main className="flex-1 bg-background">
