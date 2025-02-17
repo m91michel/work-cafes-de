@@ -45,14 +45,18 @@ export async function GET(request: NextRequest) {
       .eq("city", cafe.city)
       .order("created_at", { ascending: true });
 
-    if (duplicates === null || duplicates === undefined || duplicates.length === 0) {
+    if (
+      duplicates === null ||
+      duplicates === undefined ||
+      duplicates.length === 0
+    ) {
       console.error("⚠️ No duplicates found for cafe", cafe);
       continue;
     }
 
     console.log(`⚡️ found ${duplicates.length} duplicates for ${cafe.name}`);
     for (const [index, duplicate] of duplicates.entries()) {
-      const slug = generateSlug(`${cafe.name}-${cafe.city}-${index}`);
+      const slug = generateSlug(`${cafe.name}-${cafe.city}-${index + 1}`);
 
       const { error } = await supabase
         .from("cafes")
@@ -64,11 +68,19 @@ export async function GET(request: NextRequest) {
 
       if (error) {
         console.error("⚠️ Error updating cafe", error);
+
+        await supabase
+          .from("cafes")
+          .update({
+            status: "ERROR",
+          })
+          .eq("id", duplicate.id);
+
         continue;
       }
-      console.log(`✅ updated cafe ${duplicate.name} in ${duplicate.city}`);
+      console.log(`✅ updated cafe ${duplicate.name} in ${duplicate.city} (${slug})`);
     }
-    
+
     processedCount++;
   }
 

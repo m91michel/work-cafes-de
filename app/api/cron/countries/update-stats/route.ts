@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
-import { extractToken, generateSlug } from "@/libs/utils";
+import { extractToken } from "@/libs/utils";
 
 export const maxDuration = 60;
 
