@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
 
   const { data: cafes = [], error, count } = await supabase
     .from("cafes")
-    .select("id, google_place_id, name, address, review_count, processed", {
+    .select("id, google_place_id, name, city_slug, address, review_count, processed", {
       count: "exact",
     })
     .not("google_place_id", "is", null)
@@ -71,7 +71,9 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  console.log(`✅ finished processing ${cafes.length} cafes (left: ${count})`);
+  const cities = cafes.map((cafe) => cafe.city_slug).join(", ");
+
+  console.log(`✅ finished processing ${cafes.length} cafes (left: ${count}) in ${cities}`);
 
   return NextResponse.json({ message: "success", cafes });
 }

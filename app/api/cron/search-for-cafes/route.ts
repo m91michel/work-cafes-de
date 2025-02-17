@@ -24,9 +24,9 @@ export async function GET(request: NextRequest) {
 
   console.log(`⚡️ start processing cafes (limit: ${limit})`);
 
-  const { data: cities = [], error } = await supabase
+  const { data: cities = [], error, count: cityCount } = await supabase
     .from("cities")
-    .select("*")
+    .select("*", { count: "exact" })
     .eq("status", "READY")
     .order("population", { ascending: false })
     .limit(limit);
@@ -36,6 +36,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Error fetching cafes" });
   }
 
+  let cafesAdded = 0;
   for (const city of cities) {
     let cafesWithError: string[] = [];
     if (!city.name_de) {
@@ -141,6 +142,7 @@ export async function GET(request: NextRequest) {
         continue;
       }
 
+      cafesAdded++;
       console.log(`🎉 processed ${place.name} (${data?.id})`);
     }
 
@@ -153,13 +155,16 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    const status = cafesAdded > 0 ? "CHECK!" : "PROCESSING";
     await supabase
       .from("cities")
-      .update({ status: "PROCESSING" })
+      .update({ status: status })
       .eq("slug", city.slug);
   }
 
-  console.log(`✅ finished search for new cafes in ${cities.length} cities`);
+  const cityNames = cities.map((city) => city.name_en).join(", ");
+  const citiesLeft = cityCount ? cityCount - cities.length : 0;
+  console.log(`✅ finished search for new cafes in ${cityNames}. ${citiesLeft} cities left`);
 
   return NextResponse.json({ message: "success" });
 }

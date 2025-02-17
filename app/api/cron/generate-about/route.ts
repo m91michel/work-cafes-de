@@ -107,7 +107,10 @@ export async function GET(request: NextRequest) {
     processedCount++;
   }
 
-  console.log(`✅ finished processing ${processedCount}/${cafes.length} cafes. ${count ? count - processedCount : 0} cafes left`);
+  const cities = cafes.map((cafe) => cafe.city_slug).join(", ");
+  const cafesLeft = count ? count - processedCount : 0;
+
+  console.log(`✅ finished processing ${processedCount}/${cafes.length} cafes in ${cities}. ${cafesLeft} cafes left`);
 
   return NextResponse.json({ message: "success" });
 }

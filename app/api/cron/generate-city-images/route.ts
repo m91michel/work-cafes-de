@@ -76,7 +76,8 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  console.log(`✅ finished generating ${processed} city images`);
+  const citySlugs = cities.map((city) => city.slug).join(", ");
+  console.log(`✅ finished generating ${processed} city images for ${citySlugs}`);
 
   return NextResponse.json({ message: "success" });
 }

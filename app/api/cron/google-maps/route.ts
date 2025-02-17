@@ -108,7 +108,8 @@ export async function GET(request: NextRequest) {
     console.log(`🎉 processed ${cafe.name}`);
   }
 
-  console.log(`✅ finished processing ${cafes.length} cafes (left: ${count})`);
+  const cities = cafes.map((cafe) => cafe.city_slug).join(", ");
+  console.log(`✅ finished processing ${cafes.length} cafes (left: ${count}) in ${cities}`);
 
   return NextResponse.json({ message: "success" });
 }
