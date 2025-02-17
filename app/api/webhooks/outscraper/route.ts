@@ -7,6 +7,8 @@ import supabase from "@/libs/supabase/supabaseClient";
 import dayjs from "dayjs";
 import { Review } from "@/libs/types";
 
+export const maxDuration = 60;
+
 /* Example request body
 {
   id: 'a-44cab432-54db-4d56-b81c-f97b51bee451',
