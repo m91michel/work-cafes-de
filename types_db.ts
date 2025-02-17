@@ -35,6 +35,7 @@ export type Database = {
           preview_image: string | null
           processed: Json | null
           processed_at: string | null
+          published_at: string | null
           review_count: number
           seating_comfort: string | null
           slug: string | null
@@ -71,6 +72,7 @@ export type Database = {
           preview_image?: string | null
           processed?: Json | null
           processed_at?: string | null
+          published_at?: string | null
           review_count?: number
           seating_comfort?: string | null
           slug?: string | null
@@ -107,6 +109,7 @@ export type Database = {
           preview_image?: string | null
           processed?: Json | null
           processed_at?: string | null
+          published_at?: string | null
           review_count?: number
           seating_comfort?: string | null
           slug?: string | null

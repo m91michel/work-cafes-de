@@ -67,6 +67,9 @@ export async function GET(request: NextRequest) {
     console.log(aiResult);
 
     if (aiResult?.status) {
+      const publishedAt =
+        aiResult.status === "PUBLISHED" ? dayjs().toISOString() : null;
+
       const { error: updateError } = await supabase
         .from("cafes")
         .update({
@@ -79,6 +82,7 @@ export async function GET(request: NextRequest) {
           }),
           checked: "AUTOMATED",
           processed_at: dayjs().toISOString(),
+          published_at: publishedAt,
         })
         .eq("id", cafe.id);
 
