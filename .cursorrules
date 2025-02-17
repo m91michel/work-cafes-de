@@ -21,6 +21,8 @@ This project is a website that lists the best cafes for working.
 - This project is a npm workspace. Use `-W` to install dependencies.
 - For translations, use the `useCTranslation` hook if the file has a "use client" directive.
 - Use `initTranslations` for translations in server components.
+- Do not touch the shadcn/ui components in the components/ui folder untouched.
+- Create generic components that use shadcn/ui components as primitives and add them to the components/general folder.
 
 ## Next.js App Router best practices
 - Use app router

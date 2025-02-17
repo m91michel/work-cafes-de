@@ -6,6 +6,7 @@ import { FAQSection } from "@/components/faq";
 import initTranslations from "@/libs/i18n/config";
 import { AdvancedCafeList } from "@/components/cafe/lists/advanced-cafe-list";
 import { cafeSortingOptions } from "@/components/cafe/filters/filters-section";
+import { PaginationSection } from "@/components/general/pagination-section";
 
 export const metadata = getSEOTags({
   title: `Entdecke die besten Cafés zum Arbeiten in Deutschland`,
@@ -30,9 +31,12 @@ export default async function CafesPage({ searchParams }: Props) {
   const sort = whiteListedSortParam(_searchParams.sort as string | undefined);
   const sortBy = sort?.split('-')[0] || 'google_rating';
   const sortOrder = sort?.split('-')[1] as 'asc' | 'desc' || 'desc';
+  const currentPage = Number(_searchParams.page) || 1;
+  const pageSize = 24;
   
-  const cafes = await getCafes({
-    limit: 100,
+  const { data: cafes, total } = await getCafes({
+    limit: pageSize,
+    offset: (currentPage - 1) * pageSize,
     citySlug,
     sortBy,
     sortOrder
@@ -54,6 +58,12 @@ export default async function CafesPage({ searchParams }: Props) {
         <AdvancedCafeList
           cafes={cafes}
           cities={cities}
+        />
+
+        <PaginationSection
+          totalItems={total}
+          pageSize={pageSize}
+          currentPage={currentPage}
         />
 
         <FAQSection />

@@ -35,9 +35,8 @@ interface HomeContentProps {
 }
 async function HomeContent({ cafes, cities }: HomeContentProps) {
   const { t } = await initTranslations(["home"]);
-  const cafesCount = await getCafesCount();
   const citiesCount = await getCitiesCount();
-  const newCafes = await getCafes({
+  const { data: newCafes, total: cafesCount } = await getCafes({
     limit: 6,
     offset: 0,
     sortBy: "updated_at",

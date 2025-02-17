@@ -16,10 +16,10 @@ export async function getCafes(
     sortBy = "google_rating",
     sortOrder = "desc",
   }: BaseFilters = { limit: 100, offset: 0 }
-): Promise<Cafe[]> {
+): Promise<{ data: Cafe[]; total: number }> {
   let query = supabase
     .from("cafes")
-    .select("*, cities(name_de, name_en, slug, country)")
+    .select("*, cities(name_de, name_en, slug, country)", { count: "exact" })
     .eq("status", "PUBLISHED")
     .not("google_rating", "is", null)
     .order(sortBy, { ascending: sortOrder === "asc" });
@@ -28,14 +28,14 @@ export async function getCafes(
     query = query.eq("city_slug", citySlug);
   }
 
-  const { data, error } = await query.range(offset, offset + limit - 1);
+  const { data, error, count } = await query.range(offset, offset + limit - 1);
 
   if (error) {
     console.error("Error fetching data:", error);
-    return [];
+    return { data: [], total: 0 };
   }
 
-  return data as Cafe[];
+  return { data: data as Cafe[], total: count || 0 };
 }
 
 export async function getBestCafes(

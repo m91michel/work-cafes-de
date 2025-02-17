@@ -25,7 +25,11 @@ export const citiesCommands: Command[] = [
     name: "🏙️ Cities: Migration",
     key: "cities-migration",
     action: async () => {
-      const { data: cities, error } = await supabase.from("cities").select("*");
+      const { data: cities, error } = await supabase
+        .from("cities")
+        .select("*")
+        .eq("status", "READY")
+        .not("preview_image", "is", null)
 
       if (error) {
         console.error("❌ Error fetching cities:", error);
@@ -34,17 +38,18 @@ export const citiesCommands: Command[] = [
 
       for (const city of cities) {
         console.log(`⚡️ Processing ${city.name_de} in ${city.country}`);
-        const { error } = await supabase
+        const { data, error } = await supabase
           .from("cities")
           .update({
-            status: "PUBLISHED",
+            status: "WAIT",
           })
-          .eq("slug", city.slug);
+          .eq("slug", city.slug)
+          .select("name_de, name_en, slug, country, country_code, state, state_code, population, cafes_count, status")
 
         if (error) {
           console.error("❌ Error updating city:", error);
         } else {
-          console.log("✅ City updated successfully:", city);
+          console.log("✅ City updated successfully:", data);
         }
       }
 
@@ -54,12 +59,13 @@ export const citiesCommands: Command[] = [
 ];
 
 export async function upsertCitiesFromCsv() {
-  const cities = await readCsv<any>("../data/cities/usa-canada.csv");
+  const cities = await readCsv<any>("../data/cities/nomand-cities.csv");
 
   for (const city of cities) {
-    console.log(`⚡️ Processing ${city.name_de} in ${city.country}`);
+    const name = city.name_en || city.name_de;
+    console.log(`⚡️ Processing ${name} in ${city.country}`);
 
-    if (!city.name_de) {
+    if (!name) {
       console.error("❌ City name is null", city);
       continue;
     }
@@ -69,25 +75,26 @@ export async function upsertCitiesFromCsv() {
       .from("cities")
       .upsert({
         slug: city.slug,
-        name_de: city.name_de,
-        name_en: city.name_en,
+        name_de: city.name_de || city.name_en,
+        name_en: city.name_en || city.name_de,
         country: city.country,
         country_code: city.country_code,
-        description_long_de: city.description_long_de || '',
-        description_long_en: city.description_long_en || '',
-        description_short_de: city.description_short_de || '',
-        description_short_en: city.description_short_en || '',
+        description_long_de: city.description_long_de || null,
+        description_long_en: city.description_long_en || null,
+        description_short_de: city.description_short_de || null,
+        description_short_en: city.description_short_en || null,
         state: city.state,
         state_code: city.state_code,
         population: city.population ? parseInt(city.population) : 0,
         cafes_count: 0,
+        status: "NEW",
       }, { onConflict: 'slug', ignoreDuplicates: true })
-      .select("name_de");
+      .select("name_en, name_de");
 
     if (error) {
       console.error("❌ Error upserting city:", error);
     } else {
-      console.log(`✅ ${city.name} updated successfully`);
+      console.log(`✅ ${name} updated successfully`);
     }
   }
 }
