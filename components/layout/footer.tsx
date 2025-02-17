@@ -15,6 +15,7 @@ const resources = [
 
 const aboutLinks = [
   { key: "about", href: Paths.about },
+  { key: "roadmap", href: Paths.roadmap },
   { key: "support", href: `mailto:${config.mailgun.supportEmail}` },
 ];
 
