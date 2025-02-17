@@ -10,7 +10,7 @@ const siteUrl = process.env.SITE_URL || fallbackUrl;
 // Initialize Supabase client
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  process.env.SUPABASE_SERVICE_ROLE_KEY,
   { db: { schema: 'cafeforwork' } }
 );
 
@@ -52,6 +52,7 @@ module.exports = {
       const { data: cafes, error } = await supabase
         .from('cafes')
         .select('slug, updated_at')
+        .eq('status', 'PUBLISHED')
         .range(offset, offset + pageSize - 1);
 
       if (error) {
