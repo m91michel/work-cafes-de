@@ -7,8 +7,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 export const metadata = getSEOTags({
-  title: `Unterstütze uns | ${config.appName}`,
-  description: `Hilf uns dabei, die beste Plattform für arbeitnehmerfreundliche Cafés in Deutschland aufzubauen.`, // 100-160 characters
+  title: `Trage zu unserem Verzeichnis bei | ${config.appName}`,
+  description: `Hilf uns dabei, die besten arbeitnehmerfreundlichen Cafés weltweit zu sammeln.`, // 100-160 characters
   alternates: {
     canonical: `https://${domainDe}/helfe-uns`,
     languages: {
@@ -18,7 +18,7 @@ export const metadata = getSEOTags({
   },
 });
 
-const tweetText = `Entdecke die besten laptop-freundlichen Cafés in Deutschland auf ${config.appName} - Dein Guide für entspanntes Arbeiten im Café!`;
+const tweetText = `Entdecke die besten laptop-freundlichen Cafés weltweit auf ${config.appName} - Dein Guide für entspanntes Arbeiten im Café!`;
 
 export default function ContributePage() {
   if (!isGerman) {
@@ -29,7 +29,7 @@ export default function ContributePage() {
   return (
     <main className="flex-1 bg-background">
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-center mb-12">Hilf uns, die besten Cafés zu finden</h1>
+        <h1 className="text-4xl font-bold text-center mb-12">Trage zu unserem Verzeichnis bei</h1>
         
         <div className="grid md:grid-cols-2 gap-8">
           {/* Suggest New Listing */}

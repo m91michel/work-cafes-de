@@ -6,7 +6,7 @@ import ReactMarkdown from 'react-markdown';
 
 export const metadata = getSEOTags({
   title: `Über uns | ${config.appName}`,
-  description: `Entdecke, wie ${config.appName} dir hilft, die besten Cafés zum Arbeiten und Lernen in Deutschland zu finden.`,
+  description: `Entdecke, wie ${config.appName} dir hilft, die besten Cafés zum Arbeiten und Lernen in deiner Stadt zu finden.`,
   alternates: {
     canonical: `https://${domainDe}/ueber-uns`,
     languages: {
@@ -48,7 +48,7 @@ Wir listen nicht einfach irgendwelche Cafés – wir konzentrieren uns auf das, 
 
 ## Aktueller Stand & Zukunftspläne
 
-Wir bauen unsere Datenbank mit laptop-freundlichen Cafés in ganz Deutschland stetig aus. Auch wenn noch nicht alle Städte vertreten sind, kommen regelmäßig neue Locations dazu.
+Wir bauen unsere Datenbank mit laptop-freundlichen Cafés weltweit stetig aus. Auch wenn noch nicht alle Städte vertreten sind, kommen regelmäßig neue Locations dazu.
 
 Für die Zukunft planen wir:
 - Eine Community-Funktion für Bewertungen und Erfahrungsaustausch
@@ -60,7 +60,7 @@ Für die Zukunft planen wir:
 
 Du kennst ein tolles Café, das noch nicht bei uns gelistet ist? Oder hast Ideen, wie wir die Plattform noch besser machen können? Schreib uns einfach an [kontakt@cafezumarbeiten.de](mailto:kontakt@cafezumarbeiten.de).
 
-Gemeinsam bauen wir den besten Guide für laptop-freundliche Cafés in Deutschland!
+Gemeinsam bauen wir den besten Guide für laptop-freundliche Cafés weltweit!
 `;
 
   return (

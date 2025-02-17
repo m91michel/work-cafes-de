@@ -1,10 +1,10 @@
 {
   "hero": {
     "title": "Finde ein <highlight>Café zum Arbeiten</highlight> in deiner Stadt",
-    "subtitle": "Entdecke die besten Cafés zum Arbeiten in Deutschland! Finde den perfekten Ort zum Studieren, Arbeiten oder Kaffeetrinken in deiner Stadt."
+    "subtitle": "Entdecke die besten Cafés zum Arbeiten in deiner Stadt! Finde den perfekten Ort zum Studieren, Arbeiten oder Kaffeetrinken in deiner Stadt."
   },
   "cafes": {
-    "title": "Die besten Cafés zum Arbeiten in Deutschland",
+    "title": "Die besten Cafés zum Arbeiten in deiner Stadt",
     "buttonText_count": "Entdecke {{count}} Cafés",
     "buttonText": "Entdecke alle Cafés",
     "new_cafes_title": "Neu hinzugefügte Cafés",

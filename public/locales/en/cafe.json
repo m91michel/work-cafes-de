@@ -1,11 +1,11 @@
 {
   "index": {
-    "title": "Find the best cafes for working",
+    "title": "Find The Best Cafes For Working",
     "description": "Here you can find a list of all cafes, that are available on our website. Help us to complete the list by adding new cafes.",
-    "all_cities_title": "A list of all cities on our website"
+    "all_cities_title": "A List Of All Cities On Our Website"
   },
   "details": {
-    "title": "About this Cafe",
+    "title": "About This Cafe",
     "about": {
       "title": "About",
       "no_content": "We couldn't find any information about this cafe."

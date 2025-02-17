@@ -9,8 +9,8 @@ import { cafeSortingOptions } from "@/components/cafe/filters/filters-section";
 import { PaginationSection } from "@/components/general/pagination-section";
 
 export const metadata = getSEOTags({
-  title: `Entdecke die besten Cafés zum Arbeiten in Deutschland`,
-  description: "Entdecke die besten Cafés zum Arbeiten in Deutschland! Finde ideale Orte für Kaffee und Produktivität mit unserer umfassenden Liste der Hotspots.",
+  title: `Entdecke die besten Cafés zum Arbeiten in deiner Stadt`,
+  description: "Entdecke die besten Cafés zum Arbeiten in deiner Stadt! Finde ideale Orte für Kaffee und Produktivität mit unserer umfassenden Liste der Hotspots.",
   canonicalUrlRelative: "/cafes",
 });
 
