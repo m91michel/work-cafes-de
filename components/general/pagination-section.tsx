@@ -9,7 +9,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useQueryState, parseAsString } from "next-usequerystate";
 
 interface PaginationSectionProps {
   totalItems: number;
@@ -22,15 +22,14 @@ export function PaginationSection({
   pageSize,
   currentPage,
 }: PaginationSectionProps) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const [, setPage] = useQueryState(
+    "page",
+    parseAsString.withOptions({ scroll: true, shallow: false })
+  );
   const totalPages = Math.ceil(totalItems / pageSize);
 
-  // Create page URL with current search params
-  const createPageURL = (pageNumber: number | string) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("page", pageNumber.toString());
-    return `${pathname}?${params.toString()}`;
+  const handlePageChange = async (pageNumber: number) => {
+    await setPage(pageNumber.toString());
   };
 
   // Generate pagination range
@@ -44,12 +43,16 @@ export function PaginationSection({
     }
 
     range.push(1);
-    
+
     if (showEllipsisStart) {
       range.push("...");
     }
 
-    for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+    for (
+      let i = Math.max(2, currentPage - 1);
+      i <= Math.min(totalPages - 1, currentPage + 1);
+      i++
+    ) {
       range.push(i);
     }
 
@@ -73,9 +76,19 @@ export function PaginationSection({
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            href={createPageURL(currentPage - 1)}
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              if (currentPage > 1) {
+                handlePageChange(currentPage - 1);
+              }
+            }}
             aria-disabled={currentPage <= 1}
-            className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
+            className={
+              currentPage <= 1
+                ? "pointer-events-none opacity-50"
+                : "cursor-pointer"
+            }
           />
         </PaginationItem>
 
@@ -91,8 +104,13 @@ export function PaginationSection({
           return (
             <PaginationItem key={page}>
               <PaginationLink
-                href={createPageURL(page)}
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePageChange(page as number);
+                }}
                 isActive={currentPage === page}
+                className="cursor-pointer"
               >
                 {page}
               </PaginationLink>
@@ -102,12 +120,22 @@ export function PaginationSection({
 
         <PaginationItem>
           <PaginationNext
-            href={createPageURL(currentPage + 1)}
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              if (currentPage < totalPages) {
+                handlePageChange(currentPage + 1);
+              }
+            }}
             aria-disabled={currentPage >= totalPages}
-            className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}
+            className={
+              currentPage >= totalPages
+                ? "pointer-events-none opacity-50"
+                : "cursor-pointer"
+            }
           />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
   );
-} 
+}

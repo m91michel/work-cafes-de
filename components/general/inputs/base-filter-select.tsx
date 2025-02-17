@@ -18,9 +18,10 @@ interface FilterOption {
 interface BaseFilterSelectProps {
   paramKey: string;
   options: FilterOption[];
-  placeholder: string;
+  placeholder?: string;
   defaultValue?: string;
   className?: string;
+  onValueChange?: (value: string, setValue: (value: string | null) => Promise<URLSearchParams>) => Promise<void>;
 }
 
 export function BaseFilterSelect({
@@ -29,14 +30,21 @@ export function BaseFilterSelect({
   placeholder,
   className = "w-48",
   defaultValue,
+  onValueChange,
 }: BaseFilterSelectProps) {
   const [value, setValue] = useQueryState(paramKey, {
     defaultValue: defaultValue || '',
     shallow: false,
   });
 
-  const handleValueChange = (newValue: string) => {
-    setValue(newValue === defaultValue ? null : newValue);
+  const handleValueChange = async (newValue: string) => {
+    if (onValueChange) {
+      // Let the parent component handle the URL updates
+      await onValueChange(newValue, setValue);
+    } else {
+      // Default behavior if no onValueChange provided
+      await setValue(newValue === defaultValue ? null : newValue);
+    }
   };
 
   return (

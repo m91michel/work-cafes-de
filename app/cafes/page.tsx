@@ -32,7 +32,7 @@ export default async function CafesPage({ searchParams }: Props) {
   const sortBy = sort?.split('-')[0] || 'google_rating';
   const sortOrder = sort?.split('-')[1] as 'asc' | 'desc' || 'desc';
   const currentPage = Number(_searchParams.page) || 1;
-  const pageSize = 24;
+  const pageSize = Number(_searchParams.page_size) || 25;
   
   const { data: cafes, total } = await getCafes({
     limit: pageSize,
