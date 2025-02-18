@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
     .from("cities")
     .select("*", { count: "exact" })
     .eq("status", "READY")
-    .order("population", { ascending: false })
+    .order("population", { ascending: true })
     .limit(limit);
 
   if (cities === null || cities === undefined || error) {

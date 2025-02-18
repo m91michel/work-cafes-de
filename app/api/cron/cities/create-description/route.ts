@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
     .from("cities")
     .select("*", { count: "exact" })
     .is("description_short_en", null)
-    .in("status", ["NEW", "READY"])
+    .in("status", ["NEW", "READY", "PUBLISHED"])
     .order("population", { ascending: true })
     .limit(limit);
 
