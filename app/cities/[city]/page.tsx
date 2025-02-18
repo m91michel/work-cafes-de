@@ -7,8 +7,8 @@ import { SimpleCafeList } from "@/components/cafe/lists/simple-cafe-list";
 import { CityList } from "@/components/city/list/city-list";
 import initTranslations from "@/libs/i18n/config";
 import { isGerman } from "@/libs/environment";
-import { CafeMap } from "@/components/cafe/map/cafe-map";
 import { CityAbout } from "@/components/city/city-about";
+import { MapContainer } from "@/components/cafe/map/map-container";
 
 type Params = Promise<{ city: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
@@ -65,7 +65,7 @@ export default async function CityPage({ params }: Props) {
         <h2 className="text-2xl font-semibold mb-4">
           {t("map.title", { name: cityName })}
         </h2>
-        <CafeMap cafes={cafes} />
+        <MapContainer cafes={cafes} />
       </div>
 
       <div className="max-w-7xl mx-auto px-4">

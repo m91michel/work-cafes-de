@@ -5,7 +5,7 @@ import { Cafe, City } from "@/libs/types";
 import { cn } from "@/libs/utils";
 import { FiltersSection } from "../filters/filters-section";
 import { useQueryState } from 'next-usequerystate';
-import { CafeMap } from "../map/cafe-map";
+import { MapContainer } from "../map/map-container";
 
 interface Props {
   cafes: Cafe[];
@@ -30,7 +30,7 @@ export function AdvancedCafeList({ cafes, cities, className }: Props) {
           ))}
         </div>
       ) : (
-        <CafeMap cafes={cafes} />
+        <MapContainer cafes={cafes} />
       )}
     </section>
   );
