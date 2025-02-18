@@ -387,6 +387,11 @@ const countries: StaticCountryType[] = [
     flag: "🇭🇺",
   },
   {
+    code: "HK",
+    name: "Hong Kong",
+    flag: "🇭🇰",
+  },
+  {
     code: "IS",
     name: "Iceland",
     flag: "🇮🇸",
