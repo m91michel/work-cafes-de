@@ -33,6 +33,7 @@ export async function GET(request: NextRequest) {
     .not("google_place_id", "is", null)
     .is("processed->google_reviews_at", null)
     .eq("review_count", 0)
+    .gte("google_rating", 3)
     .in("status", ["NEW", "DUPLICATE"])
     .order("created_at", { ascending: true })
     .limit(limit);
