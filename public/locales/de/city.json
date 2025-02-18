@@ -32,9 +32,9 @@
   "hero": {
     "title": "Die besten <highlight>zum Arbeiten</highlight> in {{name}}",
     "cafe_count": "{{count}} Cafés gefunden",
-    "subtitle_one": "Entdecke {{count}} sorgfältig ausgewählte Cafés in {{name}}.",
-    "subtitle_other": "Entdecke {{count}} sorgfältig ausgewählte Cafés in {{name}}.",
-    "description": "Finde den passenden Ort um zu arbeiten, zu lesen oder mit deinen Kommilitonen zu lernen."
+    "subtitle": "Welche Cafés sind die besten zum Arbeiten in {{name}}?",
+    "description_one": "Wir haben ein Café in {{name}} gefunden. Es ist ausgewählt, basierend auf Bewertungen. Nur Cafés, die für Arbeit oder Studium geeignet sind, sind enthalten. Dies bedeutet, dass diese Cafés die Benutzung eines Laptops erlauben und WLAN bereitstellen.",
+    "description_other": "Wir haben {{count}} Cafés in {{name}} gefunden. Diese sind ausgewählt basierend auf Bewertungen. Nur Cafés, die für Arbeit oder Studium geeignet sind, sind enthalten. Dies bedeutet, dass diese Cafés die Benutzung eines Laptops erlauben und WLAN bereitstellen."
   },
   "more_cities": {
     "title": "Weitere Städte in {{country}}",
@@ -42,6 +42,12 @@
     "suggest_title": "Deine Stadt fehlt?",
     "suggest_description": "Dann schlage sie uns vor, damit wir sie auf unserer Seite aufnehmen.",
     "suggest_button": "Stadt vorschlagen"
+  },
+  "map": {
+    "title": "Wo sind die besten Cafés zum Arbeiten in {{name}} zu finden?"
+  },
+  "about": {
+    "title": "Was zeichnet {{name}} aus?"
   },
   "meta": {
     "index": {

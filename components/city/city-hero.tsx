@@ -12,7 +12,7 @@ interface CityHeroProps extends TranslationProps {
 export function CityHero({ city, cafeCount, t }: CityHeroProps) {
   const name = isGerman ? city.name_de : city.name_en;
   const cityName = name || city.slug || '';
-  const description = isGerman ? city.description_long_de : city.description_long_en;
+  const description = isGerman ? city.description_short_de : city.description_short_en;
   const flag = countryFlag(city.country);
   
   return (

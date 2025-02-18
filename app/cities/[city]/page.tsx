@@ -7,6 +7,8 @@ import { SimpleCafeList } from "@/components/cafe/lists/simple-cafe-list";
 import { CityList } from "@/components/city/list/city-list";
 import initTranslations from "@/libs/i18n/config";
 import { isGerman } from "@/libs/environment";
+import { CafeMap } from "@/components/cafe/map/cafe-map";
+import { CityAbout } from "@/components/city/city-about";
 
 type Params = Promise<{ city: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
@@ -58,23 +60,35 @@ export default async function CityPage({ params }: Props) {
   return (
     <main className="flex-1 bg-background">
       <CityHero city={city} cafeCount={cafes.length} t={t} />
+
+      <div className="max-w-7xl mx-auto px-4 mb-12">
+        <h2 className="text-2xl font-semibold mb-4">
+          {t("map.title", { name: cityName })}
+        </h2>
+        <CafeMap cafes={cafes} />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-2xl font-semibold mb-4">
-          {t("hero.subtitle", { count: cafes.length, name: cityName })}
+          {t("hero.subtitle", { name: cityName })}
         </h2>
         <p className="text-muted-foreground">
-          {t("hero.description", { name: cityName })}
+          {t("hero.description", { count: cafes.length, name: cityName })}
         </p>
       </div>
 
       <SimpleCafeList cafes={cafes} />
 
-      <CityList
-        title={t("more_cities.title", { country: city?.country || "Your Country" })}
-        cities={cities}
-        showMoreButton={true}
-        t={t}
-      />
+      <CityAbout city={city} t={t} />
+
+      {cities.length > 0 && (
+        <CityList
+          title={t("more_cities.title", { country: city?.country || "Your Country" })}
+          cities={cities}
+          showMoreButton={true}
+          t={t}
+        />
+      )}
     </main>
   );
 }

@@ -32,9 +32,9 @@
   "hero": {
     "title": "Best <highlight>Work-Friendly Cafes</highlight> In {{name}}",
     "cafe_count": "{{count}} Places Found",
-    "subtitle_one": "Discover {{count}} Carefully Selected Cafe In {{name}}.",
-    "subtitle_other": "Discover {{count}} Carefully Selected Cafes In {{name}}.",
-    "description": "The cafes are selected based on reviews and ratings. Only cafe places that are suitable for working or studying are included. This means they have a laptop-friendly policy and provide WiFi."
+    "subtitle": "What Are The Best Work-Friendly Cafes In {{name}}?",
+    "description_one": "We have found one work-friendly cafe in {{name}}. The cafe is selected based on reviews. Only cafe places that are suitable for working or studying are included. This means they have a laptop-friendly policy and provide WiFi.",
+    "description_other": "We have found {{count}} work-friendly cafes in {{name}}. The cafes are selected based on reviews. Only cafe places that are suitable for working or studying are included. This means they have a laptop-friendly policy and provide WiFi."
   },
   "more_cities": {
     "title": "Checkout Other Cities in {{country}}",
@@ -42,6 +42,12 @@
     "suggest_title": "Do You Miss A City?",
     "suggest_description": "Then suggest it to us, so we can prioritize it on our site.",
     "suggest_button": "Suggest city"
+  },
+  "map": {
+    "title": "Where Are The Best Cafes To Work In {{name}}?"
+  },
+  "about": {
+    "title": "What Makes {{name}} Special?"
   },
   "meta": {
     "index": {
