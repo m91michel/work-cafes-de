@@ -28,8 +28,7 @@ export async function GET(request: NextRequest) {
   const { data: cities = [], error, count: cityCount } = await supabase
     .from("cities")
     .select("*", { count: "exact" })
-    // .eq("status", "READY")
-    .eq("slug", "vienna")
+    .eq("status", "READY")
     .order("population", { ascending: false })
     .limit(limit);
 
