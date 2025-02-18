@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
 
   const { data: cafes = [], error, count } = await supabase
     .from("cafes")
-    .select("id, google_place_id, name, city_slug, address, review_count, processed", {
+    .select("id, google_place_id, name, city_slug, address, review_count, processed, cities(country_code)", {
       count: "exact",
     })
     .not("google_place_id", "is", null)
@@ -60,7 +60,8 @@ export async function GET(request: NextRequest) {
       await setProcessed(cafe);
     }
 
-    const keywords = ["working", "wifi", "laptop"];
+    const isGermanCity = cafe.cities?.country_code === "DE";
+    const keywords = ["working", "wifi", "laptop", ...(isGermanCity ? ["arbeiten", "wlan"] : [])];
     for (const keyword of keywords) {
       await outscraperReviewsTask({
         id: cafe.google_place_id,
