@@ -1,4 +1,5 @@
 import axios from "axios";
+import { GooglePlaceDetails } from "./types/google-maps";
 
 const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY || "";
 
@@ -153,12 +154,12 @@ type Options = {
 export async function getPlaceDetails(
   placeId?: string,
   options?: Options
-) {
+): Promise<GooglePlaceDetails | null> {
   if (!placeId) return null;
 
   const {
     language = "de",
-    fields = "type,url,website,photos,formatted_address,name,rating,opening_hours,geometry",
+    fields = "type,url,website,photos,formatted_address,name,rating,opening_hours,geometry,user_ratings_total,price_level",
   } = options || {};
 
   try {
@@ -174,7 +175,13 @@ export async function getPlaceDetails(
       }
     );
 
-    return response.data.result;
+    const data = response.data;
+
+    if (!data || !data.result) {
+      console.log(`No Google Maps data found for ${placeId}:`, data);
+      return null;
+    }
+    return data.result;
   } catch (error) {
     console.error(
       `Error fetching place details from Google Places API:`,

@@ -2,10 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
 import { extractToken } from "@/libs/utils";
-import { getPlaceDetails } from "@/libs/google-maps";
-import { uploadImageToBunny } from "@/libs/bunny";
-import { processOpenHours } from "@/libs/openai/process-open-hours";
-import dayjs from "dayjs";
 import { searchTripAdvisorLocation } from "@/libs/apis/tripAdvisor";
 import { Cafe } from "@/libs/types";
 

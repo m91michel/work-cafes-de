@@ -93,8 +93,10 @@ export async function GET(request: NextRequest) {
         open_hours: openHours,
         website_url: formatLinks(placeDetails.website),
         links: website,
+        user_ratings_total: placeDetails.user_ratings_total,
+        price_level: placeDetails.price_level,
         maps_data: {
-          ...placeDetails,
+          ...placeDetails as any,
           photos: photoUrls
         },
         status: 'PROCESSED'
