@@ -11,7 +11,7 @@ import { Cafe, City } from "@/libs/types";
 import { TransHighlight } from "@/components/general/translation";
 
 // export const revalidate = 5; // dev
-export const revalidate = 28800; // 8 hours
+export const revalidate = 3600; // 1 hour
 
 export async function generateMetadata() {
   const { t } = await initTranslations(["common"]);
