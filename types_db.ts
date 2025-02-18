@@ -33,6 +33,7 @@ export type Database = {
           name: string | null
           open_hours: string | null
           preview_image: string | null
+          price_level: number | null
           processed: Json | null
           processed_at: string | null
           published_at: string | null
@@ -42,6 +43,7 @@ export type Database = {
           status: string
           tripadvisor_id: string | null
           updated_at: string | null
+          user_ratings_total: number | null
           website_content: string | null
           website_url: string | null
           wifi_qualitity: string | null
@@ -70,6 +72,7 @@ export type Database = {
           name?: string | null
           open_hours?: string | null
           preview_image?: string | null
+          price_level?: number | null
           processed?: Json | null
           processed_at?: string | null
           published_at?: string | null
@@ -79,6 +82,7 @@ export type Database = {
           status?: string
           tripadvisor_id?: string | null
           updated_at?: string | null
+          user_ratings_total?: number | null
           website_content?: string | null
           website_url?: string | null
           wifi_qualitity?: string | null
@@ -107,6 +111,7 @@ export type Database = {
           name?: string | null
           open_hours?: string | null
           preview_image?: string | null
+          price_level?: number | null
           processed?: Json | null
           processed_at?: string | null
           published_at?: string | null
@@ -116,6 +121,7 @@ export type Database = {
           status?: string
           tripadvisor_id?: string | null
           updated_at?: string | null
+          user_ratings_total?: number | null
           website_content?: string | null
           website_url?: string | null
           wifi_qualitity?: string | null

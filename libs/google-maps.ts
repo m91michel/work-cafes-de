@@ -81,6 +81,7 @@ export type GoogleMapsPlace = {
   reference?: string;
   types?: string[];
   user_ratings_total?: number;
+  price_level?: number;
 }
 
 export type Review = {

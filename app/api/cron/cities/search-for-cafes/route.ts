@@ -88,6 +88,8 @@ export async function GET(request: NextRequest) {
         lat_long: lat_long,
         google_rating: rating,
         google_place_id: google_place_id,
+        user_ratings_total: place.user_ratings_total,
+        price_level: place.price_level,
       };
 
       const { data, error } = await supabase
