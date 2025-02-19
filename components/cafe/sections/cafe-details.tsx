@@ -1,10 +1,10 @@
 import { Card } from "@/components/ui/card";
 import { Clock, ExternalLink, LinkIcon, MapPin, Utensils, Coffee, LaptopMinimalCheck, ContactRound } from "lucide-react";
 import { Cafe } from "@/libs/types";
-import { CafeLinks } from "./links";
+import { CafeLinks } from "../links";
 import { directionLink } from "@/libs/google-maps";
 import { TranslationProps } from "@/libs/types";
-import { MLink } from "../general/link";
+import { MLink } from "../../general/link";
 import { isGerman } from "@/libs/environment";
 
 interface CafeDetailsProps extends TranslationProps {

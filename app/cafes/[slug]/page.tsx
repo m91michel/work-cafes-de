@@ -1,16 +1,16 @@
 import { CafeHero } from "@/components/cafe/cafe-hero";
-import { CafeDetails } from "@/components/cafe/cafe-details";
+import { CafeDetails } from "@/components/cafe/sections/cafe-details";
 import {
   CafeAmenities,
   CafeFurtherButtons,
   DebugInfo,
-} from "@/components/cafe/cafe-section-blocks";
+} from "@/components/cafe/sections/cafe-section-blocks";
 import { notFound } from "next/navigation";
 import { getSEOTags } from "@/libs/seo";
 import config from "@/config/config";
 import { getCafeBySlug, getCafesByCity } from "@/libs/supabase/cafes";
 import { CafeCard } from "@/components/cafe/cafe-card";
-import { CafeRatingCard } from "@/components/cafe/rating";
+import { CafeRatingCard } from "@/components/cafe/sections/rating";
 import CafeBreadcrumb from "@/components/cafe/cafe-breadcrumb";
 import { isDev } from "@/libs/environment";
 import { CafeReviews } from "@/components/cafe/cafe-reviews";

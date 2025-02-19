@@ -65,7 +65,7 @@ export default async function CityPage({ params }: Props) {
         <h2 className="text-2xl font-semibold mb-4">
           {t("map.title", { name: cityName })}
         </h2>
-        <MapContainer cafes={cafes} />
+        <MapContainer cafes={cafes} provider="leaflet" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4">

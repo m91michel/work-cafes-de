@@ -5,12 +5,12 @@ import { Card } from '@/components/ui/card';
 import { Wifi, Volume2, Armchair } from 'lucide-react';
 import Link from 'next/link';
 import { Cafe } from '@/libs/types';
-import { AmbianceBadge, SeatingComfortBadge, WifiQualityBadge } from './cafe-badges';
-import { ReportButton } from './ReportButton';
+import { AmbianceBadge, SeatingComfortBadge, WifiQualityBadge } from '../cafe-badges';
+import { ReportButton } from '../ReportButton';
 import { useCTranslation } from '@/hooks/use-translation';
 import { CheckCafeButton } from '@/components/dashboard/cafes/buttons/CheckCafeButton';
-import { Badge } from '../ui/badge';
-import { StatusDropdown } from '../dashboard/cafes/buttons/StatusDropdown';
+import { Badge } from '../../ui/badge';
+import { StatusDropdown } from '../../dashboard/cafes/buttons/StatusDropdown';
 interface Props {
   cafe: Cafe;
 }
