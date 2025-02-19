@@ -1,6 +1,10 @@
 import { Coffee, Github } from "lucide-react";
 import Link from "next/link";
-import config, { appName, domainName } from "@/config/config";
+import config, {
+  alternateDomainName,
+  appName,
+  domainName,
+} from "@/config/config";
 import { getCities } from "@/libs/supabase/cities";
 import { isGerman } from "@/libs/environment";
 import Paths from "@/libs/paths";
@@ -35,18 +39,34 @@ export async function Footer() {
     <footer className="border-t bg-secondary/30">
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Coffee className="w-6 h-6" />
-              <span className="font-bold text-xl">
-                {appName}
-              </span>
+              <span className="font-bold text-xl">{appName}</span>
             </div>
             <p className="text-sm text-muted-foreground">
               {t("meta.description")}
             </p>
-            <p className="text-sm text-muted-foreground">Build with ☕️ by <Link href="https://mathias.rocks" target="_blank" className="hover:text-primary transition-colors">Mathias Michel</Link></p>
+            <p className="text-sm text-muted-foreground">
+              Check{' '}
+              <Link
+                href={`https://${alternateDomainName}?ref=${domainName}`}
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                {alternateDomainName}
+              </Link>{' '}
+              for {isGerman ? "English" : "German"} version
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Build with ☕️ by{" "}
+              <Link
+                href="https://mathias.rocks"
+                target="_blank"
+                className="hover:text-primary transition-colors"
+              >
+                Mathias Michel
+              </Link>
+            </p>
             {/* <div>
               <h3 className="font-semibold mb-4">Folge uns</h3>
               <div className="flex items-center gap-4">
@@ -98,7 +118,7 @@ export async function Footer() {
             </ul>
           </div>
 
-          <div>
+          {/* <div>
             <h3 className="font-semibold mb-4">{t("footer.city-title")}</h3>
             <ul className="space-y-2">
               {cities.map((city) => (
@@ -112,7 +132,7 @@ export async function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
         </div>
 
         <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
