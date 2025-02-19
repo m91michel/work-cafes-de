@@ -100,9 +100,11 @@ export function CafeMap({ cafes, className }: Props) {
         center={center as L.LatLngExpression}
         zoom={13}
         className="w-full h-full"
+        attributionControl={false}
+        scrollWheelZoom={false}
+        dragging={!L.Browser.mobile}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <MapBounds coords={allCoords} />
@@ -129,6 +131,9 @@ export function CafeMap({ cafes, className }: Props) {
           )
         })}
       </MapContainer>
+      <div className="absolute bottom-0 right-0 z-20 bg-white/80 px-2 py-1 text-xs text-muted-foreground">
+        © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="hover:underline">OpenStreetMap</a> contributors
+      </div>
     </div>
   )
 } 

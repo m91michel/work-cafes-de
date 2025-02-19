@@ -108,6 +108,19 @@
     query-string "<8.x"
     retry-axios "<3.x"
 
+"@googlemaps/js-api-loader@1.16.8", "@googlemaps/js-api-loader@^1.16.8":
+  version "1.16.8"
+  resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-1.16.8.tgz#1595a2af80ca07e551fc961d921a2437d1cb3643"
+  integrity sha512-CROqqwfKotdO6EBjZO/gQGVTbeDps5V7Mt9+8+5Q+jTg5CRMi3Ii/L9PmV3USROrt2uWxtGzJHORmByxyo9pSQ==
+
+"@googlemaps/markerclusterer@2.5.3":
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/@googlemaps/markerclusterer/-/markerclusterer-2.5.3.tgz#9f891ce7e8e161775f3a3e2c9f66956810284591"
+  integrity sha512-x7lX0R5yYOoiNectr10wLgCBasNcXFHiADIBdmn7jQllF2B5ENQw5XtZK+hIw4xnV0Df0xhN4LN98XqA5jaiOw==
+  dependencies:
+    fast-deep-equal "^3.1.3"
+    supercluster "^8.0.1"
+
 "@googlemaps/url-signature@^1.0.4":
   version "1.0.39"
   resolved "https://registry.yarnpkg.com/@googlemaps/url-signature/-/url-signature-1.0.39.tgz#10bdfb748978693d14a63f868248cd6ec0a53ef4"
@@ -1235,6 +1248,28 @@
   resolved "https://registry.yarnpkg.com/@radix-ui/rect/-/rect-1.1.0.tgz#f817d1d3265ac5415dadc67edab30ae196696438"
   integrity sha512-A9+lCBZoaMJlVKcRBz2YByCG+Cp2t6nAnMnNba+XiWxnj6r4JUFqfsgwocMBZU9LPtdxC6wB56ySYpc7LQIoJg==
 
+"@react-google-maps/api@^2.20.6":
+  version "2.20.6"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/api/-/api-2.20.6.tgz#8463a4db10dd2764b14da4bfe942a584693eb4b3"
+  integrity sha512-frxkSHWbd36ayyxrEVopSCDSgJUT1tVKXvQld2IyzU3UnDuqqNA3AZE4/fCdqQb2/zBQx3nrWnZB1wBXDcrjcw==
+  dependencies:
+    "@googlemaps/js-api-loader" "1.16.8"
+    "@googlemaps/markerclusterer" "2.5.3"
+    "@react-google-maps/infobox" "2.20.0"
+    "@react-google-maps/marker-clusterer" "2.20.0"
+    "@types/google.maps" "3.58.1"
+    invariant "2.2.4"
+
+"@react-google-maps/infobox@2.20.0":
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/infobox/-/infobox-2.20.0.tgz#7c3dd1821c9f1e1e92570f37419b97f6f956c7ee"
+  integrity sha512-03PJHjohhaVLkX6+NHhlr8CIlvUxWaXhryqDjyaZ8iIqqix/nV8GFdz9O3m5OsjtxtNho09F/15j14yV0nuyLQ==
+
+"@react-google-maps/marker-clusterer@2.20.0":
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/marker-clusterer/-/marker-clusterer-2.20.0.tgz#6b64177843a60c66e0ebaf85037a47ecd07007df"
+  integrity sha512-tieX9Va5w1yP88vMgfH1pHTacDQ9TgDTjox3tLlisKDXRQWdjw+QeVVghhf5XqqIxXHgPdcGwBvKY6UP+SIvLw==
+
 "@react-leaflet/core@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@react-leaflet/core/-/core-3.0.0.tgz#34ccc280ce7d8ac5c09f2b3d5fffded450bdf1a2"
@@ -1432,6 +1467,11 @@
   version "7946.0.16"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.16.tgz#8ebe53d69efada7044454e3305c19017d97ced2a"
   integrity sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg==
+
+"@types/google.maps@3.58.1":
+  version "3.58.1"
+  resolved "https://registry.yarnpkg.com/@types/google.maps/-/google.maps-3.58.1.tgz#71ce3dec44de1452f56641d2c87c7dd8ea964b4d"
+  integrity sha512-X9QTSvGJ0nCfMzYOnaVs/k6/4L+7F5uCS+4iUmkLEls6J9S/Phv+m/i3mDeyc49ZBgwab3EFO1HEoBY7k98EGQ==
 
 "@types/hast@^3.0.0":
   version "3.0.4"
@@ -3425,6 +3465,13 @@ internal-slot@^1.0.7:
   resolved "https://registry.yarnpkg.com/internmap/-/internmap-2.0.3.tgz#6685f23755e43c524e251d29cbc97248e3061009"
   integrity sha512-5Hh7Y1wQbvY5ooGgPbDaL5iYLAPzMTUrjMulskHLH6wnv/A+1q5rgEaiuqEjB+oxGXIVZs1FF+R/KPN3ZSQYYg==
 
+invariant@2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
+  integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
+  dependencies:
+    loose-envify "^1.0.0"
+
 is-alphabetical@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/is-alphabetical/-/is-alphabetical-2.0.1.tgz#01072053ea7c1036df3c7d19a6daaec7f19e789b"
@@ -3844,7 +3891,7 @@ longest-streak@^3.0.0:
   resolved "https://registry.yarnpkg.com/longest-streak/-/longest-streak-3.1.0.tgz#62fa67cd958742a1574af9f39866364102d90cd4"
   integrity sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==
 
-loose-envify@^1.4.0:
+loose-envify@^1.0.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
