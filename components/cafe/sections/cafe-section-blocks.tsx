@@ -12,7 +12,7 @@ import { CheckCafeButton } from '@/components/dashboard/cafes/buttons/CheckCafeB
 import { Badge } from '../../ui/badge';
 import { StatusDropdown } from '../../dashboard/cafes/buttons/StatusDropdown';
 interface Props {
-  cafe: Cafe;
+  cafe: Cafe | null;
 }
 
 export function CafeAmenities({ cafe }: Props) {
@@ -27,7 +27,7 @@ export function CafeAmenities({ cafe }: Props) {
             <Wifi className="h-5 w-5 text-muted-foreground" />
             <div>
               <h3 className="font-medium">{t('details.wifi_quality.label')}</h3>
-              <WifiQualityBadge value={cafe.wifi_qualitity} />
+              <WifiQualityBadge value={cafe?.wifi_qualitity} />
             </div>
           </div>
 
@@ -36,7 +36,7 @@ export function CafeAmenities({ cafe }: Props) {
             
             <div>
               <h3 className="font-medium">{t('details.seating_comfort.label')}</h3>
-              <SeatingComfortBadge value={cafe.seating_comfort} />
+              <SeatingComfortBadge value={cafe?.seating_comfort} />
             </div>
           </div>
 
@@ -44,7 +44,7 @@ export function CafeAmenities({ cafe }: Props) {
             <Volume2 className="h-5 w-5 text-muted-foreground" />
             <div>
               <h3 className="font-medium">{t('details.ambiance.label')}</h3>
-              <AmbianceBadge value={cafe.ambiance} />
+              <AmbianceBadge value={cafe?.ambiance} />
             </div>
           </div>
         </div>
@@ -56,11 +56,15 @@ export function CafeAmenities({ cafe }: Props) {
 export function CafeFurtherButtons({ cafe }: Props) {
   const { t } = useCTranslation('cafe');
 
+  if (!cafe) {
+    return null;
+  }
+
   return (
     <div className="mt-6 flex gap-3 flex-wrap">
         <Button asChild variant="outline">
-          <Link href={`/cities/${cafe.city_slug}`}>
-            {t('more_cafes.title', { city: cafe.city })}
+          <Link href={`/cities/${cafe?.city_slug}`}>
+            {t('more_cafes.title', { city: cafe?.city })}
           </Link>
         </Button>
         <Button asChild variant="outline">
@@ -75,6 +79,10 @@ export function CafeFurtherButtons({ cafe }: Props) {
 }
 
 export function DebugInfo({ cafe }: Props) {
+  if (!cafe) {
+    return null;
+  }
+
   return (
     <Card className="p-6 mt-6 space-y-6">
       <h2 className="text-2xl font-semibold">Debug Info</h2>

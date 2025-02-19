@@ -1,10 +1,9 @@
 import { Card } from "@/components/ui/card";
-import { Clock, ExternalLink, LinkIcon, MapPin, Utensils, Coffee, LaptopMinimalCheck, ContactRound } from "lucide-react";
+import { Clock, LinkIcon, Utensils, Coffee, LaptopMinimalCheck, ContactRound } from "lucide-react";
 import { Cafe } from "@/libs/types";
 import { CafeLinks } from "../links";
 import { directionLink } from "@/libs/google-maps";
 import { TranslationProps } from "@/libs/types";
-import { MLink } from "../../general/link";
 import { isGerman } from "@/libs/environment";
 
 interface CafeDetailsProps extends TranslationProps {
@@ -18,37 +17,37 @@ export function CafeDetails({ cafe, t }: CafeDetailsProps) {
       {hours.length == 0 && <br />}
     </div>
   ));
-  const googleMapsLink = directionLink(cafe.name, cafe.google_place_id);
+  const iconClass = "h-5 w-5 text-muted-foreground mt-0 md:mt-1";
 
   return (
     <Card className="p-6">
-      <h2 className="text-2xl font-semibold mb-6">{t("details.title")}</h2>
+      <h2 className="text-2xl font-semibold mb-6">{t("details.title", { name: cafe.name || t("details.fallback_name") })}</h2>
 
       <div className="grid gap-6">
         <ContentItem
           title={t("details.about.title")}
-          icon={<ContactRound className="h-5 w-5 text-muted-foreground mt-1" />}
+          icon={<ContactRound className={iconClass} />}
         >
           {getContent(cafe.about_content) || t("details.about.no_content")}
         </ContentItem>
 
         <ContentItem
           title={t("details.food.title")}
-          icon={<Utensils className="h-5 w-5 text-muted-foreground mt-1" />}
+          icon={<Utensils className={iconClass} />}
         >
           {getContent(cafe.food_contents) || t("details.food.no_content")}
         </ContentItem>
 
         <ContentItem
           title={t("details.drinks.title")}
-          icon={<Coffee className="h-5 w-5 text-muted-foreground mt-1" />}
+          icon={<Coffee className={iconClass} />}
         >
           {getContent(cafe.drinks_content) || t("details.drinks.no_content")}
         </ContentItem>
 
         <ContentItem
           title={t("details.work_friendly.title")}
-          icon={<LaptopMinimalCheck className="h-5 w-5 text-muted-foreground mt-1" />}
+          icon={<LaptopMinimalCheck className={iconClass} />}
         >
           {getContent(cafe.work_friendly_content) ||
             t("details.work_friendly.no_content")}
@@ -56,30 +55,14 @@ export function CafeDetails({ cafe, t }: CafeDetailsProps) {
 
         <ContentItem
           title={t("details.hours.title")}
-          icon={<Clock className="h-5 w-5 text-muted-foreground mt-1" />}
+          icon={<Clock className={iconClass} />}
         >
           {openingHours || t("details.hours.no_content")}
         </ContentItem>
 
         <ContentItem
-          title={t("details.address")}
-          icon={<MapPin className="h-5 w-5 text-muted-foreground mt-1" />}
-        >
-          <p className="text-muted-foreground">
-          {cafe.address}{" "}
-              <MLink
-                href={googleMapsLink}
-                className="text-primary hover:text-primary/80 transition-colors"
-              >
-                {t("details.directions")}{" "}
-              <ExternalLink className="w-4 h-4 inline" />
-            </MLink>
-          </p>
-        </ContentItem>
-
-        <ContentItem
           title={t("details.links")}
-          icon={<LinkIcon className="h-5 w-5 text-muted-foreground mt-1" />}
+          icon={<LinkIcon className={iconClass} />}
         >
           <CafeLinks cafe={cafe} />
         </ContentItem>
@@ -99,9 +82,12 @@ function ContentItem({ title, children, icon }: ContentItemProps) {
 
   return (
     <div className="flex items-start gap-3">
-      <div className="w-5">{icon}</div>
+      <div className="hidden md:block w-5">{icon}</div>
       <div>
-        <h3 className="font-medium mb-1">{title}</h3>
+        <div className="flex gap-2 items-center">
+          <div className="md:hidden w-5">{icon}</div>
+          <h3 className="font-medium mt-1 md:mt-0 mb-1">{title}</h3>
+        </div>
         {content}
       </div>
     </div>

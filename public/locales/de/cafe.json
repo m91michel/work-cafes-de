@@ -5,7 +5,8 @@
     "all_cities_title": "Eine Liste aller Städte auf unserer Website"
   },
   "details": {
-    "title": "Über dieses Café",
+    "title": "Über {{name}}",
+    "fallback_name": "dieses Café",
     "about": {
       "title": "Über",
       "no_content": "Wir konnten leider keine Informationen über dieses Cafe finden."

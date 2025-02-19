@@ -2,7 +2,7 @@
 
 import { Card } from "../../ui/card";
 import { useCTranslation } from "@/hooks/use-translation";
-import { locationLink } from "@/libs/google-maps";
+import { locationLink, directionLink } from "@/libs/google-maps";
 import { Cafe } from "@/libs/types";
 import { MapContainer, MapOptions } from "../map/map-container";
 import { Button } from "@/components/ui/button";
@@ -28,6 +28,7 @@ const mapOptions: MapOptions = {
 export function CafeMapLocation({ cafe }: RatingCardProps) {
   const { t } = useCTranslation("cafe");
   const googleMapsLink = locationLink(cafe.name, cafe.google_place_id);
+  const googleDirectionLink = directionLink(cafe.name, cafe.google_place_id);
 
   return (
     <Card className="p-6 mb-6">
@@ -42,6 +43,15 @@ export function CafeMapLocation({ cafe }: RatingCardProps) {
           <strong className="text-base font-semibold">{cafe.name}</strong>
         )}
       />
+      <p className="text-muted-foreground">
+        {cafe.address}{" "}
+        <MLink
+          href={googleDirectionLink}
+          className="text-primary hover:text-primary/80 transition-colors"
+        >
+          {t("details.directions")} <ExternalLink className="w-4 h-4 inline" />
+        </MLink>
+      </p>
       <Button variant="default" size="sm" asChild className="mt-3 w-full">
         <MLink href={googleMapsLink}>
           {t("map.button_title")}

@@ -87,18 +87,18 @@ export default async function CafePage({ params }: Props) {
           </div>
 
           {/* Sidebar - Box 2 */}
-          <div className="order-2 lg:order-3 lg:col-span-1 lg:row-span-4">
+          <div className="order-2 lg:order-3 lg:col-span-1 lg:row-span-5">
             <div className="sticky top-6">
               <CafeMapLocation cafe={cafe} /> 
               <CafeRatingCard cafe={cafe} />
               <CafeAmenities cafe={cafe} />
               <CafeFurtherButtons cafe={cafe} />
-              {isDev && <DebugInfo cafe={cafe} />}
+              {isDev && false && <DebugInfo cafe={cafe} />}
             </div>
           </div>
 
           {/* Reviews - Box 3 */}
-          <div className="order-3 lg:order-3 lg:col-span-2 lg:row-span-2">
+          <div className="order-3 lg:order-3 lg:col-span-2 lg:row-span-3">
             <CafeReviews cafe={cafe} />
           </div>
         </div>
