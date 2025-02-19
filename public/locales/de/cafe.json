@@ -133,10 +133,10 @@
     "all": "Alle Städte",
     "select_city": "Stadt auswählen",
     "sorting": {
-      "rating_desc": "Beliebteste",
-      "rating_asc": "Unbeliebteste",
-      "created_at_desc": "Neueste",
-      "created_at_asc": "Älteste"
+      "rating_desc": "Bewertung (↓)",
+      "rating_asc": "Bewertung (↑)",
+      "published_at_desc": "Hinzugefügt (↓)",
+      "published_at_asc": "Hinzugefügt (↑)"
     }
   }
 } 

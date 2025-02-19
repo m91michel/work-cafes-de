@@ -13,9 +13,10 @@ export type SortingOption = {
 type Props = {
   options: SortingOption[];
   namespace: string;
+  className?: string;
 };
 
-export function SortingOptions({ options, namespace }: Props) {
+export function SortingOptions({ options, namespace, className }: Props) {
   const { t } = useCTranslation(namespace);
 
   const translatedOptions = options.map((option) => ({
@@ -25,6 +26,7 @@ export function SortingOptions({ options, namespace }: Props) {
 
   return (
     <BaseFilterSelect
+      className={className}
       paramKey="sort"
       options={translatedOptions}
       defaultValue={translatedOptions[0].value}

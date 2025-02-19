@@ -130,10 +130,10 @@
     "all": "All Cities",
     "select_city": "Select city",
     "sorting": {
-      "rating_desc": "Most Popular",
-      "rating_asc": "Least Popular",
-      "created_at_desc": "Newest",
-      "created_at_asc": "Oldest"
+      "rating_desc": "Popularity (↓)",
+      "rating_asc": "Popularity (↑)",
+      "published_at_desc": "Published (↓)",
+      "published_at_asc": "Published (↑)"
     }
   }
 } 

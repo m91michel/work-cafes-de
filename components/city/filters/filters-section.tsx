@@ -1,6 +1,7 @@
 import { SortingOption, SortingOptions } from "@/components/general/inputs/sorting-options";
 import { CountryFilter } from "./country-filter";
 import { Country } from "@/libs/types";
+import { CitySearchFilter } from "./city-search-filter";
 
 type Props = {
   countries: Country[];
@@ -25,12 +26,25 @@ export const citySortingOptions: SortingOption[] = [
   },
 ];
 export function FiltersSection({ countries }: Props) {
-  
   return (
-    <div className="flex flex-wrap gap-4 justify-between mb-8">
-      <CountryFilter countries={countries} />
-      {/* Add more filters here */}
-      <SortingOptions options={citySortingOptions} namespace="city" />
+    <div className="mb-6">
+      {/* Mobile Layout */}
+      <div className="flex flex-col gap-3 sm:hidden">
+        <CitySearchFilter className="w-full" />
+        <div className="flex gap-4">
+          <CountryFilter countries={countries} className="w-1/2" />
+          <SortingOptions options={citySortingOptions} namespace="city" className="w-1/2" />
+        </div>
+      </div>
+
+      {/* Desktop Layout */}
+      <div className="hidden sm:flex flex-wrap gap-4 justify-between">
+        <div className="flex gap-4">
+          <CountryFilter countries={countries} className="min-w-48" />
+          <CitySearchFilter className="min-w-[200px]" />
+        </div>
+        <SortingOptions options={citySortingOptions} namespace="city" />
+      </div>
     </div>
   );
 }

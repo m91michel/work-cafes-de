@@ -68,11 +68,12 @@
   },
   "filters": {
     "select_sort": "Select Sort",
+    "search_placeholder": "Search for a city",
     "sorting": {
-      "population_desc": "Highest Population",
-      "population_asc": "Lowest Population",
-      "updated_at_desc": "Latest Updated",
-      "updated_at_asc": "Oldest Updated"
+      "population_desc": "Population (↓)",
+      "population_asc": "Population (↑)",
+      "updated_at_desc": "Updated (↓)",
+      "updated_at_asc": "Updated (↑)"
     },
     "by-country": {
       "all": "All Countries"

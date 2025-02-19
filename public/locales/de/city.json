@@ -68,11 +68,12 @@
   },
   "filters": {
     "select_sort": "Sortieren nach",
+    "search_placeholder": "Nach einer Stadt suchen...",
     "sorting": {
-      "population_desc": "Nach Bevölkerung (Absteigend)",
-      "population_asc": "Nach Bevölkerung (Aufsteigend)",
-      "updated_at_desc": "Zuletzt aktualisiert",
-      "updated_at_asc": "Am ältesten aktualisiert"
+      "population_desc": "Bevölkerung (↓)",
+      "population_asc": "Bevölkerung (↑)",
+      "updated_at_desc": "Aktualisiert (↓)",
+      "updated_at_asc": "Aktualisiert (↑)"
     },
     "by-country": {
       "all": "Alle Länder"

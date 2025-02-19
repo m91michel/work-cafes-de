@@ -6,13 +6,15 @@ import { Country } from '@/libs/types';
 
 type CountryFilterProps = {
   countries: Country[];
+  className?: string;
 };
 
-export function CountryFilter({ countries }: CountryFilterProps) {
+export function CountryFilter({ countries, className }: CountryFilterProps) {
   const { t } = useCTranslation('city');
 
   const countryOptions = countries.map((country) => {
-    const labelWithFlag = country.flag ? `${country.flag} ${country.name}` : country.name;
+    const cityCount = country.city_count && `(${country.city_count})`;
+    const labelWithFlag = country.flag ? `${country.flag} ${country.name} ${cityCount}` : country.name;
     return {
       value: country.name || "-",
       label: labelWithFlag || country.name || "-",
@@ -26,6 +28,7 @@ export function CountryFilter({ countries }: CountryFilterProps) {
 
   return (
     <BaseFilterSelect
+      className={className}
       paramKey="country"
       options={[allOption, ...countryOptions]}
       defaultValue={allOption.value}

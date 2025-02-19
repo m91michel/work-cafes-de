@@ -8,6 +8,8 @@ import initTranslations from "@/libs/i18n/config";
 import { getSEOTags } from "@/libs/seo";
 import { getCities } from "@/libs/supabase/cities";
 import { getCountries } from "@/libs/supabase/countries";
+import { useQueryState } from "next-usequerystate";
+import { useState } from "react";
 
 export const revalidate = 28800; // 8 hours
 
@@ -44,6 +46,7 @@ export default async function CityPage({ searchParams }: Props) {
   const countries = await getCountries({ status: "ACTIVE" });
   const titleKey = country ? "index.title_with_country" : "index.title";
   const descriptionKey = country ? "index.description_with_country" : "index.description";
+
   return (
     <main className="flex-1 bg-background">
       <div className="bg-card">
