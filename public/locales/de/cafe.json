@@ -123,6 +123,10 @@
     "no_reviews_description": "Für dieses Cafe wurden keine Bewertungen gefunden.",
     "source_hint": "Bewertung von {{source}}"
   },
+  "map": {
+    "title": "Standort",
+    "button_title": "Auf Google Maps anzeigen"
+  },
   "meta": {
     "title": "Cafés zum Arbeiten",
     "slug": {

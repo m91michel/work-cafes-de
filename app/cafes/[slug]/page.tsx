@@ -17,6 +17,7 @@ import { CafeReviews } from "@/components/cafe/cafe-reviews";
 import { FAQSection } from "@/components/general/sections/faq";
 import initTranslations from "@/libs/i18n/config";
 import { getCountryByCode } from "@/libs/supabase/countries";
+import { CafeMapLocation } from "@/components/cafe/sections/cafe-map-location";
 
 export const revalidate = 3600;
 
@@ -88,6 +89,7 @@ export default async function CafePage({ params }: Props) {
           {/* Sidebar - Box 2 */}
           <div className="order-2 lg:order-3 lg:col-span-1 lg:row-span-4">
             <div className="sticky top-6">
+              <CafeMapLocation cafe={cafe} /> 
               <CafeRatingCard cafe={cafe} />
               <CafeAmenities cafe={cafe} />
               <CafeFurtherButtons cafe={cafe} />

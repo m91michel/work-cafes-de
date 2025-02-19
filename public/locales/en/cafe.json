@@ -120,6 +120,10 @@
     "no_reviews_description": "For this cafe, no reviews with relevant information were found.",
     "source_hint": "Review from {{source}}"
   },
+  "map": {
+    "title": "Location",
+    "button_title": "View on Google Maps"
+  },
   "meta": {
     "title": "Cafes to work in",
     "slug": {

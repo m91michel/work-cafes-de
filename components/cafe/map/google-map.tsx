@@ -3,8 +3,6 @@
 import { useEffect, useState, useMemo } from 'react'
 import { Loader } from '@googlemaps/js-api-loader'
 import { Cafe } from '@/libs/types'
-import { Card } from '@/components/ui/card'
-import { Star } from 'lucide-react'
 import { cn } from '@/libs/utils'
 
 // Advantages:
@@ -154,7 +152,7 @@ export function CafeGoogleMap({ cafes, className }: Props) {
       bottom: 50,
       left: 50
     })
-  }, [map, isLoaded, cafesWithCoords])
+  }, [map, isLoaded, cafesWithCoords, markers])
 
   if (error) {
     return (
@@ -162,7 +160,7 @@ export function CafeGoogleMap({ cafes, className }: Props) {
         <div className="text-center p-4">
           <p className="text-destructive mb-2">⚠️ {error}</p>
           <p className="text-sm text-muted-foreground">
-            If you're the site owner, please check the Google Cloud Console configuration.
+            If you are the site owner, please check the Google Cloud Console configuration.
           </p>
         </div>
       </div>

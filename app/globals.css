@@ -156,3 +156,12 @@
     font-size: 16px !important;
   }
 }
+
+/* Leaflet Map Styles */
+.leaflet-container {
+  z-index: 10;
+}
+
+.leaflet-popup {
+  z-index: 20;
+}
