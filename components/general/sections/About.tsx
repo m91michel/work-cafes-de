@@ -3,34 +3,28 @@
 // import pilot from "../assets/pilot.png";
 import { useCTranslation } from "@/hooks/use-translation";
 import { Statistics } from "./Statistics";
-import { TransHighlight } from "../general/translation";
-
-const aboutStats = [
-  {
-    quantity: "200+",
-    description: "Cafes",
-  },
-  {
-    quantity: "20+",
-    description: "Städte",
-  },
-];
+import { TransHighlight } from "../translation";
 
 type Props = {
-  cafeCount: number;
-  cityCount: number;
+  cafeCount?: number | null;
+  cityCount?: number | null;
+  countryCount?: number | null;
 };
 
-export const About = ({ cafeCount, cityCount }: Props) => {
+export const About = ({ cafeCount = 0, cityCount = 0, countryCount = 0 }: Props) => {
   const { t } = useCTranslation('home');
   const aboutStats = [
     {
-      quantity: cafeCount,
+      quantity: cafeCount ?? 0,
       description: t('about.cafe_count'),
     },
     {
-      quantity: cityCount,
+      quantity: cityCount ?? 0,
       description: t('about.city_count'),
+    },
+    {
+      quantity: countryCount ?? 0,
+      description: t('about.country_count'),
     },
   ];
   return (

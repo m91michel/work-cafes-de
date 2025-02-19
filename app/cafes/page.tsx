@@ -2,11 +2,11 @@ import { CitySelector } from "@/components/city/city-selector";
 import { getSEOTags } from "@/libs/seo";
 import { getCafes } from "@/libs/supabase/cafes";
 import { getCities } from "@/libs/supabase/cities";
-import { FAQSection } from "@/components/faq";
 import initTranslations from "@/libs/i18n/config";
 import { AdvancedCafeList } from "@/components/cafe/lists/advanced-cafe-list";
 import { cafeSortingOptions } from "@/components/cafe/filters/filters-section";
 import { PaginationSection } from "@/components/general/pagination-section";
+import { FAQSection } from "@/components/general/sections/faq";
 
 export const metadata = getSEOTags({
   title: `Entdecke die besten Cafés zum Arbeiten in deiner Stadt`,

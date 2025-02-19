@@ -1,14 +1,14 @@
-import { CityHero } from "@/components/city/city-hero";
+import { CityHero } from "@/components/city/sections/city-hero";
 import { notFound } from "next/navigation";
 import { getSEOTags } from "@/libs/seo";
 import { getCafesByCity } from "@/libs/supabase/cafes";
 import { getCities, getCityBySlug } from "@/libs/supabase/cities";
 import { SimpleCafeList } from "@/components/cafe/lists/simple-cafe-list";
-import { CityList } from "@/components/city/list/city-list";
 import initTranslations from "@/libs/i18n/config";
 import { isGerman } from "@/libs/environment";
-import { CityAbout } from "@/components/city/city-about";
+import { CityAbout } from "@/components/city/sections/city-about";
 import { MapContainer } from "@/components/cafe/map/map-container";
+import { CityListSection } from "@/components/city/sections/list-section";
 
 type Params = Promise<{ city: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
@@ -82,7 +82,7 @@ export default async function CityPage({ params }: Props) {
       <CityAbout city={city} t={t} />
 
       {cities.length > 0 && (
-        <CityList
+        <CityListSection
           title={t("more_cities.title", { country: city?.country || "Your Country" })}
           cities={cities}
           showMoreButton={true}

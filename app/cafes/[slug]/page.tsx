@@ -14,7 +14,7 @@ import { CafeRatingCard } from "@/components/cafe/rating";
 import CafeBreadcrumb from "@/components/cafe/cafe-breadcrumb";
 import { isDev } from "@/libs/environment";
 import { CafeReviews } from "@/components/cafe/cafe-reviews";
-import { FAQSection } from "@/components/faq";
+import { FAQSection } from "@/components/general/sections/faq";
 import initTranslations from "@/libs/i18n/config";
 import { getCountryByCode } from "@/libs/supabase/countries";
 

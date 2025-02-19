@@ -1,5 +1,5 @@
 import { SuggestCafeForm } from "@/components/cafe/form/suggest-cafe-form";
-import { FAQSection } from "@/components/faq";
+import { FAQSection } from "@/components/general/sections/faq";
 import { TransHighlight } from "@/components/general/translation";
 import initTranslations from "@/libs/i18n/config";
 import { getSEOTags } from "@/libs/seo";

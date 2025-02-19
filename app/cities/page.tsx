@@ -1,15 +1,10 @@
-import {
-  citySortingOptions,
-  FiltersSection,
-} from "@/components/city/filters/filters-section";
-import { CityList } from "@/components/city/list/city-list";
+import { citySortingOptions } from "@/components/city/filters/filters-section";
+import { FilteredCitySection } from "@/components/city/list/filtered-cities";
 import { TransHighlight } from "@/components/general/translation";
 import initTranslations from "@/libs/i18n/config";
 import { getSEOTags } from "@/libs/seo";
 import { getCities } from "@/libs/supabase/cities";
 import { getCountries } from "@/libs/supabase/countries";
-import { useQueryState } from "next-usequerystate";
-import { useState } from "react";
 
 export const revalidate = 28800; // 8 hours
 
@@ -26,7 +21,9 @@ export async function generateMetadata({ searchParams }: Props) {
   const { t } = await initTranslations(["city"]);
   const _searchParams = await searchParams;
   const country = _searchParams.country as string | undefined;
-  const titleKey = country ? "meta.index.title_with_country" : "meta.index.title";
+  const titleKey = country
+    ? "meta.index.title_with_country"
+    : "meta.index.title";
 
   return getSEOTags({
     title: t(titleKey, { country }),
@@ -45,7 +42,9 @@ export default async function CityPage({ searchParams }: Props) {
   const cities = await getCities({ limit: 1000, country, sortBy, sortOrder });
   const countries = await getCountries({ status: "ACTIVE" });
   const titleKey = country ? "index.title_with_country" : "index.title";
-  const descriptionKey = country ? "index.description_with_country" : "index.description";
+  const descriptionKey = country
+    ? "index.description_with_country"
+    : "index.description";
 
   return (
     <main className="flex-1 bg-background">
@@ -68,11 +67,10 @@ export default async function CityPage({ searchParams }: Props) {
         </div>
       </div>
 
-      <CityList
+      <FilteredCitySection
         cities={cities}
         suggestCityCard={true}
-        t={t}
-        filterSection={<FiltersSection countries={countries} />}
+        countries={countries}
       />
     </main>
   );

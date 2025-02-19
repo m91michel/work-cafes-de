@@ -2,8 +2,9 @@
 
 import { Button } from '@/components/ui/button';
 import { countryFlag } from '@/config/countires';
+import Paths from '@/libs/paths';
 import { City } from '@/libs/types';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface CitySelectorProps {
   cities: City[];
@@ -20,13 +21,12 @@ export function CitySelector({ cities }: CitySelectorProps) {
 }
 
 export function CityButton({ city }: { city: City }) {
-  const router = useRouter();
   const flag = countryFlag(city.country);
   return (
-    <Button variant="outline" onClick={() => {
-      router.push(`/cities/${city.slug}`);
-    }}>
-      {flag} {city.name_de} {city.cafes_count && `(${city.cafes_count})`}
+    <Button variant="outline" asChild>
+      <Link href={Paths.city(city.slug)}>
+        {flag} {city.name_de} {city.cafes_count && `(${city.cafes_count})`}
+      </Link>
     </Button>
   );
 }

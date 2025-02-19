@@ -7,9 +7,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { cn } from "@/libs/utils";
-import { Gradient } from "./general/gradient";
 import { useCTranslation } from "@/hooks/use-translation";
-import { TransHighlight } from "./general/translation";
+import { TransHighlight } from "../translation";
+
 
 const accordionTriggerStyles = cn(
   "flex flex-1 items-center justify-between py-4 px-2 text-sm font-medium transition-all",
@@ -22,11 +22,6 @@ const accordionContentStyles = cn(
   "px-2 pb-4"
 );
 
-type FAQ = {
-  id?: string;
-  question: string;
-  answer: string;
-};
 type Props = {
   faqsIds?: string[];
   namespace?: string;

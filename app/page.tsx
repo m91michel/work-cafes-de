@@ -1,14 +1,15 @@
 import { SimpleCafeList } from "@/components/cafe/lists/simple-cafe-list";
-import { CityList } from "@/components/city/list/city-list";
 import { CitySelector } from "@/components/city/city-selector";
 import { getSEOTags } from "@/libs/seo";
 import { getBestCafes, getCafes, getCafesCount } from "@/libs/supabase/cafes";
 import { getCities, getCitiesCount } from "@/libs/supabase/cities";
-import { FAQSection } from "@/components/faq";
-import { About } from "@/components/sections/About";
 import initTranslations from "@/libs/i18n/config";
 import { Cafe, City } from "@/libs/types";
 import { TransHighlight } from "@/components/general/translation";
+import { CityListSection } from "@/components/city/sections/list-section";
+import { FAQSection } from "@/components/general/sections/faq";
+import { About } from "@/components/general/sections/About";
+import { getCountries } from "@/libs/supabase/countries";
 
 // export const revalidate = 5; // dev
 export const revalidate = 3600; // 1 hour
@@ -43,6 +44,7 @@ async function HomeContent({ cafes, cities }: HomeContentProps) {
     sortOrder: "desc",
   });
   const allCities = await getCities({ limit: 1000, offset: 0 });
+  const activeCountries = await getCountries({ status: "active" });
 
   const cafesButtonText =
     cafesCount != null
@@ -75,7 +77,7 @@ async function HomeContent({ cafes, cities }: HomeContentProps) {
         buttonText={cafesButtonText}
       />
 
-      <CityList
+      <CityListSection
         cities={cities}
         title={t("cities.title")}
         showMoreButton={true}
@@ -85,7 +87,11 @@ async function HomeContent({ cafes, cities }: HomeContentProps) {
 
       <FAQSection />
 
-      <About cafeCount={cafesCount ?? 0} cityCount={citiesCount ?? 0} />
+      <About
+        cafeCount={cafesCount}
+        cityCount={citiesCount}
+        countryCount={activeCountries.length}
+      />
 
       <section className="max-w-7xl mx-auto px-4 py-12">
         <h2 className="text-2xl font-bold mb-4 text-center">
