@@ -10,6 +10,7 @@ import { CityListSection } from "@/components/city/sections/list-section";
 import { FAQSection } from "@/components/general/sections/faq";
 import { About } from "@/components/general/sections/About";
 import { getCountries } from "@/libs/supabase/countries";
+import { LinkSection } from "@/components/city/sections/link-section";
 
 // export const revalidate = 5; // dev
 export const revalidate = 3600; // 1 hour
@@ -41,9 +42,9 @@ async function HomeContent({ cafes, cities }: HomeContentProps) {
     limit: 6,
     offset: 0,
     sortBy: "published_at",
-    sortOrder: "desc",
+    sortOrder: "asc",
   });
-  const allCities = await getCities({ limit: 1000, offset: 0 });
+  
   const activeCountries = await getCountries({ status: "ACTIVE" });
 
   const cafesButtonText =
@@ -93,12 +94,7 @@ async function HomeContent({ cafes, cities }: HomeContentProps) {
         countryCount={activeCountries.length}
       />
 
-      <section className="max-w-7xl mx-auto px-4 py-12">
-        <h2 className="text-2xl font-bold mb-4 text-center">
-          {t("all_cities.title")}
-        </h2>
-        {allCities && <CitySelector cities={allCities} />}
-      </section>
+      <LinkSection />
     </main>
   );
 }

@@ -9,6 +9,8 @@ import { isGerman } from "@/libs/environment";
 import { CityAbout } from "@/components/city/sections/city-about";
 import { MapContainer } from "@/components/cafe/map/map-container";
 import { CityListSection } from "@/components/city/sections/list-section";
+import { LinkSection } from "@/components/city/sections/link-section";
+
 
 type Params = Promise<{ city: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
@@ -47,7 +49,7 @@ export default async function CityPage({ params }: Props) {
   const cafes = (await getCafesByCity(citySlug)) || [];
   const cityName = isGerman ? city?.name_de : city?.name_en;
   const cities = await getCities({
-    limit: 3,
+    limit: 6,
     offset: 0,
     excludeSlug: citySlug,
     country: city?.country || undefined,
@@ -89,6 +91,8 @@ export default async function CityPage({ params }: Props) {
           t={t}
         />
       )}
+
+      <LinkSection />
     </main>
   );
 }

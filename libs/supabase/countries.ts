@@ -5,16 +5,19 @@ type GetCountriesOptions = {
   status?: string;
   limit?: number;
   offset?: number;
+  sortBy?: string;
+  sortOrder?: string;
 };
 export async function getCountries(
   options: GetCountriesOptions = {}
 ): Promise<Country[]> {
-  const { limit = 100, offset = 0, status } = options;
+  const { limit = 100, offset = 0, status, sortBy = "name", sortOrder = "desc" } = options;
 
   let query = supabase
     .from("countries")
     .select("*")
-    .range(offset, offset + limit - 1);
+    .range(offset, offset + limit - 1)
+    .order(sortBy, { ascending: sortOrder === 'asc' });
 
   if (status) {
     query = query.eq("status", status);

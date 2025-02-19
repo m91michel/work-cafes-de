@@ -18,6 +18,7 @@ import { FAQSection } from "@/components/general/sections/faq";
 import initTranslations from "@/libs/i18n/config";
 import { getCountryByCode } from "@/libs/supabase/countries";
 import { CafeMapLocation } from "@/components/cafe/sections/cafe-map-location";
+import { LinkSection } from "@/components/city/sections/link-section";
 
 export const revalidate = 3600;
 
@@ -117,6 +118,8 @@ export default async function CafePage({ params }: Props) {
           <FAQSection />
         </div>
       </div>
+
+      <LinkSection />
     </main>
   );
 }

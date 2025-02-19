@@ -22,7 +22,16 @@
     "country_count": "Länder"
   },
   "all_cities": {
-    "title": "Entdecke die besten Städte weltweit"
+    "title": "Entdecke weitere Städte mit Cafés zum Arbeiten",
+    "by_country": {
+      "title": "Länder mit Cafés"
+    },
+    "by_cafe_count": {
+      "title": "Städte mit den meisten Cafés"
+    },
+    "by_population": {
+      "title": "Cafés in Großstädten"
+    }
   },
   "faq": {
     "title": "Häufig gestellte <highlight>Fragen</highlight>",

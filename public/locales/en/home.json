@@ -7,7 +7,7 @@
     "title": "Work-Friendly Cafes Around the World",
     "buttonText_count": "Explore {{count}} Cafes",
     "buttonText": "View All Cafes",
-    "new_cafes_title": "Newly added cafes",
+    "new_cafes_title": "Newly Added Cafes",
     "new_cafes_subtitle": "We add new cafes daily. Check out the latest places!"
   },
   "cities": {
@@ -22,7 +22,16 @@
     "country_count": "Countries"
   },
   "all_cities": {
-    "title": "Discover The Best Cities Worldwide"
+    "title": "Discover More Cities With Work-Friendly Cafes",
+    "by_country": {
+      "title": "Countries with Cafés"
+    },
+    "by_cafe_count": {
+      "title": "Cities with Most Cafés"
+    },
+    "by_population": {
+      "title": "Cafés in Big Cities"
+    }
   },
   "faq": {
     "title": "Frequently Asked <highlight>Questions</highlight>",

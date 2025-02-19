@@ -38,6 +38,10 @@ class Paths {
     en: "/imprint",
   });
 
+  static country(name: string) {
+    return `/cities?country=${encodeURIComponent(name)}`;
+  }
+
   // Dynamic paths
   static cafe(slug: string) {
     return `/cafes/${slug}`;
