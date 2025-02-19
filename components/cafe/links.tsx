@@ -1,8 +1,17 @@
 import { Cafe } from "@/libs/types";
 import { parseUrls } from "@/libs/utils";
 import { GlobeIcon } from "lucide-react";
-import { SiFacebook, SiInstagram, SiTiktok, SiTripadvisor, SiYelp, SiYoutube } from "@icons-pack/react-simple-icons";
+import {
+  SiFacebook,
+  SiInstagram,
+  SiTiktok,
+  SiTripadvisor,
+  SiYelp,
+  SiYoutube,
+} from "@icons-pack/react-simple-icons";
 import { MLink } from "../general/link";
+import { isNull } from "lodash";
+import { Trans } from "../general/translation";
 
 type Props = {
   cafe: Cafe;
@@ -10,12 +19,31 @@ type Props = {
 
 export function CafeLinks({ cafe }: Props) {
   const links = parseUrls(cafe.links_text || "");
+  const website = cafe.website_url;
+  let otherLinks: string[] = [];
+  if (cafe.links && typeof cafe.links === "string") {
+    otherLinks = parseUrls(cafe.links);
+  } else if (cafe.links && Array.isArray(cafe.links)) {
+    otherLinks = cafe.links
+      .filter(Boolean)
+      .filter((link) => !isNull(link))
+      .map((link) => link?.toString());
+  }
+  const allLinks = Array.from(new Set([...links, website, ...otherLinks]))
+    .filter(Boolean)
+    .filter((link) => link !== "https://");
+
+  if (!allLinks.length || allLinks.length === 0) {
+    return (
+      <p className="text-muted-foreground">
+        <Trans i18nKey="details.no_links_content" ns="cafe" />
+      </p>
+    );
+  }
 
   return (
     <ul>
-      {links.map((link) => (
-        <CafeLink key={link} link={link} />
-      ))}
+      {allLinks.map((link) => link && <CafeLink key={link} link={link} />)}
     </ul>
   );
 }

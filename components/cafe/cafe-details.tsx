@@ -61,39 +61,28 @@ export function CafeDetails({ cafe, t }: CafeDetailsProps) {
           {openingHours || t("details.hours.no_content")}
         </ContentItem>
 
-        <div className="flex items-start gap-3">
-          <div className="w-5">
-            <MapPin className="h-5 w-5 text-muted-foreground mt-1" />
-          </div>
-
-          <div>
-            <h3 className="font-medium">{t("details.address")}</h3>
-            <p className="text-muted-foreground">
-              {cafe.address}{" "}
+        <ContentItem
+          title={t("details.address")}
+          icon={<MapPin className="h-5 w-5 text-muted-foreground mt-1" />}
+        >
+          <p className="text-muted-foreground">
+          {cafe.address}{" "}
               <MLink
                 href={googleMapsLink}
                 className="text-primary hover:text-primary/80 transition-colors"
               >
                 {t("details.directions")}{" "}
-                <ExternalLink className="w-4 h-4 inline" />
-              </MLink>
-            </p>
-          </div>
-        </div>
+              <ExternalLink className="w-4 h-4 inline" />
+            </MLink>
+          </p>
+        </ContentItem>
 
-        <div className="flex items-start gap-3">
-          <LinkIcon className="h-5 w-5 text-muted-foreground mt-1" />
-
-          <div className="w-full">
-            <h3 className="font-medium">{t("details.links")}</h3>
-            {cafe.links_text && <CafeLinks cafe={cafe} />}
-            {!cafe.links_text && (
-              <p className="text-muted-foreground">
-                {t("details.no_links_content")}
-              </p>
-            )}
-          </div>
-        </div>
+        <ContentItem
+          title={t("details.links")}
+          icon={<LinkIcon className="h-5 w-5 text-muted-foreground mt-1" />}
+        >
+          <CafeLinks cafe={cafe} />
+        </ContentItem>
       </div>
     </Card>
   );
@@ -112,7 +101,7 @@ function ContentItem({ title, children, icon }: ContentItemProps) {
     <div className="flex items-start gap-3">
       <div className="w-5">{icon}</div>
       <div>
-        <h3 className="font-medium">{title}</h3>
+        <h3 className="font-medium mb-1">{title}</h3>
         {content}
       </div>
     </div>

@@ -1,7 +1,8 @@
 "use client";
 
-import { Trans } from "react-i18next";
+import { Trans as TransComponent } from "react-i18next";
 import { Gradient } from "./gradient";
+import { ComponentProps } from "react";
 
 type Props = {
   i18nKey: string;
@@ -10,7 +11,7 @@ type Props = {
 };
 export const TransHighlight = ({ i18nKey, values, namespace }: Props) => {
   return (
-    <Trans
+    <TransComponent
       i18nKey={i18nKey}
       values={values}
       ns={namespace}
@@ -19,4 +20,8 @@ export const TransHighlight = ({ i18nKey, values, namespace }: Props) => {
       }}
     />
   );
+};
+
+export const Trans = (props: ComponentProps<typeof TransComponent>) => {
+  return <TransComponent {...props} />;
 };

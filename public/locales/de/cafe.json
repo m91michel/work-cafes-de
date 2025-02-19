@@ -29,7 +29,7 @@
     "address": "Adresse",
     "directions": "Wegbeschreibung",
     "links": "Links",
-    "no_links_content": "Für dieses Cafe sind keine Links verfügbar.",
+    "no_links_content": "Für dieses Café konnten wir keine Links finden.",
     "amenities": "Ausstattung",
     "wifi_quality": {
       "available": "Verfügbar",
