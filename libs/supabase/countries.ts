@@ -37,7 +37,7 @@ export async function getCountryByCode(code?: string | null): Promise<Country | 
     .from("countries")
     .select("*")
     .eq("code", code)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error("Error fetching country:", error);

@@ -80,7 +80,7 @@ export async function getCafeBySlug(slug: string): Promise<Cafe | null> {
     .from("cafes")
     .select("*, cities(name_de, name_en, slug, country, country_code)")
     .eq("slug", slug)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error("Error fetching data:", error);

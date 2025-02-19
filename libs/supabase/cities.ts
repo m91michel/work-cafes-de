@@ -41,7 +41,7 @@ export async function getCityBySlug(slug: string): Promise<City | null> {
     .from("cities")
     .select("*")
     .eq("slug", slug)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error("Error fetching data:", error);
