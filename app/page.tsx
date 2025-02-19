@@ -40,11 +40,11 @@ async function HomeContent({ cafes, cities }: HomeContentProps) {
   const { data: newCafes, total: cafesCount } = await getCafes({
     limit: 6,
     offset: 0,
-    sortBy: "updated_at",
+    sortBy: "published_at",
     sortOrder: "desc",
   });
   const allCities = await getCities({ limit: 1000, offset: 0 });
-  const activeCountries = await getCountries({ status: "active" });
+  const activeCountries = await getCountries({ status: "ACTIVE" });
 
   const cafesButtonText =
     cafesCount != null

@@ -18,7 +18,8 @@
     "title": "<highlight>About</highlight> A Wifi Place",
     "description": "We carefully curate cafes based on verified customer reviews, focusing on spaces that are consistently rated as work-friendly. Our mission is to help digital nomads, freelancers, and students find their perfect workspace worldwide.",
     "cafe_count": "Cafés",
-    "city_count": "Cities"
+    "city_count": "Cities",
+    "country_count": "Countries"
   },
   "all_cities": {
     "title": "Discover The Best Cities Worldwide"

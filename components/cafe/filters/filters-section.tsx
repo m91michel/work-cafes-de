@@ -20,12 +20,12 @@ export const cafeSortingOptions = [
     key: "rating_asc",
   },
   {
-    value: "created_at-desc",
-    key: "created_at_desc",
+    value: "published_at-desc",
+    key: "published_at_desc",
   },
   {
-    value: "created_at-asc",
-    key: "created_at_asc",
+    value: "published_at-asc",
+    key: "published_at_asc",
   },
 ];
 

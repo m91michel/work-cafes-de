@@ -18,7 +18,8 @@
     "title": "<highlight>Über</highlight> Café zum Arbeiten",
     "description": "Wir möchten, dass du weniger Zeit mit der Suche und mehr Zeit mit produktivem Arbeiten verbringst. Egal, ob du Freelancer, Student oder einfach auf der Suche nach einem inspirierenden Arbeitsort bist – wir sind hier, um dir zu helfen.",
     "cafe_count": "Cafés",
-    "city_count": "Städte"
+    "city_count": "Städte",
+    "country_count": "Länder"
   },
   "all_cities": {
     "title": "Entdecke die besten Städte weltweit"
