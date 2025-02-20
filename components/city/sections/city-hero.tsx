@@ -1,8 +1,9 @@
-import { isGerman } from '@/libs/environment';
-import { City, TranslationProps } from '@/libs/types';
-import { LocateIcon, MapPin } from 'lucide-react';
-import { TransHighlight } from '../../general/translation';
-import { countryFlag } from '@/config/countires';
+import { isGerman } from "@/libs/environment";
+import { City, TranslationProps } from "@/libs/types";
+import { LocateIcon, MapPin } from "lucide-react";
+import { TransHighlight } from "../../general/translation";
+import { countryFlag } from "@/config/countires";
+import Image from "next/image";
 
 interface CityHeroProps extends TranslationProps {
   city: City;
@@ -11,29 +12,53 @@ interface CityHeroProps extends TranslationProps {
 
 export function CityHero({ city, cafeCount, t }: CityHeroProps) {
   const name = isGerman ? city.name_de : city.name_en;
-  const cityName = name || city.slug || '';
-  const description = isGerman ? city.description_short_de : city.description_short_en;
+  const cityName = name || city.slug || "";
+  const description = isGerman
+    ? city.description_short_de
+    : city.description_short_en;
   const flag = countryFlag(city.country);
-  
+
   return (
-    <div className="bg-card">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="flex items-center gap-2 text-muted-foreground mb-4">
-          <MapPin className="h-5 w-5" />
-          <span>{cityName} | {flag} {city.country}</span>
-          <LocateIcon className="h-5 w-5" />
-          <span>{t('hero.cafe_count', { count: cafeCount })}</span>
+    <section className="bg-card min-h-[500px]">
+      <div className="max-w-7xl mx-auto px-4 py-12 md:py-20">
+        <div className="flex flex-col md:flex-row md:gap-12 items-center">
+          {/* Content */}
+          <div className="flex-1 w-full md:w-1/2 py-6 md:py-0 mb-6 md:mb-0">
+            <div className="flex items-center gap-2 text-muted-foreground mb-4">
+              <MapPin className="h-5 w-5" />
+              <span>
+                {cityName} | {flag} {city.country}
+              </span>
+              <LocateIcon className="h-5 w-5" />
+              <span>{t("hero.cafe_count", { count: cafeCount })}</span>
+            </div>
+
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">
+              <TransHighlight
+                i18nKey="hero.title"
+                values={{ name: cityName }}
+                namespace="city"
+              />
+            </h1>
+            {description && (
+              <p className="text-lg md:text-xl text-muted-foreground">{description}</p>
+            )}
+          </div>
+
+          {/* Image */}
+          <div className="flex-1 w-full md:w-1/2">
+            <div className="relative aspect-[4/3] md:aspect-[4/3] w-full rounded-lg overflow-hidden">
+              <Image
+                src={city.preview_image || ""}
+                alt={`${cityName} skyline`}
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
         </div>
-        
-        <h1 className="text-4xl font-bold mb-4">
-          <TransHighlight i18nKey="hero.title" values={{ name: cityName }} namespace="city" />
-        </h1>
-        {description && (
-          <p className="text-xl text-muted-foreground">
-            {description}
-          </p>
-        )}
       </div>
-    </div>
+    </section>
   );
 }

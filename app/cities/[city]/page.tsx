@@ -63,7 +63,7 @@ export default async function CityPage({ params }: Props) {
     <main className="flex-1 bg-background">
       <CityHero city={city} cafeCount={cafes.length} t={t} />
 
-      <div className="max-w-7xl mx-auto px-4 mb-12">
+      <div className="max-w-7xl mx-auto px-4 py-12 mb-12">
         <h2 className="text-2xl font-semibold mb-4">
           {t("map.title", { name: cityName })}
         </h2>
