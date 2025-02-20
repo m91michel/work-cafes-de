@@ -5,9 +5,10 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L, { MapOptions } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Cafe } from "@/libs/types";
-import { Card } from "@/components/ui/card";
 import { Star } from "lucide-react";
 import { cn } from "@/libs/utils";
+import Paths from "@/libs/paths";
+import Link from "next/link";
 
 // Advantages:
 // - Free and open source
@@ -70,6 +71,9 @@ export function LeafletMap({ cafes, className, height = 600, mapOptions, content
     setMounted(true);
     // Fix for marker icons in Next.js
     L.Marker.prototype.options.icon = DEFAULT_ICON;
+    // Add custom popup close button styles
+    L.Popup.prototype.options.closeButton = true;
+    L.Popup.prototype.options.className = 'custom-popup';
   }, []);
 
   // Get cafes with valid coordinates
@@ -140,7 +144,9 @@ export function LeafletMap({ cafes, className, height = 600, mapOptions, content
 function defaultContentRender(cafe: Cafe) {
   return (
     <>
-      <h3 className="font-semibold text-lg">{cafe.name}</h3>
+      <Link href={Paths.cafe(cafe.slug ?? "")}>
+        <h3 className="font-semibold text-lg">{cafe.name}</h3>
+      </Link>
       <div className="flex items-center mt-1 text-yellow-500">
         <Star className="h-4 w-4 fill-current" />
         <span className="ml-1">{cafe.google_rating}</span>
