@@ -10,6 +10,7 @@ import { CityAbout } from "@/components/city/sections/city-about";
 import { MapContainer } from "@/components/cafe/map/map-container";
 import { CityListSection } from "@/components/city/sections/list-section";
 import { LinkSection } from "@/components/city/sections/link-section";
+import { StructuredCafeList } from "@/components/general/seo/structured-list";
 
 
 type Params = Promise<{ city: string }>;
@@ -62,6 +63,11 @@ export default async function CityPage({ params }: Props) {
   return (
     <main className="flex-1 bg-background">
       <CityHero city={city} cafeCount={cafes.length} t={t} />
+      <StructuredCafeList
+        name={t("meta.show.title", { name: cityName })}
+        description={t("meta.show.description", { name: cityName })}
+        cafes={cafes}
+      />
 
       <div className="max-w-7xl mx-auto px-4 py-12 mb-12">
         <h2 className="text-2xl font-semibold mb-4">

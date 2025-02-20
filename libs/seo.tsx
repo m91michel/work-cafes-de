@@ -92,36 +92,89 @@ export const getSEOTags = ({
 // See https://shipfa.st/docs/features/seo
 export const renderSchemaTags = () => {
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "http://schema.org",
+            "@type": "Organization",
+            name: config.appName,
+            description: config.appDescription,
+            url: `https://${config.domainName}/`,
+            logo: `https://${config.domainName}/logo.png`,
+            sameAs: [
+              "https://twitter.com/m91michel",
+              // Add other social profiles here
+            ],
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Munich", // Update with your location
+              addressCountry: "DE"
+            }
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            name: config.appName,
+            url: `https://${config.domainName}/`,
+            potentialAction: {
+              "@type": "SearchAction",
+              target: `https://${config.domainName}/search?q={search_term_string}`,
+              "query-input": "required name=search_term_string"
+            }
+          }),
+        }}
+      />
+    </>
+  );
+};
+
+// Add this new function for individual cafe pages
+export const renderCafeSchema = (cafe: {
+  name: string;
+  address: string;
+  city: string;
+  geo: { latitude: number; longitude: number };
+  rating: number;
+  reviewCount: number;
+  openingHours: string;
+  phone: string;
+}) => {
+  return (
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
         __html: JSON.stringify({
           "@context": "http://schema.org",
-          "@type": "SoftwareApplication",
-          name: config.appName,
-          description: config.appDescription,
-          image: `https://${config.domainName}/icon.png`,
-          url: `https://${config.domainName}/`,
-          author: {
-            "@type": "Person",
-            name: "Mathias Michel",
+          "@type": "CafeOrCoffeeShop",
+          name: cafe.name,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: cafe.address,
+            addressLocality: cafe.city,
+            addressCountry: "DE"
           },
-          datePublished: "2024-04-01",
-          applicationCategory: "EducationalApplication",
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: cafe.geo.latitude,
+            longitude: cafe.geo.longitude
+          },
           aggregateRating: {
             "@type": "AggregateRating",
-            ratingValue: "4.8",
-            ratingCount: "12",
+            ratingValue: cafe.rating,
+            reviewCount: cafe.reviewCount
           },
-          offers: [
-            {
-              "@type": "Offer",
-              price: "19.96",
-              priceCurrency: "USD",
-            },
-          ],
-        }),
+          openingHours: cafe.openingHours,
+          telephone: cafe.phone,
+          image: `https://${config.domainName}/images/cafes/${cafe.name.toLowerCase().replace(/ /g, '-')}.jpg`
+        })
       }}
-    ></script>
+    />
   );
 };
