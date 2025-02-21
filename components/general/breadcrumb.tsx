@@ -21,7 +21,7 @@ type Props = {
 
 function MBreadcrumb({ items, className }: Props) {
   return (
-    <div className={cn("max-w-7xl mx-auto px-4", className)}>
+    <div className={cn("max-w-7xl mx-auto px-4 md:px-12", className)}>
       <Breadcrumb>
         <BreadcrumbList>
           {items.map((item, index) => (

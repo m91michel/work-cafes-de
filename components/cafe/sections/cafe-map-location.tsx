@@ -43,7 +43,7 @@ export function CafeMapLocation({ cafe }: RatingCardProps) {
           <strong className="text-base font-semibold">{cafe.name}</strong>
         )}
       />
-      <p className="text-muted-foreground">
+      <p className="text-muted-foreground py-3">
         {cafe.address}{" "}
         <MLink
           href={googleDirectionLink}
@@ -52,7 +52,7 @@ export function CafeMapLocation({ cafe }: RatingCardProps) {
           {t("details.directions")} <ExternalLink className="w-4 h-4 inline" />
         </MLink>
       </p>
-      <Button variant="default" size="sm" asChild className="mt-3 w-full">
+      <Button variant="default" size="sm" asChild className="w-full">
         <MLink href={googleMapsLink}>
           {t("map.button_title")}
           <ExternalLink className="w-4 h-4 ml-2" />

@@ -2,7 +2,6 @@ import { CafeHero } from "@/components/cafe/cafe-hero";
 import { CafeDetails } from "@/components/cafe/sections/cafe-details";
 import {
   CafeAmenities,
-  CafeFurtherButtons,
   DebugInfo,
 } from "@/components/cafe/sections/cafe-section-blocks";
 import { notFound } from "next/navigation";
@@ -41,27 +40,20 @@ export async function generateMetadata({ params }: Props) {
       canonicalUrlRelative: `/cafes/${slug}`,
     });
   }
-  const { t } = await initTranslations(['cafe']);
+  const { t } = await initTranslations(["cafe"]);
 
   return getSEOTags({
     title: `${cafe.name} | ${config.appName}`,
-    description: t('meta.slug.description', { name: cafe.name, city: cafe.city }),
+    description: t("meta.slug.description", {
+      name: cafe.name,
+      city: cafe.city,
+    }),
     canonicalUrlRelative: `/cafes/${slug}`,
   });
 }
 
-// // Required for static site generation
-// export async function generateStaticParams() {
-//   const cafes = await getCafes({ limit: 1000 });
-//   // Don't forget that supabase returns max 1000 rows
-
-//   return cafes.map((cafe) => ({
-//     slug: cafe.slug,
-//   }));
-// }
-
 export default async function CafePage({ params }: Props) {
-  const { t } = await initTranslations(['cafe']);
+  const { t } = await initTranslations(["cafe"]);
   const slug = (await params).slug;
   const cafe = await getCafeBySlug(slug);
   const country = await getCountryByCode(cafe?.cities?.country_code);
@@ -69,7 +61,7 @@ export default async function CafePage({ params }: Props) {
   if (!cafe) {
     return notFound();
   }
-  
+
   const relatedCafes = await getCafesByCity(cafe?.city_slug || "", {
     limit: 3,
     excludeSlug: slug,
@@ -90,10 +82,9 @@ export default async function CafePage({ params }: Props) {
           {/* Sidebar - Box 2 */}
           <div className="order-2 lg:order-3 lg:col-span-1 lg:row-span-5">
             <div className="sticky top-6">
-              <CafeMapLocation cafe={cafe} /> 
+              <CafeMapLocation cafe={cafe} />
               <CafeRatingCard cafe={cafe} />
               <CafeAmenities cafe={cafe} />
-              <CafeFurtherButtons cafe={cafe} />
               {isDev && false && <DebugInfo cafe={cafe} />}
             </div>
           </div>
@@ -106,7 +97,7 @@ export default async function CafePage({ params }: Props) {
 
         <div className="mt-12">
           <h2 className="text-2xl font-semibold mb-6">
-            {t('more_cafes.title', { city: cafe.city })}
+            {t("more_cafes.title", { city: cafe.city })}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {relatedCafes.map((cafe) => (

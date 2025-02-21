@@ -20,6 +20,9 @@ export function countryFlag(countryName?: string | null): string | null {
 export function getCountryByName(name: string) {
   return countries.find((country) => country.name === name);
 }
+export function getCountryByCode(code: string) {
+  return countries.find((country) => country.code === code);
+}
 const countries: StaticCountryType[] = [
   {
     code: "AF",

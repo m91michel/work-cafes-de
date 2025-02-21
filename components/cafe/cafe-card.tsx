@@ -11,16 +11,19 @@ import {
 } from "./cafe-badges";
 import { isGerman } from "@/libs/environment";
 import { countryFlag } from "@/config/countires";
+import Paths from "@/libs/paths";
 
 interface CafeCardProps {
   cafe: Cafe;
 }
 
 export function CafeCard({ cafe }: CafeCardProps) {
+  const href = cafe.slug ? Paths.cafe(cafe.slug) : "";
+
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+    <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)]">
       <div className="relative">
-        <Link href={`/cafes/${cafe.slug}`} className="block relative h-48">
+        <Link href={href} className="block relative h-48">
           {cafe.preview_image && (
             <Image
               src={cafe.preview_image}
@@ -42,7 +45,7 @@ export function CafeCard({ cafe }: CafeCardProps) {
       </div>
 
       <div className="pb-6 px-6 pt-4">
-        <Link href={`/cafes/${cafe.slug}`}>
+        <Link href={href}>
           <h3 className="text-xl font-semibold mb-4 hover:text-primary transition-colors">
             {cafe.name}
           </h3>
