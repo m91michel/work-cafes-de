@@ -21,8 +21,10 @@ export function getCityOGImage(city?: City | null) {
     const searchParams = new URLSearchParams();
 
     // TODO: Add better fallback
-    const name = isGerman ? city?.name_de : city?.name_en;
-    if (name) searchParams.set('name', name);
+    const cityName = isGerman ? city?.name_de : city?.name_en;
+    const title = isGerman ? "Finde ein Cafe zum Arbeiten in" : "Find a Cafe to Work in";
+    searchParams.set('title', title);
+    if (cityName) searchParams.set('name', cityName);
     if (city?.country) searchParams.set('country', city.country);
     if (city?.preview_image) searchParams.set('image', city.preview_image);
 
