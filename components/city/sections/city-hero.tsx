@@ -24,13 +24,17 @@ export function CityHero({ city, cafeCount, t }: CityHeroProps) {
         <div className="flex flex-col md:flex-row md:gap-12 items-center">
           {/* Content */}
           <div className="flex-1 w-full md:w-1/2 py-6 md:py-0 mb-6 md:mb-0">
-            <div className="flex items-center gap-2 text-muted-foreground mb-4">
-              <MapPin className="h-5 w-5" />
-              <span>
-                {cityName} | {flag} {city.country}
-              </span>
-              <LocateIcon className="h-5 w-5" />
-              <span>{t("hero.cafe_count", { count: cafeCount })}</span>
+            <div className="flex flex-col md:flex-row md:items-center gap-2 text-muted-foreground mb-4">
+              <div className="flex items-center gap-2">
+                <MapPin className="h-5 w-5" />
+                <span>
+                  {cityName} | {flag} {city.country}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <LocateIcon className="h-5 w-5" />
+                <span>{t("hero.cafe_count", { count: cafeCount })}</span>
+              </div>
             </div>
 
             <h1 className="text-3xl md:text-4xl font-bold mb-4">
@@ -41,7 +45,9 @@ export function CityHero({ city, cafeCount, t }: CityHeroProps) {
               />
             </h1>
             {description && (
-              <p className="text-lg md:text-xl text-muted-foreground">{description}</p>
+              <p className="text-lg md:text-xl text-muted-foreground">
+                {description}
+              </p>
             )}
           </div>
 
