@@ -6,7 +6,7 @@ import { ComponentProps } from "react";
 
 type Props = {
   i18nKey: string;
-  values?: Record<string, string>;
+  values?: Record<string, string | number>;
   namespace?: string;
 };
 export const TransHighlight = ({ i18nKey, values, namespace }: Props) => {

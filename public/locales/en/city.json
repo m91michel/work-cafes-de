@@ -31,7 +31,8 @@
   },
   "hero": {
     "title": "Best <highlight>Work-Friendly Cafes</highlight> In {{name}}",
-    "cafe_count": "{{count}} Places Found",
+    "places_found": "{{count}} Places Found",
+    "places_found_one": "{{count}} Place Found",
     "subtitle": "What Are The Best Work-Friendly Cafes In {{name}}?",
     "description_one": "We have found one work-friendly cafe in {{name}}. The cafe is selected based on reviews. Only cafe places that are suitable for working or studying are included. This means they have a laptop-friendly policy and provide WiFi.",
     "description_other": "We have found {{count}} work-friendly cafes in {{name}}. The cafes are selected based on reviews. Only cafe places that are suitable for working or studying are included. This means they have a laptop-friendly policy and provide WiFi."

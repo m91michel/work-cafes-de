@@ -2,6 +2,7 @@ import { ImageResponse } from '@vercel/og';
 import { NextRequest } from 'next/server';
 import { countryFlag } from '@/config/countires';
 import { domainName } from '@/config/config';
+import { isGerman } from '@/libs/environment';
 
 export const runtime = 'edge';
 
@@ -20,18 +21,17 @@ export async function GET(request: NextRequest) {
         (
           <div
             style={{
-              height: '100%',
-              width: '100%',
+              height: '630px',
+              width: '1200px',
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: '#fff',
-              fontSize: 32,
-              fontWeight: 600,
+              fontSize: '32px',
+              fontWeight: 600
             }}
           >
-            <div>{domainName}</div>
+            {domainName}
           </div>
         ),
         {
@@ -42,105 +42,125 @@ export async function GET(request: NextRequest) {
     }
 
     const flag = country ? countryFlag(country) : '🌍';
+    const checkoutText = isGerman ? "Entdecken" : "Discover";
 
     return new ImageResponse(
       (
         <div
           style={{
-            height: '100%',
-            width: '100%',
+            height: '630px',
+            width: '1200px',
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            justifyContent: 'flex-end',
             backgroundColor: '#fff',
-            position: 'relative',
-            overflow: 'hidden',
+            padding: '40px',
+            position: 'relative'
           }}
         >
-          {/* Background image */}
-          {imageUrl && (
-            <img
-              src={imageUrl}
-              alt={name || ''}
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'center',
-                zIndex: 0
-              }}
-            />
-          )}
-          
-          {/* Gradient overlay */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              height: '100%',
-              width: '100%',
-              background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 80%, rgba(0,0,0,0.95) 90%)',
-              zIndex: 1
-            }}
-          />
-          
-          {/* Additional dark overlay at the bottom for better text contrast */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-                right: 0,
-              height: '250px',
-              background: 'linear-gradient(to top, rgba(0,0,0,0.4), transparent)',
-              zIndex: 1,
-            }}
-          />
-          
-          {/* Content */}
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
-              padding: '48px',
-              position: 'relative',
-              width: '100%',
-              zIndex: 2
+              justifyContent: 'space-between',
+              width: '660px',
+              height: '550px'
             }}
           >
             <div
               style={{
-                fontSize: 72,
+                fontSize: '32px',
                 fontWeight: 'bold',
-                color: 'white',
-                lineHeight: 1.1,
-                marginBottom: '8px',
-              }}
-            >
-              {name}
-            </div>
-            <div
-              style={{
-                fontSize: 48,
-                color: 'rgba(255, 255, 255, 0.9)',
+                color: '#000',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
-              }}
-            >
-              {flag} {city}
-            </div>
-            <div
-              style={{
-                fontSize: 32,
-                color: 'rgba(255, 255, 255, 0.9)',
-                marginTop: '24px',
+                gap: '8px'
               }}
             >
               {domainName}
             </div>
+
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '16px'
+              }}
+            >
+              <div
+                style={{
+                  fontSize: '24px',
+                  color: '#666',
+                  textTransform: 'uppercase',
+                  letterSpacing: '-0.02em'
+                }}
+              >
+                {checkoutText}
+              </div>
+              <div
+                style={{
+                  fontSize: '64px',
+                  fontWeight: 'bold',
+                  color: '#000',
+                  lineHeight: 1.1,
+                  letterSpacing: '-0.02em'
+                }}
+              >
+                {name}
+              </div>
+              <div
+                style={{
+                  fontSize: '32px',
+                  color: '#666',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+              >
+                {flag} {city}
+              </div>
+            </div>
+          </div>
+
+          <div
+            style={{
+              position: 'absolute',
+              right: '-40px',
+              top: '60px',
+              width: '500px',
+              height: '550px',
+              display: 'flex',
+              borderRadius: '24px',
+              overflow: 'hidden',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+              transform: 'rotate(-5deg)',
+            }}
+          >
+            {imageUrl ? (
+              <img
+                src={imageUrl}
+                alt={name || ''}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  transform: 'scale(1.1)'
+                }}
+              />
+            ) : (
+              <div
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  background: '#f5f5f5',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '24px',
+                  color: '#666'
+                }}
+              >
+                No Image
+              </div>
+            )}
           </div>
         </div>
       ),

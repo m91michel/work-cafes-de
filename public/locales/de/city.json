@@ -31,7 +31,8 @@
   },
   "hero": {
     "title": "Die besten <highlight>zum Arbeiten</highlight> in {{name}}",
-    "cafe_count": "{{count}} Cafés gefunden",
+    "places_found": "{{count}} Orte gefunden",
+    "places_found_one": "{{count}} Ort gefunden",
     "subtitle": "Welche Cafés sind die besten zum Arbeiten in {{name}}?",
     "description_one": "Wir haben ein Café in {{name}} gefunden. Es ist ausgewählt, basierend auf Bewertungen. Nur Cafés, die für Arbeit oder Studium geeignet sind, sind enthalten. Dies bedeutet, dass diese Cafés die Benutzung eines Laptops erlauben und WLAN bereitstellen.",
     "description_other": "Wir haben {{count}} Cafés in {{name}} gefunden. Diese sind ausgewählt basierend auf Bewertungen. Nur Cafés, die für Arbeit oder Studium geeignet sind, sind enthalten. Dies bedeutet, dass diese Cafés die Benutzung eines Laptops erlauben und WLAN bereitstellen."
