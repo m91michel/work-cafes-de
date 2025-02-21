@@ -1,7 +1,8 @@
 import { Cafe, City } from "../types";
+import { fetchAllRecords } from "../utils";
 import supabase from "./supabaseClient";
 
-type GetCafeProps = {
+type CityQuery = {
   limit?: number;
   offset?: number;
   excludeSlug?: string;
@@ -10,7 +11,7 @@ type GetCafeProps = {
   sortOrder?: string;
 };
 export async function getCities(
-  props: GetCafeProps = { limit: 100, offset: 0 }
+  props: CityQuery = { limit: 100, offset: 0 }
 ): Promise<City[]> {
   const { limit = 100, offset = 0, excludeSlug, country, sortBy = 'population', sortOrder = 'desc' } = props;
 
@@ -35,6 +36,8 @@ export async function getCities(
 
   return data;
 }
+
+export const getAllCities = async (props: CityQuery = {}) => await fetchAllRecords<City, CityQuery>(getCities, props);
 
 export async function getCityBySlug(slug: string): Promise<City | null> {
   const { data, error } = await supabase

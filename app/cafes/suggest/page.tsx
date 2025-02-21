@@ -1,4 +1,5 @@
 import { SuggestCafeForm } from "@/components/cafe/form/suggest-cafe-form";
+import { LinkSection } from "@/components/city/sections/link-section";
 import { FAQSection } from "@/components/general/sections/faq";
 import { TransHighlight } from "@/components/general/translation";
 import initTranslations from "@/libs/i18n/config";
@@ -41,6 +42,8 @@ export default async function CafePage() {
         <SuggestCafeForm className="max-w-2xl mx-auto" />
         <FAQSection faqsIds={defaultIds} namespace="cafe" />
       </section>
+
+      <LinkSection />
     </main>
   );
 }

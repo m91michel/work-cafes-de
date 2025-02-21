@@ -11,6 +11,7 @@ import { FAQSection } from "@/components/general/sections/faq";
 import { About } from "@/components/general/sections/About";
 import { getCountries } from "@/libs/supabase/countries";
 import { LinkSection } from "@/components/city/sections/link-section";
+import HomeHero from "@/components/general/sections/home-hero";
 
 // export const revalidate = 5; // dev
 export const revalidate = 3600; // 1 hour
@@ -44,7 +45,7 @@ async function HomeContent({ cafes, cities }: HomeContentProps) {
     sortBy: "published_at",
     sortOrder: "asc",
   });
-  
+
   const activeCountries = await getCountries({ status: "ACTIVE" });
 
   const cafesButtonText =
@@ -54,15 +55,8 @@ async function HomeContent({ cafes, cities }: HomeContentProps) {
 
   return (
     <main className="flex-1">
-      <div className="max-w-7xl mx-auto px-4 pt-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">
-            <TransHighlight i18nKey="home:hero.title" />
-          </h1>
-          <p className="text-xl text-muted-foreground">{t("hero.subtitle")}</p>
-        </div>
-        {cities && <CitySelector cities={cities} />}
-      </div>
+      <HomeHero />
+
       <SimpleCafeList
         cafes={cafes}
         title={t("cafes.title")}

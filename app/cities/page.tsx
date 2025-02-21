@@ -3,7 +3,7 @@ import { FilteredCitySection } from "@/components/city/list/filtered-cities";
 import { TransHighlight } from "@/components/general/translation";
 import initTranslations from "@/libs/i18n/config";
 import { getSEOTags } from "@/libs/seo";
-import { getCities } from "@/libs/supabase/cities";
+import { getAllCities } from "@/libs/supabase/cities";
 import { getCountries } from "@/libs/supabase/countries";
 
 export const revalidate = 28800; // 8 hours
@@ -39,7 +39,7 @@ export default async function CityPage({ searchParams }: Props) {
   const sort = whiteListedSortParam(_searchParams.sort as string | undefined);
   const sortBy = sort?.split("-")[0] || "population";
   const sortOrder = (sort?.split("-")[1] as "asc" | "desc") || "desc";
-  const cities = await getCities({ limit: 1000, country, sortBy, sortOrder });
+  const cities = await getAllCities({ country, sortBy, sortOrder });
   const countries = await getCountries({ status: "ACTIVE" });
   const titleKey = country ? "index.title_with_country" : "index.title";
   const descriptionKey = country
@@ -49,7 +49,7 @@ export default async function CityPage({ searchParams }: Props) {
   return (
     <main className="flex-1 bg-background">
       <div className="bg-card">
-        <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="max-w-3xl mx-auto px-4 py-24 md:text-center">
           <h1 className="text-4xl font-bold mb-4">
             <TransHighlight
               i18nKey={titleKey}

@@ -2,7 +2,7 @@ import { CityHero } from "@/components/city/sections/city-hero";
 import { notFound } from "next/navigation";
 import { getSEOTags } from "@/libs/seo";
 import { getCafesByCity } from "@/libs/supabase/cafes";
-import { getCities, getCityBySlug } from "@/libs/supabase/cities";
+import { getAllCities, getCities, getCityBySlug } from "@/libs/supabase/cities";
 import { SimpleCafeList } from "@/components/cafe/lists/simple-cafe-list";
 import initTranslations from "@/libs/i18n/config";
 import { isGerman } from "@/libs/environment";
@@ -19,6 +19,8 @@ type Props = {
   params: Params;
   searchParams: SearchParams;
 };
+
+export const revalidate = 28800; // 8 hours
 
 // generate metadata
 export async function generateMetadata({ params }: Props) {
@@ -37,7 +39,7 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export async function generateStaticParams() {
-  const cities = await getCities({ limit: 100 });
+  const cities = await getAllCities();
   return cities.map((city) => ({
     city: city.slug,
   }));

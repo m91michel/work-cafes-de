@@ -5,7 +5,6 @@ import config, {
   appName,
   domainName,
 } from "@/config/config";
-import { getCities } from "@/libs/supabase/cities";
 import { isGerman } from "@/libs/environment";
 import Paths from "@/libs/paths";
 import initTranslations from "@/libs/i18n/config";
@@ -30,10 +29,6 @@ const legalLinks = [
 
 export async function Footer() {
   const { t } = await initTranslations(["common"]);
-  const cities = (await getCities({ limit: 20, offset: 0 })).map((city) => ({
-    name: isGerman ? city.name_de : city.name_en,
-    slug: city.slug,
-  }));
 
   return (
     <footer className="border-t bg-secondary/30">
