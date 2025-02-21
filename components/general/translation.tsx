@@ -17,6 +17,9 @@ export const TransHighlight = ({ i18nKey, values, namespace }: Props) => {
       ns={namespace}
       components={{
         highlight: <Gradient />,
+        br: <br />,
+        mdBr: <br className="hidden md:inline" />,
+        lgBr: <br className="hidden lg:inline" />,
       }}
     />
   );

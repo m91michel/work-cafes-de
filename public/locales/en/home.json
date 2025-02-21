@@ -1,7 +1,12 @@
 {
   "hero": {
-    "title": "Find <highlight>Work-Friendly Cafes</highlight> in Your City",
-    "subtitle": "Discover cozy cafes perfect for remote work! We've curated spaces with great wifi, comfortable seating, and the right atmosphere for productivity."
+    "title": "Find <highlight>Work-Friendly Cafes</highlight> <br/>in Your City",
+    "subtitle": "Discover the perfect cafe for remote work! We've curated places with great wifi, comfortable seating, and the right atmosphere for productivity.",
+    "stats": {
+      "cafes": "Cafes Listed",
+      "cities": "Cities Listed",
+      "reviews": "Reviews Checked"
+    }
   },
   "cafes": {
     "title": "Work-Friendly Cafes Around the World",

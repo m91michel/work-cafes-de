@@ -16,3 +16,11 @@ export const getReviewsById = async (cafeId?: string | null): Promise<Review[]> 
 
   return data as Review[];
 };
+
+export const getReviewsCount = async (): Promise<number> => {
+  const { count } = await supabase
+    .from("reviews")
+    .select("*", { count: "exact" });
+
+  return count ?? 0;
+};

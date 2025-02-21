@@ -60,7 +60,7 @@ export function CitySelectorByCountry({
   );
 }
 
-export function CitySearchSelector({ cities }: { cities: City[] }) {
+export function CitySearchSelector({ cities = [], className }: { cities: City[], className?: string }) {
   const { t } = useCTranslation("city");
   const router = useRouter();
   const options = cities.map((city) => {
@@ -85,7 +85,7 @@ export function CitySearchSelector({ cities }: { cities: City[] }) {
       onChange={handleChange}
       options={options}
       size="lg"
-      className="w-full max-w-lg"
+      className={cn("w-full font-base", className)}
     />
   );
 }
