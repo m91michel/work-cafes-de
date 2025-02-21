@@ -38,16 +38,25 @@ class Paths {
     en: "/imprint",
   });
 
-  static country(name: string) {
+  
+  // Dynamic paths
+  static country(name?: string | null) {
+    if (!name) {
+      return Paths.cities;
+    }
     return `/cities?country=${encodeURIComponent(name)}`;
   }
-
-  // Dynamic paths
-  static cafe(slug: string) {
+  static cafe(slug?: string | null) {
+    if (!slug) {
+      return Paths.cafes;
+    }
     return `/cafes/${slug}`;
   }
 
-  static city(slug: string) {
+  static city(slug?: string | null) {
+    if (!slug) {
+      return Paths.cities;
+    }
     return `/cities/${slug}`;
   }
 }

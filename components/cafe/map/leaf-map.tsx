@@ -144,7 +144,7 @@ export function LeafletMap({ cafes, className, height = 600, mapOptions, content
 function defaultContentRender(cafe: Cafe) {
   return (
     <>
-      <Link href={Paths.cafe(cafe.slug ?? "")}>
+      <Link href={Paths.cafe(cafe.slug)}>
         <h3 className="font-semibold text-lg">{cafe.name}</h3>
       </Link>
       <div className="flex items-center mt-1 text-yellow-500">

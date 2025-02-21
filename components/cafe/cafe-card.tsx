@@ -18,7 +18,7 @@ interface CafeCardProps {
 }
 
 export function CafeCard({ cafe }: CafeCardProps) {
-  const href = cafe.slug ? Paths.cafe(cafe.slug) : "";
+  const href = Paths.cafe(cafe.slug)
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)]">

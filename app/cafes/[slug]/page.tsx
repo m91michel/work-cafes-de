@@ -18,6 +18,8 @@ import initTranslations from "@/libs/i18n/config";
 import { getCountryByCode } from "@/libs/supabase/countries";
 import { CafeMapLocation } from "@/components/cafe/sections/cafe-map-location";
 import { LinkSection } from "@/components/city/sections/link-section";
+import Paths from "@/libs/paths";
+import { getCafeOGImage } from "@/libs/og-helper";
 
 export const revalidate = 3600;
 
@@ -37,18 +39,32 @@ export async function generateMetadata({ params }: Props) {
     return getSEOTags({
       title: `Café nicht gefunden | ${config.appName}`,
       description: `Café nicht gefunden`,
-      canonicalUrlRelative: `/cafes/${slug}`,
+      canonicalUrlRelative: Paths.cafe(slug),
     });
   }
   const { t } = await initTranslations(["cafe"]);
 
+  const ogImage = getCafeOGImage(cafe);
+
   return getSEOTags({
     title: `${cafe.name} | ${config.appName}`,
     description: t("meta.slug.description", {
-      name: cafe.name,
-      city: cafe.city,
+      name: cafe.name || '',
+      city: cafe.city || '',
     }),
-    canonicalUrlRelative: `/cafes/${slug}`,
+    canonicalUrlRelative: Paths.cafe(slug),
+    openGraph: {
+      images: [{
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: cafe.name || ''
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: [ogImage],
+    }
   });
 }
 
