@@ -49,13 +49,25 @@ export default async function Hero() {
           </div>
         </div>
 
-        <div className="mx-auto max-w-[800px] text-center">
+        <div className="mx-auto max-w-[800px] text-center mb-12">
           <h1 className="animate-fade-up text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
             <TransHighlight i18nKey="home:hero.title" />
           </h1>
           <p className="animate-fade-up text-muted-foreground/80 animation-delay-100 mt-6 text-lg md:text-xl">
             <TransHighlight i18nKey="home:hero.subtitle" />
           </p>
+
+          {/* Search */}
+          <div className="animate-fade-up animation-delay-300 mt-12 flex flex-col items-center gap-4">
+            <CitySearchSelector
+              cities={cities}
+              className="h-[56px] w-full max-w-[400px] text-lg"
+            />
+            {/* <Button size="lg" className="h-[56px] px-8 text-lg">
+              Find Cafes
+              <ChevronDown className="ml-2 h-5 w-5" />
+            </Button> */}
+          </div>
 
           {/* Stats */}
           <div className="animate-fade-up animation-delay-200 mt-12 grid grid-cols-2 gap-4 md:grid-cols-3">
@@ -86,18 +98,6 @@ export default async function Hero() {
                 <TransHighlight i18nKey="home:hero.stats.reviews" />
               </div>
             </div>
-          </div>
-
-          {/* Search */}
-          <div className="animate-fade-up animation-delay-300 mt-12 mb-12 flex flex-col items-center gap-4">
-            <CitySearchSelector
-              cities={cities}
-              className="h-[56px] w-full max-w-[400px] text-lg"
-            />
-            {/* <Button size="lg" className="h-[56px] px-8 text-lg">
-              Find Cafes
-              <ChevronDown className="ml-2 h-5 w-5" />
-            </Button> */}
           </div>
         </div>
       </div>
