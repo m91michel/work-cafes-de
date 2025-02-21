@@ -1,21 +1,22 @@
 import { City, TranslationProps } from "@/libs/types";
-
-import { Button } from "@/components/ui/button";
-
 import { MLink } from "@/components/general/link";
 import { CityGridList } from "../list/city-list";
 import { SuggestCityCard } from "../list/city-list";
+import { ArrowRight } from "lucide-react";
+import Paths from "@/libs/paths";
 
 interface Props extends TranslationProps {
   title?: string;
+  subtitle?: string;
   cities: City[];
   suggestCityCard?: boolean;
   showMoreButton?: boolean;
-    buttonText?: string;
+  buttonText?: string;
 }
 
 export function CityListSection({
   title,
+  subtitle,
   cities = [],
   showMoreButton = false,
   suggestCityCard = false,
@@ -24,22 +25,24 @@ export function CityListSection({
 }: Props) {
   return (
     <section className="max-w-7xl mx-auto px-4 py-12">
-      {title && <h2 className="text-2xl font-semibold mb-6">{title}</h2>}
+      <div className="flex justify-between items-top mb-6">
+        <div className="flex flex-col gap-4">
+          {title && <h2 className="text-2xl font-semibold">{title}</h2>}
+          {subtitle && <p className="text-muted-foreground">{subtitle}</p>}
+        </div>
+
+        {showMoreButton && (
+          <MLink href={Paths.cities} className="flex items-center gap-2 text-primary">
+            {buttonText || t("more_cities.button_text")}
+            <ArrowRight className="w-4 h-4" />
+          </MLink>
+        )}
+      </div>
       <CityGridList
         cities={cities}
         t={t}
         extraCard={suggestCityCard && <SuggestCityCard t={t} />}
       />
-
-      {showMoreButton && (
-        <div className="flex justify-center mt-6">
-          <Button variant="default" asChild>
-            <MLink href="/cities">
-              {buttonText || t("more_cities.button_text")}
-            </MLink>
-          </Button>
-        </div>
-      )}
     </section>
   );
 }

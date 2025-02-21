@@ -48,28 +48,23 @@ async function HomeContent({ cafes, cities }: HomeContentProps) {
 
   const activeCountries = await getCountries({ status: "ACTIVE" });
 
-  const cafesButtonText =
-    cafesCount != null
-      ? t("cafes.buttonText_count", { count: cafesCount })
-      : t("cafes.buttonText");
-
   return (
     <main className="flex-1">
-      <HomeHero />
+      <HomeHero cafesCount={cafesCount} />
 
       <SimpleCafeList
         cafes={cafes}
         title={t("cafes.title")}
-        showMoreButton={true}
-        buttonText={cafesButtonText}
+        showMoreLink={true}
+        buttonText={t("cafes.buttonText")}
       />
 
       <SimpleCafeList
         cafes={newCafes}
         subtitle={t("cafes.new_cafes_subtitle")}
         title={t("cafes.new_cafes_title")}
-        showMoreButton={true}
-        buttonText={cafesButtonText}
+        showMoreLink={true}
+        buttonText={t("cafes.buttonText")}
       />
 
       <CityListSection

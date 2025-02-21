@@ -1,7 +1,7 @@
 import { Coffee, Wifi, Users, ChevronDown } from "lucide-react";
 import { TransHighlight } from "../translation";
 import { CitySearchSelector } from "@/components/city/city-selector";
-import { getAllCities } from "@/libs/supabase/cities";
+import { getAllCities, getCitiesCount } from "@/libs/supabase/cities";
 import { NumberTicker } from "../magicui/NumberTicker";
 import { getReviewsCount } from "@/libs/supabase/reviews";
 import { getCafesCount } from "@/libs/supabase/cafes";
@@ -9,10 +9,13 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Paths from "@/libs/paths";
 
-export default async function Hero() {
+type HeroProps = {
+  cafesCount: number;
+};
+
+export default async function Hero({ cafesCount }: HeroProps) {
   const cities = await getAllCities();
   const reviewsCount = await getReviewsCount();
-  const cafesCount = await getCafesCount();
 
   return (
     <div className="relative overflow-hidden bg-background">
