@@ -18,6 +18,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { useCTranslation } from "@/hooks/use-translation"
 
 type Size = ButtonProps["size"]
 
@@ -25,6 +26,7 @@ interface CityProps {
   options: {
     value: string
     label: string
+    keywords?: string[]
   }[]
   className?: string
   label?: string
@@ -34,6 +36,7 @@ interface CityProps {
 }
 
 export function SearchSelectInput({ options, className, label, placeholder, size, onChange }: CityProps) {
+  const { t } = useCTranslation("common");
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
   const [width, setWidth] = React.useState<number>(0)
@@ -70,16 +73,17 @@ export function SearchSelectInput({ options, className, label, placeholder, size
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0" style={{ width: width ? `${width}px` : 'auto' }}>
-        <Command>
+        <Command filter={searchFilter}>
           <CommandInput placeholder={placeholder} />
           <CommandList>
-            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandEmpty>{t("errors.no_results_found")}</CommandEmpty>
             <CommandGroup>
               {options.map((option) => (
                 <CommandItem
                   key={option.value}
                   value={option.value}
                   onSelect={onSelect}
+                  keywords={option.keywords}
                 >
                   {option.label}
                   <Check
@@ -96,4 +100,11 @@ export function SearchSelectInput({ options, className, label, placeholder, size
       </PopoverContent>
     </Popover>
   )
+}
+
+function searchFilter(value: string, searchKey: string, keywords?: string[]) {
+  const keywordsString = keywords?.join(' ') ?? ''
+  const extendValue = (value + ' ' + keywordsString).toLowerCase()
+  if (extendValue.includes(searchKey.toLowerCase())) return 1
+  return 0
 }

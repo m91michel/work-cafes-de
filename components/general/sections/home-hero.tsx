@@ -6,7 +6,7 @@ export default async function HomeHero() {
   const cities = await getAllCities();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 pt-12">
+    <div className="max-w-4xl mx-auto px-4 pt-24 pb-16">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">
           <TransHighlight i18nKey="home:hero.title" />

@@ -67,8 +67,10 @@
     }
   },
   "filters": {
+    "city_selector": {
+      "label": "Select Your City"
+    },
     "select_sort": "Select Sort",
-    "search_placeholder": "Search for a city",
     "sorting": {
       "population_desc": "Population (↓)",
       "population_asc": "Population (↑)",

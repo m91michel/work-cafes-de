@@ -67,8 +67,10 @@
     }
   },
   "filters": {
+    "city_selector": {
+      "label": "Deine Stadt auswählen"
+    },
     "select_sort": "Sortieren nach",
-    "search_placeholder": "Nach einer Stadt suchen...",
     "sorting": {
       "population_desc": "Bevölkerung (↓)",
       "population_asc": "Bevölkerung (↑)",

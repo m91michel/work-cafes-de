@@ -9,6 +9,7 @@ import { cn } from "@/libs/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SearchSelectInput } from "../general/form/search-select-input";
+import { useCTranslation } from "@/hooks/use-translation";
 
 interface CitySelectorProps {
   cities: City[];
@@ -60,13 +61,17 @@ export function CitySelectorByCountry({
 }
 
 export function CitySearchSelector({ cities }: { cities: City[] }) {
+  const { t } = useCTranslation("city");
   const router = useRouter();
   const options = cities.map((city) => {
     const flag = countryFlag(city.country);
     const name = isGerman ? city.name_de : city.name_en;
+    const keywords = [name, city.country, city.name_en, city.name_de].filter(Boolean) as string[];
+    
     return {
       value: city.slug,
       label: `${flag} ${name}`,
+      keywords,
     };
   });
 
@@ -75,12 +80,12 @@ export function CitySearchSelector({ cities }: { cities: City[] }) {
   };
   return (
     <SearchSelectInput
-      label={"Select a City"}
-      placeholder={"Search.. "}
+      label={t("filters.city_selector.label")}
+      placeholder={`${t("common:actions.search")}...`}
       onChange={handleChange}
       options={options}
       size="lg"
-      className="w-full md:w-1/2 lg:w-1/3"
+      className="w-full max-w-lg"
     />
   );
 }

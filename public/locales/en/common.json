@@ -19,7 +19,11 @@
     "close": "Close",
     "open": "Open",
     "share": "Share",
-    "reset": "Reset"
+    "reset": "Reset",
+    "suggest": "Suggest"
+  },
+  "errors": {
+    "no_results_found": "No results found."
   },
   "meta": {
     "title": "A Wifi.Place",

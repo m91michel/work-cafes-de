@@ -23,7 +23,7 @@ export function CitySearchFilter({ className }: Props) {
   return (
     <Input
       className={className}
-      placeholder={t('filters.search_placeholder')}
+      placeholder={`${t('common:actions.search')}...`}
       defaultValue={query || ""}
       onChange={(e) => debouncedSetQuery(e.target.value)}
     />

@@ -19,7 +19,11 @@
     "close": "Schließen",
     "open": "Öffnen",
     "share": "Teilen",
-    "reset": "Zurücksetzen"
+    "reset": "Zurücksetzen",
+    "suggest": "Vorschlagen"
+  },
+  "errors": {
+    "no_results_found": "Keine Ergebnisse gefunden."
   },
   "meta": {
     "title": "Café zum Arbeiten",
