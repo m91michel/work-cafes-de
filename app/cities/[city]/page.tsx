@@ -11,6 +11,7 @@ import { MapContainer } from "@/components/cafe/map/map-container";
 import { CityListSection } from "@/components/city/sections/list-section";
 import { LinkSection } from "@/components/city/sections/link-section";
 import { StructuredCafeList } from "@/components/general/seo/structured-list";
+import { getCityOGImage } from "@/libs/og-helper";
 
 
 type Params = Promise<{ city: string }>;
@@ -31,10 +32,24 @@ export async function generateMetadata({ params }: Props) {
   const dbName = isGerman ? city?.name_de : city?.name_en;
   const name = dbName || t("meta.show.your_city");
 
+  const ogImage = getCityOGImage(city);
+
   return getSEOTags({
     title: t("meta.show.title", { name }),
     description: t("meta.show.description", { name }),
     canonicalUrlRelative: `/cities/${slug}`,
+    openGraph: {
+      images: [{
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: name,
+      }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: [ogImage],
+    }
   });
 }
 
