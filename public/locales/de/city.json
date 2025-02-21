@@ -6,8 +6,8 @@
     "description_with_country": "Finde das perfekte Café für mobiles Arbeiten in {{country}}. Entdecke unsere kuratierte Liste von arbeitsfreundlichen Cafés mit WLAN, Steckdosen und gemütlicher Atmosphäre."
   },
   "suggest": {
-    "title": "Stadt vorschlagen",
-    "description": "Deine Stadt fehlt? Schlage sie uns vor, damit wir sie auf unserer Seite aufnehmen.",
+    "title": "Eine Stadt anfragen",
+    "description": "Deine Stadt fehlt? Reiche Sie ein damit wir wissen, dass es eine Nachfrage für diese Stadt gibt. Somit können wir priorisiert Cafes in dieser Stadt suchen und wir können sie auf unserer Seite aufnehmen.",
     "form": {
       "city": "Stadt *",
       "city_placeholder": "Berlin, Hamburg, München, etc.",
@@ -16,12 +16,12 @@
       "state_placeholder": "Berlin, Bayern, Niedersachsen, etc.",
       "email": "E-Mail",
       "email_placeholder": "deine@email.com",
-      "email_description": "Wir werden deine Vorschlag überprüfen und uns schnellstmöglich um dich kümmern."
+      "email_description": "Optionale Angabe, damit wir dich informieren können, wenn deine Stadt hinzugefügt wurde."
     },
     "toast": {
       "success": {
         "title": "Deine Stadt wurde eingereicht",
-        "description": "Wir werden deine Vorschlag überprüfen und uns schnellstmöglich um dich kümmern."
+        "description": "Wir werden deinen Vorschlag überprüfen und uns schnellstmöglich um dich kümmern."
       },
       "error": {
         "title": "Es ist etwas schief gelaufen",

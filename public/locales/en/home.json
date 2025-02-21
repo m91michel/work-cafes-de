@@ -2,6 +2,7 @@
   "hero": {
     "title": "Find <highlight>Work-Friendly Cafes</highlight> <br/>in Your City",
     "subtitle": "Discover the perfect cafe for remote work! We've curated places with great wifi, comfortable seating, and the right atmosphere for productivity.",
+    "cta": "Request City",
     "stats": {
       "cafes": "Cafes Listed",
       "cities": "Cities Listed",

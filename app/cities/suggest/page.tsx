@@ -1,20 +1,12 @@
-import { SuggestCityForm } from "@/components/city/form/suggest/suggest-city-form";
+import { AddCityForm } from "@/components/city/form/add/suggest-city-form";
 import { LinkSection } from "@/components/city/sections/link-section";
 import { FAQSection } from "@/components/general/sections/faq";
 import { TransHighlight } from "@/components/general/translation";
 import initTranslations from "@/libs/i18n/config";
 import { getSEOTags } from "@/libs/seo";
 
-type Params = Promise<{ slug: string }>;
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
-
-type Props = {
-  params: Params;
-  searchParams: SearchParams;
-};
-
 // generate metadata
-export async function generateMetadata({ searchParams }: Props) {
+export async function generateMetadata() {
   const { t } = await initTranslations(["city"]);
 
   return getSEOTags({
@@ -26,11 +18,7 @@ export async function generateMetadata({ searchParams }: Props) {
 
 const defaultIds = ['city-added-order', 'when-suggest', 'suggest-email'];
 
-export default async function CityPage({ searchParams }: Props) {
-  const { t } = await initTranslations(["city"]);
-  const _searchParams = await searchParams;
-  console.log(_searchParams);
-  
+export default async function CityPage() {
   return (
     <main className="flex-1 bg-background">
       <div className="bg-card">
@@ -51,11 +39,14 @@ export default async function CityPage({ searchParams }: Props) {
       </div>
 
       <section className="max-w-7xl mx-auto px-4 py-12">
-        <SuggestCityForm className="max-w-2xl mx-auto" />
+        <AddCityForm className="max-w-2xl mx-auto" />
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 py-12">
         <FAQSection faqsIds={defaultIds} namespace="city" />
       </section>
 
-      <LinkSection />
+      <LinkSection className="mb-12" />
     </main>
   );
 }

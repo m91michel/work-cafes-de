@@ -2,6 +2,7 @@
   "hero": {
     "title": "Finde ein <highlight>Café zum Arbeiten</highlight> in deiner Stadt",
     "subtitle": "Entdecke die besten Cafés zum Arbeiten in deiner Stadt! Finde den perfekten Ort zum Studieren, Arbeiten oder Kaffeetrinken in deiner Stadt.",
+    "cta": "Stadt anfragen",
     "stats": {
       "cafes": "Cafés gelistet",
       "cities": "Städte gelistet",

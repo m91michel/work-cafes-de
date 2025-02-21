@@ -24,7 +24,7 @@ interface FormInputs {
   email: string;
 }
 
-export function SuggestCityForm({ className }: FormProps) {
+export function AddCityForm({ className }: FormProps) {
   const { t } = useCTranslation("city");
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();

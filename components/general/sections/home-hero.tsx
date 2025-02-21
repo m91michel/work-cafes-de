@@ -5,6 +5,9 @@ import { getAllCities } from "@/libs/supabase/cities";
 import { NumberTicker } from "../magicui/NumberTicker";
 import { getReviewsCount } from "@/libs/supabase/reviews";
 import { getCafesCount } from "@/libs/supabase/cafes";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Paths from "@/libs/paths";
 
 export default async function Hero() {
   const cities = await getAllCities();
@@ -14,18 +17,12 @@ export default async function Hero() {
   return (
     <div className="relative overflow-hidden bg-background">
       {/* Animated background pattern */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]" />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FFF3E0] via-white to-[#FFE0B2] opacity-80 dark:from-[#2C1810] dark:via-background dark:to-[#1F1007]" />
-        <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]" />
-      </div>
-      {/* Animated background pattern */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0">
         {/* Dot pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]" />
 
         {/* Animated gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FFF3E0] via-white to-[#FFE0B2] opacity-80 dark:from-[#2C1810] dark:via-background dark:to-[#1F1007] animate-gradient" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#f7ffe0] via-white to-white opacity-80 dark:from-[#2C1810] dark:via-background dark:to-[#1F1007] animate-gradient" />
 
         {/* Animated glow effect */}
         <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 blur-[100px] animate-pulse-slow" />
@@ -58,15 +55,16 @@ export default async function Hero() {
           </p>
 
           {/* Search */}
-          <div className="animate-fade-up animation-delay-300 mt-12 flex flex-col items-center gap-4">
+          <div className="animate-fade-up animation-delay-300 mt-12 flex flex-row justify-center items-center gap-4">
             <CitySearchSelector
               cities={cities}
               className="h-[56px] w-full max-w-[400px] text-lg"
             />
-            {/* <Button size="lg" className="h-[56px] px-8 text-lg">
-              Find Cafes
-              <ChevronDown className="ml-2 h-5 w-5" />
-            </Button> */}
+            <Button size="lg" className="h-[56px] px-8 text-lg hidden md:inline-flex" asChild>
+              <Link href={Paths.suggestCity}>
+                <TransHighlight i18nKey="home:hero.cta" />
+              </Link>
+            </Button>
           </div>
 
           {/* Stats */}

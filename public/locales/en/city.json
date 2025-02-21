@@ -6,8 +6,8 @@
     "description_with_country": "Find the perfect cafe for mobile work in {{country}}. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
   },
   "suggest": {
-    "title": "Suggest A City",
-    "description": "Is your city missing? Suggest it to us, we will check it and add it to our site.",
+    "title": "Request A City",
+    "description": "Is your city missing? You can request it, so we know that there is a demand and we can add it to our site.",
     "form": {
       "city": "City *",
       "city_placeholder": "New York City, London, Paris, etc.",
@@ -16,7 +16,7 @@
       "state_placeholder": "California, New York, etc.",
       "email": "Email",
       "email_placeholder": "your@email.com",
-      "email_description": "We will use this email to inform if we have successfully processed your city suggestion."
+      "email_description": "Optional, so we can inform you if we have successfully processed your city request."
     },
     "toast": {
       "success": {
