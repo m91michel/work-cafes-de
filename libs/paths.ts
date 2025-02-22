@@ -59,6 +59,10 @@ class Paths {
     }
     return `/cities/${slug}`;
   }
+
+  static cafeReport(slug?: string | null) {
+    return `/cafes/report?slug=${slug}`;
+  }
 }
 
 export default Paths; 

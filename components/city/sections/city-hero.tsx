@@ -25,7 +25,7 @@ export function CityHero({ city, cafeCount, t }: CityHeroProps) {
           {/* Content */}
           <div className="flex-1 w-full md:w-1/2 py-6 md:py-0 mb-6 md:mb-0">
             {/* Location Badge */}
-            <div className="mb-6 flex items-center gap-2">
+            <div className="mb-6 flex flex-col md:flex-row items-start gap-2">
               <div className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm backdrop-blur-sm">
                 <MapPin className="mr-1 h-4 w-4 text-primary" />
                 <span className="font-medium text-primary">{cityName}</span>

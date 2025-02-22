@@ -75,7 +75,11 @@ export async function getAllCafes(
   return data as Cafe[];
 }
 
-export async function getCafeBySlug(slug: string): Promise<Cafe | null> {
+export async function getCafeBySlug(slug?: string | null): Promise<Cafe | null> {
+  if (!slug) {
+    return null;
+  }
+
   const { data, error } = await supabase
     .from("cafes")
     .select("*, cities(name_de, name_en, slug, country, country_code)")

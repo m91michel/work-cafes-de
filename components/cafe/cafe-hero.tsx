@@ -16,6 +16,7 @@ export function CafeHero({ cafe }: CafeHeroProps) {
   const flag = countryFlag(cafe.cities?.country);
   const cityHref = cafe.city_slug ? Paths.city(cafe.city_slug) : "";
   const googleMapsLink = locationLink(cafe.name, cafe.google_place_id);
+  const reportHref = Paths.cafeReport(cafe.slug);
 
   return (
     <div className="relative h-[400px] max-w-7xl mx-auto px-4">
@@ -62,8 +63,10 @@ export function CafeHero({ cafe }: CafeHeroProps) {
                   Google Maps
                 </MLink>
               </Button>
-              <Button variant="secondary" size="sm">
-                <Flag className="w-4 h-4" />
+              <Button variant="secondary" size="sm" asChild title="Report" className="hidden">
+                <MLink href={reportHref}>
+                  <Flag className="w-4 h-4" />
+                </MLink>
               </Button>
             </div>
           </div>

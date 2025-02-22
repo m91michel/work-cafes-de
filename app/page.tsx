@@ -27,16 +27,17 @@ export async function generateMetadata() {
 
 export default async function Home() {
   const cafes = await getBestCafes({ limit: 6, offset: 0 });
-  const cities = await getCities({ limit: 6, offset: 0 });
+  const biggestCities = await getCities({ limit: 6, offset: 0 });
 
-  return <HomeContent cafes={cafes} cities={cities} />;
+  return <HomeContent cafes={cafes} biggestCities={biggestCities} />;
 }
 
 interface HomeContentProps {
   cafes: Cafe[];
-  cities: City[];
+  biggestCities: City[];
+  latestCities?: City[];
 }
-async function HomeContent({ cafes, cities }: HomeContentProps) {
+async function HomeContent({ cafes, biggestCities }: HomeContentProps) {
   const { t } = await initTranslations(["home"]);
   const citiesCount = await getCitiesCount();
   const { data: newCafes, total: cafesCount } = await getCafes({
@@ -68,7 +69,7 @@ async function HomeContent({ cafes, cities }: HomeContentProps) {
       />
 
       <CityListSection
-        cities={cities}
+        cities={biggestCities}
         title={t("cities.title")}
         showMoreButton={true}
         buttonText={t("cities.buttonText")}

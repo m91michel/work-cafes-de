@@ -22,8 +22,17 @@ export type City = Database['cafeforwork']['Tables']['cities']['Row'];
 
 export type Review = Database['cafeforwork']['Tables']['reviews']['Row'];
 
+export type Country = Database['cafeforwork']['Tables']['countries']['Row'];
+
+// general types
 export interface TranslationProps {
   t: (key: string, params?: Record<string, string | number>) => string;
 }
 
-export type Country = Database['cafeforwork']['Tables']['countries']['Row'];
+export type PageParams<T> = Promise<T>
+export type PageSearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+
+export type PageProps<T = any> = {
+  params: PageParams<T>;
+  searchParams: PageSearchParams;
+};
