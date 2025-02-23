@@ -314,26 +314,32 @@ export type Database = {
       }
       user_report: {
         Row: {
+          cafe_name: string | null
           cafe_slug: string | null
           created_at: string
           email: string | null
           id: number
+          issue_type: string | null
           name: string | null
           text: string | null
         }
         Insert: {
+          cafe_name?: string | null
           cafe_slug?: string | null
           created_at?: string
           email?: string | null
           id?: number
+          issue_type?: string | null
           name?: string | null
           text?: string | null
         }
         Update: {
+          cafe_name?: string | null
           cafe_slug?: string | null
           created_at?: string
           email?: string | null
           id?: number
+          issue_type?: string | null
           name?: string | null
           text?: string | null
         }

@@ -22,6 +22,20 @@
     "reset": "Reset",
     "suggest": "Suggest"
   },
+  "fields": {
+    "name": "Name",
+    "name_placeholder": "John Doe",
+    "email": "Email",
+    "email_placeholder": "john.doe@example.com",
+    "message": "Message",
+    "message_placeholder": "Write your message here...",
+    "address": "Address",
+    "address_placeholder": "123 Main St, Anytown, USA",
+    "country": "Country",
+    "country_placeholder": "United States",
+    "state": "State",
+    "state_placeholder": "California"
+  },
   "errors": {
     "no_results_found": "No results found."
   },

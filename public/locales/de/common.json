@@ -22,6 +22,20 @@
     "reset": "Zurücksetzen",
     "suggest": "Vorschlagen"
   },
+  "fields": {
+    "name": "Name",
+    "name_placeholder": "Max Mustermann",
+    "email": "Email",
+    "email_placeholder": "max.mustermann@example.com",
+    "message": "Nachricht",
+    "message_placeholder": "Nachricht...",
+    "address": "Adresse",
+    "address_placeholder": "Musterstraße 1, 12345 Musterstadt",
+    "country": "Land",
+    "country_placeholder": "Deutschland",
+    "state": "Bundesland",
+    "state_placeholder": "Bayern"
+  },
   "errors": {
     "no_results_found": "Keine Ergebnisse gefunden."
   },

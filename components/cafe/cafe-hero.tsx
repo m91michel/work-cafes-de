@@ -63,7 +63,7 @@ export function CafeHero({ cafe }: CafeHeroProps) {
                   Google Maps
                 </MLink>
               </Button>
-              <Button variant="secondary" size="sm" asChild title="Report" className="hidden">
+              <Button variant="secondary" size="sm" asChild title="Report">
                 <MLink href={reportHref}>
                   <Flag className="w-4 h-4" />
                 </MLink>

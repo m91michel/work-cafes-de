@@ -64,18 +64,21 @@
     "all_cities": "All Cities"
   },
   "report": {
+    "title": "Report Cafe",
+    "description": "If you notice any changes in a listed cafe or if it no longer meets work-friendly standards, please use our feedback form.",
     "buttons": {
       "report": "Report Cafe",
       "cancel": "Cancel",
       "send": "Send"
     },
-    "title": "Report Cafe",
     "form": {
       "email": "Your Email",
       "name": "Your Name",
+      "cafe_name": "Cafe Name",
       "message": "Describe briefly what the problem is...",
       "success": "Successfully sent",
-      "error": "An error occurred"
+      "error": "An error occurred",
+      "message_placeholder": "Explain briefly what the problem is..."
     },
     "toast": {
       "success": {
@@ -124,6 +127,14 @@
   "map": {
     "title": "Location",
     "button_title": "View on Google Maps"
+  },
+  "faq": {
+    "title": "Frequently Asked <highlight>Questions</highlight>",
+    "description": "Get answers to common questions about our cafe recommendations and selection process.",
+    "goal-of-report.question": "What is the goal of reporting a cafe?",
+    "goal-of-report.answer": "The goal of reporting a cafe is to help us to improve the quality of the cafe recommendations. If you notice any changes in a listed cafe or if it no longer meets work-friendly standards, please use our feedback form. We'll investigate and update our information accordingly.",
+    "cases-when-report.question": "What are example cases when I should report a cafe?",
+    "cases-when-report.answer": "You can report a cafe if it is not working-friendly and does not meet our criteria. Or if you are the owner of the cafe and want to remove it from our website."
   },
   "meta": {
     "title": "Cafes to work in",
