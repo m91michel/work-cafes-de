@@ -15,7 +15,7 @@ const supabase = createClient(
 );
 
 const excludeLocaleSpecificRoutes = isGerman
-  ? ["/privacy", "/imprint", "/about", "/help-us"]
+  ? ["/privacy", "/imprint", "/about", "/contribute"]
   : ["/datenschutz", "/impressum", "/ueber-uns", "/helfe-uns"];
 
 module.exports = {
