@@ -6,7 +6,6 @@ import { Wifi, Volume2, Armchair } from 'lucide-react';
 import Link from 'next/link';
 import { Cafe } from '@/libs/types';
 import { AmbianceBadge, SeatingComfortBadge, WifiQualityBadge } from '../cafe-badges';
-import { ReportButton } from '../ReportButton';
 import { useCTranslation } from '@/hooks/use-translation';
 import { CheckCafeButton } from '@/components/dashboard/cafes/buttons/CheckCafeButton';
 import { Badge } from '../../ui/badge';
@@ -72,8 +71,6 @@ export function CafeFurtherButtons({ cafe }: Props) {
             {t('more_cafes.all_cities')}
           </Link>
         </Button>
-        
-        <ReportButton cafe={cafe} />
       </div>
   );
 }

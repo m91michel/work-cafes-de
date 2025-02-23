@@ -66,14 +66,7 @@
   "report": {
     "title": "Report Cafe",
     "description": "If you notice any changes in a listed cafe or if it no longer meets work-friendly standards, please use our feedback form.",
-    "buttons": {
-      "report": "Report Cafe",
-      "cancel": "Cancel",
-      "send": "Send"
-    },
     "form": {
-      "email": "Your Email",
-      "name": "Your Name",
       "cafe_name": "Cafe Name",
       "message": "Describe briefly what the problem is...",
       "success": "Successfully sent",

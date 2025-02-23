@@ -66,18 +66,8 @@
   "report": {
     "title": "Cafe melden",
     "description": "Wenn du einen Fehler in einem Café findest oder ein Café entfernen möchtest, kannst du dieses Formular benutzen, um uns dieses Café zu melden.",
-    "buttons": {
-      "report": "Cafe melden",
-      "cancel": "Abbrechen",
-      "send": "Senden"
-    },
     "form": {
-      "email": "Deine E-Mail",
-      "name": "Dein Name",
       "cafe_name": "Cafe Name",
-      "message": "Beschreibe kurz was genau das Problem ist...",
-      "success": "Erfolgreich gesendet",
-      "error": "Es ist ein Fehler aufgetreten",
       "message_placeholder": "Beschreibe kurz was genau das Problem ist..."
     },
     "toast": {
