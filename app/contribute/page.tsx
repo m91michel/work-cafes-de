@@ -1,3 +1,4 @@
+import { MLink } from "@/components/general/link";
 import { Button } from "@/components/ui/button";
 import config, {
   baseUrl,
@@ -9,7 +10,6 @@ import { isEnglish, language } from "@/libs/environment";
 import Paths from "@/libs/paths";
 import { getSEOTags } from "@/libs/seo";
 import { Share2, PlusCircle } from "lucide-react";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export const metadata = getSEOTags({
@@ -57,14 +57,12 @@ export default function ContributePage() {
               spots.
             </p>
             <Button asChild>
-              <a
-                href={submitFormUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <MLink
+                href={Paths.submitCafe}
                 umami-event="suggest-cafe"
               >
                 Add a Recommendation
-              </a>
+              </MLink>
             </Button>
           </div>
 
@@ -79,9 +77,9 @@ export default function ContributePage() {
               suggesting new locations for our community.
             </p>
             <Button asChild>
-              <Link href={Paths.suggestCity} umami-event="suggest-city">
+              <MLink href={Paths.suggestCity} umami-event="suggest-city">
                 Suggest a City
-              </Link>
+              </MLink>
             </Button>
           </div>
 
@@ -97,14 +95,12 @@ export default function ContributePage() {
             </p>
             <div className="flex gap-4">
               <Button asChild variant="default">
-                <a
+                <MLink
                   href={tweetUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   umami-event="share-on-twitter"
                 >
                   Share on Twitter
-                </a>
+                </MLink>
               </Button>
             </div>
           </div>
@@ -121,14 +117,12 @@ export default function ContributePage() {
               everyone.
             </p>
             <Button asChild>
-              <a
+              <MLink
                 href={`mailto:feedback@${domainEn}`}
-                target="_blank"
-                rel="noopener noreferrer"
                 umami-event="send-feedback"
               >
                 Send Feedback
-              </a>
+              </MLink>
             </Button>
           </div>
         </div>
@@ -139,10 +133,10 @@ export default function ContributePage() {
           </p>
           <div className="flex justify-center gap-4">
             <Button asChild variant="outline">
-              <Link href={Paths.cities}>Explore Cities</Link>
+              <MLink href={Paths.cities}>Explore Cities</MLink>
             </Button>
             <Button asChild variant="outline">
-              <Link href={Paths.cafes}>Explore Cafés</Link>
+              <MLink href={Paths.cafes}>Explore Cafés</MLink>
             </Button>
           </div>
         </div>
