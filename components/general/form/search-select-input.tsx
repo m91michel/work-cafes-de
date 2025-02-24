@@ -32,21 +32,27 @@ interface CityProps {
   label?: string
   placeholder?: string
   size?: Size
+  value?: string
   onChange?: (value: string) => void
 }
 
-export function SearchSelectInput({ options, className, label, placeholder, size, onChange }: CityProps) {
+export function SearchSelectInput({ options, className, label, placeholder, size, value: _value, onChange }: CityProps) {
   const { t } = useCTranslation("common");
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+  const [value, setValue] = React.useState(_value ?? "")
   const [width, setWidth] = React.useState<number>(0)
   const buttonRef = React.useRef<HTMLButtonElement>(null)
+  const labelText = label ?? placeholder ?? ""
 
   React.useEffect(() => {
     if (buttonRef.current) {
       setWidth(buttonRef.current.offsetWidth)
     }
   }, [open])
+
+  React.useEffect(() => {
+    setValue(_value ?? "")
+  }, [_value])
 
   const onSelect = (currentValue: string) => {
     setValue(currentValue === value ? "" : currentValue)
@@ -61,14 +67,14 @@ export function SearchSelectInput({ options, className, label, placeholder, size
           ref={buttonRef}
           variant="outline"
           role="combobox"
-          aria-label={label}
+          aria-label={labelText}
           size={size}
           aria-expanded={open}
           className={cn("justify-between", className)}
         >
           {value
             ? options.find((option) => option.value.includes(value))?.label
-            : label}
+            : labelText}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>

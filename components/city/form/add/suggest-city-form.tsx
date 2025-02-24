@@ -38,8 +38,7 @@ export function AddCityForm({ className }: FormProps) {
       longitude: "",
     },
   });
-  const { reset, watch } = form;
-  const city = watch("city");
+  const { reset } = form;
 
   async function clientAction(formData: FormData) {
     startTransition(async () => {
@@ -94,15 +93,6 @@ export function AddCityForm({ className }: FormProps) {
           label={t("suggest.form.city")}
           placeholder={t("suggest.form.city_placeholder")}
           types={["(cities)"]}
-          value={city}
-        />
-
-        <MyInput
-          form={form}
-          name="city"
-          required
-          label={t("suggest.form.city")}
-          placeholder={t("suggest.form.city_placeholder")}
         />
         <MyInput
           form={form}

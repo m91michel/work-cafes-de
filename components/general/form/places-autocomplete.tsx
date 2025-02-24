@@ -13,6 +13,7 @@ const libraries: Library[] = ["places"];
 export interface PlaceResult {
   placeId: string;
   city: string;
+  address: string;
   state: string;
   country: string;
   countryCode: string;
@@ -27,7 +28,6 @@ interface PlacesAutocompleteProps {
   label?: string;
   placeholder?: string;
   types?: PlaceType[];
-  value?: string;
   componentRestrictions?: { country: string[] };
   onPlaceSelect: (place: PlaceResult | null) => void;
 }
@@ -39,7 +39,6 @@ export function PlacesAutocomplete({
   placeholder,
   types = ["(cities)"],
   componentRestrictions,
-  value,
 }: PlacesAutocompleteProps) {
   const [autocomplete, setAutocomplete] =
     useState<google.maps.places.Autocomplete | null>(null);
@@ -63,6 +62,7 @@ export function PlacesAutocomplete({
 
         const placeData: PlaceResult = {
           placeId: place.place_id || "",
+          address: place.formatted_address || "",
           city:
             addressComponents.find((component) =>
               component.types.includes("locality")
