@@ -25,17 +25,22 @@ export function CityListSection({
 }: Props) {
   return (
     <section className="max-w-7xl mx-auto px-4 py-12">
-      <div className="flex justify-between items-top mb-6">
+      <div className="flex flex-col md:flex-row justify-between items-top mb-6">
         <div className="flex flex-col gap-4">
           {title && <h2 className="text-2xl font-semibold">{title}</h2>}
           {subtitle && <p className="text-muted-foreground">{subtitle}</p>}
         </div>
 
         {showMoreButton && (
-          <MLink href={Paths.cities} className="flex items-center gap-2 text-primary">
-            {buttonText || t("more_cities.button_text")}
-            <ArrowRight className="w-4 h-4" />
-          </MLink>
+          <div className="flex justify-end mt-4 md:mt-0">
+            <MLink
+              href={Paths.cities}
+              className="flex items-center gap-2 text-primary"
+            >
+              {buttonText || t("more_cities.button_text")}
+              <ArrowRight className="w-4 h-4" />
+            </MLink>
+          </div>
         )}
       </div>
       <CityGridList

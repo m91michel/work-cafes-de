@@ -43,14 +43,12 @@ export async function Footer() {
               {t("meta.description")}
             </p>
             <p className="text-sm text-muted-foreground">
-              Check{' '}
               <Link
                 href={`https://${alternateDomainName}?ref=${domainName}`}
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
-                {alternateDomainName}
-              </Link>{' '}
-              for {isGerman ? "English" : "German"} version
+                {isGerman ? "🇺🇸 English Version" : "🇩🇪 Deutsche Version"}
+              </Link>
             </p>
             <p className="text-sm text-muted-foreground">
               Build with ☕️ by{" "}
