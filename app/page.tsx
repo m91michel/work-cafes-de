@@ -27,7 +27,12 @@ export async function generateMetadata() {
 
 export default async function Home() {
   const cafes = await getBestCafes({ limit: 6, offset: 0 });
-  const biggestCities = await getCities({ limit: 6, offset: 0 });
+  const biggestCities = await getCities({
+    limit: 6,
+    offset: 0,
+    sortBy: "cafes_count",
+    sortOrder: "desc",
+  });
 
   return <HomeContent cafes={cafes} biggestCities={biggestCities} />;
 }
