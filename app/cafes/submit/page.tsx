@@ -1,4 +1,4 @@
-import { SuggestCafeForm } from "@/components/cafe/form/suggest-cafe-form";
+import { SuggestCafeForm } from "@/components/cafe/form/add/suggest-cafe-form";
 import { LinkSection } from "@/components/city/sections/link-section";
 import { FAQSection } from "@/components/general/sections/faq";
 import { TransHighlight } from "@/components/general/translation";
@@ -40,10 +40,11 @@ export default async function CafePage() {
 
       <section className="max-w-7xl mx-auto px-4 py-12">
         <SuggestCafeForm className="max-w-2xl mx-auto" />
-        <FAQSection faqsIds={defaultIds} namespace="cafe" />
       </section>
 
-      <LinkSection />
+      <section className="max-w-7xl mx-auto px-4 py-12">
+        <FAQSection faqsIds={defaultIds} namespace="cafe" />
+      </section>
     </main>
   );
 }

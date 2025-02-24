@@ -17,6 +17,7 @@ export type Database = {
           checked: string | null
           city: string | null
           city_slug: string | null
+          country_code: string | null
           created_at: string | null
           drinks_content: Json | null
           filtered_reviews: Json | null
@@ -56,6 +57,7 @@ export type Database = {
           checked?: string | null
           city?: string | null
           city_slug?: string | null
+          country_code?: string | null
           created_at?: string | null
           drinks_content?: Json | null
           filtered_reviews?: Json | null
@@ -95,6 +97,7 @@ export type Database = {
           checked?: string | null
           city?: string | null
           city_slug?: string | null
+          country_code?: string | null
           created_at?: string | null
           drinks_content?: Json | null
           filtered_reviews?: Json | null
@@ -134,6 +137,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "cities"
             referencedColumns: ["slug"]
+          },
+          {
+            foreignKeyName: "cafes_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
           },
         ]
       }
@@ -357,6 +367,7 @@ export type Database = {
         Row: {
           created_at: string
           email: string | null
+          form_values: Json | null
           id: string
           message: string | null
           record_type: string | null
@@ -365,6 +376,7 @@ export type Database = {
         Insert: {
           created_at?: string
           email?: string | null
+          form_values?: Json | null
           id?: string
           message?: string | null
           record_type?: string | null
@@ -373,6 +385,7 @@ export type Database = {
         Update: {
           created_at?: string
           email?: string | null
+          form_values?: Json | null
           id?: string
           message?: string | null
           record_type?: string | null

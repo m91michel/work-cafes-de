@@ -17,11 +17,9 @@ export async function suggestCityAction(formData: FormData) {
       latitude: formData.get("latitude"),
       longitude: formData.get("longitude"),
     }
-    console.log(rawData);
 
     // Validate the input data
     const result = suggestCitySchema.safeParse(rawData)
-    console.log(result.error);
     
     if (!result.success) {
       return {

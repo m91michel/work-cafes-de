@@ -2,7 +2,7 @@
 
 import { useLoadScript, Autocomplete } from "@react-google-maps/api";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Library } from "@googlemaps/js-api-loader";
 import { cn } from "@/libs/utils";
@@ -11,6 +11,7 @@ import { isGerman } from "@/libs/environment";
 const libraries: Library[] = ["places"];
 
 export interface PlaceResult {
+  name: string;
   placeId: string;
   city: string;
   address: string;
@@ -29,6 +30,7 @@ interface PlacesAutocompleteProps {
   placeholder?: string;
   types?: PlaceType[];
   componentRestrictions?: { country: string[] };
+  country?: string;
   onPlaceSelect: (place: PlaceResult | null) => void;
 }
 
@@ -38,10 +40,17 @@ export function PlacesAutocomplete({
   label,
   placeholder,
   types = ["(cities)"],
-  componentRestrictions,
+  componentRestrictions = { country: [] },
 }: PlacesAutocompleteProps) {
   const [autocomplete, setAutocomplete] =
     useState<google.maps.places.Autocomplete | null>(null);
+
+  // // Effect to update restrictions when componentRestrictions changes
+  // useEffect(() => {
+  //   if (autocomplete) {
+  //     autocomplete.setComponentRestrictions(componentRestrictions || { country: [] });
+  //   }
+  // }, [autocomplete, JSON.stringify(componentRestrictions)]);
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
@@ -61,6 +70,7 @@ export function PlacesAutocomplete({
         const addressComponents = place.address_components;
 
         const placeData: PlaceResult = {
+          name: place.name || "",
           placeId: place.place_id || "",
           address: place.formatted_address || "",
           city:

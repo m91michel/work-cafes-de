@@ -81,21 +81,27 @@
       }
     }
   },
-  "suggest": {
-    "title": "Cafe vorschlagen",
-    "description": "Dein Cafe fehlt? Schreib uns einfach eine E-Mail mit dem Namen und der Adresse deines Cafés und wir werden es auf unserer Website hinzufügen.",
+  "submit": {
+    "title": "Cafe einreichen",
+    "description": "Dein Cafe fehlt? Du kannst es hier einreichen.",
     "form": {
-      "name": "Dein Name",
-      "address": "Deine Adresse",
-      "email": "Deine E-Mail",
+      "name": "Cafe Name",
+      "name_placeholder": "Nach einem Cafe suchen...",
+      "address": "Adresse",
+      "address_placeholder": "Berliner Straße 1, 10115 Berlin",
+      "country": "Land",
+      "url": "Website URL",
+      "url_placeholder": "https://www.cafe.de",
       "message": "Beschreibe kurz was genau das Problem ist...",
-      "success": "Erfolgreich gesendet",
-      "error": "Es ist ein Fehler aufgetreten"
+      "message_placeholder": "Beschreibe kurz was genau das Problem ist...",
+      "email": "Deine E-Mail",
+      "email_placeholder": "jon@doe.com",
+      "email_description": "Wir werden diese E-Mail verwenden, um dich zu kontaktieren, falls wir mehr Informationen benötigen."
     },
     "toast": {
       "success": {
-        "title": "Erfolgreich gesendet",
-        "description": "Vielen Dank fürs Melden! Wir werden uns umgehend um dein Anliegen kümmern."
+        "title": "Erfolgreich eingereicht",
+        "description": "Vielen Dank fürs Einreichen! Wir werden uns umgehend das Cafe hinzufügen."
       },
       "error": {
         "title": "Es ist ein Fehler aufgetreten",
