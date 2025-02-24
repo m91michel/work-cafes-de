@@ -16,10 +16,10 @@ export const metadata = getSEOTags({
   title: `Support Us | ${config.appName}`,
   description: `Help us create the ultimate guide to work-friendly cafés by contributing your favorite spots.`, // More compelling description
   alternates: {
-    canonical: `https://${domainEn}/help-us`,
+    canonical: `https://${domainEn}${Paths.contribute}`,
     languages: {
-      de: `https://${domainDe}/hilfe-uns`,
-      en: `https://${domainEn}/help-us`,
+      de: `https://${domainDe}/helfe-uns`,
+      en: `https://${domainEn}/contribute`,
     },
   },
 });

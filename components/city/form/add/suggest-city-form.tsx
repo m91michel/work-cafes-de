@@ -12,16 +12,13 @@ import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { CountrySelectForm } from "@/components/general/form/country-select";
 import { HiddenInput } from "@/components/general/form/inputs/hidden-input";
+import { PlaceResult, PlacesAutocomplete } from "@/components/general/form/places-autocomplete";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SuggestCityInput, suggestCitySchema } from "./schema";
+
 
 interface FormProps {
   className?: string;
-}
-
-interface FormInputs {
-  city: string;
-  country: string;
-  state: string;
-  email: string;
 }
 
 export function AddCityForm({ className }: FormProps) {
@@ -29,15 +26,20 @@ export function AddCityForm({ className }: FormProps) {
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  const form = useForm<FormInputs>({
+  const form = useForm<SuggestCityInput>({
+    resolver: zodResolver(suggestCitySchema),
     defaultValues: {
       city: "",
       country: "",
       state: "",
       email: "",
+      placeId: "",
+      latitude: "",
+      longitude: "",
     },
   });
-  const { reset } = form;
+  const { reset, watch } = form;
+  const city = watch("city");
 
   async function clientAction(formData: FormData) {
     startTransition(async () => {
@@ -67,9 +69,34 @@ export function AddCityForm({ className }: FormProps) {
     });
   }
 
+  const setPlace = (place?: PlaceResult | null) => {
+    if (!place) {
+      return;
+    }
+    form.setValue("placeId", place.placeId);
+    form.setValue("city", place.city);
+    form.setValue("state", place.state);
+    form.setValue("country", place.countryCode);
+    form.setValue("latitude", place.latitude.toString());
+    form.setValue("longitude", place.longitude.toString());
+  };
+  
   return (
     <Form {...form}>
       <form action={clientAction} className={cn("space-y-4", className)}>
+        <HiddenInput form={form} name="placeId" />
+        <HiddenInput form={form} name="latitude" />
+        <HiddenInput form={form} name="longitude" />
+        <HiddenInput form={form} name="city" />
+
+        <PlacesAutocomplete
+          onPlaceSelect={setPlace}
+          label={t("suggest.form.city")}
+          placeholder={t("suggest.form.city_placeholder")}
+          types={["(cities)"]}
+          value={city}
+        />
+
         <MyInput
           form={form}
           name="city"
