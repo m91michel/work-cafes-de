@@ -53,7 +53,7 @@
     },
     "ambiance": {
       "label": "Ambiance",
-      "quiet-and-cozy": "Quiet and Cozy",
+      "quiet-and-cozy": "Quiet",
       "lively": "Lively",
       "noisy": "Noisy",
       "unknown": "Unknown"

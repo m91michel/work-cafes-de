@@ -53,7 +53,7 @@
     },
     "ambiance": {
       "label": "Ambiente",
-      "quiet-and-cozy": "Ruhig und bequem",
+      "quiet-and-cozy": "Ruhig",
       "lively": "Lebhaft",
       "noisy": "Laut",
       "unknown": "Unbekannt"
