@@ -1,9 +1,10 @@
+import { MLink } from '@/components/general/link';
 import { Button } from '@/components/ui/button';
-import config, { baseUrl, domainDe, domainEn, submitFormUrl } from '@/config/config';
+import config, { baseUrl, domainDe, domainEn } from '@/config/config';
 import { isGerman } from '@/libs/environment';
+import Paths from '@/libs/paths';
 import { getSEOTags } from '@/libs/seo';
 import { Share2, PlusCircle } from 'lucide-react';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 export const metadata = getSEOTags({
@@ -42,9 +43,25 @@ export default function ContributePage() {
               Du kennst ein gemütliches Café, in dem du gerne mit deinem Laptop arbeitest? Teile deine Entdeckung und hilf anderen, die perfekte Location zum Arbeiten zu finden.
             </p>
             <Button asChild>
-              <a href={submitFormUrl} target="_blank" rel="noopener noreferrer" umami-event="suggest-cafe">
+              <MLink href={Paths.submitCafe} umami-event="suggest-cafe">
                 Café vorschlagen
-              </a>
+              </MLink>
+            </Button>
+          </div>
+
+          {/* Suggest New City */}
+          <div className="bg-card rounded-lg p-6 border">
+            <div className="flex items-center gap-3 mb-4">
+              <PlusCircle className="h-6 w-6 text-primary" />
+              <h2 className="text-2xl font-semibold">Stadt empfehlen</h2>
+            </div>
+            <p className="text-muted-foreground mb-6">
+              Möchtest du eine neue Stadt empfehlen? Wir freuen uns auf deine Vorschläge!
+            </p>
+            <Button asChild>
+              <MLink href={Paths.suggestCity} umami-event="suggest-city">
+                Stadt vorschlagen
+              </MLink>
             </Button>
           </div>
 
@@ -59,9 +76,9 @@ export default function ContributePage() {
             </p>
             <div className="flex gap-4">
               <Button asChild variant="outline">
-                <a href={tweetUrl} target="_blank" rel="noopener noreferrer" umami-event="share-on-twitter">
+                <MLink href={tweetUrl} umami-event="share-on-twitter">
                   Auf Twitter teilen
-                </a>
+                </MLink>
               </Button>
             </div>
           </div>  
@@ -76,9 +93,9 @@ export default function ContributePage() {
               Deine Meinung ist uns wichtig! Hast du Ideen oder Vorschläge, wie wir die Suche nach gemütlichen Cafés zum Arbeiten noch einfacher machen können?
             </p>
             <Button asChild>
-              <a href={`mailto:feedback@${domainDe}`} target="_blank" rel="noopener noreferrer" umami-event="send-feedback">
+              <MLink href={`mailto:feedback@${domainDe}`} umami-event="send-feedback">
                 Feedback senden
-              </a>
+              </MLink>
             </Button>
           </div>
         </div>
@@ -87,11 +104,18 @@ export default function ContributePage() {
           <p className="text-muted-foreground mb-4">
             Lust auf neue Café-Entdeckungen?
           </p>
-          <Button asChild variant="outline">
-            <Link href="/">
-              Cafés entdecken
-            </Link>
-          </Button>
+          <div className="flex justify-center gap-4">
+            <Button asChild variant="outline">
+              <MLink href={Paths.cafes}>
+                Cafés entdecken
+              </MLink>
+            </Button>
+            <Button asChild variant="outline">
+              <MLink href={Paths.cities}>
+                Städte entdecken
+              </MLink>
+            </Button>
+          </div>
         </div>
       </div>
     </main>

@@ -4,7 +4,6 @@ import config, {
   baseUrl,
   domainDe,
   domainEn,
-  submitFormUrl,
 } from "@/config/config";
 import { isEnglish, language } from "@/libs/environment";
 import Paths from "@/libs/paths";
