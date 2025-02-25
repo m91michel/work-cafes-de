@@ -47,6 +47,17 @@ Here is the site if you want to take a look: https://awifi.place
 
 PS: I added a lot more cities if you have seen my last post.
 
+## post for r/mexicocity
+
+Hey, I am currently building a website with the best cafes in Mexico City.
+
+My approach is to check google reviews for each cafe and filter for specific keywords like "work friendly" and "wifi" to filter out the best cafes in a city. With this approach I discovered 37 cafes in Mexico City.
+
+With this post I want to gather feedback on the approach and if you have any other ideas on how to improve the website.
+
+Here is the link: https://awifi.place/cities/mexico-city
+
+
 
 
 
