@@ -15,12 +15,14 @@ interface PaginationSectionProps {
   totalItems: number;
   pageSize: number;
   currentPage: number;
+  visiblePages?: number; // Number of pages to show around current page
 }
 
 export function PaginationSection({
   totalItems,
   pageSize,
   currentPage,
+  visiblePages = 2, // Default to showing 2 pages on each side
 }: PaginationSectionProps) {
   const [, setPage] = useQueryState(
     "page",
@@ -35,10 +37,10 @@ export function PaginationSection({
   // Generate pagination range
   const generatePaginationRange = () => {
     const range = [];
-    const showEllipsisStart = currentPage > 3;
-    const showEllipsisEnd = currentPage < totalPages - 2;
+    const showEllipsisStart = currentPage > visiblePages + 2;
+    const showEllipsisEnd = currentPage < totalPages - (visiblePages + 1);
 
-    if (totalPages <= 5) {
+    if (totalPages <= (visiblePages * 2) + 3) {
       return Array.from({ length: totalPages }, (_, i) => i + 1);
     }
 
@@ -49,8 +51,8 @@ export function PaginationSection({
     }
 
     for (
-      let i = Math.max(2, currentPage - 1);
-      i <= Math.min(totalPages - 1, currentPage + 1);
+      let i = Math.max(2, currentPage - visiblePages);
+      i <= Math.min(totalPages - 1, currentPage + visiblePages);
       i++
     ) {
       range.push(i);
