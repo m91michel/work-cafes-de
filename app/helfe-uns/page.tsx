@@ -1,7 +1,7 @@
 import { MLink } from '@/components/general/link';
 import { Button } from '@/components/ui/button';
 import config, { baseUrl, domainDe, domainEn } from '@/config/config';
-import { isGerman } from '@/libs/environment';
+import { isEnglish } from '@/libs/environment';
 import Paths from '@/libs/paths';
 import { getSEOTags } from '@/libs/seo';
 import { Share2, PlusCircle } from 'lucide-react';
@@ -22,7 +22,7 @@ export const metadata = getSEOTags({
 const tweetText = `Entdecke die besten laptop-freundlichen Cafés weltweit auf ${config.appName} - Dein Guide für entspanntes Arbeiten im Café!`;
 
 export default function ContributePage() {
-  if (!isGerman) {
+  if (isEnglish) {
     return notFound();
   }
 

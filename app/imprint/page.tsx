@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getSEOTags } from "@/libs/seo";
 import config, { domainEn, domainDe, baseUrl } from "@/config/config";
-import { isEnglish } from "@/libs/environment";
+import { isGerman } from "@/libs/environment";
 import { notFound } from "next/navigation";
 import { address, lastUpdated, unsplashCredits } from "@/config/imprint";
 
@@ -19,7 +19,7 @@ export const metadata = getSEOTags({
 
 const Imprint = () => {
 
-  if (!isEnglish) {
+  if (isGerman) {
     return notFound();
   }
 

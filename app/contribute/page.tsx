@@ -27,7 +27,6 @@ const tweetText = `Found your perfect workspace yet? Check out the best work-fri
 
 export default function ContributePage() {
   if (!isEnglish) {
-    console.log("wrong language", language);
     return notFound();
   }
 

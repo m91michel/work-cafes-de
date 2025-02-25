@@ -18,7 +18,6 @@ export const metadata = getSEOTags({
 
 export default function AboutPage() {
   if (!isEnglish) {
-    console.log("wrong language", language);
     return notFound();
   }
 

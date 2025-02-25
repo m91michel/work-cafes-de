@@ -1,5 +1,5 @@
 import config, { domainDe, domainEn } from '@/config/config';
-import { isGerman } from '@/libs/environment';
+import { isEnglish } from '@/libs/environment';
 import { getSEOTags } from '@/libs/seo';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
@@ -17,7 +17,7 @@ export const metadata = getSEOTags({
 });
 
 export default function AboutPage() {
-  if (!isGerman) {
+  if (isEnglish) {
     return notFound();
   }
 
