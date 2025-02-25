@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SearchSelectInput } from "../general/form/search-select-input";
 import { useCTranslation } from "@/hooks/use-translation";
+import { useMemo } from "react";
 
 interface CitySelectorProps {
   cities: City[];
@@ -63,21 +64,13 @@ export function CitySelectorByCountry({
 export function CitySearchSelector({ cities = [], className }: { cities: City[], className?: string }) {
   const { t } = useCTranslation("city");
   const router = useRouter();
-  const options = cities.map((city) => {
-    const flag = countryFlag(city.country);
-    const name = isGerman ? city.name_de : city.name_en;
-    const keywords = [name, city.country, city.name_en, city.name_de].filter(Boolean) as string[];
-    
-    return {
-      value: city.slug,
-      label: `${flag} ${name}`,
-      keywords,
-    };
-  });
+
+  const options = useMemo(() => cities.map(mapCityOption), [cities]);
 
   const handleChange = (value: string) => {
     router.push(Paths.city(value));
   };
+
   return (
     <SearchSelectInput
       label={t("filters.city_selector.label")}
@@ -88,4 +81,16 @@ export function CitySearchSelector({ cities = [], className }: { cities: City[],
       className={cn("w-full font-base", className)}
     />
   );
+}
+
+export function mapCityOption(city: City) {
+  const flag = countryFlag(city.country);
+  const name = isGerman ? city.name_de : city.name_en;
+  const keywords = [name, city.country, city.name_en, city.name_de].filter(Boolean) as string[];
+  
+  return {
+    value: city.slug,
+    label: `${flag} ${name}`,
+    keywords,
+  };
 }

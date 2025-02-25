@@ -1,10 +1,11 @@
 'use client';
 
 import { City } from '@/libs/types';
-import { BaseFilterSelect } from '@/components/general/inputs/base-filter-select';
 import { useCTranslation } from '@/hooks/use-translation';
-import { isGerman } from '@/libs/environment';
-import { countryFlag } from '@/config/countires';
+import { mapCityOption } from '@/components/city/city-selector';
+import { SearchSelectInput } from '@/components/general/form/search-select-input';
+import { useQueryState } from 'next-usequerystate';
+import { useMemo } from 'react';
 
 type CityFilterProps = {
   cities: City[];
@@ -12,28 +13,32 @@ type CityFilterProps = {
 
 export function CityFilter({ cities }: CityFilterProps) {
   const { t } = useCTranslation('cafe');
-
-  const cityOptions = cities.map((city) => {
-    const label = isGerman ? city.name_de : city.name_en;
-    const flag = countryFlag(city.country);
-    const labelWithFlag = flag ? `${flag} ${label}` : label;
-    return {
-      value: city.slug,
-      label: labelWithFlag || city.slug,
-    };
-  });
-
   const allOption = {
     value: 'all',
     label: t('filters.all'),
   };
+  const [value, setValue] = useQueryState('city', {
+    defaultValue: allOption.value,
+    shallow: false,
+  });
+
+  const cityOptions = useMemo(() => cities.map(mapCityOption), [cities]);
+
+  const handleChange = (value: string) => {
+    const newValue = value === allOption.value ? null : value;
+    setValue(newValue);
+  };
+
+
 
   return (
-    <BaseFilterSelect
-      paramKey="city"
+    <SearchSelectInput
       options={[allOption, ...cityOptions]}
-      defaultValue={allOption.value}
+      label={t('filters.select_city')}
       placeholder={t('filters.select_city')}
+      value={value}
+      onChange={handleChange}
+      className="w-full md:max-w-sm"
     />
   );
 } 
