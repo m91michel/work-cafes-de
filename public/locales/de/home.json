@@ -39,6 +39,9 @@
       "title": "Cafés in Großstädten"
     }
   },
+  "featured": {
+    "title": "Featured on"
+  },
   "faq": {
     "title": "Häufig gestellte <highlight>Fragen</highlight>",
     "description": "Hier findest du Antworten auf die häufigsten Fragen zu Café zum Arbeiten.",

@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'arbeits-cafe.b-cdn.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'twelve.tools',
+      },
+      {
+        protocol: 'https',
+        hostname: 'startupfa.me',
+      },
     ],
   },
   async rewrites() {

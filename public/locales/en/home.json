@@ -39,6 +39,9 @@
       "title": "Cafés in Big Cities"
     }
   },
+  "featured": {
+    "title": "Featured on"
+  },
   "faq": {
     "title": "Frequently Asked <highlight>Questions</highlight>",
     "description": "Get answers to common questions about our cafe recommendations and selection process.",

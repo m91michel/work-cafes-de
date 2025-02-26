@@ -12,6 +12,7 @@ import { About } from "@/components/general/sections/About";
 import { getCountries } from "@/libs/supabase/countries";
 import { LinkSection } from "@/components/city/sections/link-section";
 import HomeHero from "@/components/general/sections/home-hero";
+import { FeaturedSection } from "@/components/city/sections/featured-section";
 
 // export const revalidate = 5; // dev
 export const revalidate = 3600; // 1 hour
@@ -90,6 +91,7 @@ async function HomeContent({ cafes, biggestCities }: HomeContentProps) {
       />
 
       <LinkSection />
+      <FeaturedSection />
     </main>
   );
 }
