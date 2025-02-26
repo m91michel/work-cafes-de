@@ -64,7 +64,7 @@ export function CafeHero({ cafe }: CafeHeroProps) {
                 </MLink>
               </Button>
               <Button variant="secondary" size="sm" asChild title="Report">
-                <MLink href={reportHref}>
+                <MLink href={reportHref} noFollow>
                   <Flag className="w-4 h-4" />
                 </MLink>
               </Button>
