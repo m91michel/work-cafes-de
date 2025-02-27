@@ -42,4 +42,5 @@ We use google review to evaluate if a cafe is laptop-friendly. A cafe is accepte
 - https://workfromcafe.app/
 - https://nomadable.net/
 - https://thewirednomad.com
+- https://goodworkcafes.com/
 - SEO: https://coworkingers.com/best-coffee-shops-to-work-from-in-munich/

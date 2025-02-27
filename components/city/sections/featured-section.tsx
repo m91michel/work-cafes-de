@@ -12,7 +12,7 @@ export function FeaturedSection() {
       <h2 className="text-2xl font-bold mb-4 text-center">
         <TransHighlight i18nKey="featured.title" namespace="home" />
       </h2>
-      <div className="flex justify-center gap-4">
+      <div className="flex justify-center gap-4 flex-wrap">
         <a href="https://twelve.tools" target="_blank">
           <Image
             src="https://twelve.tools/badge0-white.svg"
