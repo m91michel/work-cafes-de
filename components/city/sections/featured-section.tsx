@@ -43,6 +43,18 @@ export function FeaturedSection() {
             height="54"
           />
         </a>
+        <a href="https://dang.ai/" target="_blank">
+          <Image
+            src="https://cdn.prod.website-files.com/63d8afd87da01fb58ea3fbcb/6487e2868c6c8f93b4828827_dang-badge.png"
+            alt="Dang.ai"
+            style={{
+              width: "150px",
+              height: "54px",
+            }}
+            width="150"
+            height="54"
+          />
+        </a>
       </div>
     </section>
   );
