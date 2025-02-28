@@ -22,10 +22,11 @@ export function CityAbout({ city, cafes, t }: CityAboutProps) {
     return null;
   }
 
-  const cafeName1 = cafes[0]?.name;
-  const cafeName2 = cafes[1]?.name || cafeName1;
-  const cafeName3 = cafes[2]?.name || cafeName2;
-  const cafeName4 = cafes[3]?.name || cafeName3;
+  const uniqueCafeNames = [...new Set(cafes.map((cafe) => cafe.name))];
+  const cafeName1 = uniqueCafeNames[0];
+  const cafeName2 = uniqueCafeNames[1] || cafeName1;
+  const cafeName3 = uniqueCafeNames[2] || cafeName2;
+  const cafeName4 = uniqueCafeNames[3] || cafeName3;
 
   const tObject = (key: string) => {
     return t(`about.${key}`, { returnObjects: true }) as string[];
@@ -132,3 +133,4 @@ function CityAboutItem({ title, children }: CityAboutItemProps) {
 function ContentItem({ string }: { string: string }) {
   return <p className="text-xl text-muted-foreground">{string}</p>;
 }
+
