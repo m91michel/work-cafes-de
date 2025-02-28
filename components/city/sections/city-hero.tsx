@@ -57,11 +57,21 @@ export function CityHero({ city, cafeCount, t }: CityHeroProps) {
                 namespace="city"
               />
             </h1>
-            {description && (
-              <p className="text-lg md:text-xl text-muted-foreground">
-                {description}
-              </p>
-            )}
+            <p className="text-lg md:text-xl text-muted-foreground mb-4">
+              <TransHighlight
+                i18nKey="hero.subtitle"
+                values={{ name: cityName }}
+                namespace="city"
+              />
+            </p>
+
+            <p className="text-lg md:text-xl text-muted-foreground">
+              <TransHighlight
+                i18nKey="hero.description"
+                values={{ name: cityName, country: city.country || "" }}
+                namespace="city"
+              />
+            </p>
           </div>
 
           {/* Image */}

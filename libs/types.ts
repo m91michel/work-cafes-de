@@ -1,4 +1,6 @@
 import { Database } from "@/types_db";
+import { KeyPrefix, Namespace, TFunction } from "i18next";
+import { FallbackNs } from "react-i18next";
 
 export type CafeStatus = 'NEW' | 'PUBLISHED' | 'PROCESSED' | 'CLOSED' | 'DISCARDED';
 export const validStatuses = ["NEW", "PROCESSED", "PUBLISHED", "CLOSED", "NOT_FRIENDLY", "DISCARDED"];
@@ -26,7 +28,7 @@ export type Country = Database['cafeforwork']['Tables']['countries']['Row'];
 
 // general types
 export interface TranslationProps {
-  t: (key: string, params?: Record<string, string | number>) => string;
+  t: TFunction<FallbackNs<Namespace>, KeyPrefix<FallbackNs<Namespace>>>
 }
 
 export type PageParams<T> = Promise<T>

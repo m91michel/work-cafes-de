@@ -30,25 +30,58 @@
     }
   },
   "hero": {
-    "title": "Best <highlight>Work-Friendly Cafes</highlight> In {{name}}",
+    "title": "Find Your Perfect Work Spot in <highlight>{{name}}</highlight>",
     "places_found": "{{count}} Places Found",
     "places_found_one": "{{count}} Place Found",
-    "subtitle": "What Are The Best Work-Friendly Cafes In {{name}}?",
-    "description_one": "We have found one work-friendly cafe in {{name}}. The cafe is selected based on reviews. Only cafe places that are suitable for working or studying are included. This means they have a laptop-friendly policy and provide WiFi.",
-    "description_other": "We have found {{count}} work-friendly cafes in {{name}}. The cafes are selected based on reviews. Only cafe places that are suitable for working or studying are included. This means they have a laptop-friendly policy and provide WiFi."
+    "subtitle": "Discover {{name}}'s best cafes and coffee shops for digital nomads, remote work, and productivity",
+    "description": "Looking for the ideal cafe or coffee shop to work remotely in {{country}}? We've curated {{name}}'s top work-friendly spaces offering fast WiFi, comfortable seating, and the perfect ambiance for digital nomads, remote workers and students to boost productivity."
+  },
+  "cafe_list": {
+    "title": "{{count}} Cafés to Work in {{name}}",
+    "title_one": "{{count}} Café to Work in {{name}}",
+    "description": "Carefully curated from Google reviews: All locations offer WiFi and are verified as laptop-friendly by remote workers"
   },
   "more_cities": {
-    "title": "Checkout Other Cities in {{country}}",
+    "title": "Find Remote Work-Friendly Cafes in Other Cities in {{country}}",
     "button_text": "Check All Cities",
     "suggest_title": "Do You Miss A City?",
     "suggest_description": "Then suggest it to us, so we can prioritize it on our site.",
     "suggest_button": "Suggest city"
   },
   "map": {
-    "title": "Where Are The Best Cafes To Work In {{name}}?"
+    "title": "Cafe Locations Map in {{name}}"
   },
   "about": {
-    "title": "What Makes {{name}} Special?"
+    "title": "What Makes {{name}} Special?",
+    "about_title": "About the city of {{name}}",
+    "work_culture_title": "{{name}}'s Cafe & Coffee Shop Remote Work Culture",
+    "work_culture_description": "{{name}} has a thriving scene of cafes and coffee shops catering to digital nomads, remote workers, and freelancers. Popular spots like {{cafeName1}} and {{cafeName2}} showcase the city's diverse workspace offerings, ranging from bohemian-inspired coffee shops to corporate-friendly cafe environments. Whether you prefer the artistic atmosphere of {{cafeName3}} or the professional setting of {{cafeName4}}, you'll find the perfect atmosphere to suit your remote working style. The city's cafe culture has evolved to understand and embrace the needs of digital nomads, offering essential amenities like reliable WiFi, power outlets, and comfortable seating designed for longer work sessions.",
+    "wifi_title": "WiFi and Connectivity for Remote Work",
+    "wifi_description": "The cafes and coffee shops on our list offer reliable WiFi suitable for most remote work needs. Digital nomads with critical connectivity requirements may want to have a mobile hotspot backup for important meetings or deadlines.",
+    "etiquette_title": "Remote Work Etiquette and Tips",
+    "etiquette_items": [
+      "<strong>Respect cafe policies</strong> on peak-hour seating limitations for remote workers",
+      "<strong>Respect other guests</strong> and don't take it for granted that you can occupy a place for a long time",
+      "<strong>Purchase a drink or something to eat</strong> every 1-2 hours to justify your table occupancy",
+      "Headphones are essential for remote workers focusing in busier environments",
+      "Digital nomads should consider investing in a portable charger for cafes with limited outlets."
+    ],
+    "report_cafe_title": "Report a Cafe",
+    "report_cafe_description": "Found a cafe that's no longer suitable for remote work? Help keep our listings accurate by reporting cafes that:",
+    "report_cafe_reasons": [
+      "Have changed their remote work policies",
+      "Have closed down or relocated",
+      "Are not welcoming to remote workers"
+    ],
+    "suggest_cafe_title": "Suggest a New Cafe",
+    "suggest_cafe_description": "Know a great work-friendly cafe in {{name}} that's not on our list? Help fellow remote workers discover new spots! We're looking for cafes with:",
+    "suggest_cafe_requirements": [
+      "Reliable WiFi connection",
+      "Available power outlets",
+      "Comfortable seating for longer sessions",
+      "Remote worker-friendly atmosphere"
+    ],
+    "suggest_cafe_button": "Suggest a New Cafe"
   },
   "meta": {
     "index": {

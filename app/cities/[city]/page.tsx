@@ -13,7 +13,6 @@ import { LinkSection } from "@/components/city/sections/link-section";
 import { StructuredCafeList } from "@/components/general/seo/structured-list";
 import { getCityOGImage } from "@/libs/og-helper";
 
-
 type Params = Promise<{ city: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 type Props = {
@@ -39,17 +38,19 @@ export async function generateMetadata({ params }: Props) {
     description: t("meta.show.description", { name }),
     canonicalUrlRelative: `/cities/${slug}`,
     openGraph: {
-      images: [{
-        url: ogImage,
-        width: 1200,
-        height: 630,
-        alt: name,
-      }],
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: name,
+        },
+      ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       images: [ogImage],
-    }
+    },
   });
 }
 
@@ -93,22 +94,19 @@ export default async function CityPage({ params }: Props) {
         <MapContainer cafes={cafes} provider="leaflet" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-2xl font-semibold mb-4">
-          {t("hero.subtitle", { name: cityName })}
-        </h2>
-        <p className="text-muted-foreground">
-          {t("hero.description", { count: cafes.length, name: cityName })}
-        </p>
-      </div>
+      <SimpleCafeList
+        cafes={cafes}
+        title={t("cafe_list.title", { count: cafes.length, name: cityName })}
+        subtitle={t("cafe_list.description")}
+      />
 
-      <SimpleCafeList cafes={cafes} />
-
-      <CityAbout city={city} t={t} />
+      <CityAbout city={city} cafes={cafes} t={t} />
 
       {cities.length > 0 && (
         <CityListSection
-          title={t("more_cities.title", { country: city?.country || "Your Country" })}
+          title={t("more_cities.title", {
+            country: city?.country || "Your Country",
+          })}
           cities={cities}
           showMoreButton={true}
           t={t}

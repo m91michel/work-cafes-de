@@ -30,12 +30,16 @@
     }
   },
   "hero": {
-    "title": "Die besten <highlight>zum Arbeiten</highlight> in {{name}}",
+    "title": "Die besten Cafés zum <highlight>Arbeiten in {{name}}</highlight>",
     "places_found": "{{count}} Orte gefunden",
     "places_found_one": "{{count}} Ort gefunden",
-    "subtitle": "Welche Cafés sind die besten zum Arbeiten in {{name}}?",
-    "description_one": "Wir haben ein Café in {{name}} gefunden. Es ist ausgewählt, basierend auf Bewertungen. Nur Cafés, die für Arbeit oder Studium geeignet sind, sind enthalten. Dies bedeutet, dass diese Cafés die Benutzung eines Laptops erlauben und WLAN bereitstellen.",
-    "description_other": "Wir haben {{count}} Cafés in {{name}} gefunden. Diese sind ausgewählt basierend auf Bewertungen. Nur Cafés, die für Arbeit oder Studium geeignet sind, sind enthalten. Dies bedeutet, dass diese Cafés die Benutzung eines Laptops erlauben und WLAN bereitstellen."
+    "subtitle": "Entdecke die besten Cafés zum Arbeiten in {{name}} für Digital Nomads, Remote-Worker und Studierende",
+    "description": "Auf der Suche nach dem perfekten Workspace in {{name}}? Wir haben für dich die besten arbeitsfreundlichen Orte in {{country}} zusammengestellt, die schnelles WLAN, bequeme Sitzplätze und die perfekte Atmosphäre für Digital Nomads, Remote Worker und Studierende bieten, um produktiv zu arbeiten."
+  },
+  "cafe_list": {
+    "title": "{{count}} Cafés zum Arbeiten in {{name}}",
+    "title_one": "{{count}} Café zum Arbeiten in {{name}}",
+    "description": "Sorgfältig aus Google-Bewertungen ausgewählt: Alle Locations wurden von anderen Remote Workern positiv erwähnt und erlauben das Arbeiten mit Laptop"
   },
   "more_cities": {
     "title": "Weitere Städte in {{country}}",
@@ -45,10 +49,41 @@
     "suggest_button": "Stadt vorschlagen"
   },
   "map": {
-    "title": "Wo sind die besten Cafés zum Arbeiten in {{name}} zu finden?"
+    "title": "Übersicht der Cafés auf der Karte"
   },
   "about": {
-    "title": "Was zeichnet {{name}} aus?"
+    "title": "Was zeichnet {{name}} aus?",
+    "about_title": "Über die Stadt {{name}}",
+    "work_culture_title": "{{name}}'s Remote-Work Café Kultur",
+    "work_culture_description": "{{name}} bietet für Digital-Nomaden, Remote-Mitarbeiter und Freelancer einige Cafés und Orte zum Arbeiten. Beliebte Orte wie {{cafeName1}} und {{cafeName2}} zeigen die vielfältigen Angebote der Stadt, von bohemian-inspirierten Coffee Shops bis hin zu korporativ-freundlichen Café-Umgebungen. Ob du dich für den künstlerischen Atmosphäre von {{cafeName3}} oder den professionellen Setting von {{cafeName4}} entscheidest, findest du den perfekten Atmosphäre, um deinen Remote-Arbeitsstil zu unterstützen. Die Stadt-Cafe-Kultur hat sich entwickelt, um die Bedürfnisse von Digital-Nomaden zu verstehen und zu akzeptieren, indem sie wichtige Einrichtungen wie zuverlässiges WLAN, Steckdosen und bequeme Sitzplätze für längere Sitzzeiten anbietet.",
+    "wifi_title": "WLAN und Konnektivität für Remote-Arbeit",
+    "wifi_description": "Die Cafés auf unserer Liste bieten zuverlässiges WLAN für die meisten Remote-Arbeitsbedürfnisse. Digital-Nomaden mit kritischen Verbindungsanforderungen sollten eine mobile Hotspot-Backup für wichtige Treffen oder Fristen haben.",
+    "etiquette_title": "Remote-Arbeits-Etiquette und Tipps",
+    "etiquette_items": [
+      "<strong>Respektiere Café-Richtlinien</strong> auf Einschränkungen für Remote-Mitarbeiter",
+      "<strong>Respektiere andere Gäste</strong> und nehme es nicht für selbstverständlich an, dass du den ganzen Platz belegst",
+      "<strong>Kaufe alle 1-2 Stunden ein Getränk oder etwas zu essen</strong>, damit deine Anwesenheit wirtschaftlich ist",
+      "Kopfhörer sind essentiell für Remote-Mitarbeiter, die in laufenden Umgebungen arbeiten",
+      "Tätige Anrufe am Besten draußen oder in einem nicht zu stark besuchten Café",
+      "Digital-Nomaden sollten eine portable Ladestation für Cafés mit begrenzten Steckdosen investieren."
+    ],
+    "report_cafe_title": "Café melden",
+    "report_cafe_description": "Eignet sich ein Café nicht mehr, um dort zu arbeiten? Helfe uns, die Qualität unseres Verzeichnisses hoch zu halten, indem du Cafés meldest, die:",
+    "report_cafe_reasons": [
+      "Sie haben ihre Remote-Arbeitsrichtlinien geändert",
+      "Sie sind geschlossen oder umgezogen",
+      "Sie sind nicht für Remote-Mitarbeiter willkommen"
+    ],
+    "suggest_cafe_title": "Schlage ein Café vor",
+    "suggest_cafe_description": "Kennst du ein großartiges arbeitsfreundliches Café in {{name}}, das nicht auf unserer Seite ist? Hilf der Remote-Community, neue Orte zu entdecken! Wir suchen Cafés mit:",
+    "suggest_cafe_requirements": [
+      "Wo das Arbeiten vom Besitzer erlaubt ist",
+      "Zuverlässigem WLAN",
+      "Verfügbaren Steckdosen",
+      "Komfortablen Sitzplätzen für längere Sitzzeiten",
+      "Mit einer ruhigen Atmosphäre"
+    ],
+    "suggest_cafe_button": "Schlage ein Café vor"
   },
   "meta": {
     "index": {
