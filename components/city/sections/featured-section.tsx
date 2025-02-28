@@ -55,6 +55,13 @@ export function FeaturedSection() {
             height="54"
           />
         </a>
+        
+      </div>
+      {/* Text links */}
+      <div className="flex justify-center gap-4 flex-wrap mt-4">
+        <p>
+          <a href="https://projecthunt.me">projecthunt.me</a>
+        </p>
       </div>
     </section>
   );
