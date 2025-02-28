@@ -91,9 +91,10 @@
       "description_with_country": "Find the perfect cafe for mobile work in {{country}}. Discover our curated list of work-friendly cafes with WiFi, power outlets, and cozy atmosphere."
     },
     "show": {
-      "title": "Best Work-Friendly Cafes In {{name}}",
+      "title": "{{count}} Best Coffee Shops to Work in {{name}} (2025)",
+      "title_one": "Best Coffee Shop to Work in {{name}} (2025)",
       "your_city": "your city",
-      "description": "Looking for work-friendly cafes in {{name}}? Discover our handpicked selection of laptop friendly cafes with WiFi."
+      "description": "Discover {{name}}'s top-rated cafes and coffee shops for remote work. All locations offer WiFi and are verified as laptop-friendly by digital nomads and remote workers."
     },
     "suggest": {
       "title": "Suggest A City",

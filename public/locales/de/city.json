@@ -93,9 +93,10 @@
       "description_with_country": "Finde das perfekte Café für zum Arbeiten in {{country}}. Entdecke die besten Cafés mit WLAN, Steckdosen und gemütlicher Atmosphäre."
     },
     "show": {
-      "title": "Cafés zum Arbeiten in {{name}}",
-      "your_city": "deine Stadt",
-      "description": "Suchst du nach einem Café zum Arbeiten in {{name}}? Entdecke unsere handverlesenen Cafés mit schnellem WLAN, Steckdosen und gemütlichen Sitzplätzen. Perfekt für Remote-Arbeit, Studium oder um einfach raus zu gehen ."
+      "title": "{{count}} Cafés in {{name}} zum Arbeiten (2025)",
+      "title_one": "Café in {{name}} zum Arbeiten (2025)",
+      "description": "Entdecke die besten Cafés zum Arbeiten in {{name}} mit WLAN, Steckdosen und angenehmer Atmosphäre. Von der Community empfohlene Spots für Digital Nomads, Remote Worker und Studierende.",
+      "your_city": "deine Stadt"
     },
     "suggest": {
       "title": "Stadt vorschlagen",

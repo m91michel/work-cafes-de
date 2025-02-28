@@ -128,6 +128,10 @@ type CafesCountOptions = {
 export async function getCafesCount({
   citySlug,
 }: CafesCountOptions = {}): Promise<number | null> {
+  if (!citySlug) {
+    return null;
+  }
+
   let query = supabase
     .from("cafes")
     .select("name, slug", { count: "exact" })

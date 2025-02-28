@@ -1,7 +1,7 @@
 import { CityHero } from "@/components/city/sections/city-hero";
 import { notFound } from "next/navigation";
 import { getSEOTags } from "@/libs/seo";
-import { getCafesByCity } from "@/libs/supabase/cafes";
+import { getCafesByCity, getCafesCount } from "@/libs/supabase/cafes";
 import { getAllCities, getCities, getCityBySlug } from "@/libs/supabase/cities";
 import { SimpleCafeList } from "@/components/cafe/lists/simple-cafe-list";
 import initTranslations from "@/libs/i18n/config";
@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: Props) {
   const { t } = await initTranslations(["city"]);
   const slug = (await params).city;
   const city = await getCityBySlug(slug);
+  const count = await getCafesCount({ citySlug: slug }) || 0;
 
   const dbName = isGerman ? city?.name_de : city?.name_en;
   const name = dbName || t("meta.show.your_city");
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: Props) {
   const ogImage = getCityOGImage(city);
 
   return getSEOTags({
-    title: t("meta.show.title", { name }),
+    title: t("meta.show.title", { name, count }),
     description: t("meta.show.description", { name }),
     canonicalUrlRelative: `/cities/${slug}`,
     openGraph: {
