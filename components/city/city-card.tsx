@@ -1,13 +1,12 @@
 import { City } from "@/libs/types";
 import { MapPin } from "lucide-react";
-import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
 
 import { DefaultCafeImage } from "../cafe/Image";
 import { Badge } from "../ui/badge";
 import { isGerman } from "@/libs/environment";
-import { countryFlag } from "@/config/countires";
+import { countryFlag, getCountryByName } from "@/config/countires";
 
 type Props = {
   city: City;
@@ -20,7 +19,8 @@ export function CityCard({ city }: Props) {
     : city.description_short_en;
 
   const flag = countryFlag(city.country);
-  const country = flag ? `${flag} ${city.country}` : city.country;
+  const countryName = getCountryByName(city.country)?.name_de || city.country;
+  const country = flag ? `${flag} ${countryName}` : countryName;
 
   return (
     <Link href={`/cities/${city.slug}`} className="block">

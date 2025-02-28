@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { countryFlag } from "@/config/countires";
+import { countryFlag, getCountryByName } from "@/config/countires";
 import { isGerman } from "@/libs/environment";
 import Paths from "@/libs/paths";
 import { City, Country } from "@/libs/types";
@@ -50,13 +50,16 @@ export function CitySelectorByCountry({
   );
   return (
     <div className={cn("flex flex-wrap gap-3 justify-center", className)}>
-      {filteredCountries.map((country) => (
-        <Button key={country.code} variant="outline" asChild>
-          <Link href={Paths.country(country.name as string)}>
-            {country.flag} {country.name} ({country.city_count ?? 0})
-          </Link>
-        </Button>
-      ))}
+      {filteredCountries.map((country) => {
+        const name = getCountryByName(country.name)?.name_de || country.name;
+        return (
+          <Button key={country.code} variant="outline" asChild>
+            <Link href={Paths.country(country.name as string)}>
+              {country.flag} {name} ({country.city_count ?? 0})
+            </Link>
+          </Button>
+        );
+      })}
     </div>
   );
 }

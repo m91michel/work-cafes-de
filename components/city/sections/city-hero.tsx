@@ -2,7 +2,7 @@ import { isGerman } from "@/libs/environment";
 import { City, TranslationProps } from "@/libs/types";
 import { Coffee, LocateIcon, MapPin } from "lucide-react";
 import { TransHighlight } from "../../general/translation";
-import { countryFlag } from "@/config/countires";
+import { countryFlag, getCountryByName } from "@/config/countires";
 import Image from "next/image";
 
 interface CityHeroProps extends TranslationProps {
@@ -14,6 +14,7 @@ export function CityHero({ city, cafeCount, t }: CityHeroProps) {
   const name = isGerman ? city.name_de : city.name_en;
   const cityName = name || city.slug || "";
   const flag = countryFlag(city.country);
+  const countryName = getCountryByName(city.country)?.name_de || city.country;
 
   return (
     <section className="bg-card min-h-[500px]">
@@ -30,7 +31,7 @@ export function CityHero({ city, cafeCount, t }: CityHeroProps) {
                   <>
                     <span className="mx-1 text-primary">|</span>
                     <span className="text-primary font-medium">
-                      {flag} {city.country}
+                      {flag} {countryName}
                     </span>
                   </>
                 )}
@@ -65,7 +66,7 @@ export function CityHero({ city, cafeCount, t }: CityHeroProps) {
             <p className="text-lg md:text-xl text-muted-foreground">
               <TransHighlight
                 i18nKey="hero.description"
-                values={{ name: cityName, country: city.country || "" }}
+                values={{ name: cityName, country: countryName || "" }}
                 namespace="city"
               />
             </p>
