@@ -9,28 +9,28 @@
     "fallback_name": "This Cafe",
     "about": {
       "title": "About",
-      "no_content": "We couldn't find any information about this cafe."
+      "no_content": "No information about this cafe."
     },
     "food": {
       "title": "Food",
-      "no_content": "We couldn't find any information about food for this cafe."
+      "no_content": "No information about food for this cafe."
     },
     "drinks": {
       "title": "Coffee & Drinks",
-      "no_content": "We couldn't find any information about coffee & drinks for this cafe."
+      "no_content": "No information about coffee & drinks for this cafe."
     },
     "work_friendly": {
       "title": "Work and Laptop Friendly",
-      "no_content": "We couldn't find any information about work-friendly features for this cafe."
+      "no_content": "No information about work-friendly features for this cafe."
     },
     "hours": {
       "title": "Opening Hours",
-      "no_content": "We couldn't find any information about opening hours for this cafe."
+      "no_content": "No information about opening hours for this cafe."
     },
     "address": "Address",
     "directions": "Directions",
     "links": "Links",
-    "no_links_content": "We couldn't find any links for this cafe.",
+    "no_links_content": "No links for this cafe.",
     "amenities": "Amenities",
     "wifi_quality": {
       "label": "WiFi Quality",
