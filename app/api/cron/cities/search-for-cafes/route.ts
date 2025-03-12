@@ -18,19 +18,27 @@ export async function GET(request: NextRequest) {
   const token = extractToken(request.headers.get("Authorization"));
   const searchParams = request.nextUrl.searchParams;
   const limit = Number(searchParams.get("limit") || LIMIT);
+  const citySlug = searchParams.get("citySlug");
 
   if (token !== process.env.CRON_JOB_KEY && isProd) {
     return NextResponse.json({ error: "Invalid token" }, { status: 401 });
   }
 
-  console.log(`⚡️ start processing cafes (limit: ${limit})`);
+  console.log(`⚡️ start processing cafes (limit: ${limit}, citySlug: ${citySlug})`);
 
-  const { data: cities = [], error, count: cityCount } = await supabase
+   const query = supabase
     .from("cities")
     .select("*", { count: "exact" })
-    .eq("status", "READY")
+    .in("status", ["READY", "BOOSTED"])
     .order("population", { ascending: true })
+    .order("status", { ascending: false }) // Boosted cities first
     .limit(limit);
+
+  if (citySlug) {
+    query.eq("slug", citySlug);
+  }
+
+  const { data: cities = [], error, count: cityCount } = await query;
 
   if (cities === null || cities === undefined || error) {
     console.error("⚠️ Error fetching cafes", error);
@@ -41,16 +49,18 @@ export async function GET(request: NextRequest) {
     let cafesAdded = 0;
     let cafesWithError: string[] = [];
     let firstAddress = "";
+    console.log(`⚡️ start processing ${city.name_en} (${city.slug})`);
 
 
-    const isGermany = city.country === "Germany";
-    const cityName = isGermany ? city.name_de : city.name_en;
+    const DACH_COUNTRIES = ["DE", "AT", "CH"];
+    const isDACHCountry = DACH_COUNTRIES.includes(city.country_code || "");
+    const cityName = isDACHCountry ? city.name_de : city.name_en;
 
     if (!cityName) {
       console.error("⚠️ City name is null", city);
       continue;
     }
-    const searchQuery = isGermany
+    const searchQuery = isDACHCountry
       ? `cafe zum arbeiten in ${cityName}`
       : `cafe for working in ${cityName}`;
     const places = await searchPlaces(searchQuery, { type: "cafe" });
@@ -166,7 +176,7 @@ export async function GET(request: NextRequest) {
         )} \n\nAddress: ${firstAddress}`
       );
     }
-    const status = cafesAdded > 0 ? "CHECK!" : "PROCESSING";
+    const status = cafesAdded > 0 ? "PROCESSING" : "CHECK!";
     await supabase
       .from("cities")
       .update({ status: status })

@@ -35,6 +35,8 @@ export async function GET(request: NextRequest) {
     .eq("review_count", 0)
     .gte("google_rating", 3)
     .in("status", ["NEW", "DUPLICATE"])
+    // TODO: remove this after boosting
+    .gte("created_at", dayjs().subtract(1, "day").toISOString())
     .order("created_at", { ascending: true })
     .limit(limit);
 
@@ -61,8 +63,9 @@ export async function GET(request: NextRequest) {
       await setProcessed(cafe);
     }
 
-    const isGermanCity = cafe.cities?.country_code === "DE";
-    const keywords = ["working", "wifi", "laptop", ...(isGermanCity ? ["arbeiten", "wlan"] : [])];
+    const DACH_COUNTRIES = ["DE", "AT", "CH"];
+    const isDACHCountry = DACH_COUNTRIES.includes(cafe.cities?.country_code || "");
+    const keywords = ["working", "wifi", "laptop", ...(isDACHCountry ? ["arbeiten", "wlan"] : [])];
     for (const keyword of keywords) {
       await outscraperReviewsTask({
         id: cafe.google_place_id,
