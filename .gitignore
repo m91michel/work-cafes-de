@@ -56,3 +56,6 @@ scripts/node_modules/
 
 # Data
 data/ignored
+
+# Cursor
+.cursor/mcp.json

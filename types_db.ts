@@ -257,6 +257,45 @@ export type Database = {
         }
         Relationships: []
       }
+      reddit_searches: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          last_checked: string | null
+          query: string
+          result_limit: number
+          sort: string
+          subreddit: string
+          time_frame: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          last_checked?: string | null
+          query: string
+          result_limit?: number
+          sort?: string
+          subreddit: string
+          time_frame?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          last_checked?: string | null
+          query?: string
+          result_limit?: number
+          sort?: string
+          subreddit?: string
+          time_frame?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       reviews: {
         Row: {
           author_image: string | null

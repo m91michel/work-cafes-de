@@ -17,8 +17,12 @@ This project is a website that lists the best cafes for working.
 - English: awifi.place
 - German: cafezumarbeiten.de
 
+## Database
+- This project uses the `cafeforwork` schema. Alway use this for SQL output and MCP commands.
+
 ## Additional instructions
 - This project is a npm workspace. Use `-W` to install dependencies.
+- Port for localhost is `3010`! Example: `http://localhost:3010/api/cron/reddit-tracker`
 - For translations, use the `useCTranslation` hook if the file has a "use client" directive.
 - Use `initTranslations` for translations in server components.
 - Do not touch the shadcn/ui components in the components/ui folder untouched.
