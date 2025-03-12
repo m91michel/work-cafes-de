@@ -38,3 +38,34 @@ export type PageProps<T = any> = {
   params: PageParams<T>;
   searchParams: PageSearchParams;
 };
+
+export interface RedditSearch {
+  id: string;
+  subreddit: string;
+  query: string;
+  time_frame: "hour" | "day" | "week" | "month" | "year" | "all";
+  sort: "relevance" | "hot" | "top" | "new" | "comments";
+  result_limit?: number;
+  is_active?: boolean;
+  last_checked?: string | null;
+}
+
+export interface RedditPost {
+  id?: string;
+  reddit_id: string;
+  subreddit: string;
+  title: string;
+  selftext?: string;
+  url: string;
+  permalink: string;
+  created_utc: number;
+  author: string;
+  num_comments: number;
+  is_relevant?: boolean;
+  has_been_replied?: boolean;
+  reply_id?: string;
+  notes?: string;
+  search_id?: string;
+  created_at?: string;
+  updated_at?: string;
+}

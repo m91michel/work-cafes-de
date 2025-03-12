@@ -257,6 +257,74 @@ export type Database = {
         }
         Relationships: []
       }
+      reddit_posts: {
+        Row: {
+          author: string
+          created_at: string
+          created_utc: number
+          has_been_replied: boolean | null
+          id: string
+          is_relevant: boolean | null
+          notes: string | null
+          num_comments: number
+          permalink: string
+          reddit_id: string
+          reply_id: string | null
+          search_id: string | null
+          selftext: string | null
+          subreddit: string
+          title: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          author: string
+          created_at?: string
+          created_utc: number
+          has_been_replied?: boolean | null
+          id?: string
+          is_relevant?: boolean | null
+          notes?: string | null
+          num_comments?: number
+          permalink: string
+          reddit_id: string
+          reply_id?: string | null
+          search_id?: string | null
+          selftext?: string | null
+          subreddit: string
+          title: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          author?: string
+          created_at?: string
+          created_utc?: number
+          has_been_replied?: boolean | null
+          id?: string
+          is_relevant?: boolean | null
+          notes?: string | null
+          num_comments?: number
+          permalink?: string
+          reddit_id?: string
+          reply_id?: string | null
+          search_id?: string | null
+          selftext?: string | null
+          subreddit?: string
+          title?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reddit_posts_search_id_fkey"
+            columns: ["search_id"]
+            isOneToOne: false
+            referencedRelation: "reddit_searches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reddit_searches: {
         Row: {
           created_at: string
