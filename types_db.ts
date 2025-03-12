@@ -262,9 +262,13 @@ export type Database = {
           author: string
           created_at: string
           created_utc: number
+          eval_confidence: number | null
+          eval_shouldReply: number | null
           has_been_replied: boolean | null
           id: string
           is_relevant: boolean | null
+          keywords: Json | null
+          meta_data: Json
           notes: string | null
           num_comments: number
           permalink: string
@@ -281,9 +285,13 @@ export type Database = {
           author: string
           created_at?: string
           created_utc: number
+          eval_confidence?: number | null
+          eval_shouldReply?: number | null
           has_been_replied?: boolean | null
           id?: string
           is_relevant?: boolean | null
+          keywords?: Json | null
+          meta_data?: Json
           notes?: string | null
           num_comments?: number
           permalink: string
@@ -300,9 +308,13 @@ export type Database = {
           author?: string
           created_at?: string
           created_utc?: number
+          eval_confidence?: number | null
+          eval_shouldReply?: number | null
           has_been_replied?: boolean | null
           id?: string
           is_relevant?: boolean | null
+          keywords?: Json | null
+          meta_data?: Json
           notes?: string | null
           num_comments?: number
           permalink?: string

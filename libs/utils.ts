@@ -134,3 +134,8 @@ export async function fetchAllRecords<T, P extends PaginationParams>(
 export const extractNameFromEmail = (email: string) => {
   return email.split("@")[0];
 };
+
+export const stripString = (string: string, length: number) => {
+  if (!string) return "";
+  return string.length > length ? string.substring(0, length) + "..." : string;
+};
