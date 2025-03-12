@@ -130,3 +130,7 @@ export async function fetchAllRecords<T, P extends PaginationParams>(
 
   return allRecords;
 }
+
+export const extractNameFromEmail = (email: string) => {
+  return email.split("@")[0];
+};
