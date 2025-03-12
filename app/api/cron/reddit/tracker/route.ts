@@ -85,7 +85,6 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json({
     success: true,
-    posts,
     count: posts.length,
     searches_processed: searches.length,
     timestamp: new Date().toISOString(),
