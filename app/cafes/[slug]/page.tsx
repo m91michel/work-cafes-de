@@ -21,8 +21,6 @@ import { LinkSection } from "@/components/city/sections/link-section";
 import Paths from "@/libs/paths";
 import { getCafeOGImage } from "@/libs/og-helper";
 
-export const revalidate = 3600;
-
 type Params = Promise<{ slug: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 type Props = {
