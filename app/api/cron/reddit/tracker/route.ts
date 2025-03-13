@@ -9,6 +9,8 @@ import { RedditPost } from "@/libs/types";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+export const maxDuration = 300; // max for PRO
+
 const LIMIT = 10;
 
 export async function GET(request: NextRequest) {
@@ -44,34 +46,38 @@ export async function GET(request: NextRequest) {
   const posts: RedditPost[] = [];
 
   for (const search of searches) {
-    const { id: searchId, subreddit, query, time_frame, sort, result_limit } = search;
+    const { id: searchId, subreddits, query, time_frame, sort, result_limit } = search;
     
-    console.log(`🔍 Searching r/${subreddit} for "${query}"`);
+    console.log(`🔍 Searching ${subreddits.length} subreddits for "${query}"`);
     
-    const _posts = await redditClient.searchSubreddit(subreddit, query, {
-      time: time_frame,
-      sort: sort,
-      limit: result_limit,
-    });
-    
-    if (_posts.length > 0) {
-      // Transform posts to match our database schema
-      const transformedPosts = _posts.map(post => ({
-        reddit_id: post.id,
-        subreddit: post.subreddit,
-        title: post.title,
-        selftext: post.selftext,
-        url: post.url,
-        permalink: post.permalink,
-        created_utc: post.created_utc,
-        author: post.author,
-        num_comments: post.num_comments,
-        search_id: searchId
-      }));
+    for (const subreddit of subreddits) {
+      console.log(`  - Searching r/${subreddit}`);
       
-      // Save posts to database
-      await saveRedditPosts(transformedPosts, searchId);
-      posts.push(...transformedPosts);
+      const _posts = await redditClient.searchSubreddit(subreddit, query, {
+        time: time_frame,
+        sort: sort,
+        limit: result_limit,
+      });
+      
+      if (_posts.length > 0) {
+        // Transform posts to match our database schema
+        const transformedPosts = _posts.map(post => ({
+          reddit_id: post.id,
+          subreddit: post.subreddit,
+          title: post.title,
+          selftext: post.selftext,
+          url: post.url,
+          permalink: post.permalink,
+          created_utc: post.created_utc,
+          author: post.author,
+          num_comments: post.num_comments,
+          search_id: searchId
+        }));
+        
+        // Save posts to database
+        await saveRedditPosts(transformedPosts, searchId);
+        posts.push(...transformedPosts);
+      }
     }
     
     // Update last_checked timestamp

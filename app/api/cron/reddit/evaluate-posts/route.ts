@@ -8,6 +8,8 @@ import { extractToken } from "@/libs/utils";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+export const maxDuration = 300;
+
 const LIMIT = 1;
 
 export async function GET(request: NextRequest) {

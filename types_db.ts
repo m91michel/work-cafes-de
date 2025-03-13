@@ -346,7 +346,7 @@ export type Database = {
           query: string
           result_limit: number
           sort: string
-          subreddit: string
+          subreddits: string[]
           time_frame: string
           updated_at: string
         }
@@ -358,7 +358,7 @@ export type Database = {
           query: string
           result_limit?: number
           sort?: string
-          subreddit: string
+          subreddits: string[]
           time_frame?: string
           updated_at?: string
         }
@@ -370,7 +370,7 @@ export type Database = {
           query?: string
           result_limit?: number
           sort?: string
-          subreddit?: string
+          subreddits?: string[]
           time_frame?: string
           updated_at?: string
         }

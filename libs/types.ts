@@ -41,7 +41,7 @@ export type PageProps<T = any> = {
 
 export interface RedditSearch {
   id: string;
-  subreddit: string;
+  subreddits: string[];
   query: string;
   time_frame: "hour" | "day" | "week" | "month" | "year" | "all";
   sort: "relevance" | "hot" | "top" | "new" | "comments";
