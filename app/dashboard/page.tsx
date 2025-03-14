@@ -1,8 +1,9 @@
 import { getSEOTags } from "@/libs/seo";
 import { getAllCafes } from "@/libs/supabase/cafes";
 import { CafesTable } from "@/components/dashboard/cafes/cafes-table";
-import { notFound } from "next/navigation";
-import { isProd } from "@/libs/environment";
+import { createClient } from '@/libs/supabase/server';
+import { redirect } from 'next/navigation';
+import SignOutButton from "@/components/auth/sign-out-button";
 
 export const revalidate = 5;
 
@@ -14,16 +15,23 @@ export const metadata = getSEOTags({
 });
 
 export default async function CafeIndex() {
-  const cafes = await getAllCafes({ limit: 1000, offset: 0 });
-
-  if (isProd) {
-    return notFound()
+  // Check if user is authenticated
+  const supabase = await createClient();
+  const { data: { session } } = await supabase.auth.getSession();
+  
+  if (!session) {
+    redirect('/login');
   }
+  
+  const cafes = await getAllCafes({ limit: 1000, offset: 0 });
 
   return (
     <main className="flex-1 p-8 bg-background">
       <div className="flex flex-col gap-4">
-        <h1 className="text-3xl font-bold">Cafes Dashboard</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-3xl font-bold">Cafes Dashboard</h1>
+          <SignOutButton />
+        </div>
         <CafesTable data={cafes} />
       </div>
     </main>
