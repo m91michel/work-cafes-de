@@ -50,6 +50,7 @@ export interface RedditSearch {
   last_checked?: string | null;
 }
 
+export type DBRedditPost = Database['cafeforwork']['Tables']['reddit_posts']['Row'];
 export interface RedditPost {
   id?: string;
   reddit_id: string;
@@ -69,3 +70,5 @@ export interface RedditPost {
   created_at?: string;
   updated_at?: string;
 }
+
+export type DBRedditPostReply = Database['cafeforwork']['Tables']['reddit_post_replies']['Row'];

@@ -257,6 +257,47 @@ export type Database = {
         }
         Relationships: []
       }
+      reddit_post_replies: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_approved: boolean | null
+          metadata: Json | null
+          post_id: string
+          published: boolean | null
+          published_at: string | null
+          reply_message: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_approved?: boolean | null
+          metadata?: Json | null
+          post_id: string
+          published?: boolean | null
+          published_at?: string | null
+          reply_message: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_approved?: boolean | null
+          metadata?: Json | null
+          post_id?: string
+          published?: boolean | null
+          published_at?: string | null
+          reply_message?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reddit_post_replies_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "reddit_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reddit_posts: {
         Row: {
           author: string
@@ -526,7 +567,19 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      index_advisor: {
+        Args: {
+          query: string
+        }
+        Returns: {
+          startup_cost_before: Json
+          startup_cost_after: Json
+          total_cost_before: Json
+          total_cost_after: Json
+          index_statements: string[]
+          errors: string[]
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

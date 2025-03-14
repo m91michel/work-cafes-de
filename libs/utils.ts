@@ -139,3 +139,8 @@ export const stripString = (string: string, length: number) => {
   if (!string) return "";
   return string.length > length ? string.substring(0, length) + "..." : string;
 };
+
+export const extractDomain = (url: string) => {
+  const parsedUrl = new URL(url);
+  return parsedUrl.hostname;
+};
