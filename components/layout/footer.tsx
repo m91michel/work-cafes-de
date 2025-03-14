@@ -1,13 +1,12 @@
-import { Coffee, Github } from "lucide-react";
+import { Coffee } from "lucide-react";
 import Link from "next/link";
 import config, {
-  alternateDomainName,
   appName,
   domainName,
 } from "@/config/config";
-import { isGerman } from "@/libs/environment";
 import Paths from "@/libs/paths";
 import initTranslations from "@/libs/i18n/config";
+import { LanguageSwitcher } from "@/components/general/LanguageSwitcher";
 
 const currentYear = new Date().getFullYear();
 
@@ -43,12 +42,7 @@ export async function Footer() {
               {t("meta.description")}
             </p>
             <p className="text-sm text-muted-foreground">
-              <Link
-                href={`https://${alternateDomainName}?ref=${domainName}`}
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                {isGerman ? "🇺🇸 English Version" : "🇩🇪 Deutsche Version"}
-              </Link>
+              <LanguageSwitcher />
             </p>
             <p className="text-sm text-muted-foreground">
               Build with ☕️ by{" "}

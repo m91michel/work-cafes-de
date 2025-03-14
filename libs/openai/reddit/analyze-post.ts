@@ -1,4 +1,4 @@
-import { City, RedditPost } from "@/libs/types";
+import { RedditPost } from "@/libs/types";
 import { stripString } from "@/libs/utils";
 import OpenAI from "openai";
 
