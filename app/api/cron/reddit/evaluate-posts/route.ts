@@ -10,7 +10,7 @@ export const revalidate = 0;
 
 export const maxDuration = 300;
 
-const LIMIT = 1;
+const LIMIT = 100;
 
 export async function GET(request: NextRequest) {
   const token = extractToken(request.headers.get("Authorization"));
@@ -44,28 +44,26 @@ export async function GET(request: NextRequest) {
       analysis = await analyzeRedditPost(post as RedditPost);
     }
 
-    console.log(`🔍 Analysis: ${JSON.stringify(analysis)}`);
+    console.log(` isRelevant: ${analysis?.isRelevant ? "true" : "false"} confidence: ${analysis?.confidence} reasoning: ${analysis?.reasoning}`);
 
     if (!analysis) {
       console.log(`🔴 No analysis for post ${post.id}: ${post.title}`);
       analysis = {
-        isSearchingForWorkCafe: false,
-        city: null,
+        isRelevant: false,
         keywords: [],
-        confidence: 0,
-        shouldReply: 0,
+        confidence: 0
       }
     }
 
-    const { isSearchingForWorkCafe } = analysis;
+    const { isRelevant } = analysis;
 
     const { error } = await supabase
       .from("reddit_posts")
       .update({
-        is_relevant: isSearchingForWorkCafe,
+        is_relevant: isRelevant,
         keywords: analysis.keywords,
         eval_confidence: analysis.confidence,
-        eval_shouldReply: analysis.shouldReply,
+        eval_reasoning: analysis.reasoning,
         meta_data: analysis,
       })
       .eq("id", post.id);
