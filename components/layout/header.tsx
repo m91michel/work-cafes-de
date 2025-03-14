@@ -7,6 +7,7 @@ import { NavLinks } from "./NavLinks";
 import { useCTranslation } from "@/hooks/use-translation";
 import { appName } from "@/config/config";
 import AuthNav from "@/components/auth/auth-nav";
+import { isProd } from "@/libs/environment";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,7 +32,7 @@ export function Header() {
 
         <nav className="hidden md:flex gap-6 items-center">
           <NavLinks className="flex gap-6 items-center" />
-          <AuthNav />
+          {!isProd && <AuthNav />}
         </nav>
       </div>
 

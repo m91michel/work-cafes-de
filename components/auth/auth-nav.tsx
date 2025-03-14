@@ -1,16 +1,26 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/libs/supabase/client'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { isProd } from '@/libs/environment'
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuGroup, 
+  DropdownMenuItem, 
+  DropdownMenuSeparator, 
+  DropdownMenuTrigger 
+} from '@/components/ui/dropdown-menu'
+import { Loader2, User } from 'lucide-react'
+import { Session } from '@supabase/supabase-js'
 
 export default function AuthNav() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const pathname = usePathname()
+  const router = useRouter()
   const supabase = createClient()
 
   useEffect(() => {
@@ -23,7 +33,7 @@ export default function AuthNav() {
     checkAuth()
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
+      (_event: string, session: Session | null) => {
         setIsAuthenticated(!!session)
       }
     )
@@ -33,24 +43,47 @@ export default function AuthNav() {
     }
   }, [supabase])
 
+  const handleSignOut = async () => {
+    await supabase.auth.signOut()
+    router.push('/login')
+    router.refresh()
+  }
+
   if (isLoading) {
-    return null
+    return (
+      <Button variant="ghost" size="icon" className="rounded-full" disabled>
+        <Loader2 className="h-5 w-5 animate-spin" />
+      </Button>
+    )
   }
 
   // Don't show auth nav on login page
-  if (pathname === '/login' || isProd) {
+  if (pathname === '/login') {
     return null
   }
 
   if (isAuthenticated) {
     return (
-      <div className="flex items-center gap-4">
-        <Link href="/dashboard">
-          <Button variant="ghost" size="sm">
-            Dashboard
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon" className="rounded-full">
+            <User className="h-5 w-5" />
           </Button>
-        </Link>
-      </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-48">
+          <DropdownMenuGroup>
+            <DropdownMenuItem asChild>
+              <Link href="/dashboard" className="w-full cursor-pointer">
+                Dashboard
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
+            Logout
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     )
   }
 
