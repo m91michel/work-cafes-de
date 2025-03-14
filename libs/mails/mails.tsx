@@ -38,9 +38,9 @@ export const sendMailTemplate = async <T extends object>(
       text: plain,
     });
 
-    console.log("🚀 Mail sent:", result);
+    console.log(`🚀 Mail sent to ${props.email}`);
   } catch (e: any) {
-    console.error("🚨 Mail issue:" + e);
+    console.error(`🚨 Mail issue to ${props.email}: ${e}`);
     status = "error";
   }
 

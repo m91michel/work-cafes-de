@@ -51,6 +51,5 @@ export const sendEmail = async ({
   };
 
   const domain = (config.mailgun.subdomain ? `${config.mailgun.subdomain}.` : "") + domainEn;
-  console.log("🚀 Sending email to:", domain, subject);
   return mg.messages.create(domain, data as any);
 };

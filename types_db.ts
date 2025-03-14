@@ -263,11 +263,13 @@ export type Database = {
           created_at: string
           created_utc: number
           eval_confidence: number | null
+          eval_reasoning: string | null
           eval_shouldReply: number | null
           has_been_replied: boolean | null
           id: string
           is_relevant: boolean | null
           keywords: Json | null
+          mail_send_at: string | null
           meta_data: Json
           notes: string | null
           num_comments: number
@@ -286,11 +288,13 @@ export type Database = {
           created_at?: string
           created_utc: number
           eval_confidence?: number | null
+          eval_reasoning?: string | null
           eval_shouldReply?: number | null
           has_been_replied?: boolean | null
           id?: string
           is_relevant?: boolean | null
           keywords?: Json | null
+          mail_send_at?: string | null
           meta_data?: Json
           notes?: string | null
           num_comments?: number
@@ -309,11 +313,13 @@ export type Database = {
           created_at?: string
           created_utc?: number
           eval_confidence?: number | null
+          eval_reasoning?: string | null
           eval_shouldReply?: number | null
           has_been_replied?: boolean | null
           id?: string
           is_relevant?: boolean | null
           keywords?: Json | null
+          mail_send_at?: string | null
           meta_data?: Json
           notes?: string | null
           num_comments?: number
@@ -343,6 +349,7 @@ export type Database = {
           id: string
           is_active: boolean
           last_checked: string | null
+          name: string | null
           query: string
           result_limit: number
           sort: string
@@ -355,10 +362,11 @@ export type Database = {
           id?: string
           is_active?: boolean
           last_checked?: string | null
+          name?: string | null
           query: string
           result_limit?: number
           sort?: string
-          subreddits: string[]
+          subreddits?: string[]
           time_frame?: string
           updated_at?: string
         }
@@ -367,6 +375,7 @@ export type Database = {
           id?: string
           is_active?: boolean
           last_checked?: string | null
+          name?: string | null
           query?: string
           result_limit?: number
           sort?: string
