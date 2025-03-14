@@ -6,12 +6,21 @@ import { sendMailTemplate } from "@/libs/mails/mails";
 import { RedditResults } from "@/emails/transactional/reddit-results";
 import { RedditPost } from "@/libs/types";
 import supabase from "@/libs/supabase/supabaseClient";
+import { Database } from "@/types_db";
+
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 const LIMIT = 100;
 const EMAIL = "work91michel@gmail.com";
+
+type Post = Database["cafeforwork"]["Tables"]["reddit_posts"]["Row"];
+type Search = Database["cafeforwork"]["Tables"]["reddit_searches"]["Row"];
+
+export type RedditPostWithSearch = Post & {
+  search?: Search;
+};
 
 export async function GET(request: NextRequest) {
   const token = extractToken(request.headers.get("Authorization"));
@@ -24,23 +33,24 @@ export async function GET(request: NextRequest) {
 
   console.log("⚡️ start fetching reddit posts");
 
-  const { data: posts = [] } = await supabase
+  const { data = [] } = await supabase
     .from("reddit_posts")
-    .select("*")
+    .select("*, search:reddit_searches(id, name)")
     .eq("is_relevant", true)
     .is("mail_send_at", null)
     .limit(limit);
 
+  const posts = data as RedditPostWithSearch[];
   console.log(`✅ fetched ${posts?.length} posts`);
 
   if (posts && posts.length > 0) {
     await sendMailTemplate(RedditResults, {
-      posts: posts as RedditPost[],
+      posts,
       email: EMAIL,
     });
     
     // Bulk update all posts that were sent in the email
-    await updatePosts(posts as RedditPost[]);
+    await updatePosts(posts);
   }
 
   console.log("✅ finished");
@@ -53,7 +63,7 @@ export async function GET(request: NextRequest) {
   });
 }
 
-async function updatePosts(posts: RedditPost[]) {
+async function updatePosts(posts: RedditPostWithSearch[]) {
   if (posts.length === 0) {
     return;
   }

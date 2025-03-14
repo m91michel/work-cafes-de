@@ -1,6 +1,5 @@
 export const emailStyle = {
   main: {
-    backgroundColor: "#f6f9fc",
     fontFamily:
       '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
   },
@@ -10,10 +9,11 @@ export const emailStyle = {
     margin: "0 auto",
     padding: "20px 0 48px",
     marginBottom: "64px",
+    maxWidth: '900px',
   },
 
   box: {
-    padding: "0 48px",
+    padding: "0 24px",
   },
 
   hr: {
