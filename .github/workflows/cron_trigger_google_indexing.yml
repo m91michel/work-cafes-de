@@ -6,6 +6,11 @@ on:
   # schedule:
   #   - cron: '7 0 * * *' # every day at 7am
   workflow_dispatch:
+    inputs:
+      siteUrl:
+        description: 'Site URL'
+        required: false
+        default: 'awifi.place'
 
 env:
   SITE_URL_DE: 'cafezumarbeiten.de'
@@ -17,13 +22,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Indexing ${{ env.SITE_URL_EN }}
-        uses: robingenz/action-google-indexing@v1.0.2
+        if: inputs.siteUrl == null || inputs.siteUrl == ${{ env.SITE_URL_EN }}
+        uses: m91michel/action-google-indexing@main
         with:
           siteUrl: ${{ env.SITE_URL_EN }}
           gcpServiceAccountKey: ${{ env.GCP_SA_KEY }}
 
       - name: Indexing ${{ env.SITE_URL_DE }}
-        uses: robingenz/action-google-indexing@v1.0.2
+        if: inputs.siteUrl == null || inputs.siteUrl == ${{ env.SITE_URL_DE }}
+        uses: m91michel/action-google-indexing@main
         with:
           siteUrl: ${{ env.SITE_URL_DE }}
           gcpServiceAccountKey: ${{ env.GCP_SA_KEY }}
