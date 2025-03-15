@@ -56,17 +56,17 @@ export interface RedditPost {
   reddit_id: string;
   subreddit: string;
   title: string;
-  selftext?: string;
+  selftext?: string | null;
   url: string;
   permalink: string;
   created_utc: number;
   author: string;
   num_comments: number;
-  is_relevant?: boolean;
-  has_been_replied?: boolean;
-  reply_id?: string;
-  notes?: string;
-  search_id?: string;
+  is_relevant?: boolean | null;
+  has_been_replied?: boolean | null;
+  reply_id?: string | null;
+  notes?: string | null;
+  search_id?: string | null;
   created_at?: string;
   updated_at?: string;
 }
