@@ -19,8 +19,10 @@ const ITEMS_PER_PAGE = 10;
 export default async function RedditPostsPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  const requestSearchParams = await searchParams;
+
   // Check if user is authenticated
   const supabase = await createClient();
   const { data: { session } } = await supabase.auth.getSession();
@@ -34,9 +36,9 @@ export default async function RedditPostsPage({
   const weekStart = formatISO(startOfWeek(new Date(), { weekStartsOn: 1 }));
 
   // Parse query parameters
-  const dateFilter = (searchParams.date as string) || 'today';
-  const relevanceFilter = (searchParams.relevance as string) || 'relevant';
-  const page = parseInt((searchParams.page as string) || '1', 10);
+  const dateFilter = (requestSearchParams.date as string) || 'today';
+  const relevanceFilter = (requestSearchParams.relevance as string) || 'relevant';
+  const page = parseInt((requestSearchParams.page as string) || '1', 10);
   const offset = (page - 1) * ITEMS_PER_PAGE;
 
   // Build base query
