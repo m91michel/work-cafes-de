@@ -29,13 +29,14 @@ export async function GET(request: NextRequest) {
    const query = supabase
     .from("cities")
     .select("*", { count: "exact" })
-    .in("status", ["READY", "BOOSTED"])
     .order("population", { ascending: true })
     .order("status", { ascending: false }) // Boosted cities first
     .limit(limit);
 
   if (citySlug) {
     query.eq("slug", citySlug);
+  } else {
+    query.in("status", ["READY", "BOOSTED"])
   }
 
   const { data: cities = [], error, count: cityCount } = await query;
@@ -71,7 +72,8 @@ export async function GET(request: NextRequest) {
     }
 
     for (const [index, place] of places.entries()) {
-      if (!isInCity(place, city.name_local || cityName)) {
+      const cityNames = [city.name_local, cityName].filter(Boolean) as string[];
+      if (!isInCity(place, cityNames)) {
         console.log(`⚠️ ${place.formatted_address} is not in ${city.name_local || cityName}`);
         firstAddress = place.formatted_address || "";
         continue;
@@ -190,12 +192,18 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ message: "success" });
 }
 
-function isInCity(place: GoogleMapsPlace, cityName: string): boolean {
+function isInCity(place: GoogleMapsPlace, cityNames: string[]): boolean {
   if (!place.formatted_address) return false;
+  if (!cityNames || cityNames.length == 0) return false
 
   // Convert to lowercase and remove special characters for comparison
   const normalizedAddress = place.formatted_address.toLowerCase();
-  const normalizedCity = cityName.replace("City", "").trim().toLowerCase();
+  for (const name of cityNames) { 
+    const normalizedCity = name.replace("City", "").trim().toLowerCase();
+    if (normalizedAddress.includes(normalizedCity)) {
+      return true
+    }
+  }
 
-  return normalizedAddress.includes(normalizedCity);
+  return false
 }
