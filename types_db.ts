@@ -534,6 +534,7 @@ export type Database = {
       }
       user_suggestions: {
         Row: {
+          country: string | null
           created_at: string
           email: string | null
           form_values: Json | null
@@ -543,6 +544,7 @@ export type Database = {
           slug: string | null
         }
         Insert: {
+          country?: string | null
           created_at?: string
           email?: string | null
           form_values?: Json | null
@@ -552,6 +554,7 @@ export type Database = {
           slug?: string | null
         }
         Update: {
+          country?: string | null
           created_at?: string
           email?: string | null
           form_values?: Json | null
