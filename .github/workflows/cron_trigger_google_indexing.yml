@@ -21,15 +21,21 @@ jobs:
   google-indexing:
     runs-on: ubuntu-latest
     steps:
+      - name: Echo inputs
+        run: |
+          echo "inputs.siteUrl: ${{ inputs.siteUrl }}"
+          echo "env.SITE_URL_EN: ${{ env.SITE_URL_EN }}"
+          echo "env.SITE_URL_DE: ${{ env.SITE_URL_DE }}"
+
       - name: Indexing ${{ env.SITE_URL_EN }}
-        if: inputs.siteUrl == null || inputs.siteUrl == ${{ env.SITE_URL_EN }}
+        if: inputs.siteUrl == ${{ env.SITE_URL_EN }}
         uses: m91michel/action-google-indexing@main
         with:
           siteUrl: ${{ env.SITE_URL_EN }}
           gcpServiceAccountKey: ${{ env.GCP_SA_KEY }}
 
       - name: Indexing ${{ env.SITE_URL_DE }}
-        if: inputs.siteUrl == null || inputs.siteUrl == ${{ env.SITE_URL_DE }}
+        if: inputs.siteUrl == ${{ env.SITE_URL_DE }}
         uses: m91michel/action-google-indexing@main
         with:
           siteUrl: ${{ env.SITE_URL_DE }}

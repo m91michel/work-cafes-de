@@ -1,7 +1,7 @@
 name: "[Cron] Deploy CI"
 on:
-  schedule:
-    - cron: '0 8 * * 1' # will run every Monday at 8 am
+  # schedule:
+  #   - cron: '0 8 * * 1' # will run every Monday at 8 am
   workflow_dispatch:
 
 jobs:
