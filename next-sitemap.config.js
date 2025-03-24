@@ -5,7 +5,7 @@ const { createClient } = require('@supabase/supabase-js');
 
 const isGerman = process.env.NEXT_PUBLIC_LANGUAGE === "de";
 const fallbackUrl = isGerman ? "https://cafezumarbeiten.de" : "https://awifi.place";
-const fallbackUrlEn = isGerman ? "https://awifi.place" : "https://cafezumarbeiten.de";
+// const fallbackUrlEn = isGerman ? "https://awifi.place" : "https://cafezumarbeiten.de";
 const siteUrl = process.env.SITE_URL || fallbackUrl;
 
 // Initialize Supabase client
@@ -23,12 +23,6 @@ module.exports = {
   // REQUIRED: add your own domain name here
   siteUrl,
   generateRobotsTxt: true,
-  alternateRefs: [
-    {
-      href: fallbackUrlEn,
-      hreflang: isGerman ? "de" : "en",
-    },
-  ],
   // use this to exclude routes from the sitemap (i.e. a user dashboard). By default, NextJS app router metadata files are excluded (https://nextjs.org/docs/app/api-reference/file-conventions/metadata)
   exclude: [
     "/twitter-image.*",
