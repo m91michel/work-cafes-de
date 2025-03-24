@@ -1,11 +1,9 @@
 import { SimpleCafeList } from "@/components/cafe/lists/simple-cafe-list";
-import { CitySelector } from "@/components/city/city-selector";
 import { getSEOTags } from "@/libs/seo";
-import { getBestCafes, getCafes, getCafesCount } from "@/libs/supabase/cafes";
+import { getBestCafes, getCafes } from "@/libs/supabase/cafes";
 import { getCities, getCitiesCount } from "@/libs/supabase/cities";
 import initTranslations from "@/libs/i18n/config";
 import { Cafe, City } from "@/libs/types";
-import { TransHighlight } from "@/components/general/translation";
 import { CityListSection } from "@/components/city/sections/list-section";
 import { FAQSection } from "@/components/general/sections/faq";
 import { About } from "@/components/general/sections/About";
@@ -13,7 +11,9 @@ import { getCountries } from "@/libs/supabase/countries";
 import { LinkSection } from "@/components/city/sections/link-section";
 import HomeHero from "@/components/general/sections/home-hero";
 import { FeaturedSection } from "@/components/city/sections/featured-section";
-
+import peerlist from "./peerlist-launched.svg"
+import Image from "next/image";
+import { MLink } from "@/components/general/link";
 // export const revalidate = 5; // dev
 export const revalidate = 3600; // 1 hour
 
@@ -58,6 +58,22 @@ async function HomeContent({ cafes, biggestCities }: HomeContentProps) {
   return (
     <main className="flex-1">
       <HomeHero cafesCount={cafesCount} />
+
+      <div className="container mx-auto flex gap-4 flex-wrap justify-center items-center py-12">
+        <MLink href="https://fazier.com/launches/a-wifi-place" noFollow>
+          <Image
+            src="https://fazier.com/api/v1/public/badges/embed_image.svg?launch_id=3483&badge_type=featured&theme=light"
+            width={270}
+            height={54}
+            alt="Fazier badge"
+            unoptimized
+          />
+        </MLink>
+
+        <MLink href="https://peerlist.io/m4thias/project/a-wifi-place" noFollow>
+          <Image src={peerlist.src} alt="Peerlist badge" width={221} height={60} />
+        </MLink>
+      </div>
 
       <SimpleCafeList
         cafes={cafes}

@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
     .from("cities")
     .select("name_de, name_en, slug, status")
     .is("preview_image", null)
-    .in("status", ["NEW", "READY"])
+    .in("status", ["WAIT", "NEW", "READY", "PUBLISHED"])
     .order("population", { ascending: false })
     .limit(limit);
 
