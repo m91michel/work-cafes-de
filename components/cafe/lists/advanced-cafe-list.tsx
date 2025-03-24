@@ -20,7 +20,7 @@ export function AdvancedCafeList({ cafes, cities, className }: Props) {
   });
 
   return (
-    <section className={cn("max-w-7xl mx-auto px-4 py-12", className)}>
+    <section className={cn("max-w-7xl mx-auto md:px-4 py-12", className)}>
       <FiltersSection cities={cities} />
 
       {(view === 'list' || !view) ? (
