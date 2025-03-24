@@ -31,13 +31,13 @@ export const cafeSortingOptions = [
 
 export function FiltersSection({ cities }: Props) {
   return (
-    <div className="flex flex-wrap gap-4 justify-between mb-8">
+    <div className="flex flex-col md:flex-row flex-wrap gap-4 justify-between mb-8">
       <CityFilter cities={cities} />
       {/* Add more filters here */}
-      <div className="flex flex-row gap-2 items-center">
+      <div className="flex flex-row gap-4 items-center flex-wrap">
         {isDev && <ViewToggle />}
-        <PageSizeSelect options={[25, 50, 100]} defaultValue={25} />
-        <SortingOptions options={cafeSortingOptions} namespace="cafe" />
+        <PageSizeSelect options={[25, 50, 100]} defaultValue={25} className="w-full md:w-auto" />
+        <SortingOptions options={cafeSortingOptions} namespace="cafe" className="w-full md:w-auto" />
       </div>
     </div>
   );

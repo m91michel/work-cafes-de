@@ -28,7 +28,7 @@ export function BaseFilterSelect({
   paramKey,
   options,
   placeholder,
-  className = "w-48",
+  className = "",
   defaultValue,
   onValueChange,
 }: BaseFilterSelectProps) {
