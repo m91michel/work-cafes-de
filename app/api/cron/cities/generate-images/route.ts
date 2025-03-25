@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
     .from("cities")
     .select("name_de, name_en, slug, status")
     .is("preview_image", null)
-    .in("status", ["WAIT", "NEW", "READY", "PUBLISHED"])
+    .in("status", ["NEW", "READY", "PUBLISHED"])
     .order("population", { ascending: false })
     .limit(limit);
 
@@ -59,8 +59,7 @@ export async function GET(request: NextRequest) {
         const { error: updateError } = await supabase
           .from("cities")
           .update({
-            preview_image: bunnyUrl,
-            status: "READY",
+            preview_image: bunnyUrl
           })
           .eq("slug", city.slug);
 
