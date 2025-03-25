@@ -3,8 +3,8 @@ name: "[Cron] Google Indexing"
 # Documentation: https://github.com/robingenz/action-google-indexing
 
 on:
-  # schedule:
-  #   - cron: '7 0 * * *' # every day at 7am
+  schedule:
+    - cron: '0 7 * * 1' # Every monday at 7am
   workflow_dispatch:
     inputs:
       siteUrl:
