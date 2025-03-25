@@ -17,7 +17,8 @@
     "new_cafes_subtitle": "Wir fügen neue Cafés täglich hinzu. Schau dir die neuesten Cafés an!"
   },
   "cities": {
-    "title": "Finde ein Cafe zum Arbeiten in deiner Stadt",
+    "biggest_title": "Städte mit den meisten Cafés zum Arbeiten",
+    "latest_title": "Zuletzt hinzugefügte Städte",
     "buttonText": "Entdecke alle Städte"
   },
   "about": {

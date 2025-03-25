@@ -17,7 +17,8 @@
     "new_cafes_subtitle": "We add new cafes daily. Check out the latest places!"
   },
   "cities": {
-    "title": "Browse by City",
+    "biggest_title": "Cities with Most Cafés",
+    "latest_title": "Latest Added Cities",
     "buttonText": "View All Cities"
   },
   "about": {

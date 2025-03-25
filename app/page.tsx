@@ -11,7 +11,7 @@ import { getCountries } from "@/libs/supabase/countries";
 import { LinkSection } from "@/components/city/sections/link-section";
 import HomeHero from "@/components/general/sections/home-hero";
 import { FeaturedSection } from "@/components/city/sections/featured-section";
-import peerlist from "./peerlist-launched.svg"
+import peerlist from "./peerlist-launched.svg";
 import Image from "next/image";
 import { MLink } from "@/components/general/link";
 // export const revalidate = 5; // dev
@@ -27,6 +27,15 @@ export async function generateMetadata() {
 }
 
 export default async function Home() {
+  const { t } = await initTranslations(["home"]);
+  const citiesCount = await getCitiesCount();
+  const { data: newCafes, total: cafesCount } = await getCafes({
+    limit: 6,
+    offset: 0,
+    sortBy: "published_at",
+    sortOrder: "desc",
+  });
+
   const cafes = await getBestCafes({ limit: 6, offset: 0 });
   const biggestCities = await getCities({
     limit: 6,
@@ -35,21 +44,10 @@ export default async function Home() {
     sortOrder: "desc",
   });
 
-  return <HomeContent cafes={cafes} biggestCities={biggestCities} />;
-}
-
-interface HomeContentProps {
-  cafes: Cafe[];
-  biggestCities: City[];
-  latestCities?: City[];
-}
-async function HomeContent({ cafes, biggestCities }: HomeContentProps) {
-  const { t } = await initTranslations(["home"]);
-  const citiesCount = await getCitiesCount();
-  const { data: newCafes, total: cafesCount } = await getCafes({
+  const latestCities = await getCities({
     limit: 6,
     offset: 0,
-    sortBy: "published_at",
+    sortBy: "created_at",
     sortOrder: "desc",
   });
 
@@ -62,7 +60,7 @@ async function HomeContent({ cafes, biggestCities }: HomeContentProps) {
       <div className="container mx-auto flex gap-4 flex-wrap justify-center items-center py-12">
         <MLink href="https://fazier.com/launches/a-wifi-place" noFollow>
           <Image
-            src="https://fazier.com/api/v1/public/badges/embed_image.svg?launch_id=3483&badge_type=featured&theme=light"
+            src="https://fazier.com/api/v1/public/badges/embed_image.svg?launch_id=3483&badge_type=daily&theme=light"
             width={270}
             height={54}
             alt="Fazier badge"
@@ -71,7 +69,12 @@ async function HomeContent({ cafes, biggestCities }: HomeContentProps) {
         </MLink>
 
         <MLink href="https://peerlist.io/m4thias/project/a-wifi-place" noFollow>
-          <Image src={peerlist.src} alt="Peerlist badge" width={221} height={60} />
+          <Image
+            src={peerlist.src}
+            alt="Peerlist badge"
+            width={221}
+            height={60}
+          />
         </MLink>
       </div>
 
@@ -92,7 +95,15 @@ async function HomeContent({ cafes, biggestCities }: HomeContentProps) {
 
       <CityListSection
         cities={biggestCities}
-        title={t("cities.title")}
+        title={t("cities.biggest_title")}
+        showMoreButton={true}
+        buttonText={t("cities.buttonText")}
+        t={t}
+      />
+
+      <CityListSection
+        cities={latestCities}
+        title={t("cities.latest_title")}
         showMoreButton={true}
         buttonText={t("cities.buttonText")}
         t={t}
