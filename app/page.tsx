@@ -50,7 +50,7 @@ async function HomeContent({ cafes, biggestCities }: HomeContentProps) {
     limit: 6,
     offset: 0,
     sortBy: "published_at",
-    sortOrder: "asc",
+    sortOrder: "desc",
   });
 
   const activeCountries = await getCountries({ status: "ACTIVE" });

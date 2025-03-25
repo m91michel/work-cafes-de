@@ -6,35 +6,36 @@ import { processLinks } from "../../libs/openai/process-links";
 
 const migrationsActions: Command[] = [
   {
-    name: "Cafe: update status",
-    key: "update-status",
+    name: "Cafe: update published_at",
+    key: "update-published-at",
     action: async () => {
 
 
-      const { data: cafes, error } = await supabase
+      const { data: cafes, error, count } = await supabase
         .from("cafes")
-        .select("*")
+        .select("*", { count: "exact" })
         .eq("status", "PUBLISHED")
-        .gte("created_at", "2025-01-10")
+        .is("published_at", null)
 
       if (error) {
         console.error("Error fetching cafes:", error);
         return;
       }
 
-      console.log(`✅ count: ${cafes.length}`);
-
       for (const cafe of cafes) {
         const { error: updateError } = await supabase
           .from("cafes")
-          .update({ checked: "AUTOMATED" })
+          .update({ published_at: cafe.processed_at })
           .eq("id", cafe.id);
 
         if (updateError) {
           console.error("Error updating cafe:", updateError);
           continue;
         }
+        console.log(`✅ Cafe ${cafe.name} published_at updated`);
       }
+
+      console.log(`✅ ${count} cafes updated (${cafes.length} left)`);
     },
   },
   {
