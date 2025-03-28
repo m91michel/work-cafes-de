@@ -46,6 +46,10 @@ type ReturnType = {
 export async function generateCityDescription(city: City, lang: "de" | "en"): Promise<ReturnType | null> {
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY || '',
+    baseURL: "https://oai.helicone.ai/v1",
+    defaultHeaders: {
+      "Helicone-Auth": `Bearer ${process.env.HELICONE_API_KEY}`
+    }
   });
 
   const language = lang === "de" ? "German" : "English";

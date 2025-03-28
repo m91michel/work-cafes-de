@@ -41,6 +41,10 @@ type AIResponse = {
 export async function processLinks(cafe: Cafe): Promise<AIResponse | null> {
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY || '',
+    baseURL: "https://oai.helicone.ai/v1",
+    defaultHeaders: {
+      "Helicone-Auth": `Bearer ${process.env.HELICONE_API_KEY}`
+    }
   });
 
   console.log(`Processing links ${cafe.links_text}`);
