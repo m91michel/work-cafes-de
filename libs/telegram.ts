@@ -11,7 +11,7 @@ const chatId = process.env.TELEGRAM_CHAT_ID || '';
  * @returns {Promise<void>} - A promise that resolves when the message is successfully sent.
  * @note Logs an error to the console if the message fails to send.
  */
-export async function sendTelegramMessage(message: string, object?: any): Promise<void> {
+export async function sendMessage(message: string, object?: any): Promise<void> {
   // Construct the URL for the Telegram Bot API
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
