@@ -4,7 +4,7 @@ const { createClient } = require('@supabase/supabase-js');
 // docs: https://www.npmjs.com/package/next-sitemap
 
 const isGerman = process.env.NEXT_PUBLIC_LANGUAGE === "de";
-const fallbackUrl = isGerman ? "https://cafezumarbeiten.de" : "https://awifi.place";
+const fallbackUrl = isGerman ? "https://cafezumarbeiten.de" : "https://awifiplace.com";
 // const fallbackUrlEn = isGerman ? "https://awifi.place" : "https://cafezumarbeiten.de";
 const siteUrl = process.env.SITE_URL || fallbackUrl;
 

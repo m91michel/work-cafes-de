@@ -10,11 +10,11 @@ on:
       siteUrl:
         description: 'Site URL'
         required: false
-        default: 'awifi.place'
+        default: 'awifiplace.com'
 
 env:
   SITE_URL_DE: 'cafezumarbeiten.de'
-  SITE_URL_EN: 'awifi.place'
+  SITE_URL_EN: 'awifiplace.com'
   GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
 
 jobs:

@@ -2,16 +2,16 @@
 
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Check, Copy, Star } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Check, Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
+import { domainDe, domainEn } from "@/config/config";
 
 interface EmbedCodeProps {
   theme: "light" | "neutral" | "dark";
-  domain: "awifi.place" | "cafezumarbeiten.de";
+  domain: string;
   cafeName?: string;
 }
 
@@ -34,7 +34,7 @@ const getEmbedCode = ({ theme, domain, cafeName = "" }: EmbedCodeProps) => {
 export function FeaturedSection() {
   const { t } = useTranslation("featured");
   const [theme, setTheme] = useState<"light" | "neutral" | "dark">("light");
-  const [domain, setDomain] = useState<"awifi.place" | "cafezumarbeiten.de">("awifi.place");
+  const [domain, setDomain] = useState<string>(domainEn);
   const [cafeName, setCafeName] = useState("");
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
@@ -83,8 +83,8 @@ export function FeaturedSection() {
                     <label className="block text-sm font-medium mb-1">{t("domain")}</label>
                     <Tabs value={domain} onValueChange={(value) => setDomain(value as any)} className="w-full">
                       <TabsList className="grid grid-cols-2 w-full">
-                        <TabsTrigger value="awifi.place">awifi.place</TabsTrigger>
-                        <TabsTrigger value="cafezumarbeiten.de">cafezumarbeiten.de</TabsTrigger>
+                        <TabsTrigger value={domainEn}>{domainEn}</TabsTrigger>
+                        <TabsTrigger value={domainDe}>{domainDe}</TabsTrigger>
                       </TabsList>
                     </Tabs>
                   </div>

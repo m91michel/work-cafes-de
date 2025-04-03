@@ -1,11 +1,11 @@
 import { isGerman } from "@/libs/environment";
 
 export const domainDe = "cafezumarbeiten.de";
-export const domainEn = "awifi.place";
+export const domainEn = "awifiplace.com";
 export const domainName = isGerman ? domainDe : domainEn;
 export const alternateDomainName = isGerman ? domainEn : domainDe;
 export const baseUrl = `https://${domainName}`;
-export const appName = isGerman ? "Café zum Arbeiten" : "A Wifi.Place";
+export const appName = isGerman ? "Café zum Arbeiten" : "A Wifi Place";
 
 export const submitFormUrl = "https://tally.so/r/mB81VA";
 
