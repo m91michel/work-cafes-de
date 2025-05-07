@@ -13,7 +13,9 @@
     "email": "email dev --port 3031",
     "start": "next start",
     "lint": "next lint",
-    "types": "npx --yes supabase gen types typescript --project-id \"nkmwwlzfsdpqxnflygyr\" --schema cafeforwork > types_db.ts"
+    "types": "npx --yes supabase gen types typescript --project-id \"nkmwwlzfsdpqxnflygyr\" --schema cafeforwork > types_db.ts",
+    "worker": "ts-node scripts/worker.ts",
+    "worker:dev": "nodemon --exec ts-node scripts/worker.ts"
   },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.4.0",
