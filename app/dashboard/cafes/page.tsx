@@ -1,36 +1,28 @@
-import { getSEOTags } from "@/libs/seo";
-import { getAllCafes } from "@/libs/supabase/cafes";
-import { CafesTable } from "@/components/dashboard/cafes/cafes-table";
-import { createClient } from '@/libs/supabase/server';
-import { redirect } from 'next/navigation';
+import { QueueStatusCard } from "@/components/dashboard/queue-status";
+import { DashboardShell } from "@/components/dashboard/shell";
+import { DashboardHeader } from "@/components/dashboard/header";
+import { CafeTable } from "@/components/cafe/cafe-table";
+import supabase from "@/libs/supabase/supabaseClient";
 
-export const revalidate = 5;
-
-export const metadata = getSEOTags({
-  title: `Cafes Dashboard`,
-  description: "Manage cafes",
-  canonicalUrlRelative: "/dashboard/cafes",
-  robots: "noindex, nofollow",
-});
-
-export default async function CafesPage() {
-  // Check if user is authenticated
-  const supabase = await createClient();
-  const { data: { session } } = await supabase.auth.getSession();
-  
-  if (!session) {
-    redirect('/login');
-  }
-  
-  const cafes = await getAllCafes({ limit: 100, offset: 0 });
+export default async function DashboardCafesPage() {
+  const { data: cafes } = await supabase
+    .from("cafes")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(100);
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-3xl font-bold">Cafes</h1>
+    <DashboardShell>
+      <DashboardHeader
+        heading="Cafes"
+        text="Manage your cafes and their status."
+      />
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <QueueStatusCard />
       </div>
-
-      <CafesTable data={cafes} />
-    </div>
+      <div>
+        <CafeTable data={cafes || []} />
+      </div>
+    </DashboardShell>
   );
-} 
+}

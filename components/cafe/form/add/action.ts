@@ -5,6 +5,7 @@ import { generateSlug } from "@/libs/utils";
 import { fromZodError } from "zod-validation-error";
 import { suggestCafeSchema } from "./schema";
 import { sendMessage } from "@/libs/telegram";
+import { addProcessNewCafeJob } from "@/libs/queue/queues";
 
 export async function suggestCityAction(formData: FormData) {
   try {
@@ -61,7 +62,8 @@ export async function suggestCityAction(formData: FormData) {
     });
     const citySlug = city?.slug;
 
-    const { error } = await supabase
+    // Insert the cafe into the database
+    const { data: cafeData, error } = await supabase
       .from("cafes")
       .insert({
         name: data.name || "",
@@ -72,7 +74,7 @@ export async function suggestCityAction(formData: FormData) {
         city_slug: citySlug,
         lat_long: `${data.latitude},${data.longitude}`,
         slug: slug,
-        status: "UNKNOWN",
+        status: "PENDING", // Changed from UNKNOWN to PENDING
       })
       .select();
 
@@ -94,9 +96,21 @@ export async function suggestCityAction(formData: FormData) {
       };
     }
 
-    const message = `✅ Ein Nutzer hat ${data.name} in ${data.countryCode} hinzugefügt`;
-    await sendMessage(message);
-    console.log(message);
+    // Add the cafe to the processing queue
+    if (cafeData && cafeData.length > 0) {
+      const cafe = cafeData[0];
+      await addProcessNewCafeJob({
+        cafeId: cafe.id,
+        slug: cafe.slug,
+        name: cafe.name,
+        citySlug: cafe.city_slug,
+        placeId: cafe.google_place_id,
+      });
+      
+      await sendMessage(`✅ Ein Nutzer hat ${data.name} in ${data.countryCode} hinzugefügt. Cafe wurde zur Verarbeitungsqueue hinzugefügt.`);
+    } else {
+      await sendMessage(`✅ Ein Nutzer hat ${data.name} in ${data.countryCode} hinzugefügt`);
+    }
 
     return {
       success: true,
