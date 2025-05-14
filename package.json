@@ -56,7 +56,7 @@
     "@types/leaflet": "^1.9.16",
     "@types/lodash": "^4.17.13",
     "@types/mapbox-gl": "^3.4.1",
-    "@types/node": "22.14.1",
+    "@types/node": "22.15.3",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
     "@types/react-map-gl": "^6.1.7",
