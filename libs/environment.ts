@@ -7,3 +7,4 @@ export const isGerman = language === "de";
 export const isEnglish = language === "en";
 
 export const localhost = "http://localhost:3010";
+export const isVercelProduction = process.env.VERCEL_ENV === "production";

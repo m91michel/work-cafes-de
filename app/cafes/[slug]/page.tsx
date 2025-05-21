@@ -7,11 +7,16 @@ import {
 import { notFound } from "next/navigation";
 import { getSEOTags } from "@/libs/seo";
 import config from "@/config/config";
-import { getAllPublishedCafes, getCafeBySlug, getCafes, getCafesByCity } from "@/libs/supabase/cafes";
+import {
+  getAllPublishedCafes,
+  getCafeBySlug,
+  getCafes,
+  getCafesByCity,
+} from "@/libs/supabase/cafes";
 import { CafeCard } from "@/components/cafe/cafe-card";
 import { CafeRatingCard } from "@/components/cafe/sections/rating";
 import CafeBreadcrumb from "@/components/cafe/cafe-breadcrumb";
-import { isDev } from "@/libs/environment";
+import { isDev, isVercelProduction } from "@/libs/environment";
 import { CafeReviews } from "@/components/cafe/cafe-reviews";
 import { FAQSection } from "@/components/general/sections/faq";
 import initTranslations from "@/libs/i18n/config";
@@ -47,35 +52,38 @@ export async function generateMetadata({ params }: Props) {
   return getSEOTags({
     title: `${cafe.name} | ${config.appName}`,
     description: t("meta.slug.description", {
-      name: cafe.name || '',
-      city: cafe.city || '',
+      name: cafe.name || "",
+      city: cafe.city || "",
     }),
     canonicalUrlRelative: Paths.cafe(slug),
     openGraph: {
-      images: [{
-        url: ogImage,
-        width: 1200,
-        height: 630,
-        alt: cafe.name || ''
-      }],
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: cafe.name || "",
+        },
+      ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       images: [ogImage],
-    }
+    },
   });
 }
 
 export const generateStaticParams = async () => {
-  if (isDev) {
-    // Just generate 10 cafes for dev
-    const cafes = await getCafes({ limit: 10, offset: 0 });
-    return cafes.data.map((cafe) => ({
+  if (isVercelProduction) {
+    // Generate all cafes for production
+    const cafes = await getAllPublishedCafes();
+    return cafes.map((cafe) => ({
       slug: cafe.slug,
     }));
   }
-  const cafes = await getAllPublishedCafes();
-  return cafes.map((cafe) => ({
+  // Just generate 10 cafes for dev
+  const cafes = await getCafes({ limit: 10, offset: 0 });
+  return cafes.data.map((cafe) => ({
     slug: cafe.slug,
   }));
 };
