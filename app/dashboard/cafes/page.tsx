@@ -1,5 +1,5 @@
 import { getSEOTags } from "@/libs/seo";
-import { getAllCafes } from "@/libs/supabase/cafes";
+import { getCafesWithUnpublished } from "@/libs/supabase/cafes";
 import { CafesTable } from "@/components/dashboard/cafes/cafes-table";
 import { createClient } from '@/libs/supabase/server';
 import { redirect } from 'next/navigation';
@@ -22,7 +22,7 @@ export default async function CafesPage() {
     redirect('/login');
   }
   
-  const cafes = await getAllCafes({ limit: 100, offset: 0 });
+  const cafes = await getCafesWithUnpublished({ limit: 100, offset: 0 });
 
   return (
     <div className="space-y-6">

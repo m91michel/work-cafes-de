@@ -1,4 +1,5 @@
-import { Cafe, CafeStatus } from "../types";
+import { Cafe } from "../types";
+import { fetchAllRecords } from "../utils";
 import supabase from "./supabaseClient";
 
 type BaseFilters = {
@@ -58,7 +59,7 @@ export async function getBestCafes(
   return data as Cafe[];
 }
 
-export async function getAllCafes(
+export async function getCafesWithUnpublished(
   { limit = 100, offset = 0 }: BaseFilters = { limit: 100, offset: 0 }
 ): Promise<Cafe[]> {
   const { data, error, count } = await supabase
@@ -150,3 +151,27 @@ export async function getCafesCount({
 
   return count;
 }
+
+// Just return cafes without count -> used for getAllPublishedCafes
+export async function getPublishedCafes(
+  {
+    limit = 100,
+    offset = 0,
+  }: BaseFilters = { limit: 100, offset: 0 }
+): Promise<Cafe[]> {
+  let query = supabase
+    .from("cafes")
+    .select("*", { count: "exact" })
+    .eq("status", "PUBLISHED")
+    .order("created_at", { ascending: false });
+
+  const { data, error } = await query.range(offset, offset + limit - 1);
+
+  if (error) {
+    console.error("Error fetching data:", error);
+    return []
+  }
+
+  return data as Cafe[];
+}
+export const getAllPublishedCafes = async (props: BaseFilters = {}) => await fetchAllRecords<Cafe, BaseFilters>(getPublishedCafes, props);

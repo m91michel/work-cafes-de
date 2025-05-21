@@ -7,7 +7,7 @@ import {
 import { notFound } from "next/navigation";
 import { getSEOTags } from "@/libs/seo";
 import config from "@/config/config";
-import { getCafeBySlug, getCafesByCity } from "@/libs/supabase/cafes";
+import { getAllPublishedCafes, getCafeBySlug, getCafes, getCafesByCity } from "@/libs/supabase/cafes";
 import { CafeCard } from "@/components/cafe/cafe-card";
 import { CafeRatingCard } from "@/components/cafe/sections/rating";
 import CafeBreadcrumb from "@/components/cafe/cafe-breadcrumb";
@@ -65,6 +65,20 @@ export async function generateMetadata({ params }: Props) {
     }
   });
 }
+
+export const generateStaticParams = async () => {
+  if (isDev) {
+    // Just generate 10 cafes for dev
+    const cafes = await getCafes({ limit: 10, offset: 0 });
+    return cafes.data.map((cafe) => ({
+      slug: cafe.slug,
+    }));
+  }
+  const cafes = await getAllPublishedCafes();
+  return cafes.map((cafe) => ({
+    slug: cafe.slug,
+  }));
+};
 
 export default async function CafePage({ params }: Props) {
   const { t } = await initTranslations(["cafe"]);
