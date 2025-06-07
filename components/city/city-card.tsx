@@ -1,3 +1,5 @@
+'use client'
+
 import { City } from "@/libs/types";
 import { MapPin } from "lucide-react";
 import Link from "next/link";
@@ -7,12 +9,18 @@ import { DefaultCafeImage } from "../cafe/Image";
 import { Badge } from "../ui/badge";
 import { isGerman } from "@/libs/environment";
 import { countryFlag, getCountryByName } from "@/config/countires";
+import { usePathname, useRouter } from "next/navigation";
+import Paths from "@/libs/paths";
 
 type Props = {
   city: City;
 };
 
 export function CityCard({ city }: Props) {
+  const pathname = usePathname();
+
+  const isStudyCity = pathname.includes(Paths.bestStudy);
+  const url = isStudyCity ? Paths.studyCity(city.slug) : Paths.city(city.slug);
   const name = isGerman ? city.name_de : city.name_en;
   const description = isGerman
     ? city.description_short_de
@@ -23,7 +31,7 @@ export function CityCard({ city }: Props) {
   const country = flag ? `${flag} ${countryName}` : countryName;
 
   return (
-    <Link href={`/cities/${city.slug}`} className="block">
+    <Link href={url} className="block">
       <div className="relative overflow-hidden rounded-lg aspect-[4/3] group">
         {city.preview_image && (
           <Image

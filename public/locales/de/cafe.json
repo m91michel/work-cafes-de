@@ -127,6 +127,14 @@
     "title": "Standort",
     "button_title": "Auf Google Maps anzeigen"
   },
+  "faq": {
+    "title": "Häufig gestellte <highlight>Fragen</highlight>",
+    "description": "Hier findest du Antworten auf häufig gestellte Fragen zu unseren Café-Empfehlungen und Auswahlprozess.",
+    "goal-of-report.question": "Was ist das Ziel des Meldens eines Cafés?",
+    "goal-of-report.answer": "Das Ziel des Meldens eines Cafés ist es uns zu helfen, die Qualität unserer Café-Empfehlungen zu verbessern. Wenn du bemerkst, dass sich ein auf unserer Website aufgelistetes Café verändert hat oder es nicht mehr unseren Arbeits- und Laptop-freundlichen Standards entspricht, kannst du unser Feedback-Formular nutzen. Wir werden uns darum kümmern und die Informationen entsprechend aktualisieren.",
+    "cases-when-report.question": "Wann sollte ich ein Café melden?",
+    "cases-when-report.answer": "Du kannst ein Café melden, wenn es nicht arbeits- und laptopfreundlich ist und unseren Kriterien nicht entspricht. Oder wenn du der Eigentümer des Cafés bist und es von unserer Website entfernen möchtest."
+  },
   "meta": {
     "title": "Cafés zum Arbeiten",
     "slug": {

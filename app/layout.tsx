@@ -12,7 +12,7 @@ import config from "@/config/config";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const namespaces = ["common", "cafe", "city", "home"];
+const namespaces = ["common", "cafe", "city", "home", "study"];
 
 export const metadata = getSEOTags({
   title: `Cafés zum Arbeiten`,

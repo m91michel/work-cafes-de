@@ -13,6 +13,7 @@ const currentYear = new Date().getFullYear();
 const resources = [
   { key: "all-cafes", href: Paths.cafes },
   { key: "all-cities", href: Paths.cities },
+  { key: "study-cities", href: Paths.bestStudy },
 ];
 
 const aboutLinks = [

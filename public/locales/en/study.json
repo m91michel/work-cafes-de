@@ -1,0 +1,160 @@
+{
+  "index": {
+    "title": "Find The Best Cafes For <highlight>Studying</highlight>",
+    "description": "Discover quiet, comfortable cafes perfect for studying, reading, and focused work. All locations verified for student-friendly atmosphere and amenities.",
+    "all_cities_title": "Study-Friendly Cafes In All Cities"
+  },
+  "hero": {
+    "title": "Perfect Study Spots in <highlight>{{name}}</highlight>",
+    "places_found": "{{count}} Study Spots Found",
+    "places_found_one": "{{count}} Study Spot Found",
+    "subtitle": "Discover {{name}}'s quietest cafes and coffee shops perfect for studying, reading, and academic work",
+    "description": "Looking for the perfect study environment in {{country}}? We've curated {{name}}'s most student-friendly cafes offering quiet atmosphere, comfortable seating, reliable WiFi, and the ideal ambiance for focused academic work and exam preparation."
+  },
+  "cafe_list": {
+    "title": "{{count}} Study-Friendly Cafés in {{name}}",
+    "title_one": "{{count}} Study-Friendly Café in {{name}}",
+    "description": "Carefully selected for quiet atmosphere and student amenities: All locations offer WiFi, comfortable seating, and study-friendly environment"
+  },
+  "more_cities": {
+    "title": "Find Study-Friendly Cafes in Other Cities in {{country}}",
+    "button_text": "Check All Study Cities",
+    "suggest_title": "Do You Miss A City?",
+    "suggest_description": "Then suggest it to us, so we can prioritize it for student-friendly locations.",
+    "suggest_button": "Suggest study city"
+  },
+  "map": {
+    "title": "Study Cafe Locations Map in {{name}}"
+  },
+  "about": {
+    "title": "What Makes {{name}} Perfect for Studying?",
+    "about_title": "What makes {{name}} special for students?",
+    "study_culture_title": "{{name}}'s student-friendly cafe culture",
+    "study_culture_description": "{{name}} is a student's paradise with cafes like {{cafeName1}} and {{cafeName2}} offering the perfect blend of quiet atmosphere and focused work environment. Popular study spots like {{cafeName3}} and {{cafeName4}} truly understand student needs: extended opening hours, comfortable seating, and just the right noise level create ideal conditions for productive studying. The city has developed a distinctive cafe culture that supports academic work - with dedicated study areas, power outlets at every seat, and staff who understand that great ideas take time.",
+    "wifi_title": "Digital amenities for students",
+    "wifi_description": "All recommended cafes feature fast, free WiFi - perfect for online research, e-learning platforms, and writing assignments. Many locations also offer printing services and special quiet zones so you can fully focus on your studies.",
+    "etiquette_title": "How to behave properly in study cafes",
+    "etiquette_items": [
+      "<strong>Keep it quiet</strong> - avoid loud conversations, especially during peak study hours",
+      "<strong>Headphones are mandatory</strong> for videos, music, or online lectures",
+      "<strong>Support the cafe</strong> - order something every 2-3 hours to 'rent' your spot",
+      "<strong>Stay organized</strong> - use only the space you need and clean up after yourself",
+      "<strong>Mind the timing</strong> - during busy hours, students should make room for paying customers"
+    ],
+    "report_cafe_title": "Report a problematic cafe",
+    "report_cafe_description": "Been to a cafe that turned out unsuitable for studying? Help fellow students by reporting cafes that:",
+    "report_cafe_reasons": [
+      "Have become too noisy, making concentrated work impossible",
+      "No longer welcome students or have introduced time limits",
+      "Have removed their study-friendly amenities (WiFi, outlets)"
+    ],
+    "suggest_cafe_title": "Share your study cafe secret",
+    "suggest_cafe_description": "Know a fantastic study cafe in {{name}} that's not on our list yet? Share your secret spot and help fellow students! We're looking for cafes with:",
+    "suggest_cafe_requirements": [
+      "Quiet atmosphere that enables concentrated work",
+      "Comfortable seating for multi-hour study sessions",
+      "Stable WiFi and plenty of power outlets",
+      "Student-friendly policies (no time limits, fair prices)"
+    ],
+    "suggest_cafe_button": "Suggest a Study Cafe"
+  },
+  "details": {
+    "title": "About {{name}} for Studying",
+    "fallback_name": "This Study Cafe",
+    "about": {
+      "title": "Study Environment",
+      "no_content": "No information about the study environment for this cafe."
+    },
+    "food": {
+      "title": "Food & Study Snacks",
+      "no_content": "No information about study-friendly food options for this cafe."
+    },
+    "drinks": {
+      "title": "Coffee & Study Beverages",
+      "no_content": "No information about beverages suitable for long study sessions."
+    },
+    "study_friendly": {
+      "title": "Study-Friendly Features",
+      "no_content": "No information about study-specific amenities for this cafe."
+    },
+    "hours": {
+      "title": "Study Hours",
+      "no_content": "No information about study-friendly hours for this cafe."
+    },
+    "noise_level": {
+      "label": "Noise Level",
+      "very-quiet": "Very Quiet",
+      "quiet": "Quiet", 
+      "moderate": "Moderate",
+      "noisy": "Too Noisy",
+      "unknown": "Unknown"
+    },
+    "study_amenities": "Study Amenities",
+    "power_outlets": "Power Outlets Available",
+    "quiet_zones": "Designated Quiet Areas",
+    "long_stay_policy": "Extended Stay Welcome"
+  },
+  "more_cafes": {
+    "title": "More Study Cafés in {{city}}",
+    "all_cities": "All Study Cities"
+  },
+  "filters": {
+    "all": "All Study Cities",
+    "select_city": "Select study city",
+    "sorting": {
+      "rating_desc": "Best for Studying (↓)",
+      "rating_asc": "Best for Studying (↑)",
+      "published_at_desc": "Recently Added (↓)",
+      "published_at_asc": "Recently Added (↑)",
+      "noise_level_asc": "Quietest First",
+      "noise_level_desc": "Liveliest First"
+    }
+  },
+  "meta": {
+    "index": {
+      "title": "Best Study Cafes - Quiet Coffee Shops for Students",
+      "description": "Find the perfect quiet cafe for studying. Discover our curated list of student-friendly cafes with WiFi, comfortable seating, and peaceful atmosphere for focused academic work."
+    },
+    "show": {
+      "title": "{{count}} Best Study Cafes in {{name}} (2025)",
+      "title_one": "Best Study Cafe in {{name}} (2025)",
+      "your_city": "your city",
+      "description": "Discover {{name}}'s top-rated cafes for studying and academic work. All locations offer quiet atmosphere, WiFi, and are verified as student-friendly by fellow academics."
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked <highlight>Questions</highlight> About Study Cafes",
+    "description": "Everything you need to know about studying in cafes - from choosing the right spot to finding the perfect study hours.",
+    "what-makes-study-friendly.question": "What makes a cafe the perfect study spot?",
+    "what-makes-study-friendly.answer": "An ideal study cafe offers a quiet atmosphere without distracting noise, comfortable seating for hours of work, fast WiFi for online research, and plenty of power outlets for your devices. It's also important that students are genuinely welcome and won't be asked to leave after just one hour.",
+    "how-long-can-stay.question": "How long am I allowed to study in a cafe?",
+    "how-long-can-stay.answer": "In most student-friendly cafes, you can stay for several hours, especially during off-peak times. A good rule of thumb: order something new every 2-3 hours and be especially mindful during lunch hours or weekends when the cafe gets busy.",
+    "best-study-times.question": "When's the best time to study in cafes?",
+    "best-study-times.answer": "It's usually quietest in the morning (10 AM - 12 PM) and early afternoon (2 PM - 5 PM). Avoid lunch rush (12 PM - 2 PM) and weekend mornings - that's when it gets loud and crowded. Evenings after 7 PM usually quiet down again."
+  },
+  "cities_index": {
+    "title": "Best Study Cafes <highlight>Worldwide</highlight>",
+    "description": "Discover quiet, student-friendly cafes perfect for studying in cities around the world. Find your ideal study spot with reliable WiFi, comfortable seating, and peaceful atmosphere.",
+    "cities_count": "{{count}} Cities Available",
+    "city": "City",
+    "cities": "Cities", 
+    "cafe": "Cafe",
+    "cafes": "Cafes",
+    "city_description": "Find the best study cafes in {{city}}",
+    "seo": {
+      "title": "Why Choose Study-Friendly Cafes?",
+      "why_study_cafes": {
+        "title": "Perfect Study Environment",
+        "description": "Study cafes offer the ideal balance of ambient noise, comfortable seating, and academic atmosphere. Unlike libraries, they provide the flexibility of longer hours, food and beverages, and a more relaxed environment that many students find conducive to productivity and focus."
+      },
+      "global_coverage": {
+        "title": "Global Network of Study Spots",
+        "description": "Our curated list spans {{count}} countries, ensuring you can find quality study environments whether you're a local student, digital nomad, or traveling academic. Each location is verified for student-friendly policies and study amenities."
+      }
+    },
+    "meta": {
+      "title": "Best Study Cafes Worldwide - Student-Friendly Coffee Shops",
+      "description": "Find the perfect study cafe in any city. Browse our global directory of quiet, student-friendly cafes with WiFi, comfortable seating, and study-conducive atmosphere."
+    }
+  }
+} 

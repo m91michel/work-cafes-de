@@ -17,6 +17,7 @@ class Paths {
   static suggestCity = "/cities/suggest";
   static roadmap = "/roadmap";
   static submitCafe = "/cafes/submit";
+  static bestStudy = "/best-study-places";
 
   // Localized paths
   static about = Paths.getPath({
@@ -63,6 +64,13 @@ class Paths {
 
   static cafeReport(slug?: string | null) {
     return `/cafes/report?slug=${slug}`;
+  }
+
+  static studyCity(slug?: string | null) {
+    if (!slug) {
+      return Paths.bestStudy;
+    }
+    return `${Paths.bestStudy}/in/${slug}`;
   }
 }
 

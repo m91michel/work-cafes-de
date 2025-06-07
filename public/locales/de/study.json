@@ -1,0 +1,160 @@
+{
+  "index": {
+    "title": "Finde Die Besten Cafés Zum <highlight>Lernen</highlight>",
+    "description": "Entdecke ruhige, gemütliche Cafés perfekt zum Lernen, Lesen und konzentrierten Arbeiten. Alle Standorte sind für studentenfreundliche Atmosphäre und Ausstattung verifiziert.",
+    "all_cities_title": "Lernfreundliche Cafés In Allen Städten"
+  },
+  "hero": {
+    "title": "Die besten Cafés zum Lernen in <highlight>{{name}}</highlight>",
+    "places_found": "{{count}} Cafés Gefunden",
+    "places_found_one": "{{count}} Café Gefunden",
+    "subtitle": "Entdecke {{name}}s ruhigste Cafés und Kaffeehäuser perfekt zum Lernen, Lesen und akademischen Arbeiten",
+    "description": "Suchst du die perfekte Lernumgebung in {{country}}? Wir haben {{name}}s studentenfreundlichste Cafés kuratiert, die ruhige Atmosphäre, bequeme Sitzplätze, zuverlässiges WLAN und das ideale Ambiente für konzentrierte akademische Arbeit und Prüfungsvorbereitung bieten."
+  },
+  "cafe_list": {
+    "title": "{{count}} Lernfreundliche Cafés in {{name}}",
+    "title_one": "{{count}} Lernfreundliches Café in {{name}}",
+    "description": "Sorgfältig ausgewählt für ruhige Atmosphäre und Studenten-Ausstattung: Alle Standorte bieten WLAN, bequeme Sitzplätze und lernfreundliche Umgebung"
+  },
+  "more_cities": {
+    "title": "Finde Lernfreundliche Cafés in Anderen Städten in {{country}}",
+    "button_text": "Alle Lern-Städte Anzeigen",
+    "suggest_title": "Vermisst Du Eine Stadt?",
+    "suggest_description": "Dann schlage sie uns vor, damit wir sie für studentenfreundliche Standorte priorisieren können.",
+    "suggest_button": "Lern-Stadt vorschlagen"
+  },
+  "map": {
+    "title": "Lern-Café Standorte Karte in {{name}}"
+  },
+  "about": {
+    "title": "Was Macht {{name}} Perfekt Zum Lernen?",
+    "about_title": "Was zeichnet {{name}} für Studenten aus?",
+    "study_culture_title": "{{name}}s studentenfreundliche Café-Kultur",
+    "study_culture_description": "{{name}} ist ein Paradies für Studenten und Akademiker. Cafés wie {{cafeName1}} und {{cafeName2}} bieten die perfekte Mischung aus ruhiger Atmosphäre und konzentrierter Arbeitsumgebung. Beliebte Lernplätze wie {{cafeName3}} und {{cafeName4}} verstehen die Bedürfnisse von Studenten: erweiterte Öffnungszeiten, bequeme Sitzplätze und ein angenehmer Geräuschpegel schaffen ideale Bedingungen für produktives Lernen. Die Stadt hat eine ausgeprägte Café-Kultur entwickelt, die akademische Arbeit unterstützt - mit speziellen Lernbereichen, Steckdosen an jedem Platz und Personal, das versteht, dass gute Ideen Zeit brauchen.",
+    "wifi_title": "Digitale Ausstattung für Studenten",
+    "wifi_description": "Alle empfohlenen Cafés verfügen über schnelles, kostenloses WLAN - perfekt für Online-Recherchen, E-Learning-Plattformen und das Verfassen von Hausarbeiten. Viele Standorte bieten zusätzlich Druckservice und spezielle Ruhezonen, damit du dich voll auf dein Studium konzentrieren kannst.",
+    "etiquette_title": "So verhältst du dich richtig im Lern-Café",
+    "etiquette_items": [
+      "<strong>Halte die Ruhe</strong> - vermeide laute Gespräche, besonders zu Stoßzeiten des Lernens",
+      "<strong>Kopfhörer sind Pflicht</strong> für Videos, Musik oder Online-Vorlesungen",
+      "<strong>Unterstütze das Café</strong> - bestelle alle 2-3 Stunden etwas, um deinen Platz zu 'mieten'",
+      "<strong>Ordnung halten</strong> - nutze nur den Platz, den du brauchst, und räume nach dir auf",
+      "<strong>Timing beachten</strong> - in den Stoßzeiten sollten Studenten Platz für zahlende Gäste machen"
+    ],
+    "report_cafe_title": "Problematisches Café melden",
+    "report_cafe_description": "Du warst in einem Café, das sich als ungeeignet zum Lernen herausgestellt hat? Hilf anderen Studenten und melde uns Cafés, die:",
+    "report_cafe_reasons": [
+      "Zu laut geworden sind und konzentriertes Arbeiten unmöglich machen",
+      "Studenten nicht mehr willkommen heißen oder Zeitlimits eingeführt haben",
+      "Ihre lernfreundliche Ausstattung (WLAN, Steckdosen) entfernt haben"
+    ],
+    "suggest_cafe_title": "Geheimtipp für Lern-Café teilen",
+    "suggest_cafe_description": "Du kennst ein fantastisches Café zum Lernen in {{name}}, das noch nicht auf unserer Liste steht? Teile deinen Geheimtipp und hilf anderen Studenten! Wir suchen Cafés mit:",
+    "suggest_cafe_requirements": [
+      "Ruhiger Atmosphäre, die konzentriertes Arbeiten ermöglicht",
+      "Bequemen Sitzplätzen für mehrstündige Lernsessions",
+      "Stabilem WLAN und ausreichend Steckdosen",
+      "Studenten-freundlicher Politik (keine Zeitlimits, faire Preise)"
+    ],
+    "suggest_cafe_button": "Lern-Café Vorschlagen"
+  },
+  "details": {
+    "title": "Über {{name}} Zum Lernen",
+    "fallback_name": "Dieses Lern-Café",
+    "about": {
+      "title": "Lernumgebung",
+      "no_content": "Keine Informationen über die Lernumgebung für dieses Café."
+    },
+    "food": {
+      "title": "Essen & Lern-Snacks",
+      "no_content": "Keine Informationen über lernfreundliche Essensoptionen für dieses Café."
+    },
+    "drinks": {
+      "title": "Kaffee & Lern-Getränke",
+      "no_content": "Keine Informationen über Getränke geeignet für lange Lernsitzungen."
+    },
+    "study_friendly": {
+      "title": "Lernfreundliche Eigenschaften",
+      "no_content": "Keine Informationen über lernspezifische Ausstattung für dieses Café."
+    },
+    "hours": {
+      "title": "Lernzeiten",
+      "no_content": "Keine Informationen über lernfreundliche Zeiten für dieses Café."
+    },
+    "noise_level": {
+      "label": "Geräuschpegel",
+      "very-quiet": "Sehr Ruhig",
+      "quiet": "Ruhig", 
+      "moderate": "Mäßig",
+      "noisy": "Zu Laut",
+      "unknown": "Unbekannt"
+    },
+    "study_amenities": "Lern-Ausstattung",
+    "power_outlets": "Steckdosen Verfügbar",
+    "quiet_zones": "Ausgewiesene Ruhebereiche",
+    "long_stay_policy": "Längere Aufenthalte Willkommen"
+  },
+  "more_cafes": {
+    "title": "Mehr Lern-Cafés in {{city}}",
+    "all_cities": "Alle Lern-Städte"
+  },
+  "filters": {
+    "all": "Alle Lern-Städte",
+    "select_city": "Lern-Stadt auswählen",
+    "sorting": {
+      "rating_desc": "Beste Zum Lernen (↓)",
+      "rating_asc": "Beste Zum Lernen (↑)",
+      "published_at_desc": "Kürzlich Hinzugefügt (↓)",
+      "published_at_asc": "Kürzlich Hinzugefügt (↑)",
+      "noise_level_asc": "Ruhigste Zuerst",
+      "noise_level_desc": "Lebhafteste Zuerst"
+    }
+  },
+  "meta": {
+    "index": {
+      "title": "Beste Lern-Cafés - Ruhige Kaffeehäuser für Studenten",
+      "description": "Finde das perfekte ruhige Café zum Lernen. Entdecke unsere kuratierte Liste studentenfreundlicher Cafés mit WLAN, bequemen Sitzplätzen und friedlicher Atmosphäre für konzentrierte akademische Arbeit."
+    },
+    "show": {
+      "title": "{{count}} Beste Lern-Cafés in {{name}} (2025)",
+      "title_one": "Bestes Lern-Café in {{name}} (2025)",
+      "your_city": "deiner Stadt",
+      "description": "Entdecke {{name}}s bestbewertete Cafés zum Lernen und für akademische Arbeit. Alle Standorte bieten ruhige Atmosphäre, WLAN und sind als studentenfreundlich von anderen Akademikern verifiziert."
+    }
+  },
+  "faq": {
+    "title": "Häufig Gestellte <highlight>Fragen</highlight> Über Lern-Cafés",
+    "description": "Alles was du über das Lernen in Cafés wissen musst - von der Auswahl des richtigen Platzes bis zur perfekten Lernzeit.",
+    "what-makes-study-friendly.question": "Was macht ein Café zum perfekten Lernort?",
+    "what-makes-study-friendly.answer": "Ein ideales Lern-Café bietet eine ruhige Atmosphäre ohne störende Geräusche, bequeme Sitzplätze für stundenlanges Arbeiten, schnelles WLAN für Online-Recherchen und genügend Steckdosen für deine Geräte. Wichtig ist auch, dass Studenten willkommen sind und nicht nach einer Stunde 'rausgeschmissen' werden.",
+    "how-long-can-stay.question": "Wie lange darf ich im Café lernen?",
+    "how-long-can-stay.answer": "In den meisten studentenfreundlichen Cafés kannst du mehrere Stunden bleiben, vor allem außerhalb der Stoßzeiten. Als Faustregel gilt: Bestelle alle 2-3 Stunden etwas Neues und sei besonders aufmerksam zur Mittagszeit oder am Wochenende, wenn das Café voll wird.",
+    "best-study-times.question": "Wann ist die beste Zeit zum Lernen im Café?",
+    "best-study-times.answer": "Am ruhigsten ist es meist vormittags (10-12 Uhr) und am frühen Nachmittag (14-17 Uhr). Vermeide die Mittagspause (12-14 Uhr) und Wochenendvormittage - da wird's oft laut und voll. Abends ab 19 Uhr wird es meist wieder ruhiger."
+  },
+  "cities_index": {
+    "title": "Beste Lern-Cafés <highlight>Weltweit</highlight>",
+    "description": "Entdecke ruhige, studentenfreundliche Cafés perfekt zum Lernen in Städten auf der ganzen Welt. Finde deinen idealen Lernplatz mit zuverlässigem WLAN, bequemen Sitzplätzen und friedlicher Atmosphäre.",
+    "cities_count": "{{count}} Städte Verfügbar",
+    "city": "Stadt",
+    "cities": "Städte",
+    "cafe": "Café", 
+    "cafes": "Cafés",
+    "city_description": "Finde die besten Lern-Cafés in {{city}}",
+    "seo": {
+      "title": "Warum Lernfreundliche Cafés Wählen?",
+      "why_study_cafes": {
+        "title": "Perfekte Lernumgebung",
+        "description": "Lern-Cafés bieten die ideale Balance aus Hintergrundgeräuschen, bequemen Sitzplätzen und akademischer Atmosphäre. Im Gegensatz zu Bibliotheken bieten sie die Flexibilität längerer Öffnungszeiten, Essen und Getränke und eine entspanntere Umgebung, die viele Studenten als förderlich für Produktivität und Konzentration empfinden."
+      },
+      "global_coverage": {
+        "title": "Globales Netzwerk von Lernplätzen",
+        "description": "Unsere kuratierte Liste umfasst {{count}} Länder und stellt sicher, dass du qualitativ hochwertige Lernumgebungen findest, egal ob du ein lokaler Student, digitaler Nomade oder reisender Akademiker bist. Jeder Standort ist für studentenfreundliche Richtlinien und Lern-Ausstattung verifiziert."
+      }
+    },
+    "meta": {
+      "title": "Beste Lern-Cafés Weltweit - Studentenfreundliche Kaffeehäuser",
+      "description": "Finde das perfekte Lern-Café in jeder Stadt. Durchsuche unser globales Verzeichnis ruhiger, studentenfreundlicher Cafés mit WLAN, bequemen Sitzplätzen und lernförderlicher Atmosphäre."
+    }
+  }
+} 
