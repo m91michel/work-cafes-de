@@ -11,7 +11,7 @@ import { uniq } from "lodash";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-export const maxDuration = 60;
+export const maxDuration = 120;
 
 const LIMIT = 1;
 
