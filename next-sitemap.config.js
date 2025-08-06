@@ -39,11 +39,17 @@ module.exports = {
     "/dashboard/*",
     ...excludeLocaleSpecificRoutes,
   ],
-  // robotsTxtOptions: {
-  //   additionalSitemaps: [
-  //     `${siteUrl}/server-sitemap.xml`, // generated sitemap for all videos
-  //   ],
-  // },
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: '*',
+        disallow: ['/cafes/report'],
+      },
+    ],
+    // additionalSitemaps: [
+    //   `${siteUrl}/server-sitemap.xml`, // generated sitemap for all videos
+    // ],
+  },
   additionalPaths: async (config) => {
     const paths = [];
     const pageSize = 1000;
