@@ -62,8 +62,15 @@ class Paths {
     return `/cities/${slug}`;
   }
 
-  static cafeReport(slug?: string | null) {
-    return `/cafes/report?slug=${slug}`;
+  static cafeReport(slug?: string | null, name?: string | null) {
+    const params = new URLSearchParams();
+    if (slug) {
+      params.set('slug', slug);
+    }
+    if (name) {
+      params.set('name', name);
+    }
+    return `/cafes/report?${params.toString()}`;
   }
 
   static studyCity(slug?: string | null) {

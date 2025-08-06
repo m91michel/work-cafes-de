@@ -3,8 +3,7 @@ import { FAQSection } from "@/components/general/sections/faq";
 import { TransHighlight } from "@/components/general/translation";
 import initTranslations from "@/libs/i18n/config";
 import { getSEOTags } from "@/libs/seo";
-import { getCafeBySlug } from "@/libs/supabase/cafes";
-import { PageProps } from "@/libs/types";
+import { Suspense } from "react";
 
 // generate metadata
 export async function generateMetadata() {
@@ -14,17 +13,15 @@ export async function generateMetadata() {
     title: t("report.title"),
     description: t("report.description"),
     canonicalUrlRelative: `/cafes/report`,
+    extraTags: {
+      robots: 'noindex, nofollow',
+    },
   });
 }
 
 const defaultIds = ['goal-of-report', 'cases-when-report'];
 
-export default async function CafePage({ searchParams }: PageProps) {
-  const _searchParams = await searchParams;
-  const cafeSlug = _searchParams.slug as string | undefined;
-
-  const cafe = await getCafeBySlug(cafeSlug);
-
+export default async function CafeReportPage() {
   return (
     <main className="flex-1 bg-background">
       <div className="bg-card">
@@ -45,7 +42,9 @@ export default async function CafePage({ searchParams }: PageProps) {
       </div>
 
       <section className="max-w-7xl mx-auto px-4 py-12">
-        <ReportCafeForm className="max-w-2xl mx-auto" cafe={cafe} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ReportCafeForm className="max-w-2xl mx-auto" />
+        </Suspense>
       </section>
 
       <div className="max-w-7xl mx-auto px-4 py-12">  

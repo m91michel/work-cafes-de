@@ -9,14 +9,13 @@ import { cn } from "@/libs/utils";
 import { FormReset, FormSubmit } from "@/components/general/form/buttons";
 import { useToast } from "@/hooks/use-toast";
 import { useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { HiddenInput } from "@/components/general/form/inputs/hidden-input";
 import { Cafe } from "@/libs/types";
 import { MyTextarea } from "@/components/general/form/inputs/textarea-input";
 
 interface FormProps {
   className?: string;
-  cafe?: Cafe | null;
 }
 
 interface FormInputs {
@@ -27,18 +26,24 @@ interface FormInputs {
   slug: string;
 }
 
-export function ReportCafeForm({ className, cafe }: FormProps) {
+export function ReportCafeForm({ className }: FormProps) {
   const { t } = useCTranslation("cafe");
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  
+  // Get cafe name and slug from URL params if not provided via props
+  const cafeNameFromParams = searchParams.get('name');
+  const cafeSlugFromParams = searchParams.get('slug');
+  
   const form = useForm<FormInputs>({
     defaultValues: {
-      cafe_name: cafe?.name || "",
+      cafe_name: cafeNameFromParams || "",
       email: "",
       name: "",
       message: "",
-      slug: cafe?.slug || "",
+      slug: cafeSlugFromParams || "",
     },
   });
   const { reset } = form;
@@ -78,8 +83,8 @@ export function ReportCafeForm({ className, cafe }: FormProps) {
         <MyInput
           form={form}
           name="cafe_name"
-          value={cafe?.name || ""}
-          disabled={!!cafe}
+          value={cafeNameFromParams || ""}
+          disabled={!!cafeNameFromParams}
           label={t("report.form.cafe_name")}
         />
         <MyInput

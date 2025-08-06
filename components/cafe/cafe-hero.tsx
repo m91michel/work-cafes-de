@@ -16,7 +16,7 @@ export function CafeHero({ cafe }: CafeHeroProps) {
   const flag = countryFlag(cafe.cities?.country);
   const cityHref = cafe.city_slug ? Paths.city(cafe.city_slug) : "";
   const googleMapsLink = locationLink(cafe.name, cafe.google_place_id);
-  const reportHref = Paths.cafeReport(cafe.slug);
+  const reportHref = Paths.cafeReport(cafe.slug, cafe.name);
 
   return (
     <div className="relative h-[400px] max-w-7xl mx-auto px-4">
