@@ -1,0 +1,5 @@
+[phases.install]
+cmds = [
+  "printf '%s\n' \"$NPM_RC\" > .npmrc",
+  "yarn install"
+]
