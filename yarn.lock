@@ -931,11 +931,6 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@m91michel/mm-helpers@^0.0.4":
-  version "0.0.4"
-  resolved "https://npm.pkg.github.com/download/@m91michel/mm-helpers/0.0.4/997dbfbf18e4096beeb0fa7cf9caafdac6b843ed#997dbfbf18e4096beeb0fa7cf9caafdac6b843ed"
-  integrity sha512-w2jZJlFAInO4mBnkfLuFVCG9ZmkZOSGn5/kTTHxrjTi2yEHdleZ34wAunUwwACgMOnbFAp4fCmLtzt0mT7sQ7A==
-
 "@mapbox/jsonlint-lines-primitives@^2.0.2", "@mapbox/jsonlint-lines-primitives@~2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@mapbox/jsonlint-lines-primitives/-/jsonlint-lines-primitives-2.0.2.tgz#ce56e539f83552b58d10d672ea4d6fc9adc7b234"
