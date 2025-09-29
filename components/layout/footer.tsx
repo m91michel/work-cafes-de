@@ -20,11 +20,16 @@ const aboutLinks = [
   { key: "about", href: Paths.about },
   { key: "roadmap", href: Paths.roadmap },
   { key: "support", href: `mailto:${config.mailgun.supportEmail}` },
+  { key: "contribute", href: Paths.contribute },
 ];
 
 const legalLinks = [
   { key: "privacy", href: Paths.privacy },
   { key: "imprint", href: Paths.imprint },
+];
+
+const toolsLinks = [
+  { label: "RewriteBar", href: "https://rewritebar.com" },
 ];
 
 export async function Footer() {
@@ -100,6 +105,24 @@ export async function Footer() {
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
                     {t(`footer.${link.key}`)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-semibold mb-4">{t("footer.tools")}</h3>
+            <ul className="space-y-2">
+              {toolsLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {link.label}
                   </Link>
                 </li>
               ))}
