@@ -1,27 +1,3 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    ":approveMajorUpdates",
-    ":label(dependencies)"
-  ],
-  "npm": {
-    "minimumReleaseAge": "14 days"
-  },
-  "packageRules": [
-    {
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch",
-      "excludePackagePatterns": ["@trigger.dev/*", "supabase", "openai"],
-      "excludePackageNames": ["react", "react-dom"],
-      "matchPackagePatterns": [
-        "*"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ]
-    }
-  ],
-  "npmrc": "registry=https://registry.npmjs.org\n@m91michel:registry=https://npm.pkg.github.com"
+  "extends": ["github>m91michel/renovate-config"]
 }
