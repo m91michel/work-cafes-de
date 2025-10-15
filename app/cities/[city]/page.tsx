@@ -20,7 +20,7 @@ type Props = {
   searchParams: SearchParams;
 };
 
-export const revalidate = 28800; // 8 hours
+export const revalidate = 3600 * 24 * 7; // 30 days
 
 // generate metadata
 export async function generateMetadata({ params }: Props) {

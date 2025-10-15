@@ -6,7 +6,7 @@ import { getSEOTags } from "@/libs/seo";
 import { getAllCities } from "@/libs/supabase/cities";
 import { getCountries } from "@/libs/supabase/countries";
 
-export const revalidate = 28800; // 8 hours
+export const revalidate = 3600 * 24 * 30; // 30 days
 
 type Params = Promise<{ slug: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;

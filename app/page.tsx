@@ -3,7 +3,6 @@ import { getSEOTags } from "@/libs/seo";
 import { getBestCafes, getCafes } from "@/libs/supabase/cafes";
 import { getCities, getCitiesCount } from "@/libs/supabase/cities";
 import initTranslations from "@/libs/i18n/config";
-import { Cafe, City } from "@/libs/types";
 import { CityListSection } from "@/components/city/sections/list-section";
 import { FAQSection } from "@/components/general/sections/faq";
 import { About } from "@/components/general/sections/About";
@@ -14,8 +13,9 @@ import { FeaturedSection } from "@/components/city/sections/featured-section";
 import peerlist from "./peerlist-launched.svg";
 import Image from "next/image";
 import { MLink } from "@/components/general/link";
+
 // export const revalidate = 5; // dev
-export const revalidate = 3600; // 1 hour
+export const revalidate = 3600 * 24 * 7; // 30 days
 
 export async function generateMetadata() {
   const { t } = await initTranslations(["common"]);
