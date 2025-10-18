@@ -345,15 +345,17 @@
     debug "^4.3.1"
     minimatch "^3.1.2"
 
-"@eslint/config-helpers@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@eslint/config-helpers/-/config-helpers-0.3.1.tgz#d316e47905bd0a1a931fa50e669b9af4104d1617"
-  integrity sha512-xR93k9WhrDYpXHORXpxVL5oHj3Era7wo6k/Wd8/IsQNnZUTzkGS29lyn3nAT05v6ltUuTFVCCYDEGfy2Or/sPA==
+"@eslint/config-helpers@^0.4.0":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@eslint/config-helpers/-/config-helpers-0.4.1.tgz#7d173a1a35fe256f0989a0fdd8d911ebbbf50037"
+  integrity sha512-csZAzkNhsgwb0I/UAV6/RGFTbiakPCf0ZrGmrIxQpYvGZ00PhTkSnyKNolphgIvmnJeGw6rcGVEXfTzUnFuEvw==
+  dependencies:
+    "@eslint/core" "^0.16.0"
 
-"@eslint/core@^0.15.2":
-  version "0.15.2"
-  resolved "https://registry.yarnpkg.com/@eslint/core/-/core-0.15.2.tgz#59386327d7862cc3603ebc7c78159d2dcc4a868f"
-  integrity sha512-78Md3/Rrxh83gCxoUc0EiciuOHsIITzLy53m3d9UyiW8y9Dj2D29FeETqyKA+BRK76tnTp6RXWb3pCay8Oyomg==
+"@eslint/core@^0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@eslint/core/-/core-0.16.0.tgz#490254f275ba9667ddbab344f4f0a6b7a7bd7209"
+  integrity sha512-nmC8/totwobIiFcGkDza3GIKfAw1+hLiYVrh3I1nIomQ8PEr5cxg34jnkmGawul/ep52wGRAcyeDCNtWKSOj4Q==
   dependencies:
     "@types/json-schema" "^7.0.15"
 
@@ -372,22 +374,22 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@eslint/js@9.36.0":
-  version "9.36.0"
-  resolved "https://registry.yarnpkg.com/@eslint/js/-/js-9.36.0.tgz#b1a3893dd6ce2defed5fd49de805ba40368e8fef"
-  integrity sha512-uhCbYtYynH30iZErszX78U+nR3pJU3RHGQ57NXy5QupD4SBVwDeU8TNBy+MjMngc1UyIW9noKqsRqfjQTBU2dw==
+"@eslint/js@9.37.0":
+  version "9.37.0"
+  resolved "https://registry.yarnpkg.com/@eslint/js/-/js-9.37.0.tgz#0cfd5aa763fe5d1ee60bedf84cd14f54bcf9e21b"
+  integrity sha512-jaS+NJ+hximswBG6pjNX0uEJZkrT0zwpVi3BA3vX22aFGjJjmgSTSmPpZCRKmoBL5VY/M6p0xsSJx7rk7sy5gg==
 
 "@eslint/object-schema@^2.1.6":
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/@eslint/object-schema/-/object-schema-2.1.6.tgz#58369ab5b5b3ca117880c0f6c0b0f32f6950f24f"
   integrity sha512-RBMg5FRL0I0gs51M/guSAj5/e14VQ4tpZnQNWwuDT66P14I43ItmPfIZRhO9fUVIPOAQXU47atlywZ/czoqFPA==
 
-"@eslint/plugin-kit@^0.3.5":
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/@eslint/plugin-kit/-/plugin-kit-0.3.5.tgz#fd8764f0ee79c8ddab4da65460c641cefee017c5"
-  integrity sha512-Z5kJ+wU3oA7MMIqVR9tyZRtjYPr4OC004Q4Rw7pgOKUOKkJfZ3O24nz3WYfGRpMDNmcOi3TwQOmgm7B7Tpii0w==
+"@eslint/plugin-kit@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@eslint/plugin-kit/-/plugin-kit-0.4.0.tgz#f6a245b42886abf6fc9c7ab7744a932250335ab2"
+  integrity sha512-sB5uyeq+dwCWyPi31B2gQlVlo+j5brPlWx4yZBrEaRo/nhdDE8Xke1gsGgtiBdaBTxuTkceLVuVt/pclrasb0A==
   dependencies:
-    "@eslint/core" "^0.15.2"
+    "@eslint/core" "^0.16.0"
     levn "^0.4.1"
 
 "@floating-ui/core@^1.7.3":
@@ -2300,9 +2302,9 @@
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
 "@types/leaflet@^1.9.16":
-  version "1.9.20"
-  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.9.20.tgz#a7feef4b0a4b36335dfc98456e76c0a86ab8462c"
-  integrity sha512-rooalPMlk61LCaLOvBF2VIf9M47HgMQqi5xQ9QRi7c8PkdIe0WrIi5IxXUXQjAdL0c+vcQ01mYWbthzmp9GHWw==
+  version "1.9.21"
+  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.9.21.tgz#542e8f91250bc444f8a1416d472f5b518d83e979"
+  integrity sha512-TbAd9DaPGSnzp6QvtYngntMZgcRk+igFELwR2N99XZn7RXUdKgsXMR+28bUO0rPsWp8MIu/f47luLIQuSLYv/w==
   dependencies:
     "@types/geojson" "*"
 
@@ -2350,10 +2352,10 @@
   dependencies:
     undici-types "~7.8.0"
 
-"@types/node@22.18.8":
-  version "22.18.8"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.18.8.tgz#738d9dafa38f6e0c467687c158f8e1ca2d7d8eaa"
-  integrity sha512-pAZSHMiagDR7cARo/cch1f3rXy0AEXwsVsVH09FcyeJVAzCnGgmYis7P3JidtTUjyadhTeSo8TgRPswstghDaw==
+"@types/node@22.18.10":
+  version "22.18.10"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.18.10.tgz#37f0ac8d2ec41af7bba06f162c85ff409e4e3420"
+  integrity sha512-anNG/V/Efn/YZY4pRzbACnKxNKoBng2VTFydVu8RRs5hQjikP8CQfaeAV59VFSCzKNp90mXiVXW2QzV56rwMrg==
   dependencies:
     undici-types "~6.21.0"
 
@@ -2381,10 +2383,10 @@
   resolved "https://registry.yarnpkg.com/@types/phoenix/-/phoenix-1.6.6.tgz#3c1ab53fd5a23634b8e37ea72ccacbf07fbc7816"
   integrity sha512-PIzZZlEppgrpoT2QgbnDU+MMzuR6BbCjllj0bM70lWoejMeNJAxCchxnv7J3XFkI8MpygtRpzXrIlmWUBclP5A==
 
-"@types/react-dom@19.1.9":
-  version "19.1.9"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-19.1.9.tgz#5ab695fce1e804184767932365ae6569c11b4b4b"
-  integrity sha512-qXRuZaOsAdXKFyOhRBg6Lqqc0yay13vN7KrIg4L7N4aaHN68ma9OK3NE1BoDFgFOTfM7zg+3/8+2n8rLUH3OKQ==
+"@types/react-dom@19.2.1":
+  version "19.2.1"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-19.2.1.tgz#2a16d84466e5cbaab97809f3e6f3bded6b5dbac7"
+  integrity sha512-/EEvYBdT3BflCWvTMO7YkYBHVE9Ci6XdqZciZANQgKpaiDRGOLIlRo91jbTNRQjgPFWVaRxcYc0luVNFitz57A==
 
 "@types/react-map-gl@^6.1.7":
   version "6.1.7"
@@ -2403,10 +2405,10 @@
   dependencies:
     csstype "^3.0.2"
 
-"@types/react@19.1.16":
-  version "19.1.16"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-19.1.16.tgz#6329b1c17a5de624439eae673f86a2c5569a42be"
-  integrity sha512-WBM/nDbEZmDUORKnh5i1bTnAz6vTohUf9b8esSMu+b24+srbaxa04UbJgWx78CVfNXA20sNu0odEIluZDFdCog==
+"@types/react@19.2.2":
+  version "19.2.2"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-19.2.2.tgz#ba123a75d4c2a51158697160a4ea2ff70aa6bf36"
+  integrity sha512-6mDvHUFSjyT2B2yeNx2nUgMxh9LtOWvkhIU3uePn2I2oyNymUAX1NIsdgviM4CH+JSrp2D2hsMvJOkxY+0wNRA==
   dependencies:
     csstype "^3.0.2"
 
@@ -2535,15 +2537,15 @@
     "@resvg/resvg-wasm" "2.4.0"
     satori "0.16.0"
 
-"@vis.gl/react-mapbox@8.0.4":
-  version "8.0.4"
-  resolved "https://registry.yarnpkg.com/@vis.gl/react-mapbox/-/react-mapbox-8.0.4.tgz#f87fc26fa89ccf62f39e04cea690a1faa0b23178"
-  integrity sha512-NFk0vsWcNzSs0YCsVdt2100Zli9QWR+pje8DacpLkkGEAXFaJsFtI1oKD0Hatiate4/iAIW39SQHhgfhbeEPfQ==
+"@vis.gl/react-mapbox@8.1.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@vis.gl/react-mapbox/-/react-mapbox-8.1.0.tgz#ce08f2942ddd92784ae1cedb35dccad61c613ab0"
+  integrity sha512-FwvH822oxEjWYOr+pP2L8hpv+7cZB2UsQbHHHT0ryrkvvqzmTgt7qHDhamv0EobKw86e1I+B4ojENdJ5G5BkyQ==
 
-"@vis.gl/react-maplibre@8.0.4":
-  version "8.0.4"
-  resolved "https://registry.yarnpkg.com/@vis.gl/react-maplibre/-/react-maplibre-8.0.4.tgz#f7c4c38aa57d03510c9456667ba36dbeab0cfeda"
-  integrity sha512-HwZyfLjEu+y1mUFvwDAkVxinGm8fEegaWN+O8np/WZ2Sqe5Lv6OXFpV6GWz9LOEvBYMbGuGk1FQdejo+4HCJ5w==
+"@vis.gl/react-maplibre@8.1.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@vis.gl/react-maplibre/-/react-maplibre-8.1.0.tgz#48844fc47986637f7bd48d481f26d505ac2976c5"
+  integrity sha512-PkAK/gp3mUfhCLhUuc+4gc3PN9zCtVGxTF2hB6R5R5yYUw+hdg84OZ770U5MU4tPMTCG6fbduExuIW6RRKN6qQ==
   dependencies:
     "@maplibre/maplibre-gl-style-spec" "^19.2.1"
 
@@ -4017,19 +4019,19 @@ eslint-visitor-keys@^4.2.1:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-4.2.1.tgz#4cfea60fe7dd0ad8e816e1ed026c1d5251b512c1"
   integrity sha512-Uhdk5sfqcee/9H/rCOJikYz67o0a2Tw2hGRPOG2Y1R2dg7brRe1uG0yaNQDHu+TO/uQPF/5eCapvYSmHUjt7JQ==
 
-eslint@9.36.0:
-  version "9.36.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-9.36.0.tgz#9cc5cbbfb9c01070425d9bfed81b4e79a1c09088"
-  integrity sha512-hB4FIzXovouYzwzECDcUkJ4OcfOEkXTv2zRY6B9bkwjx/cprAq0uvm1nl7zvQ0/TsUk0zQiN4uPfJpB9m+rPMQ==
+eslint@9.37.0:
+  version "9.37.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-9.37.0.tgz#ac0222127f76b09c0db63036f4fe289562072d74"
+  integrity sha512-XyLmROnACWqSxiGYArdef1fItQd47weqB7iwtfr9JHwRrqIXZdcFMvvEcL9xHCmL0SNsOvF0c42lWyM1U5dgig==
   dependencies:
     "@eslint-community/eslint-utils" "^4.8.0"
     "@eslint-community/regexpp" "^4.12.1"
     "@eslint/config-array" "^0.21.0"
-    "@eslint/config-helpers" "^0.3.1"
-    "@eslint/core" "^0.15.2"
+    "@eslint/config-helpers" "^0.4.0"
+    "@eslint/core" "^0.16.0"
     "@eslint/eslintrc" "^3.3.1"
-    "@eslint/js" "9.36.0"
-    "@eslint/plugin-kit" "^0.3.5"
+    "@eslint/js" "9.37.0"
+    "@eslint/plugin-kit" "^0.4.0"
     "@humanfs/node" "^0.16.6"
     "@humanwhocodes/module-importer" "^1.0.1"
     "@humanwhocodes/retry" "^0.4.2"
@@ -5098,10 +5100,10 @@ jackspeak@^3.1.2:
   optionalDependencies:
     "@pkgjs/parseargs" "^0.11.0"
 
-jiti@^1.21.6:
-  version "1.21.6"
-  resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.21.6.tgz#6c7f7398dd4b3142767f9a168af2f317a428d268"
-  integrity sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==
+jiti@^1.21.7:
+  version "1.21.7"
+  resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.21.7.tgz#9dd81043424a3d28458b193d965f0d18a2300ba9"
+  integrity sha512-/imKNG4EbWNrVjoNC/1H5/9GFy+tqjGBHCaSsN+P2RnPqjsLmv6UD3Ej+Kj8nBWaRAwyk7kK5ZUc+OEatnTR3A==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -5229,12 +5231,7 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-lilconfig@^3.0.0:
-  version "3.1.2"
-  resolved "https://registry.npmjs.org/lilconfig/-/lilconfig-3.1.2.tgz"
-  integrity sha512-eop+wDAvpItUys0FWkHIKeC9ybYrTGbU41U5K7+bttZZeohvnY7M9dZ5kB21GNWiFT2q1OoPTvncPCgSOVO5ow==
-
-lilconfig@^3.1.3:
+lilconfig@^3.1.1, lilconfig@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-3.1.3.tgz#a1bcfd6257f9585bf5ae14ceeebb7b559025e4c4"
   integrity sha512-/vlFKAoH5Cgt3Ie+JLhRbwOsCQePABiU3tJ1egGvyQ+33R/vcwM2Zl2QR/LzjsBeItPt3oSVXapn+m4nQDvpzw==
@@ -5301,10 +5298,10 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-lucide-react@^0.544.0:
-  version "0.544.0"
-  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.544.0.tgz#4719953c10fd53a64dd8343bb0ed16ec79f3eeef"
-  integrity sha512-t5tS44bqd825zAW45UQxpG2CvcC4urOwn2TrwSH8u+MjeE+1NnWl6QqeQ/6NdjMqdOygyiT9p3Ev0p1NJykxjw==
+lucide-react@^0.545.0:
+  version "0.545.0"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.545.0.tgz#82affd1b581d358356578dd033e11dd17e6493a0"
+  integrity sha512-7r1/yUuflQDSt4f1bpn5ZAocyIxcTyVyBBChSVtBKn5M+392cPmI5YJMWOJKk/HUWGm5wg83chlAZtCcGbEZtw==
 
 mailgun.js@^12.0.1:
   version "12.1.1"
@@ -6172,13 +6169,12 @@ postcss-js@^4.0.1:
   dependencies:
     camelcase-css "^2.0.1"
 
-postcss-load-config@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/postcss-load-config/-/postcss-load-config-4.0.2.tgz#7159dcf626118d33e299f485d6afe4aff7c4a3e3"
-  integrity sha512-bSVhyJGL00wMVoPUzAVAnbEoWyqRxkjv64tUl427SKnPrENtq6hJwUojroMz2VB+Q1edmi4IfrAPpami5VVgMQ==
+"postcss-load-config@^4.0.2 || ^5.0 || ^6.0":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/postcss-load-config/-/postcss-load-config-6.0.1.tgz#6fd7dcd8ae89badcf1b2d644489cbabf83aa8096"
+  integrity sha512-oPtTM4oerL+UXmx+93ytZVN82RrlY/wPUV8IeDxFrzIjXOLF1pN+EmKPLbubvKHT2HC20xXsCAH2Z+CKV6Oz/g==
   dependencies:
-    lilconfig "^3.0.0"
-    yaml "^2.3.4"
+    lilconfig "^3.1.1"
 
 postcss-nested@^6.2.0:
   version "6.2.0"
@@ -6399,12 +6395,12 @@ react-leaflet@^5.0.0:
     "@react-leaflet/core" "^3.0.0"
 
 react-map-gl@^8.0.1:
-  version "8.0.4"
-  resolved "https://registry.yarnpkg.com/react-map-gl/-/react-map-gl-8.0.4.tgz#7eebcb83e281ffd86820befe27d030a071e4c980"
-  integrity sha512-SHdpvFIvswsZBg6BCPcwY/nbKuCo3sJM1Cj7Sd+gA3gFRFOixD+KtZ2XSuUWq2WySL2emYEXEgrLZoXsV4Ut4Q==
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/react-map-gl/-/react-map-gl-8.1.0.tgz#97ce754e3bbdd49421fc10283119d189db945e00"
+  integrity sha512-vDx/QXR3Tb+8/ap/z6gdMjJQ8ZEyaZf6+uMSPz7jhWF5VZeIsKsGfPvwHVPPwGF43Ryn+YR4bd09uEFNR5OPdg==
   dependencies:
-    "@vis.gl/react-mapbox" "8.0.4"
-    "@vis.gl/react-maplibre" "8.0.4"
+    "@vis.gl/react-mapbox" "8.1.0"
+    "@vis.gl/react-maplibre" "8.1.0"
 
 react-markdown@^9.0.1:
   version "9.1.0"
@@ -7277,10 +7273,10 @@ tailwindcss-animate@^1.0.7:
   resolved "https://registry.npmjs.org/tailwindcss-animate/-/tailwindcss-animate-1.0.7.tgz"
   integrity sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==
 
-tailwindcss@3.4.17:
-  version "3.4.17"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.17.tgz#ae8406c0f96696a631c790768ff319d46d5e5a63"
-  integrity sha512-w33E2aCvSDP0tW9RZuNXadXlkHXqFzSkQew/aIa2i/Sj8fThxwovwlXHSPXTbAHwEIhBFXAedUhP2tueAKP8Og==
+tailwindcss@3.4.18:
+  version "3.4.18"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.18.tgz#9fa9650aace186644b608242f1e57d2d55593301"
+  integrity sha512-6A2rnmW5xZMdw11LYjhcI5846rt9pbLSabY5XPxo+XWdxwZaFEn47Go4NzFiHu9sNNmr/kXivP1vStfvMaK1GQ==
   dependencies:
     "@alloc/quick-lru" "^5.2.0"
     arg "^5.0.2"
@@ -7290,7 +7286,7 @@ tailwindcss@3.4.17:
     fast-glob "^3.3.2"
     glob-parent "^6.0.2"
     is-glob "^4.0.3"
-    jiti "^1.21.6"
+    jiti "^1.21.7"
     lilconfig "^3.1.3"
     micromatch "^4.0.8"
     normalize-path "^3.0.0"
@@ -7299,7 +7295,7 @@ tailwindcss@3.4.17:
     postcss "^8.4.47"
     postcss-import "^15.1.0"
     postcss-js "^4.0.1"
-    postcss-load-config "^4.0.2"
+    postcss-load-config "^4.0.2 || ^5.0 || ^6.0"
     postcss-nested "^6.2.0"
     postcss-selector-parser "^6.1.2"
     resolve "^1.22.8"
@@ -7878,11 +7874,6 @@ yallist@^3.0.2:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-3.1.1.tgz#dbb7daf9bfd8bac9ab45ebf602b8cbad0d5d08fd"
   integrity sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==
-
-yaml@^2.3.4:
-  version "2.5.1"
-  resolved "https://registry.npmjs.org/yaml/-/yaml-2.5.1.tgz"
-  integrity sha512-bLQOjaX/ADgQ20isPJRvF0iRUHIxVhYvr53Of7wGcWlO2jvtUlH5m87DsmulFVxRpNLOnI4tB6p/oh8D7kpn9Q==
 
 yargs-parser@^21.1.1:
   version "21.1.1"
