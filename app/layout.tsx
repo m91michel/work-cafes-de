@@ -27,7 +27,7 @@ export default async function RootLayout({
   const { resources } = await initTranslations(namespaces, language, null, null);
 
   return (
-    <html lang={language}>
+    <html lang={language} suppressHydrationWarning>
       <head>
         <meta
           name="viewport"
