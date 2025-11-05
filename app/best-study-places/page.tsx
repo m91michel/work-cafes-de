@@ -9,7 +9,7 @@ import Paths from "@/libs/paths";
 import { TransHighlight } from "@/components/general/translation";
 import { LinkSection } from "@/components/city/sections/link-section";
 
-export const revalidate = 3600 * 24 * 30; // 30 days
+export const revalidate = 2592000; // 30 days
 
 export async function generateMetadata() {
   const { t } = await initTranslations(["study"]);

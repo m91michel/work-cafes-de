@@ -15,7 +15,7 @@ import Image from "next/image";
 import { MLink } from "@/components/general/link";
 
 // export const revalidate = 5; // dev
-export const revalidate = 3600 * 24 * 7; // 30 days
+export const revalidate = 604800; // 7 days
 
 export async function generateMetadata() {
   const { t } = await initTranslations(["common"]);

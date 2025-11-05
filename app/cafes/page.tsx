@@ -22,7 +22,7 @@ type Props = {
   searchParams: SearchParams;
 };
 
-export const revalidate = 3600 * 24 * 30; // 30 days
+export const revalidate = 2592000; // 30 days
 
 export default async function CafesPage({ searchParams }: Props) {
   const { t } = await initTranslations(['cafe']);
