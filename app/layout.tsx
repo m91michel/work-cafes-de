@@ -10,7 +10,13 @@ import TranslationProvider from "@/components/providers/i18n-provider";
 import initTranslations from "@/libs/i18n/config";
 import config from "@/config/config";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ["latin"],
+  display: 'swap',
+  fallback: ['system-ui', 'arial'],
+  // Ensure font is downloaded during build, not runtime
+  preload: true,
+});
 
 const namespaces = ["common", "cafe", "city", "home", "study"];
 

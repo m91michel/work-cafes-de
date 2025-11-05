@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: process.env.VERCEL_ENV === 'production' ? 'standalone' : undefined, // Required for optimized Docker image
   images: { 
     unoptimized: true,
     formats: ['image/avif', 'image/webp'],

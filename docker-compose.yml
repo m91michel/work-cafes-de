@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # German version (cafezumarbeiten.de)
+  cafes-de:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        LANGUAGE: de
+        NODE_VERSION: 22
+    image: work-cafes-de:de
+    ports:
+      - "3010:3010"
+    env_file:
+      - .env.local
+    restart: unless-stopped
+    networks:
+      - cafes-network
+
+  # English version (awifiplace.com)
+  cafes-en:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        LANGUAGE: en
+        NODE_VERSION: 22
+    image: work-cafes-de:en
+    ports:
+      - "3011:3010"  # Different port to avoid conflict
+    env_file:
+      - .env.local
+    restart: unless-stopped
+    networks:
+      - cafes-network
+
+networks:
+  cafes-network:
+    driver: bridge
+
