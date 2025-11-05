@@ -38,37 +38,3 @@ export type PageProps<T = any> = {
   params: PageParams<T>;
   searchParams: PageSearchParams;
 };
-
-export interface RedditSearch {
-  id: string;
-  subreddits: string[];
-  query: string;
-  time_frame: "hour" | "day" | "week" | "month" | "year" | "all";
-  sort: "relevance" | "hot" | "top" | "new" | "comments";
-  result_limit?: number;
-  is_active?: boolean;
-  last_checked?: string | null;
-}
-
-export type DBRedditPost = Database['cafeforwork']['Tables']['reddit_posts']['Row'];
-export interface RedditPost {
-  id?: string;
-  reddit_id: string;
-  subreddit: string;
-  title: string;
-  selftext?: string | null;
-  url: string;
-  permalink: string;
-  created_utc: number;
-  author: string;
-  num_comments: number;
-  is_relevant?: boolean | null;
-  has_been_replied?: boolean | null;
-  reply_id?: string | null;
-  notes?: string | null;
-  search_id?: string | null;
-  created_at?: string;
-  updated_at?: string;
-}
-
-export type DBRedditPostReply = Database['cafeforwork']['Tables']['reddit_post_replies']['Row'];
