@@ -13,7 +13,9 @@
     "email": "email dev --port 3031",
     "start": "node .next/standalone/server.js",
     "lint": "next lint",
-    "types": "npx --yes supabase gen types typescript --project-id \"nkmwwlzfsdpqxnflygyr\" --schema cafeforwork > types_db.ts"
+    "types": "npx --yes supabase gen types typescript --project-id \"nkmwwlzfsdpqxnflygyr\" --schema cafeforwork > types_db.ts",
+    "worker:dev": "cd worker && yarn dev",
+    "worker:build": "cd worker && yarn build"
   },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.4.0",
@@ -61,6 +63,10 @@
     "@types/react-dom": "19.2.2",
     "@types/react-map-gl": "^6.1.7",
     "@vercel/og": "^0.8.0",
+    "@bull-board/api": "^5.22.0",
+    "@bull-board/ui": "^5.22.0",
+    "bullmq": "^5.28.0",
+    "ioredis": "^5.3.2",
     "autoprefixer": "10.4.21",
     "axios": "^1.7.9",
     "base64-js": "^1.5.1",

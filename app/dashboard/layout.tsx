@@ -1,7 +1,7 @@
 import { createClient } from '@/libs/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { Coffee, MessageSquare, LayoutDashboard } from 'lucide-react';
+import { Coffee, MessageSquare, LayoutDashboard, Activity } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SignOutButton from '@/components/auth/sign-out-button';
 
@@ -37,6 +37,12 @@ export default async function DashboardLayout({ children }: Props) {
               <Link href="/dashboard/cafes">
                 <Coffee className="mr-2 h-4 w-4" />
                 Cafes
+              </Link>
+            </Button>
+            <Button variant="ghost" className="w-full justify-start" asChild>
+              <Link href="/dashboard/queues">
+                <Activity className="mr-2 h-4 w-4" />
+                Queues
               </Link>
             </Button>
           </nav>
