@@ -34,7 +34,7 @@ FROM base AS builder
 WORKDIR /app
 
 # Build argument for language (de or en)
-ARG LANGUAGE=de
+ARG LANGUAGE=en
 
 # Set language environment variable for build
 ENV NEXT_PUBLIC_LANGUAGE=${LANGUAGE}
