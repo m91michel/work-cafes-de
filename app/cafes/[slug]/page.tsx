@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export const generateStaticParams = async () => {
-  if (isVercelProduction) {
+  if (isVercelProduction) { // TODO: Check this before deploying to coolify
     // Generate all cafes for production
     const cafes = await getAllPublishedCafes();
     return cafes.map((cafe) => ({
