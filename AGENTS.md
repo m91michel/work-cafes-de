@@ -85,3 +85,4 @@ scripts/
 5. Implement proper error boundaries
 6. Follow Next.js naming conventions for special files
 7. Use environment variables for configuration
+
