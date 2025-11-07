@@ -1,12 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Queue } from 'bullmq';
 import Redis from 'ioredis';
+import { createClient } from '@/libs/supabase/server';
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { path?: string[] } }
-) {
+export async function GET(request: NextRequest) {
   try {
+    // Check authentication
+    const supabase = await createClient();
+    const { data: { session }, error: authError } = await supabase.auth.getSession();
+
+    if (authError || !session) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     // Get queue statistics
     // Note: Full Bull Board UI requires Express middleware which doesn't work
     // directly with Next.js App Router. This endpoint provides basic stats.
