@@ -4,7 +4,7 @@ import { updateSession } from '@/libs/supabase/utils'
 // export async function middleware(request: NextRequest) {
 //   return await updateSession(request)
 // }
-export default function middleware() { }
+export default function proxy() { }
 
 export const config = {
   // matcher: [
