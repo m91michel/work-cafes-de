@@ -28,4 +28,7 @@ yarn-error.log*
 # Local scripts workspace (not needed for deployment)
 scripts
 
+# Worker (separate project, not part of Next.js build)
+worker
+
 
