@@ -1,3 +1,5 @@
+# syntax=docker.io/docker/dockerfile:1
+
 FROM node:22-alpine AS base
 
 # Install build dependencies
@@ -10,10 +12,14 @@ COPY package.json yarn.lock ./
 # Copy worker package files
 COPY worker/package.json worker/yarn.lock ./worker/
 # Install root dependencies (needed for libs/ imports)
-RUN yarn install --frozen-lockfile --production=false
+# Use BuildKit cache mount to share yarn cache between builds
+RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
+    yarn install --frozen-lockfile --production=false
 WORKDIR /app/worker
 # Install worker dependencies including devDependencies for build
-RUN yarn install --frozen-lockfile --production=false
+# Use BuildKit cache mount to share yarn cache between builds
+RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
+    yarn install --frozen-lockfile --production=false
 
 FROM base AS builder
 WORKDIR /app

@@ -27,7 +27,9 @@ RUN apk add --no-cache python3 make g++ git
 COPY package.json yarn.lock ./
 
 # Install all deps for build, including devDependencies required by Tailwind/PostCSS
-RUN yarn install --frozen-lockfile --production=false
+# Use BuildKit cache mount to share yarn cache between builds
+RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
+    yarn install --frozen-lockfile --production=false
 
 # ----------------------------- builder ----------------------------
 FROM base AS builder
