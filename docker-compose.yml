@@ -1,6 +1,23 @@
 version: '3.8'
 
 services:
+  # Redis service for job queues
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis-cafes
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - cafes-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
   # # German version (cafezumarbeiten.de)
   # cafes-de:
   #   build:
@@ -32,20 +49,17 @@ services:
     env_file:
       - .env.local
     restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
     networks:
       - cafes-network
-      - coolify  # Connect to Coolify network to access Redis
     environment:
-      # Redis connection to Coolify Redis container
-      # Using service name for DNS resolution (more reliable than IP)
-      # Redis username and password should be set in .env.local
-      - REDIS_URL=${REDIS_URL:-redis://r8ggcg04wgso08oso48sc00k:6379}
-      - REDIS_USERNAME=${REDIS_USERNAME:-default}
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      # Redis connection to local Redis container
+      - REDIS_URL=${REDIS_URL:-redis://redis:6379}
       - REDIS_DB=5
 
   # Worker service for background jobs
-  # Note: Connects to Redis on host machine (not in Docker)
   worker:
     build:
       context: .
@@ -53,45 +67,42 @@ services:
     env_file:
       - .env.local
     depends_on:
-      - cafes-en
+      redis:
+        condition: service_healthy
+      cafes-en:
+        condition: service_started
     restart: unless-stopped
     networks:
       - cafes-network
-      - coolify  # Connect to Coolify network to access Redis
     environment:
       - NODE_ENV=production
       - CAFE_WORKER_CONCURRENCY=5
       - CRON_WORKER_CONCURRENCY=1
-      # Redis connection to Coolify Redis container
-      # Using service name for DNS resolution (more reliable than IP)
-      # Redis username and password should be set in .env.local
-      - REDIS_URL=${REDIS_URL:-redis://r8ggcg04wgso08oso48sc00k:6379}
-      - REDIS_USERNAME=${REDIS_USERNAME:-default}
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      # Redis connection to local Redis container
+      - REDIS_URL=${REDIS_URL:-redis://redis:6379}
       - REDIS_DB=5
   
   bullboard:
     container_name: bullboard
     image: venatum/bull-board
     depends_on:
-      - worker
+      redis:
+        condition: service_healthy
+      worker:
+        condition: service_started
     env_file:
       - .env.local
       - .env
     restart: unless-stopped
     networks:
       - cafes-network
-      - coolify  # Connect to Coolify network to access Redis
     ports:
       - "3232:3000"
     environment:
-      # Redis connection to Coolify Redis container
+      # Redis connection to local Redis container
       # Bull Board uses REDIS_HOST and REDIS_PORT separately
-      # Using service name for DNS resolution
-      - REDIS_HOST=${REDIS_HOST:-r8ggcg04wgso08oso48sc00k}
+      - REDIS_HOST=${REDIS_HOST:-redis}
       - REDIS_PORT=${REDIS_PORT:-6379}
-      - REDIS_USERNAME=${REDIS_USERNAME:-default}
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
       - REDIS_DB=5
       - USER_LOGIN=mathias
       - USER_PASSWORD=mathias
@@ -99,6 +110,8 @@ services:
 networks:
   cafes-network:
     driver: bridge
-  coolify:
-    external: true  # Use existing Coolify network
+
+volumes:
+  redis-data:
+    driver: local
 
