@@ -15,6 +15,11 @@ export const JOB_NAME = JOB_NAMES.updateCafeStats;
  * Enqueue a job to update cafe stats
  */
 export async function enqueueJob(citySlug?: string) {
+  if (!cronQueue) {
+    console.warn(`⚠️ Redis queue not available. Skipping ${JOB_NAME} job${citySlug ? ` for city: ${citySlug}` : ''}`);
+    return;
+  }
+
   const jobId = citySlug ? `${JOB_NAME}-${citySlug}` : JOB_NAME;
   
   await cronQueue.add(

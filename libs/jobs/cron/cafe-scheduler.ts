@@ -11,6 +11,11 @@ export const JOB_NAME = JOB_NAMES.cafeScheduler;
  * Enqueue a job to process a cafe
  */
 export async function enqueueJob() {
+  if (!cronQueue) {
+    console.warn(`⚠️ Redis queue not available. Skipping ${JOB_NAME} job`);
+    return;
+  }
+
   // Generate unique job ID using hash of cafeId and timestamp
   const timestamp = Date.now();
   const hash = createHash("sha256")

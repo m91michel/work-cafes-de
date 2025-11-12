@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/libs/supabase/server';
-import { queues } from '@/libs/queues';
+import { queues, areQueuesAvailable } from '@/libs/queues';
 
 export async function GET(request: NextRequest) {
   try {
@@ -15,24 +15,32 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // Check if queues are available
+    if (!areQueuesAvailable()) {
+      return NextResponse.json({
+        queues: [],
+        message: 'Redis queues are not available in this environment',
+      });
+    }
+
     // Get queue statistics for both queues
     // Note: Full Bull Board UI requires Express middleware which doesn't work
     // directly with Next.js App Router. This endpoint provides basic stats.
 
     const [cafeWaiting, cafeActive, cafeCompleted, cafeFailed, cafeDelayed] = await Promise.all([
-      queues.cafe.getWaitingCount(),
-      queues.cafe.getActiveCount(),
-      queues.cafe.getCompletedCount(),
-      queues.cafe.getFailedCount(),
-      queues.cafe.getDelayedCount(),
+      queues.cafe?.getWaitingCount() || Promise.resolve(0),
+      queues.cafe?.getActiveCount() || Promise.resolve(0),
+      queues.cafe?.getCompletedCount() || Promise.resolve(0),
+      queues.cafe?.getFailedCount() || Promise.resolve(0),
+      queues.cafe?.getDelayedCount() || Promise.resolve(0),
     ]);
 
     const [cronWaiting, cronActive, cronCompleted, cronFailed, cronDelayed] = await Promise.all([
-      queues.cron.getWaitingCount(),
-      queues.cron.getActiveCount(),
-      queues.cron.getCompletedCount(),
-      queues.cron.getFailedCount(),
-      queues.cron.getDelayedCount(),
+      queues.cron?.getWaitingCount() || Promise.resolve(0),
+      queues.cron?.getActiveCount() || Promise.resolve(0),
+      queues.cron?.getCompletedCount() || Promise.resolve(0),
+      queues.cron?.getFailedCount() || Promise.resolve(0),
+      queues.cron?.getDelayedCount() || Promise.resolve(0),
     ]);
 
     return NextResponse.json({

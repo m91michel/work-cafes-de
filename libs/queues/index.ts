@@ -5,3 +5,8 @@ export const queues = {
   cafe: cafeQueue,
   cron: cronQueue,
 };
+
+// Helper to check if queues are available
+export const areQueuesAvailable = (): boolean => {
+  return cafeQueue !== null && cronQueue !== null;
+};
