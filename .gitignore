@@ -62,3 +62,4 @@ data/ignored
 .cursor/mcp.json
 
 worker/.env
+worker/dist

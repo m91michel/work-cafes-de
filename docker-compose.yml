@@ -48,10 +48,12 @@ services:
   # Note: Connects to Redis on host machine (not in Docker)
   worker:
     build:
-      context: ./worker
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: worker/Dockerfile
     env_file:
       - .env.local
+    depends_on:
+      - cafes-en
     restart: unless-stopped
     networks:
       - cafes-network
@@ -71,6 +73,8 @@ services:
   bullboard:
     container_name: bullboard
     image: venatum/bull-board
+    depends_on:
+      - worker
     env_file:
       - .env.local
       - .env
