@@ -37,7 +37,9 @@ COPY libs/ ./libs/
 # Note: This file may be generated, so build will continue if missing
 COPY types_db.ts ./types_db.ts
 WORKDIR /app/worker
-RUN yarn build
+RUN yarn build && \
+    ls -la dist/ && \
+    test -f dist/index.js || (echo "ERROR: dist/index.js not found after build" && exit 1)
 
 FROM base AS runner
 WORKDIR /app/worker
@@ -47,6 +49,8 @@ COPY --from=builder /app/worker/node_modules ./node_modules
 COPY --from=builder /app/worker/package.json ./
 # Copy libs directory (needed at runtime)
 COPY --from=builder /app/libs ./libs
+# Copy root node_modules (needed for libs/ imports at runtime)
+COPY --from=builder /app/node_modules ../node_modules
 
 CMD ["node", "dist/index.js"]
 
