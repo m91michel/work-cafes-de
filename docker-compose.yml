@@ -1,22 +1,22 @@
 version: '3.8'
 
 services:
-  # German version (cafezumarbeiten.de)
-  cafes-de:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        LANGUAGE: de
-        NODE_VERSION: 22
-    image: work-cafes-de:de
-    ports:
-      - "3010:3010"
-    env_file:
-      - .env.local
-    restart: unless-stopped
-    networks:
-      - cafes-network
+  # # German version (cafezumarbeiten.de)
+  # cafes-de:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #     args:
+  #       LANGUAGE: de
+  #       NODE_VERSION: 22
+  #   image: work-cafes-de:de
+  #   ports:
+  #     - "3010:3010"
+  #   env_file:
+  #     - .env.local
+  #   restart: unless-stopped
+  #   networks:
+  #     - cafes-network
 
   # English version (awifiplace.com)
   cafes-en:
@@ -48,6 +48,29 @@ services:
       - cafes-network
     environment:
       - NODE_ENV=production
+      - CAFE_WORKER_CONCURRENCY=5
+      - CRON_WORKER_CONCURRENCY=1
+      # - REDIS_HOST=r8ggcg04wgso08oso48sc00k
+      # - REDIS_PORT=6379
+      - REDIS_DB=5
+  
+  bullboard:
+    container_name: bullboard
+    image: venatum/bull-board
+    env_file:
+      - .env.local
+      - .env
+    restart: unless-stopped
+    networks:
+      - cafes-network
+    ports:
+      - "3232:3000"
+    environment:
+      # - REDIS_HOST=host.docker.internal
+      # - REDIS_PORT=6379
+      - REDIS_DB=5
+      - USER_LOGIN=mathias
+      - USER_PASSWORD=mathias
 
 networks:
   cafes-network:
