@@ -1,13 +1,13 @@
 import { Job } from "bullmq";
 import { createHash } from "crypto";
-import { queue as cafeQueue } from "../queues/cafe";
-import supabase from "../supabase/supabaseClient";
-import { mergeObjects } from "../utils";
+import { queue as cafeQueue } from "../../queues/cafe";
+import supabase from "../../supabase/supabaseClient";
+import { mergeObjects } from "../../utils";
 import dayjs from "dayjs";
-import { analyzeReviews } from "../openai/analyze-reviews";
-import { prepareReviews } from "../review-utils";
-import { isDev } from "../environment";
-import { JOB_NAMES } from "./job-names";
+import { analyzeReviews } from "../../openai/analyze-reviews";
+import { prepareReviews } from "../../review-utils";
+import { isDev } from "../../environment";
+import { JOB_NAMES } from "../job-names";
 
 export interface JobData {
   cafeId: string;

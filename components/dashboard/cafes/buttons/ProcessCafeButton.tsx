@@ -40,6 +40,11 @@ const JOB_OPTIONS: JobOption[] = [
     label: "Evaluate Publish Status",
     description: "Evaluate the publish status of the cafe",
   },
+  {
+    name: JOB_NAMES.cafeFetchAboutContent,
+    label: "Fetch About Content",
+    description: "Fetch and update cafe about content",
+  },
 ];
 
 export function ProcessCafeButton({ cafe, title }: Props) {

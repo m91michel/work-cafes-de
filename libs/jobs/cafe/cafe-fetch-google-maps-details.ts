@@ -1,13 +1,13 @@
 import { Job } from 'bullmq';
 import { createHash } from 'crypto';
-import { queue as cafeQueue } from '../queues/cafe';
-import supabase from '../supabase/supabaseClient';
-import { getPlaceDetails } from '../google-maps';
-import { uploadImageToBunny } from '../bunny';
-import { processOpenHours } from '../openai/process-open-hours';
-import { formatLinks, mergeObjects } from '../utils';
+import { queue as cafeQueue } from '../../queues/cafe';
+import supabase from '../../supabase/supabaseClient';
+import { getPlaceDetails } from '../../google-maps';
+import { uploadImageToBunny } from '../../bunny';
+import { processOpenHours } from '../../openai/process-open-hours';
+import { formatLinks, mergeObjects } from '../../utils';
 import dayjs from 'dayjs';
-import { JOB_NAMES } from './job-names';
+import { JOB_NAMES } from '../job-names';
 
 export interface JobData {
   cafeId: string;

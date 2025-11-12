@@ -59,6 +59,9 @@ export async function POST(
       case JOB_NAMES.cafeEvalPublishStatus:
         await enqueue.cafeEvalPublishStatus(id);
         break;
+      case JOB_NAMES.cafeFetchAboutContent:
+        await enqueue.cafeFetchAboutContent(id);
+        break;
       default:
         return NextResponse.json(
           { error: `Job ${jobName} is not supported for individual cafes` },
