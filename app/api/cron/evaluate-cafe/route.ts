@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import supabase from "@/libs/supabase/supabaseClient";
 import { extractToken, mergeObjects } from "@/libs/utils";
-import { Review } from "@/libs/types";
-import { AIReview, analyzeReviews } from "@/libs/openai/analyze-reviews";
+import { analyzeReviews } from "@/libs/openai/analyze-reviews";
 import dayjs from "dayjs";
 import { updateCafeCount } from "@/libs/supabase/cities";
 import { uniq } from "lodash";
+import { prepareReviews } from "@/libs/review-utils";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -112,26 +112,4 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ message: "success" });
 }
 
-function prepareReviews(reviews: Review[]): AIReview[] {
-  if (reviews.length === 0) {
-    return [];
-  }
 
-  return reviews.map((review) => ({
-    name: review.author_name || "",
-    date: review.created_at || "",
-    review: getReviewText(review),
-  }));
-}
-
-function getReviewText(review: Review) {
-  if (review.text_en) {
-    return review.text_en;
-  }
-
-  if (review.text_de) {
-    return review.text_de;
-  }
-
-  return review.text_original || "";
-}

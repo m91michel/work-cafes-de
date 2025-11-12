@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
+import { JOB_NAMES } from "@/libs/jobs/job-names";
 import { Cafe } from "@/libs/types";
 import { Play, ChevronDown } from "lucide-react";
 import { useState } from "react";
@@ -25,14 +26,19 @@ type JobOption = {
 
 const JOB_OPTIONS: JobOption[] = [
   {
-    name: "cafe-fetch-google-maps-details",
+    name: JOB_NAMES.googleMapsDetails,
     label: "Fetch Google Maps Details",
     description: "Fetch and update cafe details from Google Maps",
   },
   {
-    name: "cafe-fetch-reviews",
+    name: JOB_NAMES.cafeFetchReviews,
     label: "Fetch Reviews",
     description: "Fetch reviews from Google Maps",
+  },
+  {
+    name: JOB_NAMES.cafeEvalPublishStatus,
+    label: "Evaluate Publish Status",
+    description: "Evaluate the publish status of the cafe",
   },
 ];
 

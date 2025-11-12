@@ -7,12 +7,13 @@ import { uploadImageToBunny } from '../bunny';
 import { processOpenHours } from '../openai/process-open-hours';
 import { formatLinks, mergeObjects } from '../utils';
 import dayjs from 'dayjs';
+import { JOB_NAMES } from './job-names';
 
 export interface JobData {
   cafeId: string;
 }
 
-export const JOB_NAME = 'cafe-fetch-google-maps-details' as const;
+export const JOB_NAME = JOB_NAMES.googleMapsDetails;
 
 /**
  * Enqueue a job to process a cafe

@@ -3,12 +3,13 @@ import { queue as cafeQueue } from '../queues/cafe';
 import supabase from '../supabase/supabaseClient';
 import { updateCafeCount } from '../supabase/cities';
 import { Cafe } from '../types';
+import { JOB_NAMES } from './job-names';
 
 export interface JobData {
   citySlug?: string;
 }
 
-export const JOB_NAME = 'update-cafe-stats' as const;
+export const JOB_NAME = JOB_NAMES.updateCafeStats;
 
 /**
  * Enqueue a job to update cafe stats

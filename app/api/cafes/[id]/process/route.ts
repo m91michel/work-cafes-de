@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import type { NextRequest } from "next/server";
-import { enqueue, JOB_NAMES } from "@/libs/jobs";
+import { enqueue } from "@/libs/jobs";
+import { JOB_NAMES } from "@/libs/jobs/job-names";
 
 type Params = Promise<{ id: string }>
 
@@ -54,6 +55,9 @@ export async function POST(
         break;
       case JOB_NAMES.cafeFetchReviews:
         await enqueue.cafeFetchReviews(id);
+        break;
+      case JOB_NAMES.cafeEvalPublishStatus:
+        await enqueue.cafeEvalPublishStatus(id);
         break;
       default:
         return NextResponse.json(

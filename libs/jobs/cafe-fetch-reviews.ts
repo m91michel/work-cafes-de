@@ -7,12 +7,13 @@ import dayjs from 'dayjs';
 import { Cafe } from '../types';
 import { outscraperReviewsTask } from '../apis/outscraper';
 import { getKeywords } from '../cafe-utils';
+import { JOB_NAMES } from './job-names';
 
 export interface JobData {
   cafeId: string;
 }
 
-export const JOB_NAME = 'cafe-fetch-reviews' as const;
+export const JOB_NAME = JOB_NAMES.cafeFetchReviews;
 
 /**
  * Enqueue a job to process a cafe
