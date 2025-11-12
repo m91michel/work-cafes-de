@@ -15,11 +15,11 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Get queue statistics
+    // Get queue statistics for both queues
     // Note: Full Bull Board UI requires Express middleware which doesn't work
     // directly with Next.js App Router. This endpoint provides basic stats.
 
-    const [waiting, active, completed, failed, delayed] = await Promise.all([
+    const [cafeWaiting, cafeActive, cafeCompleted, cafeFailed, cafeDelayed] = await Promise.all([
       queues.cafe.getWaitingCount(),
       queues.cafe.getActiveCount(),
       queues.cafe.getCompletedCount(),
@@ -27,15 +27,31 @@ export async function GET(request: NextRequest) {
       queues.cafe.getDelayedCount(),
     ]);
 
+    const [cronWaiting, cronActive, cronCompleted, cronFailed, cronDelayed] = await Promise.all([
+      queues.cron.getWaitingCount(),
+      queues.cron.getActiveCount(),
+      queues.cron.getCompletedCount(),
+      queues.cron.getFailedCount(),
+      queues.cron.getDelayedCount(),
+    ]);
+
     return NextResponse.json({
       queues: [
         {
           name: 'cafe-processing',
-          waiting,
-          active,
-          completed,
-          failed,
-          delayed,
+          waiting: cafeWaiting,
+          active: cafeActive,
+          completed: cafeCompleted,
+          failed: cafeFailed,
+          delayed: cafeDelayed,
+        },
+        {
+          name: 'cron-jobs',
+          waiting: cronWaiting,
+          active: cronActive,
+          completed: cronCompleted,
+          failed: cronFailed,
+          delayed: cronDelayed,
         },
       ],
     });

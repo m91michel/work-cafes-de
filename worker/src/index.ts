@@ -33,45 +33,82 @@ import { redisConnection } from './config/redis';
 import { processJob } from './processors/job-processor';
 import { initializeScheduler, shutdownScheduler } from './schedulers/scheduler';
 
-let worker: Worker | null = null;
+let cafeWorker: Worker | null = null;
+let cronWorker: Worker | null = null;
 let isShuttingDown = false;
 
-async function startWorker() {
-  console.log('🚀 Starting worker...');
+async function startWorkers() {
+  console.log('🚀 Starting workers...');
 
   // Initialize scheduler
   await initializeScheduler();
 
-  // Create worker
-  worker = new Worker(
+  // Get concurrency from environment variables
+  const cafeConcurrency = parseInt(process.env.CAFE_WORKER_CONCURRENCY || process.env.WORKER_CONCURRENCY || '5', 10);
+  const cronConcurrency = parseInt(process.env.CRON_WORKER_CONCURRENCY || '1', 10);
+  
+  console.log(`📊 Cafe worker concurrency set to: ${cafeConcurrency}`);
+  console.log(`📊 Cron worker concurrency set to: ${cronConcurrency}`);
+
+  // Create cafe processing worker
+  cafeWorker = new Worker(
     'cafe-processing',
     async (job: Job) => {
       return await processJob(job);
     },
     {
       connection: redisConnection,
-      concurrency: 5,
+      concurrency: cafeConcurrency,
     }
   );
 
-  // Event listeners
-  worker.on('completed', (job: Job) => {
-    console.log(`✅ Job ${job.id} completed`);
+  // Create cron jobs worker
+  cronWorker = new Worker(
+    'cron-jobs',
+    async (job: Job) => {
+      return await processJob(job);
+    },
+    {
+      connection: redisConnection,
+      concurrency: cronConcurrency,
+    }
+  );
+
+  // Cafe worker event listeners
+  cafeWorker.on('completed', (job: Job) => {
+    console.log(`✅ Cafe job ${job.id} completed`);
   });
 
-  worker.on('failed', (job: Job | undefined, err: Error) => {
-    console.error(`❌ Job ${job?.id || 'unknown'} failed:`, err.message);
+  cafeWorker.on('failed', (job: Job | undefined, err: Error) => {
+    console.error(`❌ Cafe job ${job?.id || 'unknown'} failed:`, err.message);
   });
 
-  worker.on('active', (job: Job) => {
-    console.log(`🔄 Job ${job.id} is now active`);
+  cafeWorker.on('active', (job: Job) => {
+    console.log(`🔄 Cafe job ${job.id} is now active`);
   });
 
-  worker.on('error', (err: Error) => {
-    console.error('❌ Worker error:', err);
+  cafeWorker.on('error', (err: Error) => {
+    console.error('❌ Cafe worker error:', err);
   });
 
-  console.log('✅ Worker started and ready to process jobs');
+  // Cron worker event listeners
+  cronWorker.on('completed', (job: Job) => {
+    console.log(`✅ Cron job ${job.id} completed`);
+  });
+
+  cronWorker.on('failed', (job: Job | undefined, err: Error) => {
+    console.error(`❌ Cron job ${job?.id || 'unknown'} failed:`, err.message);
+  });
+
+  cronWorker.on('active', (job: Job) => {
+    console.log(`🔄 Cron job ${job.id} is now active`);
+  });
+
+  cronWorker.on('error', (err: Error) => {
+    console.error('❌ Cron worker error:', err);
+  });
+
+  console.log('✅ Workers started and ready to process jobs');
 }
 
 async function shutdown() {
@@ -80,12 +117,18 @@ async function shutdown() {
   }
 
   isShuttingDown = true;
-  console.log('🛑 Shutting down worker...');
+  console.log('🛑 Shutting down workers...');
 
-  if (worker) {
-    await worker.close();
-    worker = null;
-    console.log('✅ Worker closed');
+  if (cafeWorker) {
+    await cafeWorker.close();
+    cafeWorker = null;
+    console.log('✅ Cafe worker closed');
+  }
+
+  if (cronWorker) {
+    await cronWorker.close();
+    cronWorker = null;
+    console.log('✅ Cron worker closed');
   }
 
   await shutdownScheduler();
@@ -110,9 +153,9 @@ process.on('unhandledRejection', (reason, promise) => {
   shutdown();
 });
 
-// Start the worker
-startWorker().catch((error) => {
-  console.error('❌ Failed to start worker:', error);
+// Start the workers
+startWorkers().catch((error) => {
+  console.error('❌ Failed to start workers:', error);
   process.exit(1);
 });
 

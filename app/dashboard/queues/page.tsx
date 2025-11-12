@@ -13,7 +13,7 @@ interface QueueStats {
 }
 
 export default function QueuesPage() {
-  const [stats, setStats] = useState<QueueStats | null>(null);
+  const [stats, setStats] = useState<QueueStats[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,7 +26,7 @@ export default function QueuesPage() {
         }
         const data = await response.json();
         if (data.queues && data.queues.length > 0) {
-          setStats(data.queues[0]);
+          setStats(data.queues);
         }
         setLoading(false);
       } catch (err) {
@@ -66,56 +66,75 @@ export default function QueuesPage() {
         Monitor and manage background job queues
       </p>
 
-      {stats && (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Queue Name</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.name}</div>
-            </CardContent>
-          </Card>
+      {stats.length > 0 && (
+        <div className="space-y-6">
+          {stats.map((queueStats) => (
+            <div key={queueStats.name}>
+              <h2 className="text-lg font-semibold mb-4 capitalize">
+                {queueStats.name.replace('-', ' ')}
+              </h2>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Queue Name</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-lg font-bold">{queueStats.name}</div>
+                  </CardContent>
+                </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Waiting</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.waiting}</div>
-              <p className="text-xs text-muted-foreground">Jobs in queue</p>
-            </CardContent>
-          </Card>
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Waiting</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">{queueStats.waiting}</div>
+                    <p className="text-xs text-muted-foreground">Jobs in queue</p>
+                  </CardContent>
+                </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.active}</div>
-              <p className="text-xs text-muted-foreground">Currently processing</p>
-            </CardContent>
-          </Card>
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Active</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">{queueStats.active}</div>
+                    <p className="text-xs text-muted-foreground">Currently processing</p>
+                  </CardContent>
+                </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Completed</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.completed}</div>
-              <p className="text-xs text-muted-foreground">Successfully finished</p>
-            </CardContent>
-          </Card>
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Completed</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">{queueStats.completed}</div>
+                    <p className="text-xs text-muted-foreground">Successfully finished</p>
+                  </CardContent>
+                </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Failed</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.failed}</div>
-              <p className="text-xs text-muted-foreground">Jobs that failed</p>
-            </CardContent>
-          </Card>
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Failed</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">{queueStats.failed}</div>
+                    <p className="text-xs text-muted-foreground">Jobs that failed</p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Delayed</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">{queueStats.delayed}</div>
+                    <p className="text-xs text-muted-foreground">Scheduled jobs</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          ))}
         </div>
       )}
 

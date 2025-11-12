@@ -25,7 +25,7 @@ export async function initializeScheduler() {
  */
 async function jobExists(jobId: string): Promise<boolean> {
   try {
-    const repeatableJobs = await queues.cafe.getRepeatableJobs();
+    const repeatableJobs = await queues.cron.getRepeatableJobs();
     return repeatableJobs.some((job) => job.id === jobId);
   } catch (error) {
     console.error(`❌ Error checking for existing job ${jobId}:`, error);
@@ -51,7 +51,7 @@ async function scheduleJobIfNotExists(
   }
 
   try {
-    await queues.cafe.add(
+    await queues.cron.add(
       jobName,
       jobData,
       {
@@ -98,12 +98,12 @@ async function scheduleRepeatableJobs() {
 }
 
 export async function listScheduledJobs() {
-  const repeatableJobs = await queues.cafe.getRepeatableJobs();
+  const repeatableJobs = await queues.cron.getRepeatableJobs();
   return repeatableJobs;
 }
 
 export async function removeScheduledJob(jobKey: string) {
-  await queues.cafe.removeRepeatableByKey(jobKey);
+  await queues.cron.removeRepeatableByKey(jobKey);
   console.log(`✅ Removed scheduled job: ${jobKey}`);
 }
 

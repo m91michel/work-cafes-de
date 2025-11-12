@@ -10,6 +10,22 @@ The worker service processes background jobs for the cafe management system. It 
 - **Redis**: Queue storage and job state
 - **Supabase**: Database access for job processing
 
+### Queue Structure
+
+The system uses two separate queues for better job organization and concurrency control:
+
+1. **Cafe Processing Queue** (`cafe-processing`): Handles individual cafe processing jobs
+   - `CAFE_FETCH_GOOGLE_MAPS_DETAILS` - Fetch Google Maps details for a cafe
+   - `CAFE_FETCH_REVIEWS` - Fetch reviews for a cafe
+   - `CAFE_EVAL_PUBLISH_STATUS` - Evaluate if a cafe should be published
+   - `CAFE_FETCH_ABOUT_CONTENT` - Fetch about content for a cafe
+
+2. **Cron Jobs Queue** (`cron-jobs`): Handles scheduled/recurring jobs
+   - `CAFE_SCHEDULER` - Runs every 5 minutes, finds cafes and enqueues individual cafe jobs
+   - `UPDATE_CAFE_STATS` - Runs daily at 3 AM, updates city-level cafe statistics
+
+Each queue has its own worker with independent concurrency settings, allowing fine-tuned control over resource usage.
+
 ## Directory Structure
 
 ```
@@ -39,7 +55,17 @@ REDIS_DB=1
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 NODE_ENV=development
+CAFE_WORKER_CONCURRENCY=5
+CRON_WORKER_CONCURRENCY=1
 ```
+
+**Worker Concurrency:**
+- `CAFE_WORKER_CONCURRENCY` (default: `5`) - Number of cafe processing jobs that can run simultaneously
+- `CRON_WORKER_CONCURRENCY` (default: `1`) - Number of cron/scheduled jobs that can run simultaneously
+- `WORKER_CONCURRENCY` (deprecated, falls back to `CAFE_WORKER_CONCURRENCY`) - Legacy setting for backward compatibility
+- Increase these values to process more jobs in parallel (useful for high-throughput scenarios)
+- Decrease these values to reduce resource usage or API rate limits
+- Cron jobs typically run less frequently, so lower concurrency is usually sufficient
 
 **Redis Database Number:**
 - `REDIS_DB` (default: `1`) - Redis database number to use for BullMQ data

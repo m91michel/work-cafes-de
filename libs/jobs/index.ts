@@ -1,10 +1,10 @@
 // Job registry for type-safe processing (internal imports)
 import * as googleMapsJobs from './cafe/cafe-fetch-google-maps-details';
-import * as updateCafeStatsJobs from './city/update-cafe-stats';
+import * as updateCafeStatsJobs from './cron/update-cafe-stats';
 import * as cafeFetchReviewsJobs from './cafe/cafe-fetch-reviews';
 import * as cafeEvalPublishStatusJobs from './cafe/cafe-eval-publish-status';
 import * as cafeFetchAboutContentJobs from './cafe/fetch-about-content';
-import * as cafeSchedulerJobs from './cafe/cafe-scheduler';
+import * as cafeSchedulerJobs from './cron/cafe-scheduler';
 
 type CafeJobData = {
   cafeId: string;

@@ -1,5 +1,5 @@
 import { Job } from 'bullmq';
-import { queue as cafeQueue } from '../../queues/cafe';
+import { queue as cronQueue } from '../../queues/cron';
 import supabase from '../../supabase/supabaseClient';
 import { updateCafeCount } from '../../supabase/cities';
 import { Cafe } from '../../types';
@@ -17,7 +17,7 @@ export const JOB_NAME = JOB_NAMES.updateCafeStats;
 export async function enqueueJob(citySlug?: string) {
   const jobId = citySlug ? `${JOB_NAME}-${citySlug}` : JOB_NAME;
   
-  await cafeQueue.add(
+  await cronQueue.add(
     JOB_NAME,
     { citySlug },
     {

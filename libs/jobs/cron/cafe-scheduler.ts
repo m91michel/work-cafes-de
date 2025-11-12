@@ -1,6 +1,6 @@
 import { Job } from "bullmq";
 import { createHash } from "crypto";
-import { queue as cafeQueue } from "../../queues/cafe";
+import { queue as cronQueue } from "../../queues/cron";
 import supabase from "../../supabase/supabaseClient";
 import { JOB_NAMES } from "../job-names";
 import { enqueue } from "..";
@@ -19,12 +19,12 @@ export async function enqueueJob() {
     .substring(0, 16); // Use first 16 chars for shorter ID
   const jobId = `${JOB_NAME}-${hash}`;
 
-  await cafeQueue.add(
+  await cronQueue.add(
     JOB_NAME,
     {},
     {
       jobId,
-      priority: 10, // Higher priority for individual cafe processing
+      priority: 10, // Higher priority for scheduler jobs
     }
   );
 
