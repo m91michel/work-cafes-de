@@ -1,25 +1,47 @@
 import { Job } from 'bullmq';
-import supabase from '../../../libs/supabase/supabaseClient';
-import { updateCafeCount } from '../../../libs/supabase/cities';
-import { Cafe } from '../../../libs/types';
+import { cafeQueue } from './index';
+import supabase from '../supabase/supabaseClient';
+import { updateCafeCount } from '../supabase/cities';
+import { Cafe } from '../types';
 
 export interface UpdateCafeStatsJobData {
   citySlug?: string;
 }
 
-export async function updateCafeStats(job: Job<UpdateCafeStatsJobData>) {
+export const JOB_NAME = 'update-cafe-stats' as const;
+
+/**
+ * Enqueue a job to update cafe stats
+ */
+export async function enqueueUpdateCafeStats(citySlug?: string) {
+  const jobId = citySlug ? `${JOB_NAME}-${citySlug}` : JOB_NAME;
+  
+  await cafeQueue.add(
+    JOB_NAME,
+    { citySlug },
+    {
+      jobId, // Prevent duplicates
+      priority: 5,
+    }
+  );
+
+  console.log(`✅ Enqueued ${JOB_NAME} job${citySlug ? ` for city: ${citySlug}` : ''}`);
+}
+
+/**
+ * Process update cafe stats job
+ */
+export async function processUpdateCafeStats(job: Job<UpdateCafeStatsJobData>) {
   const { citySlug } = job.data;
   
-  console.log(`⚡️ Starting update-cafe-stats job${citySlug ? ` for city: ${citySlug}` : ' for all cities'}`);
+  console.log(`⚡️ Starting ${JOB_NAME} job${citySlug ? ` for city: ${citySlug}` : ' for all cities'}`);
 
   try {
-    // Build query
     let query = supabase
       .from('cafes')
       .select('id, city_slug, status')
       .eq('status', 'PUBLISHED');
 
-    // If citySlug is provided, filter by it
     if (citySlug) {
       query = query.eq('city_slug', citySlug);
     }
@@ -35,7 +57,6 @@ export async function updateCafeStats(job: Job<UpdateCafeStatsJobData>) {
       return { success: true, processed: 0 };
     }
 
-    // Get unique city slugs
     const citySlugs = [...new Set(cafes.map((cafe) => cafe.city_slug).filter(Boolean))];
 
     console.log(`📊 Processing ${citySlugs.length} cities`);
@@ -43,12 +64,7 @@ export async function updateCafeStats(job: Job<UpdateCafeStatsJobData>) {
     let processedCount = 0;
     for (const slug of citySlugs) {
       if (!slug) continue;
-
-      // Get cafes for this city
-      const cityCafes = cafes.filter((cafe) => cafe.city_slug === slug);
       
-      // Update cafe count for this city
-      // We'll use the first cafe as a reference (updateCafeCount expects a cafe object)
       const cafeRef: Partial<Cafe> = {
         city_slug: slug,
         status: 'PUBLISHED',
@@ -68,7 +84,7 @@ export async function updateCafeStats(job: Job<UpdateCafeStatsJobData>) {
       citiesProcessed: citySlugs.length,
     };
   } catch (error) {
-    console.error('❌ Error in update-cafe-stats job:', error);
+    console.error(`❌ Error in ${JOB_NAME} job:`, error);
     throw error;
   }
 }

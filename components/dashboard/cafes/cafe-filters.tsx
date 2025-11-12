@@ -20,8 +20,8 @@ export function CafeFilters({ table }: CafeFiltersProps) {
   const status = table.getColumn("status")?.getFilterValue() as string;
 
   return (
-    <div className="grid grid-cols-3 gap-4">
-      <div className="space-y-2">
+    <div className="flex gap-4 justify-between">
+      <div className="w-full md:w-1/3">
         <Label>Search by Name</Label>
         <Input
           placeholder="Search cafes..."
@@ -32,7 +32,7 @@ export function CafeFilters({ table }: CafeFiltersProps) {
           className="max-w-sm"
         />
       </div>
-      <div className="space-y-2">
+      <div className="w-full md:w-1/3">
         <Label>Filter by City</Label>
         <Input
           placeholder="Filter by city..."
@@ -43,7 +43,7 @@ export function CafeFilters({ table }: CafeFiltersProps) {
           className="max-w-sm"
         />
       </div>
-      <div className="space-y-2">
+      <div className="w-full md:w-1/3">
         <Label>Filter by Status</Label>
         <Select
           value={status || undefined}
@@ -51,7 +51,7 @@ export function CafeFilters({ table }: CafeFiltersProps) {
             table.getColumn("status")?.setFilterValue(value === "all" ? undefined : value)
           }
         >
-          <SelectTrigger className="max-w-sm">
+          <SelectTrigger className="min-w-40">
             <SelectValue placeholder="Select status" />
           </SelectTrigger>
           <SelectContent>
@@ -60,6 +60,7 @@ export function CafeFilters({ table }: CafeFiltersProps) {
             <SelectItem value="NEW">New</SelectItem>
             <SelectItem value="PROCESSED">Processed</SelectItem>
             <SelectItem value="CLOSED">Closed</SelectItem>
+            <SelectItem value="UNKNOWN">Unknown</SelectItem>
           </SelectContent>
         </Select>
       </div>

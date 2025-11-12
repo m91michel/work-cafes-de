@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
     // directly with Next.js App Router. This endpoint provides basic stats.
     
     const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
-    const redisDb = parseInt(process.env.REDIS_DB || '1', 10);
+    const redisDb = parseInt(process.env.REDIS_DB || '5', 10);
     
     const redis = new Redis(redisUrl, {
       db: redisDb,

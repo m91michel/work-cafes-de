@@ -1,4 +1,4 @@
-import { cafeQueue } from '../config/queues';
+import { cafeQueue } from '../../../libs/jobs';
 
 let schedulerInitialized = false;
 
@@ -22,7 +22,7 @@ export async function initializeScheduler() {
 async function scheduleRepeatableJobs() {
   try {
     // Check if the repeatable job already exists
-    const repeatableJobs = await cafeQueue.getRepeatableJobs();
+    const repeatableJobs = await cafeQueue.getJobSchedulers();
     const existingJob = repeatableJobs.find(
       (job) => job.id === 'update-cafe-stats-daily'
     );

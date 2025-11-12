@@ -16,18 +16,17 @@ The worker service processes background jobs for the cafe management system. It 
 worker/
 ├── src/
 │   ├── config/
-│   │   ├── redis.ts          # Redis connection configuration
-│   │   └── queues.ts          # Queue definitions
-│   ├── jobs/
-│   │   └── update-cafe-stats.ts  # Example job implementation
+│   │   └── redis.ts          # Redis connection configuration
 │   ├── processors/
-│   │   └── job-processor.ts   # Job processing router
+│   │   └── job-processor.ts   # Job processing router (uses registry from libs/jobs)
 │   ├── schedulers/
 │   │   └── scheduler.ts       # Scheduled/repeatable jobs
 │   └── index.ts               # Worker entry point
-├── package.json
-├── tsconfig.json
-└── Dockerfile
+
+libs/jobs/
+├── index.ts                   # Queue initialization and job registry
+├── process-cafe.ts            # Process cafe job (enqueue + process)
+└── update-cafe-stats.ts       # Update cafe stats job (enqueue + process)
 ```
 
 ## Environment Variables
@@ -82,19 +81,43 @@ NODE_ENV=development
 
 ### 1. Create Job File
 
-Create a new file in `src/jobs/`:
+Create a new file in `libs/jobs/` that contains both the enqueue and process functions:
 
 ```typescript
-// src/jobs/my-new-job.ts
+// libs/jobs/my-new-job.ts
 import { Job } from 'bullmq';
+import { cafeQueue } from './index';
 
 export interface MyNewJobData {
   // Define your job data structure
   someField: string;
 }
 
-export async function myNewJob(job: Job<MyNewJobData>) {
+export const JOB_NAME = 'my-new-job' as const;
+
+/**
+ * Enqueue a job
+ */
+export async function enqueueMyNewJob(someField: string) {
+  await cafeQueue.add(
+    JOB_NAME,
+    { someField },
+    {
+      jobId: `${JOB_NAME}-${someField}`, // Optional: prevent duplicates
+      priority: 5,
+    }
+  );
+
+  console.log(`✅ Enqueued ${JOB_NAME} job for: ${someField}`);
+}
+
+/**
+ * Process the job
+ */
+export async function processMyNewJob(job: Job<MyNewJobData>) {
   const { someField } = job.data;
+  
+  console.log(`⚡️ Starting ${JOB_NAME} for: ${someField}`);
   
   // Your job logic here
   console.log(`Processing: ${someField}`);
@@ -103,36 +126,49 @@ export async function myNewJob(job: Job<MyNewJobData>) {
 }
 ```
 
-### 2. Register in Job Processor
+### 2. Register in Job Registry
 
-Update `src/processors/job-processor.ts`:
+Update `libs/jobs/index.ts` to register your new job:
 
 ```typescript
-import { myNewJob, MyNewJobData } from '../jobs/my-new-job';
+// Add import
+import { processMyNewJob, MyNewJobData, JOB_NAME as MY_NEW_JOB_NAME } from './my-new-job';
 
-// In the switch statement:
-case 'my-new-job':
-  result = await myNewJob(job as Job<MyNewJobData>);
-  break;
+// Add to JobData union type (automatic if exported)
+export type JobData = ProcessCafeJobData | UpdateCafeStatsJobData | MyNewJobData;
+
+// Add to job handlers registry
+export const jobHandlers: Record<string, JobHandler> = {
+  [PROCESS_CAFE_NAME]: processProcessCafe,
+  [UPDATE_STATS_NAME]: processUpdateCafeStats,
+  [MY_NEW_JOB_NAME]: processMyNewJob, // Add this line
+};
+
+// Add to JOB_NAMES constant
+export const JOB_NAMES = {
+  PROCESS_CAFE: PROCESS_CAFE_NAME,
+  UPDATE_CAFE_STATS: UPDATE_STATS_NAME,
+  MY_NEW_JOB: MY_NEW_JOB_NAME, // Add this line
+} as const;
 ```
 
 ### 3. Enqueue Jobs
 
-From your Next.js app, use the queue client:
+From your Next.js app, import and use the enqueue function:
 
 ```typescript
-import { cafeQueue } from '@/libs/jobs/queue-client';
+import { enqueueMyNewJob } from '@/libs/jobs';
 
-await cafeQueue.add('my-new-job', {
-  someField: 'value',
-});
+await enqueueMyNewJob('value');
 ```
 
 ## Scheduling Jobs
 
-Jobs can be scheduled using BullMQ's repeatable jobs feature. Edit `src/schedulers/scheduler.ts`:
+Jobs can be scheduled using BullMQ's repeatable jobs feature. Edit `worker/src/schedulers/scheduler.ts`:
 
 ```typescript
+import { cafeQueue } from '../../../libs/jobs';
+
 // Schedule a job to run daily at 3 AM
 await cafeQueue.add(
   'my-new-job',
@@ -225,12 +261,13 @@ docker-compose restart worker
 The included `update-cafe-stats` job demonstrates:
 
 1. Job data interface definition
-2. Supabase integration
-3. Progress updates
-4. Error handling
-5. Result reporting
+2. Enqueue function with job options
+3. Process function with Supabase integration
+4. Progress updates
+5. Error handling
+6. Result reporting
 
-See `src/jobs/update-cafe-stats.ts` for reference.
+See `libs/jobs/update-cafe-stats.ts` for reference.
 
 ## Production Considerations
 

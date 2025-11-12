@@ -60,3 +60,5 @@ data/ignored
 
 # Cursor
 .cursor/mcp.json
+
+worker/.env

@@ -3,6 +3,7 @@ import { Cafe } from "@/libs/types";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { CheckCafeButton } from "./buttons/CheckCafeButton";
+import { ProcessCafeButton } from "./buttons/ProcessCafeButton";
 import { StatusDropdown } from "./buttons/StatusDropdown";
 
 interface CafeActionsProps {
@@ -15,7 +16,7 @@ export function CafeActions({ cafe }: CafeActionsProps) {
   
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center gap-1">
       <Link
         href={`/cafes/${cafe.slug}`}
         className="inline-flex items-center justify-center h-8 w-8 rounded-md hover:bg-muted"
@@ -25,6 +26,7 @@ export function CafeActions({ cafe }: CafeActionsProps) {
 
       <StatusDropdown cafe={cafe} />
       <CheckCafeButton cafe={cafe} />
+      <ProcessCafeButton cafe={cafe} />
     </div>
   );
 }

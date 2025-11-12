@@ -1,7 +1,5 @@
 import { Job } from 'bullmq';
-import { updateCafeStats, UpdateCafeStatsJobData } from '../jobs/update-cafe-stats';
-
-export type JobData = UpdateCafeStatsJobData;
+import { jobHandlers, JobData } from '../../../libs/jobs';
 
 export async function processJob(job: Job<JobData>) {
   const startTime = Date.now();
@@ -11,15 +9,13 @@ export async function processJob(job: Job<JobData>) {
   console.log(`🚀 Processing job: ${jobName} (ID: ${jobId})`);
 
   try {
-    let result;
-
-    switch (jobName) {
-      case 'update-cafe-stats':
-        result = await updateCafeStats(job as Job<UpdateCafeStatsJobData>);
-        break;
-      default:
-        throw new Error(`Unknown job type: ${jobName}`);
+    const handler = jobHandlers[jobName];
+    
+    if (!handler) {
+      throw new Error(`Unknown job type: ${jobName}`);
     }
+
+    const result = await handler(job);
 
     const duration = Date.now() - startTime;
     console.log(`✅ Job ${jobName} (ID: ${jobId}) completed in ${duration}ms`);
