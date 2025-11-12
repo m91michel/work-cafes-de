@@ -1,4 +1,5 @@
 import { queues } from '../../../libs/queues';
+import { JOB_NAMES } from '../../../libs/jobs/job-names';
 
 let schedulerInitialized = false;
 
@@ -19,32 +20,77 @@ export async function initializeScheduler() {
   console.log('✅ Scheduler initialized');
 }
 
-async function scheduleRepeatableJobs() {
+/**
+ * Helper function to check if a repeatable job already exists
+ */
+async function jobExists(jobId: string): Promise<boolean> {
   try {
-    // Check if the repeatable job already exists
-    const repeatableJobs = await queues.cafe.getJobSchedulers();
-    const existingJob = repeatableJobs.find(
-      (job) => job.id === 'update-cafe-stats-daily'
-    );
+    const repeatableJobs = await queues.cafe.getRepeatableJobs();
+    return repeatableJobs.some((job) => job.id === jobId);
+  } catch (error) {
+    console.error(`❌ Error checking for existing job ${jobId}:`, error);
+    return false;
+  }
+}
 
-    if (existingJob) {
-      console.log('ℹ️ Repeatable job already exists: update-cafe-stats-daily');
-      return;
-    }
+/**
+ * Schedule a repeatable job if it doesn't already exist
+ */
+async function scheduleJobIfNotExists(
+  jobName: string,
+  jobId: string,
+  cronPattern: string,
+  description: string,
+  jobData: any = {}
+) {
+  const exists = await jobExists(jobId);
+  
+  if (exists) {
+    console.log(`ℹ️ Repeatable job already exists: ${jobId} (${description})`);
+    return;
+  }
 
-    // Schedule update-cafe-stats to run daily at 3 AM
+  try {
     await queues.cafe.add(
-      'update-cafe-stats',
-      {},
+      jobName,
+      jobData,
       {
         repeat: {
-          pattern: '0 3 * * *', // Cron pattern: daily at 3 AM
+          pattern: cronPattern,
         },
-        jobId: 'update-cafe-stats-daily',
+        jobId,
       }
     );
 
-    console.log('✅ Scheduled repeatable job: update-cafe-stats (daily at 3 AM)');
+    console.log(`✅ Scheduled repeatable job: ${jobId} (${description})`);
+  } catch (error) {
+    console.error(`❌ Error scheduling job ${jobId}:`, error);
+    throw error;
+  }
+}
+
+async function scheduleRepeatableJobs() {
+  try {
+    // Schedule cafe-scheduler to run every 5 minutes
+    // This job will fetch cafes and schedule subsequent jobs for each cafe
+    await scheduleJobIfNotExists(
+      JOB_NAMES.cafeScheduler,
+      'cafe-scheduler-every-5-min',
+      '*/5 * * * *', // Every 5 minutes
+      'Cafe scheduler (every 5 minutes)',
+      {}
+    );
+
+    // Schedule update-cafe-stats to run daily at 3 AM
+    await scheduleJobIfNotExists(
+      JOB_NAMES.updateCafeStats,
+      'update-cafe-stats-daily',
+      '0 3 * * *', // Daily at 3 AM
+      'Update cafe stats (daily at 3 AM)',
+      {}
+    );
+
+    console.log('✅ All repeatable jobs scheduled');
   } catch (error) {
     console.error('❌ Error scheduling repeatable jobs:', error);
     throw error;

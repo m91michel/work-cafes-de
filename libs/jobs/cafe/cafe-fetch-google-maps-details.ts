@@ -112,7 +112,7 @@ export async function processJob(job: Job<JobData>) {
           ...placeDetails as any,
           photos: photoUrls
         },
-        status: 'PROCESSED'
+        status: cafe.status !== 'PUBLISHED' ? 'PROCESSED' : cafe.status
       })
       .eq("id", cafe.id);
 

@@ -90,7 +90,7 @@ type AIResponse = {
 }
 
 export async function analyzeReviews(reviews?: AIReview[] | null): Promise<AIResponse | null> {
-  if (!reviews) {
+  if (!reviews || reviews.length === 0) {
     console.log("⚠️ No reviews provided");
     return null;
   }
