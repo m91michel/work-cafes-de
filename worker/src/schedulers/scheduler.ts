@@ -1,4 +1,4 @@
-import { cafeQueue } from '../../../libs/jobs';
+import { queues } from '../../../libs/queues';
 
 let schedulerInitialized = false;
 
@@ -22,7 +22,7 @@ export async function initializeScheduler() {
 async function scheduleRepeatableJobs() {
   try {
     // Check if the repeatable job already exists
-    const repeatableJobs = await cafeQueue.getJobSchedulers();
+    const repeatableJobs = await queues.cafe.getJobSchedulers();
     const existingJob = repeatableJobs.find(
       (job) => job.id === 'update-cafe-stats-daily'
     );
@@ -33,7 +33,7 @@ async function scheduleRepeatableJobs() {
     }
 
     // Schedule update-cafe-stats to run daily at 3 AM
-    await cafeQueue.add(
+    await queues.cafe.add(
       'update-cafe-stats',
       {},
       {
@@ -52,12 +52,12 @@ async function scheduleRepeatableJobs() {
 }
 
 export async function listScheduledJobs() {
-  const repeatableJobs = await cafeQueue.getRepeatableJobs();
+  const repeatableJobs = await queues.cafe.getRepeatableJobs();
   return repeatableJobs;
 }
 
 export async function removeScheduledJob(jobKey: string) {
-  await cafeQueue.removeRepeatableByKey(jobKey);
+  await queues.cafe.removeRepeatableByKey(jobKey);
   console.log(`✅ Removed scheduled job: ${jobKey}`);
 }
 

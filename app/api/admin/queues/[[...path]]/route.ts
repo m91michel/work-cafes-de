@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Queue } from 'bullmq';
-import Redis from 'ioredis';
 import { createClient } from '@/libs/supabase/server';
+import { queues } from '@/libs/queues';
 
 export async function GET(request: NextRequest) {
   try {
@@ -19,25 +18,13 @@ export async function GET(request: NextRequest) {
     // Get queue statistics
     // Note: Full Bull Board UI requires Express middleware which doesn't work
     // directly with Next.js App Router. This endpoint provides basic stats.
-    
-    const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
-    const redisDb = parseInt(process.env.REDIS_DB || '5', 10);
-    
-    const redis = new Redis(redisUrl, {
-      db: redisDb,
-      maxRetriesPerRequest: null,
-    });
-
-    const cafeQueue = new Queue('cafe-processing', {
-      connection: redis,
-    });
 
     const [waiting, active, completed, failed, delayed] = await Promise.all([
-      cafeQueue.getWaitingCount(),
-      cafeQueue.getActiveCount(),
-      cafeQueue.getCompletedCount(),
-      cafeQueue.getFailedCount(),
-      cafeQueue.getDelayedCount(),
+      queues.cafe.getWaitingCount(),
+      queues.cafe.getActiveCount(),
+      queues.cafe.getCompletedCount(),
+      queues.cafe.getFailedCount(),
+      queues.cafe.getDelayedCount(),
     ]);
 
     return NextResponse.json({

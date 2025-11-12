@@ -1,10 +1,10 @@
 import { Job } from 'bullmq';
-import { cafeQueue } from './index';
+import { queue as cafeQueue } from '../queues/cafe';
 import supabase from '../supabase/supabaseClient';
 import { updateCafeCount } from '../supabase/cities';
 import { Cafe } from '../types';
 
-export interface UpdateCafeStatsJobData {
+export interface JobData {
   citySlug?: string;
 }
 
@@ -13,7 +13,7 @@ export const JOB_NAME = 'update-cafe-stats' as const;
 /**
  * Enqueue a job to update cafe stats
  */
-export async function enqueueUpdateCafeStats(citySlug?: string) {
+export async function enqueueJob(citySlug?: string) {
   const jobId = citySlug ? `${JOB_NAME}-${citySlug}` : JOB_NAME;
   
   await cafeQueue.add(
@@ -31,7 +31,7 @@ export async function enqueueUpdateCafeStats(citySlug?: string) {
 /**
  * Process update cafe stats job
  */
-export async function processUpdateCafeStats(job: Job<UpdateCafeStatsJobData>) {
+export async function processJob(job: Job<JobData>) {
   const { citySlug } = job.data;
   
   console.log(`⚡️ Starting ${JOB_NAME} job${citySlug ? ` for city: ${citySlug}` : ' for all cities'}`);

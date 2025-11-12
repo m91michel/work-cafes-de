@@ -28,7 +28,7 @@ export async function POST(
   }
 
   try {
-    await enqueue.processCafe(id);
+    await enqueue.cafeFetchGoogleMapsDetails(id);
 
     return NextResponse.json({ 
       success: true, 

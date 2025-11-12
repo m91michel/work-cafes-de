@@ -72,6 +72,7 @@ export async function suggestCityAction(formData: FormData) {
         city_slug: citySlug,
         lat_long: `${data.latitude},${data.longitude}`,
         slug: slug,
+        source: "USER",
         status: "UNKNOWN",
       })
       .select();
