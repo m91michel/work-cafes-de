@@ -11,14 +11,17 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 # Copy worker package files
 COPY worker/package.json worker/yarn.lock ./worker/
+# Set Yarn cache folder explicitly for Yarn v1
+ENV YARN_CACHE_FOLDER=/usr/local/share/.cache/yarn
 # Install root dependencies (needed for libs/ imports)
 # Use BuildKit cache mount to share yarn cache between builds
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
+# Yarn v1 doesn't handle concurrent writes well, so use 'locked' mode to serialize access
+RUN --mount=type=cache,target=/usr/local/share/.cache/yarn,id=yarn-cache,sharing=locked \
     yarn install --frozen-lockfile --production=false
 WORKDIR /app/worker
 # Install worker dependencies including devDependencies for build
 # Use BuildKit cache mount to share yarn cache between builds
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
+RUN --mount=type=cache,target=/usr/local/share/.cache/yarn,id=yarn-cache,sharing=locked \
     yarn install --frozen-lockfile --production=false
 
 FROM base AS builder

@@ -28,7 +28,9 @@ COPY package.json yarn.lock ./
 
 # Install all deps for build, including devDependencies required by Tailwind/PostCSS
 # Use BuildKit cache mount to share yarn cache between builds
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
+# Yarn v1 doesn't handle concurrent writes well, so use 'locked' mode to serialize access
+ENV YARN_CACHE_FOLDER=/usr/local/share/.cache/yarn
+RUN --mount=type=cache,target=/usr/local/share/.cache/yarn,id=yarn-cache,sharing=locked \
     yarn install --frozen-lockfile --production=false
 
 # ----------------------------- builder ----------------------------
