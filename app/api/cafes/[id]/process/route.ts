@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { isProd } from "@/libs/environment";
 import type { NextRequest } from "next/server";
-import { enqueue } from "@/libs/jobs";
+import { enqueue, JOB_NAMES } from "@/libs/jobs";
 
 type Params = Promise<{ id: string }>
 
@@ -28,16 +28,48 @@ export async function POST(
   }
 
   try {
-    await enqueue.cafeFetchGoogleMapsDetails(id);
+    const body = await request.json();
+    const { jobName } = body;
+
+    if (!jobName) {
+      return NextResponse.json(
+        { error: "Job name is required" },
+        { status: 400 }
+      );
+    }
+
+    // Validate job name
+    const validJobNames = Object.values(JOB_NAMES);
+    if (!validJobNames.includes(jobName)) {
+      return NextResponse.json(
+        { error: `Invalid job name. Valid options: ${validJobNames.join(", ")}` },
+        { status: 400 }
+      );
+    }
+
+    // Execute the corresponding job based on job name
+    switch (jobName) {
+      case JOB_NAMES.googleMapsDetails:
+        await enqueue.cafeFetchGoogleMapsDetails(id);
+        break;
+      case JOB_NAMES.cafeFetchReviews:
+        await enqueue.cafeFetchReviews(id);
+        break;
+      default:
+        return NextResponse.json(
+          { error: `Job ${jobName} is not supported for individual cafes` },
+          { status: 400 }
+        );
+    }
 
     return NextResponse.json({ 
       success: true, 
-      message: `Processing job enqueued for cafe ${id}` 
+      message: `${jobName} job enqueued for cafe ${id}` 
     });
   } catch (error) {
-    console.error("Error enqueuing processing job:", error);
+    console.error("Error enqueuing job:", error);
     return NextResponse.json(
-      { error: "Failed to enqueue processing job" },
+      { error: "Failed to enqueue job" },
       { status: 500 }
     );
   }

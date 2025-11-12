@@ -1,9 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
 import { Cafe } from "@/libs/types";
-import { Play } from "lucide-react";
+import { Play, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 type Props = {
@@ -11,11 +17,30 @@ type Props = {
   title?: string;
 };
 
+type JobOption = {
+  name: string;
+  label: string;
+  description: string;
+};
+
+const JOB_OPTIONS: JobOption[] = [
+  {
+    name: "cafe-fetch-google-maps-details",
+    label: "Fetch Google Maps Details",
+    description: "Fetch and update cafe details from Google Maps",
+  },
+  {
+    name: "cafe-fetch-reviews",
+    label: "Fetch Reviews",
+    description: "Fetch reviews from Google Maps",
+  },
+];
+
 export function ProcessCafeButton({ cafe, title }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const handleProcess = async () => {
+  const handleJobExecution = async (jobName: string) => {
     if (!cafe.id) {
       toast({
         title: "Error",
@@ -25,6 +50,9 @@ export function ProcessCafeButton({ cafe, title }: Props) {
       return;
     }
 
+    const jobOption = JOB_OPTIONS.find((job) => job.name === jobName);
+    const jobLabel = jobOption?.label || jobName;
+
     try {
       setIsLoading(true);
       const response = await fetch(`/api/cafes/${cafe.id}/process`, {
@@ -32,23 +60,24 @@ export function ProcessCafeButton({ cafe, title }: Props) {
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({ jobName }),
       });
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || "Failed to enqueue processing job");
+        throw new Error(error.error || "Failed to enqueue job");
       }
 
       toast({
         title: "Job Enqueued",
-        description: `Processing job has been queued for ${cafe.name}`,
+        description: `${jobLabel} has been queued for ${cafe.name}`,
       });
     } catch (error) {
-      console.error("Failed to enqueue processing job:", error);
+      console.error("Failed to enqueue job:", error);
       toast({
         title: "Error",
         description:
-          error instanceof Error ? error.message : "Failed to enqueue processing job",
+          error instanceof Error ? error.message : "Failed to enqueue job",
         variant: "destructive",
       });
     } finally {
@@ -57,15 +86,31 @@ export function ProcessCafeButton({ cafe, title }: Props) {
   };
 
   return (
-    <Button
-      variant="outline"
-      size="sm"
-      disabled={isLoading}
-      onClick={handleProcess}
-    >
-      <Play className="h-4 w-4" />
-      {title}
-    </Button>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="sm" disabled={isLoading}>
+          <Play className="h-4 w-4 mr-2" />
+          {title || "Process"}
+          <ChevronDown className="h-4 w-4 ml-2" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        {JOB_OPTIONS.map((job) => (
+          <DropdownMenuItem
+            key={job.name}
+            onClick={() => handleJobExecution(job.name)}
+            disabled={isLoading}
+          >
+            <div className="flex flex-col">
+              <span className="font-medium">{job.label}</span>
+              <span className="text-xs text-muted-foreground">
+                {job.description}
+              </span>
+            </div>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
 

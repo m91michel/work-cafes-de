@@ -6,6 +6,7 @@ import { outscraperReviewsTask } from "@/libs/apis/outscraper";
 import dayjs from "dayjs";
 import { Cafe } from "@/libs/types";
 import { uniq } from "lodash";
+import { getKeywords } from "@/libs/cafe-utils";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -63,9 +64,7 @@ export async function GET(request: NextRequest) {
       await setProcessed(cafe);
     }
 
-    const DACH_COUNTRIES = ["DE", "AT", "CH"];
-    const isDACHCountry = DACH_COUNTRIES.includes(cafe.cities?.country_code || "");
-    const keywords = ["working", "wifi", "laptop", ...(isDACHCountry ? ["arbeiten", "wlan"] : [])];
+    const keywords = getKeywords(cafe.cities?.country_code || "");
     for (const keyword of keywords) {
       await outscraperReviewsTask({
         id: cafe.google_place_id,

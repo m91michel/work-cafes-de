@@ -51,3 +51,13 @@ export async function getCafeByCitySlug(slug: string, city: string): Promise<Caf
   const cityData = cafes[city];
   return cityData?.find(c => generateSlug(`${c.city}-${c.name}`) === slug) || null;
 }
+
+export function getKeywords(countryCode: string) {
+  const DACH_COUNTRIES = ["DE", "AT", "CH"];
+  const isDACHCountry = DACH_COUNTRIES.includes(countryCode);
+
+  return [
+    "working", "wifi", "laptop", // English terms
+    ...(isDACHCountry ? ["arbeiten", "wlan"] : []), // German terms
+  ];
+}
