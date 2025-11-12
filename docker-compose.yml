@@ -34,9 +34,18 @@ services:
     restart: unless-stopped
     networks:
       - cafes-network
+      - coolify  # Connect to Coolify network to access Redis
+    environment:
+      # Redis connection to Coolify Redis container
+      # Using service name for DNS resolution (more reliable than IP)
+      # Redis username and password should be set in .env.local
+      - REDIS_URL=${REDIS_URL:-redis://r8ggcg04wgso08oso48sc00k:6379}
+      - REDIS_USERNAME=${REDIS_USERNAME:-default}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_DB=5
 
   # Worker service for background jobs
-  # Note: Uses existing Redis container. Set REDIS_URL and REDIS_DB in .env.local
+  # Note: Connects to Redis on host machine (not in Docker)
   worker:
     build:
       context: ./worker
@@ -46,12 +55,17 @@ services:
     restart: unless-stopped
     networks:
       - cafes-network
+      - coolify  # Connect to Coolify network to access Redis
     environment:
       - NODE_ENV=production
       - CAFE_WORKER_CONCURRENCY=5
       - CRON_WORKER_CONCURRENCY=1
-      # - REDIS_HOST=r8ggcg04wgso08oso48sc00k
-      # - REDIS_PORT=6379
+      # Redis connection to Coolify Redis container
+      # Using service name for DNS resolution (more reliable than IP)
+      # Redis username and password should be set in .env.local
+      - REDIS_URL=${REDIS_URL:-redis://r8ggcg04wgso08oso48sc00k:6379}
+      - REDIS_USERNAME=${REDIS_USERNAME:-default}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
       - REDIS_DB=5
   
   bullboard:
@@ -63,11 +77,17 @@ services:
     restart: unless-stopped
     networks:
       - cafes-network
+      - coolify  # Connect to Coolify network to access Redis
     ports:
       - "3232:3000"
     environment:
-      # - REDIS_HOST=host.docker.internal
-      # - REDIS_PORT=6379
+      # Redis connection to Coolify Redis container
+      # Bull Board uses REDIS_HOST and REDIS_PORT separately
+      # Using service name for DNS resolution
+      - REDIS_HOST=${REDIS_HOST:-r8ggcg04wgso08oso48sc00k}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_USERNAME=${REDIS_USERNAME:-default}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
       - REDIS_DB=5
       - USER_LOGIN=mathias
       - USER_PASSWORD=mathias
@@ -75,4 +95,6 @@ services:
 networks:
   cafes-network:
     driver: bridge
+  coolify:
+    external: true  # Use existing Coolify network
 
