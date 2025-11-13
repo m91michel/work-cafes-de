@@ -24,6 +24,10 @@ export async function initializeScheduler() {
  * Helper function to check if a repeatable job already exists
  */
 async function jobExists(jobId: string): Promise<boolean> {
+  if (!queues.cron) {
+    throw new Error('Cron queue is not available. Redis connection required.');
+  }
+  
   try {
     const repeatableJobs = await queues.cron.getRepeatableJobs();
     return repeatableJobs.some((job) => job.id === jobId);
@@ -48,6 +52,10 @@ async function scheduleJobIfNotExists(
   if (exists) {
     console.log(`ℹ️ Repeatable job already exists: ${jobId} (${description})`);
     return;
+  }
+
+  if (!queues.cron) {
+    throw new Error('Cron queue is not available. Redis connection required.');
   }
 
   try {
@@ -98,11 +106,19 @@ async function scheduleRepeatableJobs() {
 }
 
 export async function listScheduledJobs() {
+  if (!queues.cron) {
+    throw new Error('Cron queue is not available. Redis connection required.');
+  }
+  
   const repeatableJobs = await queues.cron.getRepeatableJobs();
   return repeatableJobs;
 }
 
 export async function removeScheduledJob(jobKey: string) {
+  if (!queues.cron) {
+    throw new Error('Cron queue is not available. Redis connection required.');
+  }
+  
   await queues.cron.removeRepeatableByKey(jobKey);
   console.log(`✅ Removed scheduled job: ${jobKey}`);
 }
