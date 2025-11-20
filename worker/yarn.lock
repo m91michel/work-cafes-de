@@ -138,10 +138,10 @@
   dependencies:
     undici-types "~7.16.0"
 
-"@types/node@22.18.13":
-  version "22.18.13"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.18.13.tgz#a037c4f474b860be660e05dbe92a9ef945472e28"
-  integrity sha512-Bo45YKIjnmFtv6I1TuC8AaHBbqXtIo+Om5fE4QiU1Tj8QR/qt+8O3BAtOimG5IFmwaWiPmB3Mv3jtYzBA4Us2A==
+"@types/node@22.19.1":
+  version "22.19.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.19.1.tgz#1188f1ddc9f46b4cc3aec76749050b4e1f459b7b"
+  integrity sha512-LCCV0HdSZZZb34qifBsyWlUmok6W7ouER+oQIGBScS8EsZsQbrtFTUrDX4hOl+CS6p7cnNC4td+qrSVGSCTUfQ==
   dependencies:
     undici-types "~6.21.0"
 
@@ -223,12 +223,12 @@ buffer-from@^1.0.0:
   integrity sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==
 
 bullmq@^5.28.0:
-  version "5.63.0"
-  resolved "https://registry.yarnpkg.com/bullmq/-/bullmq-5.63.0.tgz#b36d5273518bb6eda50fa775127db0faf0b239c3"
-  integrity sha512-HT1iM3Jt4bZeg3Ru/MxrOy2iIItxcl1Pz5Ync1Vrot70jBpVguMxFEiSaDU57BwYwR4iwnObDnzct2lirKkX5A==
+  version "5.64.0"
+  resolved "https://registry.yarnpkg.com/bullmq/-/bullmq-5.64.0.tgz#bec20fa4b7495db86e19e528a22a43af542847fb"
+  integrity sha512-4o+RWWayu/yiRzETY7rP4Ol/iRh4YpMn37kRrIR0UkbxHVwQyuj3ReAgAEpPeHmGRXsMnnI1+lA/zxMSJZQ3tA==
   dependencies:
     cron-parser "^4.9.0"
-    ioredis "^5.4.1"
+    ioredis "^5.8.2"
     msgpackr "^1.11.2"
     node-abort-controller "^3.1.1"
     semver "^7.5.4"
@@ -367,7 +367,7 @@ inherits@2:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
-ioredis@^5.3.2, ioredis@^5.4.1:
+ioredis@^5.3.2, ioredis@^5.8.2:
   version "5.8.2"
   resolved "https://registry.yarnpkg.com/ioredis/-/ioredis-5.8.2.tgz#c7a228a26cf36f17a5a8011148836877780e2e14"
   integrity sha512-C6uC+kleiIMmjViJINWk80sOQw5lEzse1ZmvD+S/s8p8CWapftSaC+kocGTx6xrbrJ4WmYQGC08ffHLr6ToR6Q==
