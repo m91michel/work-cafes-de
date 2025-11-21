@@ -97,3 +97,45 @@ export async function updateCafeCount(cafe?: Partial<Cafe>) {
     })
     .eq("slug", cafe.city_slug);
 }
+
+type DashboardFilters = {
+  limit?: number;
+  offset?: number;
+  status?: string;
+  state?: string;
+  sortBy?: string;
+  sortOrder?: "asc" | "desc";
+};
+
+export async function getCitiesForDashboard(
+  {
+    limit = 100,
+    offset = 0,
+    status,
+    state,
+    sortBy = "created_at",
+    sortOrder = "desc",
+  }: DashboardFilters = { limit: 100, offset: 0 }
+): Promise<{ data: City[]; total: number }> {
+  let query = supabase
+    .from("cities")
+    .select("*", { count: "exact" })
+    .order(sortBy, { ascending: sortOrder === "asc" });
+
+  if (status) {
+    query = query.eq("status", status);
+  }
+
+  if (state) {
+    query = query.eq("state", state);
+  }
+
+  const { data, error, count } = await query.range(offset, offset + limit - 1);
+
+  if (error) {
+    console.error("Error fetching cities:", error);
+    return { data: [], total: 0 };
+  }
+
+  return { data: data as City[], total: count || 0 };
+}

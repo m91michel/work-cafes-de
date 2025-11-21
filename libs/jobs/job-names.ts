@@ -5,4 +5,6 @@ export const JOB_NAMES = {
   cafeEvalPublishStatus: "CAFE_EVAL_PUBLISH_STATUS",
   cafeFetchAboutContent: "CAFE_FETCH_ABOUT_CONTENT",
   cafeScheduler: "CAFE_SCHEDULER",
+  citySearchForCafes: "CITY_SEARCH_FOR_CAFES",
+  cafeProcessDuplicates: "CAFE_PROCESS_DUPLICATES",
 } as const;

@@ -1,6 +1,7 @@
 import { getSEOTags } from "@/libs/seo";
 import { getCafesWithUnpublished } from "@/libs/supabase/cafes";
 import { CafesTable } from "@/components/dashboard/cafes/cafes-table";
+import { ProcessDuplicatesButton } from "@/components/dashboard/cafes/buttons/ProcessDuplicatesButton";
 import { createClient } from '@/libs/supabase/server';
 import { redirect } from 'next/navigation';
 
@@ -28,6 +29,7 @@ export default async function CafesPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-3xl font-bold">Cafes</h1>
+        <ProcessDuplicatesButton />
       </div>
 
       <CafesTable data={cafes} />

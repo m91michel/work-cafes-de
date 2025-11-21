@@ -10,7 +10,9 @@
     "contribute": "Contribute",
     "roadmap": "Roadmap",
     "privacy": "Privacy",
-    "imprint": "Imprint"
+    "imprint": "Imprint",
+    "dashboard": "Dashboard",
+    "queues": "Queues"
   },
   "actions": {
     "search": "Search",

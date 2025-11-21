@@ -1,13 +1,21 @@
 import { createClient } from '@/libs/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { Coffee, MessageSquare, LayoutDashboard, Activity } from 'lucide-react';
+import { Coffee, MessageSquare, LayoutDashboard, Activity, MapIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SignOutButton from '@/components/auth/sign-out-button';
+import { Trans, TransHighlight } from '@/components/general/translation';
 
 interface Props {
   children: React.ReactNode;
 }
+
+const menuItems = [
+  { href: '/dashboard', key: 'navigation.dashboard', icon: LayoutDashboard },
+  { href: '/dashboard/cafes', key: 'navigation.cafes', icon: Coffee },
+  { href: '/dashboard/cities', key: 'navigation.cities', icon: MapIcon },
+  { href: '/dashboard/queues', key: 'navigation.queues', icon: Activity },
+]
 
 export default async function DashboardLayout({ children }: Props) {
   // Check if user is authenticated
@@ -27,24 +35,14 @@ export default async function DashboardLayout({ children }: Props) {
             <h2 className="text-lg font-semibold">Dashboard</h2>
           </div>
           <nav className="p-2 space-y-1">
-            <Button variant="ghost" className="w-full justify-start" asChild>
-              <Link href="/dashboard">
-                <LayoutDashboard className="mr-2 h-4 w-4" />
-                Overview
-              </Link>
-            </Button>
-            <Button variant="ghost" className="w-full justify-start" asChild>
-              <Link href="/dashboard/cafes">
-                <Coffee className="mr-2 h-4 w-4" />
-                Cafes
-              </Link>
-            </Button>
-            <Button variant="ghost" className="w-full justify-start" asChild>
-              <Link href="/dashboard/queues">
-                <Activity className="mr-2 h-4 w-4" />
-                Queues
-              </Link>
-            </Button>
+            {menuItems.map((item) => (
+              <Button variant="ghost" className="w-full justify-start" asChild key={item.href}>
+                <Link href={item.href}>
+                  {item.icon && <item.icon className="mr-2 h-4 w-4" />}
+                  <Trans i18nKey={item.key} />
+                </Link>
+              </Button>
+            ))}
           </nav>
           <div className="mt-auto p-4 border-t">
             <SignOutButton className="w-full" />

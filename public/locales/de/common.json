@@ -10,7 +10,9 @@
     "contribute": "Helfe uns",
     "roadmap": "Roadmap",
     "privacy": "Datenschutz",
-    "imprint": "Impressum"
+    "imprint": "Impressum",
+    "dashboard": "Dashboard",
+    "queues": "Queues"
   },
   "actions": {
     "search": "Suchen",

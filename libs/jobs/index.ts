@@ -5,6 +5,8 @@ import * as cafeFetchReviewsJobs from './cafe/cafe-fetch-reviews';
 import * as cafeEvalPublishStatusJobs from './cafe/cafe-eval-publish-status';
 import * as cafeFetchAboutContentJobs from './cafe/fetch-about-content';
 import * as cafeSchedulerJobs from './cron/cafe-scheduler';
+import * as citySearchForCafesJobs from './city/city-search-for-cafes';
+import * as cafeProcessDuplicatesJobs from './cafe/cafe-process-duplicates';
 
 type CafeJobData = {
   cafeId: string;
@@ -20,6 +22,8 @@ export const jobHandlers: Record<string, JobHandler> = {
   [cafeEvalPublishStatusJobs.JOB_NAME]: cafeEvalPublishStatusJobs.processJob,
   [cafeFetchAboutContentJobs.JOB_NAME]: cafeFetchAboutContentJobs.processJob,
   [cafeSchedulerJobs.JOB_NAME]: cafeSchedulerJobs.processJob,
+  [citySearchForCafesJobs.JOB_NAME]: citySearchForCafesJobs.processJob,
+  [cafeProcessDuplicatesJobs.JOB_NAME]: cafeProcessDuplicatesJobs.processJob,
 };
 
 export const enqueue = {
@@ -29,4 +33,6 @@ export const enqueue = {
   cafeEvalPublishStatus: cafeEvalPublishStatusJobs.enqueueJob,
   cafeFetchAboutContent: cafeFetchAboutContentJobs.enqueueJob,
   cafeScheduler: cafeSchedulerJobs.enqueueJob,
+  citySearchForCafes: citySearchForCafesJobs.enqueueJob,
+  cafeProcessDuplicates: cafeProcessDuplicatesJobs.enqueueJob,
 }
