@@ -8,4 +8,5 @@ export const JOB_NAMES = {
   citySearchForCafes: "CITY_SEARCH_FOR_CAFES",
   cafeProcessDuplicates: "CAFE_PROCESS_DUPLICATES",
   cityGenerateImage: "CITY_GENERATE_IMAGE",
+  cityGenerateDescription: "CITY_GENERATE_DESCRIPTION",
 } as const;

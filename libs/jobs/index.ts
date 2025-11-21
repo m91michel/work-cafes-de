@@ -8,6 +8,7 @@ import * as cafeSchedulerJobs from './cron/cafe-scheduler';
 import * as citySearchForCafesJobs from './city/city-search-for-cafes';
 import * as cafeProcessDuplicatesJobs from './cafe/cafe-process-duplicates';
 import * as cityGenerateImageJobs from './city/city-generate-image';
+import * as cityGenerateDescriptionJobs from './city/city-generate-description';
 
 type CafeJobData = {
   cafeId: string;
@@ -26,6 +27,7 @@ export const jobHandlers: Record<string, JobHandler> = {
   [citySearchForCafesJobs.JOB_NAME]: citySearchForCafesJobs.processJob,
   [cafeProcessDuplicatesJobs.JOB_NAME]: cafeProcessDuplicatesJobs.processJob,
   [cityGenerateImageJobs.JOB_NAME]: cityGenerateImageJobs.processJob,
+  [cityGenerateDescriptionJobs.JOB_NAME]: cityGenerateDescriptionJobs.processJob,
 };
 
 export const enqueue = {
@@ -38,4 +40,5 @@ export const enqueue = {
   citySearchForCafes: citySearchForCafesJobs.enqueueJob,
   cafeProcessDuplicates: cafeProcessDuplicatesJobs.enqueueJob,
   cityGenerateImage: cityGenerateImageJobs.enqueueJob,
+  cityGenerateDescription: cityGenerateDescriptionJobs.enqueueJob,
 }
