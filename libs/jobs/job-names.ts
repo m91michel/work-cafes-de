@@ -7,4 +7,5 @@ export const JOB_NAMES = {
   cafeScheduler: "CAFE_SCHEDULER",
   citySearchForCafes: "CITY_SEARCH_FOR_CAFES",
   cafeProcessDuplicates: "CAFE_PROCESS_DUPLICATES",
+  cityGenerateImage: "CITY_GENERATE_IMAGE",
 } as const;

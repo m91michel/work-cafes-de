@@ -32,6 +32,11 @@ const JOB_OPTIONS: JobOption[] = [
     label: "Search for Cafes",
     description: "Search for new cafes in this city",
   },
+  {
+    name: JOB_NAMES.cityGenerateImage,
+    label: "Generate Image",
+    description: "Generate a preview image for this city",
+  },
 ];
 
 export function ProcessCityButton({ city, title }: Props) {
