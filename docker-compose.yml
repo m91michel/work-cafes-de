@@ -34,6 +34,9 @@ services:
     restart: unless-stopped
     networks:
       - cafes-network
+    environment:
+      - REDIS_URL=${REDIS_URL:-redis://redis:6379}
+      - REDIS_DB=5
 
   # English version (awifiplace.com)
   cafes-en:
