@@ -59,7 +59,7 @@
     "@types/lodash": "^4.17.13",
     "@types/mapbox-gl": "^3.4.1",
     "@types/node": "22.19.1",
-    "@types/react": "19.2.4",
+    "@types/react": "19.2.5",
     "@types/react-dom": "19.2.3",
     "@types/react-map-gl": "^6.1.7",
     "@vercel/og": "^0.8.0",
