@@ -6,17 +6,11 @@ import { Badge } from "@/components/ui/badge";
 import {
   ColumnDef,
   Row,
-  useReactTable,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getSortedRowModel,
   SortingState,
-  ColumnFiltersState,
 } from "@tanstack/react-table";
 import { CafeFilters } from "./cafe-filters";
 import { useState } from "react";
 import { CafeActions } from "./table-action";
-
 
 export const columns: ColumnDef<Cafe>[] = [
   {
@@ -88,32 +82,17 @@ interface CafesTableProps {
 }
 
 export function CafesTable({ data }: CafesTableProps) {
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
-
-  const table = useReactTable({
-    data,
-    columns,
-    state: {
-      sorting,
-      columnFilters,
-    },
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-  });
 
   return (
     <DataTable
       columns={columns}
       data={data}
       sorting={sorting}
-      columnFilters={columnFilters}
+      columnFilters={[]}
       onSortingChange={setSorting}
-      onColumnFiltersChange={setColumnFilters}
-      filterComponent={<CafeFilters table={table} />}
+      onColumnFiltersChange={() => {}}
+      filterComponent={<CafeFilters />}
     />
   );
 }

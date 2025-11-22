@@ -8,6 +8,7 @@ import { Cafe, City } from '../../types';
 import { generateSlug } from '../../utils';
 import { JOB_NAMES } from '../job-names';
 import * as cafeProcessDuplicatesJobs from '../cafe/cafe-process-duplicates';
+import { isDACHCountry } from '../../cafe-utils';
 
 export interface JobData {
   citySlug: string;
@@ -53,9 +54,8 @@ export async function searchCafesForCity(city: City) {
   let firstAddress = "";
   let duplicatesFound = false;
 
-  const DACH_COUNTRIES = ["DE", "AT", "CH"];
-  const isDACHCountry = DACH_COUNTRIES.includes(city.country_code || "");
-  const cityName = isDACHCountry ? city.name_de : city.name_en;
+  const isDACH = isDACHCountry(city.country_code || "");
+  const cityName = isDACH ? city.name_de : city.name_en;
 
   if (!cityName) {
     throw new Error(`City name is null for city ${city.slug}`);
@@ -63,7 +63,7 @@ export async function searchCafesForCity(city: City) {
 
   console.log(`⚡️ start processing ${cityName} (${city.slug})`);
 
-  const searchQuery = isDACHCountry
+  const searchQuery = isDACH
     ? `cafe zum arbeiten in ${cityName}`
     : `cafe for working in ${cityName}`;
   const places = await searchPlaces(searchQuery, { type: "cafe" });

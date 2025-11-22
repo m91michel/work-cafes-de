@@ -1,5 +1,5 @@
 import { getSEOTags } from "@/libs/seo";
-import { getCafesWithUnpublished } from "@/libs/supabase/cafes";
+import { getCafesForDashboard } from "@/libs/supabase/cafes";
 import { CafesTable } from "@/components/dashboard/cafes/cafes-table";
 import { ProcessDuplicatesButton } from "@/components/dashboard/cafes/buttons/ProcessDuplicatesButton";
 import { createClient } from '@/libs/supabase/server';
@@ -14,7 +14,13 @@ export const metadata = getSEOTags({
   robots: "noindex, nofollow",
 });
 
-export default async function CafesPage() {
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
+export default async function CafesPage({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
   // Check if user is authenticated
   const supabase = await createClient();
   const { data: { session } } = await supabase.auth.getSession();
@@ -22,8 +28,24 @@ export default async function CafesPage() {
   if (!session) {
     redirect('/login');
   }
-  
-  const cafes = await getCafesWithUnpublished({ limit: 100, offset: 0 });
+
+  const params = await searchParams;
+  const status = typeof params.status === 'string' ? params.status : undefined;
+  const city = typeof params.city === 'string' ? params.city : undefined;
+  const name = typeof params.name === 'string' ? params.name : undefined;
+  const page = typeof params.page === 'string' ? parseInt(params.page) : 1;
+  const limit = typeof params.limit === 'string' ? parseInt(params.limit) : 100;
+  const offset = (page - 1) * limit;
+
+  const { data: cafes } = await getCafesForDashboard({
+    limit,
+    offset,
+    status,
+    city,
+    name,
+    sortBy: "created_at",
+    sortOrder: "desc",
+  });
 
   return (
     <div className="space-y-6">

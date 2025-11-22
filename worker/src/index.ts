@@ -44,7 +44,7 @@ async function startWorkers() {
   await initializeScheduler();
 
   // Get concurrency from environment variables
-  const cafeConcurrency = parseInt(process.env.CAFE_WORKER_CONCURRENCY || process.env.WORKER_CONCURRENCY || '5', 10);
+  const cafeConcurrency = parseInt(process.env.CAFE_WORKER_CONCURRENCY || process.env.WORKER_CONCURRENCY || '1', 10);
   const cronConcurrency = parseInt(process.env.CRON_WORKER_CONCURRENCY || '1', 10);
   
   console.log(`📊 Cafe worker concurrency set to: ${cafeConcurrency}`);

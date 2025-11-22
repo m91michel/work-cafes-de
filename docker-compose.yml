@@ -18,25 +18,25 @@ services:
       interval: 5s
       timeout: 3s
       retries: 5
-  # German version (cafezumarbeiten.de)
-  cafes-de:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        LANGUAGE: de
-        NODE_VERSION: 22
-    image: work-cafes-de:de
-    ports:
-      - "3010:3010"
-    env_file:
-      - .env.local
-    restart: unless-stopped
-    networks:
-      - cafes-network
-    environment:
-      - REDIS_URL=${REDIS_URL:-redis://redis:6379}
-      - REDIS_DB=5
+  # # German version (cafezumarbeiten.de)
+  # cafes-de:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #     args:
+  #       LANGUAGE: de
+  #       NODE_VERSION: 22
+  #   image: work-cafes-de:de
+  #   ports:
+  #     - "3010:3010"
+  #   env_file:
+  #     - .env.local
+  #   restart: unless-stopped
+  #   networks:
+  #     - cafes-network
+  #   environment:
+  #     - REDIS_URL=${REDIS_URL:-redis://redis:6379}
+  #     - REDIS_DB=5
 
   # English version (awifiplace.com)
   cafes-en:
