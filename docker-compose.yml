@@ -1,3 +1,8 @@
+# Production deployment configuration for Coolify
+# Coolify will manage environment variables via its UI
+# The env_file: .env.local references Coolify's generated .env file
+# For local development, use docker-compose.local.yml
+
 version: '3.8'
 
 services:
@@ -50,7 +55,7 @@ services:
     ports:
       - "3011:3010"  # Different port to avoid conflict
     env_file:
-      - .env.local
+      - .env
     restart: unless-stopped
     depends_on:
       redis:
@@ -58,9 +63,12 @@ services:
     networks:
       - cafes-network
     environment:
-      # Redis connection to local Redis container
+      # Redis connection - Coolify will override these via env_file
+      # Defaults for local development (Coolify will override)
       - REDIS_URL=${REDIS_URL:-redis://redis:6379}
-      - REDIS_DB=5
+      - REDIS_DB=${REDIS_DB:-5}
+      - REDIS_USERNAME=${REDIS_USERNAME:-}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
 
   # Worker service for background jobs
   worker:
@@ -68,7 +76,7 @@ services:
       context: .
       dockerfile: worker/Dockerfile
     env_file:
-      - .env.local
+      - .env
     depends_on:
       redis:
         condition: service_healthy
@@ -79,11 +87,14 @@ services:
       - cafes-network
     environment:
       - NODE_ENV=production
-      - CAFE_WORKER_CONCURRENCY=1
-      - CRON_WORKER_CONCURRENCY=1
-      # Redis connection to local Redis container
+      - CAFE_WORKER_CONCURRENCY=${CAFE_WORKER_CONCURRENCY:-1}
+      - CRON_WORKER_CONCURRENCY=${CRON_WORKER_CONCURRENCY:-1}
+      # Redis connection - Coolify will override these via env_file
+      # Defaults for local development (Coolify will override)
       - REDIS_URL=${REDIS_URL:-redis://redis:6379}
-      - REDIS_DB=5
+      - REDIS_DB=${REDIS_DB:-5}
+      - REDIS_USERNAME=${REDIS_USERNAME:-}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
   
   bullboard:
     container_name: bullboard
@@ -93,21 +104,22 @@ services:
         condition: service_healthy
       worker:
         condition: service_started
-    env_file:
-      - .env.local
     restart: unless-stopped
     networks:
       - cafes-network
     ports:
       - "3232:3000"
     environment:
-      # Redis connection to local Redis container
+      # Redis connection - Coolify will override these via env_file
       # Bull Board uses REDIS_HOST and REDIS_PORT separately
+      # Defaults for local development (Coolify will override)
       - REDIS_HOST=${REDIS_HOST:-redis}
       - REDIS_PORT=${REDIS_PORT:-6379}
-      - REDIS_DB=5
-      - USER_LOGIN=mathias
-      - USER_PASSWORD=mathias
+      - REDIS_DB=${REDIS_DB:-5}
+      - REDIS_USERNAME=${REDIS_USERNAME:-}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      - USER_LOGIN=${USER_LOGIN:-mathias}
+      - USER_PASSWORD=${USER_PASSWORD:-mathias}
 
 networks:
   cafes-network:
