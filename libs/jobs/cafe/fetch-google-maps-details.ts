@@ -3,11 +3,11 @@ import { createHash } from 'crypto';
 import { queue as cafeQueue } from '../../queues/cafe';
 import supabase from '../../supabase/supabaseClient';
 import { getPlaceDetails } from '../../google-maps';
-import { uploadImageToBunny } from '../../bunny';
 import { processOpenHours } from '../../openai/process-open-hours';
 import { formatLinks, mergeObjects } from '../../utils';
 import dayjs from 'dayjs';
 import { JOB_NAMES } from '../job-names';
+import { setCafeAsError } from '../../supabase/cafe/update-actions';
 
 export interface JobData {
   cafeId: string;
@@ -52,38 +52,31 @@ export async function processJob(job: Job<JobData>) {
   
   console.log(`⚡️ Starting ${JOB_NAME} for cafe: ${cafeId}`);
 
+  const { data: cafe } = await supabase
+    .from('cafes')
+    .select('*')
+    .eq('id', cafeId)
+    .maybeSingle();
+  
+  if (!cafe || !cafe.google_place_id) {
+    return {
+      success: false,
+      cafeId,
+      error: `No google_place_id for cafe ${cafeId}`,
+    };
+  }
   try {
-    if (!cafeId) {
-      throw new Error('Cafe ID is required');
-    }
-    const { data: cafe } = await supabase
-      .from('cafes')
-      .select('*')
-      .eq('id', cafeId)
-      .maybeSingle();
-    
-    if (!cafe || !cafe.google_place_id) {
-      throw new Error(`Cafe not found or no google_place_id for ${cafeId}`);
-    }
-
     const placeDetails = await getPlaceDetails(cafe.google_place_id);
 
     if (!placeDetails) {
       throw new Error(`No place details found for ${cafe.name}`);
     }
 
-    // process photos
+    // Store photo URLs in maps_data (images will be processed separately)
     const photos = placeDetails.photos || [];
     const photoUrls: string[] = photos.map((photo: any) => {
       return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
     });
-
-    let bunnyUrl;
-    if (photoUrls.length > 0) {
-      const filename = `${cafe.slug}-thumb.jpg`;
-      bunnyUrl = await uploadImageToBunny(photoUrls[0], filename, 'cafes');
-      console.log(`📸 uploaded image for ${cafe.name}`);
-    }
 
     const formattedAddress = placeDetails.formatted_address;
     const lat_long = `${placeDetails.geometry.location.lat},${placeDetails.geometry.location.lng}`;
@@ -106,7 +99,6 @@ export async function processJob(job: Job<JobData>) {
         processed_at: dayjs().toISOString(),
         address: formattedAddress,
         lat_long: lat_long,
-        preview_image: bunnyUrl,
         google_rating: rating,
         open_hours: openHours,
         website_url: formatLinks(placeDetails.website),
@@ -134,6 +126,7 @@ export async function processJob(job: Job<JobData>) {
     };
   } catch (error) {
     console.error(`❌ Error in ${JOB_NAME} for cafe ${cafeId}:`, error);
+    await setCafeAsError(cafe, error as Error);
     return {
       success: false,
       cafeId,

@@ -3,7 +3,7 @@ import { Cafe } from "../types";
 import { fetchAllRecords } from "../utils";
 import supabase from "./supabaseClient";
 
-type BaseFilters = {
+export type BaseFilters = {
   limit?: number;
   offset?: number;
   citySlug?: string;
@@ -219,90 +219,3 @@ export const getAllPublishedCafes = async (props: BaseFilters = {}) => {
   return await fetchAllRecords<Cafe, BaseFilters>(getPublishedCafes, props);
 };
 
-/* -------------------------------------------------------------------------- */
-/*                                  PROCESSING                                 */
-/* -------------------------------------------------------------------------- */
-
-export async function getCafesForGoogleMapsDetails(
-  { limit = 10 }: BaseFilters = { limit: 10 }
-): Promise<{ data: Cafe[]; count: number }> {
-  const { data, error, count } = await supabase
-    .from("cafes")
-    .select("*", { count: "exact" })
-    .not("google_place_id", "is", null)
-    .gte("review_count", 1) // only process cafes with at least 1 review
-    .is("processed->google_details_at", null)
-    .in("status", ["NEW", "PROCESSED", "UNKNOWN"])
-    .order("created_at", { ascending: true })
-    .limit(limit);
-
-  if (error) {
-    console.error("Error fetching data:", error);
-    return { data: [], count: 0 };
-  }
-
-  return { data: data as Cafe[], count: count || 0 };
-}
-
-export async function getCafesToFetchReviews(
-  { limit = 10 }: BaseFilters = { limit: 10 }
-): Promise<{ data: Cafe[]; count: number }> {
-  const { data, error, count } = await supabase
-    .from("cafes")
-    .select("*, cities(country_code)", { count: "exact" })
-    .not("google_place_id", "is", null)
-    .not("city_slug", "is", null)
-    .not("city", "is", null)
-    .is("processed->google_reviews_at", null)
-    .eq("review_count", 0)
-    .gte("google_rating", 3)
-    .in("status", ["NEW", "PROCESSED"])
-    .order("created_at", { ascending: true })
-    .limit(limit);
-
-  if (error) {
-    console.error("Error fetching data:", error);
-    return { data: [], count: 0 };
-  }
-  return { data: data as Cafe[], count: count || 0 };
-}
-
-export async function getCafesToEvaluate(
-  { limit = 10 }: BaseFilters = { limit: 10 }
-): Promise<{ data: Cafe[]; count: number }> {
-  const { data, error, count } = await supabase
-    .from("cafes")
-    .select("*", { count: "exact" })
-    .eq("status", "PROCESSED")
-    .is("processed->checked_reviews_at", null)
-    .gte("review_count", 1)
-    .gte("processed_at", dayjs().subtract(30, "minute").toISOString())
-    .is("checked", null)
-    .order("created_at", { ascending: true })
-    .limit(limit);
-
-  if (error) {
-    console.error("Error fetching data:", error);
-    return { data: [], count: 0 };
-  }
-  return { data: data as Cafe[], count: count || 0 };
-}
-
-export async function getCafesToFetchAboutContent(
-  { limit = 10 }: BaseFilters = { limit: 10 }
-): Promise<{ data: Cafe[]; count: number }> {
-  const { data, error, count } = await supabase
-    .from("cafes")
-    .select("*", { count: "exact" })
-    .eq("status", "PUBLISHED")
-    .not("website_url", "is", null)
-    .is("processed->fetched_website_content_at", null)
-    .order("created_at", { ascending: true })
-    .limit(limit);
-
-  if (error) {
-    console.error("Error fetching data:", error);
-    return { data: [], count: 0 };
-  }
-  return { data: data as Cafe[], count: count || 0 };
-}

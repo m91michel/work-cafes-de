@@ -25,6 +25,8 @@ export type Database = {
           country_code: string | null
           created_at: string | null
           drinks_content: Json | null
+          error_message: string | null
+          error_metadata: Json | null
           food_content: string | null
           food_contents: Json | null
           google_place_id: string | null
@@ -64,6 +66,8 @@ export type Database = {
           country_code?: string | null
           created_at?: string | null
           drinks_content?: Json | null
+          error_message?: string | null
+          error_metadata?: Json | null
           food_content?: string | null
           food_contents?: Json | null
           google_place_id?: string | null
@@ -103,6 +107,8 @@ export type Database = {
           country_code?: string | null
           created_at?: string | null
           drinks_content?: Json | null
+          error_message?: string | null
+          error_metadata?: Json | null
           food_content?: string | null
           food_contents?: Json | null
           google_place_id?: string | null

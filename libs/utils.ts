@@ -70,17 +70,17 @@ export function formatLinks(links?: string | null) {
     const url = new URL(cleanedLink);
     return url.origin + url.pathname;
   } catch (error) {
-    console.error("Invalid URL:", links);
+    console.error("Invalid URL:", links, error);
     return null;
   }
 }
 
 export function mergeObjects(
-  initialObject?: any | null,
-  newObject?: Record<string, any> | null
+  initialObject: any | null = {},
+  newObject: Record<string, any> | null = {}
 ) {
   if (!initialObject) {
-    return null;
+    return newObject;
   }
 
   return {

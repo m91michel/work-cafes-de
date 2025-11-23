@@ -1,5 +1,6 @@
 // Job registry for type-safe processing (internal imports)
-import * as googleMapsJobs from './cafe/cafe-fetch-google-maps-details';
+import * as googleMapsJobs from './cafe/fetch-google-maps-details';
+import * as googleMapsImagesJobs from './cafe/fetch-google-maps-images';
 import * as updateCafeStatsJobs from './cron/update-cafe-stats';
 import * as cafeFetchReviewsJobs from './cafe/cafe-fetch-reviews';
 import * as cafeEvalPublishStatusJobs from './cafe/cafe-eval-publish-status';
@@ -19,6 +20,7 @@ export type JobHandler = (job: any) => Promise<any>;
 
 export const jobHandlers: Record<string, JobHandler> = {
   [googleMapsJobs.JOB_NAME]: googleMapsJobs.processJob,
+  [googleMapsImagesJobs.JOB_NAME]: googleMapsImagesJobs.processJob,
   [updateCafeStatsJobs.JOB_NAME]: updateCafeStatsJobs.processJob,
   [cafeFetchReviewsJobs.JOB_NAME]: cafeFetchReviewsJobs.processJob,
   [cafeEvalPublishStatusJobs.JOB_NAME]: cafeEvalPublishStatusJobs.processJob,
@@ -32,6 +34,7 @@ export const jobHandlers: Record<string, JobHandler> = {
 
 export const enqueue = {
   cafeFetchGoogleMapsDetails: googleMapsJobs.enqueueJob,
+  cafeFetchGoogleMapsImages: googleMapsImagesJobs.enqueueJob,
   updateCafeStats: updateCafeStatsJobs.enqueueJob,
   cafeFetchReviews: cafeFetchReviewsJobs.enqueueJob,
   cafeEvalPublishStatus: cafeEvalPublishStatusJobs.enqueueJob,

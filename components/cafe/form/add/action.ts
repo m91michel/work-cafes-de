@@ -66,6 +66,7 @@ export async function suggestCityAction(formData: FormData) {
       .insert({
         name: data.name || "",
         address: data.address || "",
+        city: data.city || "",
         country_code: data.countryCode,
         website_url: data.url || "",
         google_place_id: data.placeId,

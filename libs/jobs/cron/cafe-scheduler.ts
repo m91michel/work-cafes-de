@@ -1,9 +1,15 @@
 import { Job } from "bullmq";
 import { createHash } from "crypto";
 import { queue as cronQueue } from "../../queues/cron";
-import { JOB_NAMES } from "../job-names"
+import { JOB_NAMES } from "../job-names";
 import { enqueue } from "..";
-import { getCafesForGoogleMapsDetails, getCafesToEvaluate, getCafesToFetchAboutContent, getCafesToFetchReviews } from "../../supabase/cafes";
+import {
+  getCafesForGoogleMapsDetails,
+  getCafesForGoogleMapsImages,
+  getCafesToFetchReviews,
+  getCafesToEvaluate,
+  getCafesToFetchAboutContent,
+} from "../../supabase/cafe/processing-queries";
 import { isProd } from "../../environment";
 
 export const JOB_NAME = JOB_NAMES.cafeScheduler;
@@ -43,6 +49,7 @@ export async function enqueueJob() {
 
 const processCount = {
   updateMaps: 10,
+  updateImages: 5,
   fetchReviews: 2,
   evaluateCafes: 2,
   fetchAboutContent: 2,
@@ -57,10 +64,8 @@ export async function processJob(job: Job) {
     };
   }
 
-  const {
-    data: updateMapDetailsCafes = [],
-    count: updateMapsTotalCount = 0,
-  } = await getCafesForGoogleMapsDetails({ limit: processCount.updateMaps });
+  const { data: updateMapDetailsCafes = [], count: updateMapsTotalCount = 0 } =
+    await getCafesForGoogleMapsDetails({ limit: processCount.updateMaps });
 
   for (const cafe of updateMapDetailsCafes || []) {
     console.log(
@@ -69,10 +74,18 @@ export async function processJob(job: Job) {
     await enqueue.cafeFetchGoogleMapsDetails(cafe.id);
   }
 
-  const {
-    data: fetchReviewsCafes = [],
-    count: fetchReviewsTotalCount = 0,
-  } = await getCafesToFetchReviews({ limit: processCount.fetchReviews });
+  const { data: updateImagesCafes = [], count: updateImagesTotalCount = 0 } =
+    await getCafesForGoogleMapsImages({ limit: processCount.updateImages });
+
+  for (const cafe of updateImagesCafes || []) {
+    console.log(
+      `⚡️ Triggering ${JOB_NAMES.googleMapsImages} for ${cafe.slug}`
+    );
+    await enqueue.cafeFetchGoogleMapsImages(cafe.id);
+  }
+
+  const { data: fetchReviewsCafes = [], count: fetchReviewsTotalCount = 0 } =
+    await getCafesToFetchReviews({ limit: processCount.fetchReviews });
 
   for (const cafe of fetchReviewsCafes || []) {
     console.log(
@@ -81,10 +94,8 @@ export async function processJob(job: Job) {
     await enqueue.cafeFetchReviews(cafe.id);
   }
 
-  const {
-    data: evaluateCafes = [],
-    count: evaluateCafesTotalCount = 0,
-  } = await getCafesToEvaluate({ limit: processCount.evaluateCafes });
+  const { data: evaluateCafes = [], count: evaluateCafesTotalCount = 0 } =
+    await getCafesToEvaluate({ limit: processCount.evaluateCafes });
 
   for (const cafe of evaluateCafes || []) {
     console.log(
@@ -96,7 +107,9 @@ export async function processJob(job: Job) {
   const {
     data: fetchAboutContentCafes = [],
     count: fetchAboutContentTotalCount = 0,
-  } = await getCafesToFetchAboutContent({ limit: processCount.fetchAboutContent });
+  } = await getCafesToFetchAboutContent({
+    limit: processCount.fetchAboutContent,
+  });
 
   for (const cafe of fetchAboutContentCafes || []) {
     console.log(
@@ -109,6 +122,7 @@ export async function processJob(job: Job) {
     success: true,
     data: {
       updateMaps: `Updated ${updateMapsTotalCount} of ${updateMapsTotalCount} cafes`,
+      updateImages: `Updated images for ${updateImagesTotalCount} of ${updateImagesTotalCount} cafes`,
       fetchReviews: `Fetched ${fetchReviewsTotalCount} of ${fetchReviewsTotalCount} cafes`,
       evaluateCafes: `Evaluated ${evaluateCafesTotalCount} of ${evaluateCafesTotalCount} cafes`,
       fetchAboutContent: `Fetched ${fetchAboutContentTotalCount} of ${fetchAboutContentTotalCount} cafes`,

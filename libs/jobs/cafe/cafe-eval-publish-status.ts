@@ -8,6 +8,7 @@ import { analyzeReviews } from "../../openai/analyze-reviews";
 import { prepareReviews } from "../../review-utils";
 import { isDev } from "../../environment";
 import { JOB_NAMES } from "../job-names";
+import { setCafeAsError } from "../../supabase/cafe/update-actions";
 
 export interface JobData {
   cafeId: string;
@@ -54,20 +55,28 @@ export async function processJob(job: Job<JobData>) {
 
   console.log(`⚡️ Starting ${JOB_NAME} for cafe: ${cafeId}`);
 
+  const { data: cafe } = await supabase
+    .from("cafes")
+    .select("*")
+    .eq("id", cafeId)
+    .maybeSingle();
+
+  if (!cafe) {
+    return {
+      success: false,
+      cafeId,
+      error: `Cafe not found for ${cafeId}`,
+    };
+  }
+  if (!cafe.google_place_id) {
+    return {
+      success: false,
+      cafeId,
+      error: `No google_place_id for cafe ${cafeId}`,
+    };
+  }
+
   try {
-    if (!cafeId) {
-      throw new Error("Cafe ID is required");
-    }
-    const { data: cafe } = await supabase
-      .from("cafes")
-      .select("*")
-      .eq("id", cafeId)
-      .maybeSingle();
-
-    if (!cafe) {
-      throw new Error(`Cafe not found for id: ${cafeId}`);
-    }
-
     const { data: reviews = [], error: reviewsError } = await supabase
       .from("reviews")
       .select("*")
@@ -123,6 +132,7 @@ export async function processJob(job: Job<JobData>) {
     };
   } catch (error) {
     console.error(`❌ Error in ${JOB_NAME} for cafe ${cafeId}:`, error);
+    await setCafeAsError(cafe, error as Error);
     return {
       success: false,
       cafeId,

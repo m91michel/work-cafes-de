@@ -2,12 +2,11 @@ import { Job } from 'bullmq';
 import { createHash } from 'crypto';
 import { queue as cafeQueue } from '../../queues/cafe';
 import supabase from '../../supabase/supabaseClient';
-import { mergeObjects } from '../../utils';
-import dayjs from 'dayjs';
-import { Cafe } from '../../types';
 import { outscraperReviewsTask } from '../../apis/outscraper';
 import { getKeywords } from '../../cafe-utils';
 import { JOB_NAMES } from '../job-names';
+import { setCafeAsError, setProcessed } from '../../supabase/cafe/update-actions';
+import { Cafe } from '../../types';
 
 export interface JobData {
   cafeId: string;
@@ -52,22 +51,29 @@ export async function processJob(job: Job<JobData>) {
   
   console.log(`⚡️ Starting ${JOB_NAME} for cafe: ${cafeId}`);
 
-  try {
-    if (!cafeId) {
-      throw new Error('Cafe ID is required');
-    }
-    const { data: cafe } = await supabase
-      .from('cafes')
-      .select("id, google_place_id, name, city_slug, address, review_count, processed, cities(country_code)")
-      .eq('id', cafeId)
-      .maybeSingle();
-    
-    if (!cafe || !cafe.google_place_id) {
-      throw new Error(`Cafe not found or no google_place_id for ${cafeId}`);
-    }
+  const { data: cafe } = await supabase
+    .from('cafes')
+    .select("id, google_place_id, name, city_slug, address, review_count, processed, status, cities(country_code)")
+    .eq('id', cafeId)
+    .maybeSingle();
 
-    //@ts-ignore
-    if (cafe.processed?.google_reviews_at) {
+  if (!cafe) {
+    return {
+      success: false,
+      cafeId,
+      error: `Cafe not found for ${cafeId}`,
+    };
+  }
+  if (!cafe.google_place_id) {
+    return {
+      success: false,
+      cafeId,
+      error: `No google_place_id for ${cafeId}`,
+    };
+  }
+
+  try {
+    if ((cafe?.processed as any)?.google_reviews_at) {
       console.log(`Skipping ${cafe.name} because it as already been processed`);
       return {
         success: true,
@@ -75,7 +81,7 @@ export async function processJob(job: Job<JobData>) {
       };
     }
 
-    await setProcessed(cafe);
+    await setProcessed(cafe, "google_reviews_at");
 
     const keywords = getKeywords(cafe.cities?.country_code || "");
     for (const keyword of keywords) {
@@ -96,6 +102,7 @@ export async function processJob(job: Job<JobData>) {
     };
   } catch (error) {
     console.error(`❌ Error in ${JOB_NAME} for cafe ${cafeId}:`, error);
+    await setCafeAsError(cafe, error as Error);
     return {
       success: false,
       cafeId,
@@ -103,18 +110,4 @@ export async function processJob(job: Job<JobData>) {
       details: error,
     };
   }
-}
-
-async function setProcessed(cafe?: Pick<Cafe, "id" | "processed">) {
-  if (!cafe) return;
-
-  return await supabase
-    .from("cafes")
-    .update({
-      processed: mergeObjects(cafe?.processed, {
-        google_reviews_at: dayjs().toISOString(),
-      }),
-      processed_at: dayjs().toISOString(),
-    })
-    .eq("id", cafe.id);
 }

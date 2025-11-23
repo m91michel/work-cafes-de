@@ -53,6 +53,9 @@ export async function POST(
       case JOB_NAMES.googleMapsDetails:
         await enqueue.cafeFetchGoogleMapsDetails(id);
         break;
+      case JOB_NAMES.googleMapsImages:
+        await enqueue.cafeFetchGoogleMapsImages(id);
+        break;
       case JOB_NAMES.cafeFetchReviews:
         await enqueue.cafeFetchReviews(id);
         break;
