@@ -103,6 +103,7 @@ export async function searchCafesForCity(city: City) {
       google_place_id: google_place_id,
       user_ratings_total: place.user_ratings_total,
       price_level: place.price_level,
+      source: "GOOGLE_MAPS_SEARCH",
     };
 
     const { data, error } = await supabase

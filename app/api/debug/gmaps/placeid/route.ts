@@ -99,6 +99,8 @@ async function createNewCafe(place: GoogleMapsCandidate) {
     google_place_id: place.place_id,
     google_rating: place.rating,
     maps_data: place,
+    source: "GOOGLE_MAPS_SEARCH",
+    status: "NEW",
   });
 
   if (error) {

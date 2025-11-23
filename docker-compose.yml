@@ -79,7 +79,7 @@ services:
       - cafes-network
     environment:
       - NODE_ENV=production
-      - CAFE_WORKER_CONCURRENCY=5
+      - CAFE_WORKER_CONCURRENCY=1
       - CRON_WORKER_CONCURRENCY=1
       # Redis connection to local Redis container
       - REDIS_URL=${REDIS_URL:-redis://redis:6379}
@@ -95,7 +95,6 @@ services:
         condition: service_started
     env_file:
       - .env.local
-      - .env
     restart: unless-stopped
     networks:
       - cafes-network

@@ -1,9 +1,10 @@
 import { Job } from "bullmq";
 import { createHash } from "crypto";
 import { queue as cronQueue } from "../../queues/cron";
-import supabase from "../../supabase/supabaseClient";
-import { JOB_NAMES } from "../job-names";
+import { JOB_NAMES } from "../job-names"
 import { enqueue } from "..";
+import { getCafesForGoogleMapsDetails, getCafesToEvaluate, getCafesToFetchAboutContent, getCafesToFetchReviews } from "../../supabase/cafes";
+import { isProd } from "../../environment";
 
 export const JOB_NAME = JOB_NAMES.cafeScheduler;
 
@@ -33,39 +34,84 @@ export async function enqueueJob() {
     }
   );
 
-  console.log(
-    `✅ Enqueued ${JOB_NAME} job (Job ID: ${jobId})`
-  );
+  console.log(`✅ Enqueued ${JOB_NAME} job (Job ID: ${jobId})`);
 }
 
 /**
  * Process a cafe job
  */
+
+const processCount = {
+  updateMaps: 10,
+  fetchReviews: 2,
+  evaluateCafes: 2,
+  fetchAboutContent: 2,
+};
 export async function processJob(job: Job) {
   console.log(`⚡️ Starting ${JOB_NAME} job ${job.id}`);
+  if (isProd) {
+    console.log(`⚡️ Skipping ${JOB_NAME} job ${job.id} in production`);
+    return {
+      success: true,
+      skip: true,
+    };
+  }
 
   const {
     data: updateMapDetailsCafes = [],
     count: updateMapsTotalCount = 0,
-  } = await supabase
-    .from("cafes")
-    .select("*", { count: "exact" })
-    .not("google_place_id", "is", null)
-    .gte("review_count", 1) // only process cafes with at least 1 review
-    .is("processed->google_details_at", null)
-    .in("status", ["NEW", "PROCESSED", "UNKNOWN"])
-    .order("created_at", { ascending: true })
-    .limit(10);
+  } = await getCafesForGoogleMapsDetails({ limit: processCount.updateMaps });
 
   for (const cafe of updateMapDetailsCafes || []) {
-    console.log(`⚡️ processing ${cafe.name} ${cafe.address}`);
+    console.log(
+      `⚡️ Triggering ${JOB_NAMES.googleMapsDetails} for ${cafe.slug}`
+    );
     await enqueue.cafeFetchGoogleMapsDetails(cafe.id);
+  }
+
+  const {
+    data: fetchReviewsCafes = [],
+    count: fetchReviewsTotalCount = 0,
+  } = await getCafesToFetchReviews({ limit: processCount.fetchReviews });
+
+  for (const cafe of fetchReviewsCafes || []) {
+    console.log(
+      `⚡️ Triggering ${JOB_NAMES.cafeFetchReviews} for ${cafe.slug}`
+    );
+    await enqueue.cafeFetchReviews(cafe.id);
+  }
+
+  const {
+    data: evaluateCafes = [],
+    count: evaluateCafesTotalCount = 0,
+  } = await getCafesToEvaluate({ limit: processCount.evaluateCafes });
+
+  for (const cafe of evaluateCafes || []) {
+    console.log(
+      `⚡️ Triggering ${JOB_NAMES.cafeEvalPublishStatus} for ${cafe.name} ${cafe.slug}`
+    );
+    await enqueue.cafeEvalPublishStatus(cafe.id);
+  }
+
+  const {
+    data: fetchAboutContentCafes = [],
+    count: fetchAboutContentTotalCount = 0,
+  } = await getCafesToFetchAboutContent({ limit: processCount.fetchAboutContent });
+
+  for (const cafe of fetchAboutContentCafes || []) {
+    console.log(
+      `⚡️ Triggering ${JOB_NAMES.cafeFetchAboutContent} for ${cafe.slug}`
+    );
+    await enqueue.cafeFetchAboutContent(cafe.id);
   }
 
   return {
     success: true,
     data: {
       updateMaps: `Updated ${updateMapsTotalCount} of ${updateMapsTotalCount} cafes`,
+      fetchReviews: `Fetched ${fetchReviewsTotalCount} of ${fetchReviewsTotalCount} cafes`,
+      evaluateCafes: `Evaluated ${evaluateCafesTotalCount} of ${evaluateCafesTotalCount} cafes`,
+      fetchAboutContent: `Fetched ${fetchAboutContentTotalCount} of ${fetchAboutContentTotalCount} cafes`,
     },
   };
 }
