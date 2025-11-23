@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Cafe } from "@/libs/types";
 import { DefaultCafeImage } from "./Image";
 import { Button } from "../ui/button";
-import { Flag, Globe, MapPinned } from "lucide-react";
+import { Flag, Globe, MapPinned, MessageCircleWarning } from "lucide-react";
 import { MLink } from "../general/link";
 import { countryFlag } from "@/config/countires";
 import Paths from "@/libs/paths";
@@ -65,7 +65,7 @@ export function CafeHero({ cafe }: CafeHeroProps) {
               </Button>
               <Button variant="secondary" size="sm" asChild title="Report">
                 <MLink href={reportHref} noFollow>
-                  <Flag className="w-4 h-4" />
+                  <MessageCircleWarning className="w-4 h-4" />
                 </MLink>
               </Button>
             </div>

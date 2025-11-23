@@ -45,6 +45,10 @@ module.exports = {
         userAgent: '*',
         disallow: ['/cafes/report'],
       },
+      {
+        userAgent: '*',
+        disallow: ['/api/', '/dashboard/', '/send/', '/_next/', '/_static/', '/_static/'],
+      },
     ],
     // additionalSitemaps: [
     //   `${siteUrl}/server-sitemap.xml`, // generated sitemap for all videos

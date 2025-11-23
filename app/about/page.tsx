@@ -1,4 +1,4 @@
-import config, { domainDe, domainEn } from '@/config/config';
+import config, { domainDe, domainEn, domainName } from '@/config/config';
 import { isEnglish, language } from '@/libs/environment';
 import { getSEOTags } from '@/libs/seo';
 import { notFound } from 'next/navigation';
@@ -58,7 +58,7 @@ Looking ahead, we're exploring features like:
 
 ## Get Involved
 
-Found a great café that's not on our list? Have suggestions for making the platform better? We'd love to hear from you! Drop us a line at [contact@cafezumarbeiten.de](mailto:contact@cafezumarbeiten.de).
+Found a great café that's not on our list? Have suggestions for making the platform better? We'd love to hear from you! Drop us a line at [contact@${domainName}](mailto:contact@${domainName}).
 
 Together, we can build the most comprehensive guide to laptop-friendly cafés in Germany.
 `;

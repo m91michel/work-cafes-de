@@ -1,66 +1,50 @@
-version: '3.8'
+# Local development configuration
+# This file is for local development only
+# For production deployment, use docker-compose.yml with Coolify
 
 services:
-  # # German version (cafezumarbeiten.de)
-  # cafes-de:
+  # web:
   #   build:
   #     context: .
   #     dockerfile: Dockerfile
   #     args:
-  #       LANGUAGE: de
+  #       LANGUAGE: en
   #       NODE_VERSION: 22
-  #   image: work-cafes-de:de
+  #   image: work-cafes-de:en
   #   ports:
-  #     - "3010:3010"
+  #     - "3011:3010"  # Different port to avoid conflict
   #   env_file:
   #     - .env.local
   #   restart: unless-stopped
   #   networks:
   #     - cafes-network
 
-  # English version (awifiplace.com)
-  cafes-en:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        LANGUAGE: en
-        NODE_VERSION: 22
-    image: work-cafes-de:en
-    ports:
-      - "3011:3010"  # Different port to avoid conflict
-    env_file:
-      - .env.local
-    restart: unless-stopped
-    networks:
-      - cafes-network
-
   # Worker service for background jobs
   # Note: Uses existing Redis container. Set REDIS_URL and REDIS_DB in .env.local
-  worker:
-    build:
-      context: ./worker
-      dockerfile: Dockerfile
-    env_file:
-      - .env.local
-    restart: unless-stopped
-    networks:
-      - cafes-network
-    environment:
-      - NODE_ENV=production
+  # worker:
+  #   build:
+  #     context: ./worker
+  #     dockerfile: Dockerfile
+  #   env_file:
+  #     - .env.local
+  #   restart: unless-stopped
+  #   networks:
+  #     - cafes-network
+  #   environment:
+  #     - NODE_ENV=production
   
   bullboard:
     container_name: bullboard
     image: venatum/bull-board
     env_file:
       - .env.local
-      - .env
     restart: unless-stopped
     networks:
       - cafes-network
     ports:
       - "3232:3000"
     environment:
+      # For local Redis (if running locally):
       - REDIS_HOST=host.docker.internal
       - REDIS_PORT=6379
       - REDIS_DB=5
