@@ -6,6 +6,7 @@ import {
   getCafesToEvaluate,
   getCafesToFetchAboutContent,
   getCafesToFetchReviews,
+  getPublishedCafesForRegularUpdate,
 } from "@/libs/supabase/cafe/processing-queries";
 import { pick } from "lodash";
 import { Cafe } from "@/libs/types";
@@ -29,6 +30,9 @@ export async function GET() {
   const updateMapDetailsCafes = await getCafesForGoogleMapsDetails({
     limit: 10,
   });
+  const regularUpdateOfPublishedCafes = await getPublishedCafesForRegularUpdate({
+    limit: 10,
+  });
   const updateImagesCafes = await getCafesForGoogleMapsImages({ limit: 10 });
 
   return NextResponse.json({
@@ -50,6 +54,10 @@ export async function GET() {
         count: updateMapDetailsCafes.count,
         cafes: mapCafeToResponse(updateMapDetailsCafes.data),
       },
+      regularUpdateOfPublishedCafes: {
+        count: regularUpdateOfPublishedCafes.count,
+        cafes: mapCafeToResponse(regularUpdateOfPublishedCafes.data),
+      },
       updateImagesCafes: {
         count: updateImagesCafes.count,
         cafes: mapCafeToResponse(updateImagesCafes.data),
@@ -60,6 +68,6 @@ export async function GET() {
 
 function mapCafeToResponse(cafes: Cafe[]) {
   return cafes.map((cafe) =>
-    pick(cafe, ["id", "name", "slug", "city_slug", "processed_at", "status"])
+    pick(cafe, ["id", "name", "slug", "city_slug", "processed_at", "status", "processed"])
   );
 }

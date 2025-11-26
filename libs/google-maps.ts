@@ -159,7 +159,7 @@ export async function getPlaceDetails(
 
   const {
     language = "de",
-    fields = "type,url,website,photos,formatted_address,name,rating,opening_hours,geometry,user_ratings_total,price_level",
+    fields = "type,url,website,photos,formatted_address,name,rating,opening_hours,geometry,user_ratings_total,price_level,business_status",
   } = options || {};
 
   try {

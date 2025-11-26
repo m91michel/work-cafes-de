@@ -24,6 +24,28 @@ export async function getCafesForGoogleMapsDetails(
   return { data: data as Cafe[], count: count || 0 };
 }
 
+export async function getPublishedCafesForRegularUpdate(
+  { limit = 10 }: BaseFilters = { limit: 10 }
+): Promise<{ data: Cafe[]; count: number }> {
+  const { data, error, count } = await supabase
+    .from("cafes")
+    .select("*", { count: "exact" })
+    .not("google_place_id", "is", null)
+    .not("processed->google_details_at", "is", null)
+    .lt("processed_at", dayjs().subtract(30, "day").toISOString())
+    .in("status", ["PUBLISHED"])
+    // oldest first
+    .order("processed->google_details_at", { ascending: true })
+    .limit(limit);
+
+  if (error) {
+    console.error("Error fetching data:", error);
+    return { data: [], count: 0 };
+  }
+
+  return { data: data as Cafe[], count: count || 0 };
+}
+
 export async function getCafesToFetchReviews(
   { limit = 10 }: BaseFilters = { limit: 10 }
 ): Promise<{ data: Cafe[]; count: number }> {

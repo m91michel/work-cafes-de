@@ -32,6 +32,7 @@ interface OpeningHours {
 }
 
 export interface GooglePlaceDetails {
+  business_status?: string;
   formatted_address: string;
   geometry: {
     location: {

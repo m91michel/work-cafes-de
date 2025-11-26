@@ -72,6 +72,16 @@ export async function processJob(job: Job<JobData>) {
       throw new Error(`No place details found for ${cafe.name}`);
     }
 
+    let discard_reason = null;
+    let status = cafe.status !== 'PUBLISHED' ? 'PROCESSED' : cafe.status;
+    // Check if cafe is still operational
+    if (placeDetails.business_status !== "OPERATIONAL") {
+      console.log(`⚠️ ${cafe.name} is not operational (status: ${placeDetails.business_status})`);
+      
+      discard_reason = "This place is not operational";
+      status = "DISCARDED";
+    }
+
     // Store photo URLs in maps_data (images will be processed separately)
     const photos = placeDetails.photos || [];
     const photoUrls: string[] = photos.map((photo: any) => {
@@ -93,6 +103,8 @@ export async function processJob(job: Job<JobData>) {
     const { error } = await supabase
       .from("cafes")
       .update({
+        status: status,
+        discard_reason: discard_reason,
         processed: mergeObjects(cafe?.processed, {
           google_details_at: dayjs().toISOString(),
         }),
@@ -109,7 +121,6 @@ export async function processJob(job: Job<JobData>) {
           ...placeDetails as any,
           photos: photoUrls
         },
-        status: cafe.status !== 'PUBLISHED' ? 'PROCESSED' : cafe.status
       })
       .eq("id", cafe.id);
 

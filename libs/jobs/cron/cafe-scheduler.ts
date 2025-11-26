@@ -9,6 +9,7 @@ import {
   getCafesToFetchReviews,
   getCafesToEvaluate,
   getCafesToFetchAboutContent,
+  getPublishedCafesForRegularUpdate,
 } from "../../supabase/cafe/processing-queries";
 import { isProd } from "../../environment";
 
@@ -49,9 +50,10 @@ export async function enqueueJob() {
 
 const processCount = {
   updateMaps: 10,
+  regularUpdateOfPublishedCafes: 5, // Regular updates for published cafes
   updateImages: 5,
   fetchReviews: 2,
-  evaluateCafes: 2,
+  evaluateCafes: 10,
   fetchAboutContent: 2,
 };
 export async function processJob(job: Job) {
@@ -68,6 +70,20 @@ export async function processJob(job: Job) {
     await getCafesForGoogleMapsDetails({ limit: processCount.updateMaps });
 
   for (const cafe of updateMapDetailsCafes || []) {
+    console.log(
+      `⚡️ Triggering ${JOB_NAMES.googleMapsDetails} for ${cafe.slug}`
+    );
+    await enqueue.cafeFetchGoogleMapsDetails(cafe.id);
+  }
+
+  const {
+    data: regularUpdateOfPublishedCafes = [],
+    count: regularUpdateOfPublishedCafesTotalCount = 0,
+  } = await getPublishedCafesForRegularUpdate({
+    limit: processCount.regularUpdateOfPublishedCafes,
+  });
+
+  for (const cafe of regularUpdateOfPublishedCafes || []) {
     console.log(
       `⚡️ Triggering ${JOB_NAMES.googleMapsDetails} for ${cafe.slug}`
     );
@@ -118,14 +134,14 @@ export async function processJob(job: Job) {
     await enqueue.cafeFetchAboutContent(cafe.id);
   }
 
-  return {
-    success: true,
-    data: {
-      updateMaps: `Updated ${updateMapsTotalCount} of ${updateMapsTotalCount} cafes`,
-      updateImages: `Updated images for ${updateImagesTotalCount} of ${updateImagesTotalCount} cafes`,
-      fetchReviews: `Fetched ${fetchReviewsTotalCount} of ${fetchReviewsTotalCount} cafes`,
-      evaluateCafes: `Evaluated ${evaluateCafesTotalCount} of ${evaluateCafesTotalCount} cafes`,
-      fetchAboutContent: `Fetched ${fetchAboutContentTotalCount} of ${fetchAboutContentTotalCount} cafes`,
-    },
+  const data = {
+    updateMaps: `Updated ${updateMapsTotalCount} of ${updateMapsTotalCount} cafes`,
+    regularUpdateOfPublishedCafes: `Updated ${regularUpdateOfPublishedCafesTotalCount} of ${regularUpdateOfPublishedCafesTotalCount} cafes`,
+    updateImages: `Updated images for ${updateImagesTotalCount} of ${updateImagesTotalCount} cafes`,
+    fetchReviews: `Fetched ${fetchReviewsTotalCount} of ${fetchReviewsTotalCount} cafes`,
+    evaluateCafes: `Evaluated ${evaluateCafesTotalCount} of ${evaluateCafesTotalCount} cafes`,
+    fetchAboutContent: `Fetched ${fetchAboutContentTotalCount} of ${fetchAboutContentTotalCount} cafes`,
   };
+  console.log(data);
+  return { success: true, data };
 }
