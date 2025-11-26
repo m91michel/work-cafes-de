@@ -16,7 +16,7 @@ import {
 import { CafeCard } from "@/components/cafe/cafe-card";
 import { CafeRatingCard } from "@/components/cafe/sections/rating";
 import CafeBreadcrumb from "@/components/cafe/cafe-breadcrumb";
-import { isDev, isVercelProduction } from "@/libs/environment";
+import { isDev, isProd, isVercelProduction } from "@/libs/environment";
 import { CafeReviews } from "@/components/cafe/cafe-reviews";
 import { FAQSection } from "@/components/general/sections/faq";
 import initTranslations from "@/libs/i18n/config";
@@ -95,6 +95,10 @@ export default async function CafePage({ params }: Props) {
   const country = await getCountryByCode(cafe?.cities?.country_code);
 
   if (!cafe) {
+    return notFound();
+  }
+
+  if (cafe.status !== "PUBLISHED" && isProd) {
     return notFound();
   }
 
