@@ -16,7 +16,7 @@ Assess if the café meets one of the following **laptop-friendly** requirements:
 2. **Laptop Policy** – Does the review mention that the café allows customers to use a laptop?
 3. **Suitable for Working** – Does the review mention that the café is suitable for working?
 
-In case of mixed reviews of working WiFI use 'PUBLISHED' status and 'Unknown' for wifi_quality.
+In case of mixed reviews of working WiFI use 'PUBLISHED' status and 'UNKNOWN' for wifi_quality.
 
 #### **Output Format**  
 Return a JSON object with the following fields:  
@@ -24,6 +24,7 @@ Return a JSON object with the following fields:
 'json
 {
   "status": "PUBLISHED | DISCARDED | UNKNOWN",
+  "status_reasoning": "Reasoning for the status (No reviews found | Discarded by AI evaluation | Unknown because of mixed reviews | etc.)",
   "wifi_quality": "Unknown | Available | Unavailable | Poor | Average | Good",
   "ambiance": "Quiet and Cozy | Lively | Noisy | Unknown",
   "seating_comfort": "Unknown | Comfortable | Very Comfortable | Slightly Uncomfortable"
@@ -33,8 +34,12 @@ Return a JSON object with the following fields:
 - **status**:  
   - **PUBLISHED** → If reviews mentions that the cafe is suitable for working **or** WiFi is available **or** laptop use is allowed.  
   - **DISCARDED** → If people confirm that its not allowed to use a laptop.  
-  - **UNKNOWN** → If there is no clear mention of WiFi or laptop policies.  
+  - **UNKNOWN** → If there is no clear mention of WiFi or laptop policies.
 
+- **status_reasoning**:
+  - Reasoning for the status DISCARDED or UNKNOWN.
+  - Return null if the status is PUBLISHED.
+  
 - **wifi_quality**:  
   - **Unknown** → If no review mentions WiFi quality.  
   - **Available** → If reviews at LEAST ONE mention that the WiFi is available.
@@ -84,6 +89,7 @@ export type AIReview = {
 }
 type AIResponse = {
   status: string;
+  status_reasoning: string;
   wifi_quality: string;
   ambiance: string;
   seating_comfort: string;
@@ -106,7 +112,7 @@ export async function analyzeReviews(reviews?: AIReview[] | null): Promise<AIRes
 
   try {
     const response = await openai.beta.chat.completions.parse({
-      model: "gpt-4.1-mini",
+      model: "gpt-4.1",
       messages: [
         {
           role: "system",
@@ -125,6 +131,10 @@ export async function analyzeReviews(reviews?: AIReview[] | null): Promise<AIRes
                 type: "string",
                 description: "Status of the reviews analysis (PUBLISHED | DISCARDED | UNKNOWN)",
                 enum: ["PUBLISHED", "DISCARDED", "UNKNOWN"],
+              },
+              status_reasoning: {
+                type: "string",
+                description: "Reasoning for the status (No reviews found | Discarded by AI evaluation | Unknown because of mixed reviews)",
               },
               wifi_quality: {
                 type: "string",

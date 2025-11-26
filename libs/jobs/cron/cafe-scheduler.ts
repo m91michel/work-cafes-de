@@ -51,7 +51,7 @@ const processCount = {
   updateMaps: 10,
   updateImages: 5,
   fetchReviews: 2,
-  evaluateCafes: 10,
+  evaluateCafes: 2,
   fetchAboutContent: 2,
 };
 export async function processJob(job: Job) {

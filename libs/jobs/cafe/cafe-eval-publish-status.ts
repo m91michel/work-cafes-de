@@ -21,7 +21,9 @@ export const JOB_NAME = JOB_NAMES.cafeEvalPublishStatus;
  */
 export async function enqueueJob(cafeId: string) {
   if (!cafeQueue) {
-    console.warn(`⚠️ Redis queue not available. Skipping ${JOB_NAME} job for cafe: ${cafeId}`);
+    console.warn(
+      `⚠️ Redis queue not available. Skipping ${JOB_NAME} job for cafe: ${cafeId}`
+    );
     return;
   }
 
@@ -108,6 +110,7 @@ export async function processJob(job: Job<JobData>) {
       .from("cafes")
       .update({
         status: aiResult.status,
+        discard_reason: aiResult.status_reasoning,
         wifi_qualitity: aiResult.wifi_quality,
         ambiance: aiResult.ambiance,
         seating_comfort: aiResult.seating_comfort,

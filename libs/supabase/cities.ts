@@ -103,6 +103,7 @@ type DashboardFilters = {
   offset?: number;
   status?: string;
   state?: string;
+  name?: string;
   sortBy?: string;
   sortOrder?: "asc" | "desc";
 };
@@ -113,6 +114,7 @@ export async function getCitiesForDashboard(
     offset = 0,
     status,
     state,
+    name,
     sortBy = "created_at",
     sortOrder = "desc",
   }: DashboardFilters = { limit: 100, offset: 0 }
@@ -128,6 +130,13 @@ export async function getCitiesForDashboard(
 
   if (state) {
     query = query.eq("state", state);
+  }
+
+  if (name) {
+    // Search in both name_de and name_en with OR operator
+    // PostgREST .or() syntax: column.operator.value,column2.operator.value
+    const searchPattern = `%${name}%`;
+    query = query.or(`name_de.ilike.${searchPattern},name_en.ilike.${searchPattern}`);
   }
 
   const { data, error, count } = await query.range(offset, offset + limit - 1);
