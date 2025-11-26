@@ -106,7 +106,7 @@ export async function analyzeReviews(reviews?: AIReview[] | null): Promise<AIRes
 
   try {
     const response = await openai.beta.chat.completions.parse({
-      model: "gpt-4o-mini",
+      model: "gpt-4.1-mini",
       messages: [
         {
           role: "system",
@@ -124,6 +124,7 @@ export async function analyzeReviews(reviews?: AIReview[] | null): Promise<AIRes
               status: {
                 type: "string",
                 description: "Status of the reviews analysis (PUBLISHED | DISCARDED | UNKNOWN)",
+                enum: ["PUBLISHED", "DISCARDED", "UNKNOWN"],
               },
               wifi_quality: {
                 type: "string",

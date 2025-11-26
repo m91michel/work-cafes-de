@@ -55,7 +55,7 @@ export async function generateAboutContent(content?: string, cafeName?: string |
 
   try {
     const response = await openai.beta.chat.completions.parse({
-      model: "gpt-4o",
+      model: "gpt-4.1",
       messages: [
         {
           role: "system",

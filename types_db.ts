@@ -24,6 +24,7 @@ export type Database = {
           city_slug: string | null
           country_code: string | null
           created_at: string | null
+          discard_reason: string | null
           drinks_content: Json | null
           error_message: string | null
           error_metadata: Json | null
@@ -65,6 +66,7 @@ export type Database = {
           city_slug?: string | null
           country_code?: string | null
           created_at?: string | null
+          discard_reason?: string | null
           drinks_content?: Json | null
           error_message?: string | null
           error_metadata?: Json | null
@@ -106,6 +108,7 @@ export type Database = {
           city_slug?: string | null
           country_code?: string | null
           created_at?: string | null
+          discard_reason?: string | null
           drinks_content?: Json | null
           error_message?: string | null
           error_metadata?: Json | null
@@ -548,8 +551,10 @@ export type Database = {
           form_values: Json | null
           id: string
           message: string | null
+          notes: string | null
           record_type: string | null
           slug: string | null
+          status: string | null
         }
         Insert: {
           country?: string | null
@@ -558,8 +563,10 @@ export type Database = {
           form_values?: Json | null
           id?: string
           message?: string | null
+          notes?: string | null
           record_type?: string | null
           slug?: string | null
+          status?: string | null
         }
         Update: {
           country?: string | null
@@ -568,8 +575,10 @@ export type Database = {
           form_values?: Json | null
           id?: string
           message?: string | null
+          notes?: string | null
           record_type?: string | null
           slug?: string | null
+          status?: string | null
         }
         Relationships: []
       }

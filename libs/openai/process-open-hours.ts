@@ -27,7 +27,7 @@ const openai = new OpenAI({
 export async function processOpenHours(openHours: string): Promise<string | undefined> {
   try {
     const response = await openai.beta.chat.completions.parse({
-      model: "gpt-4o-mini",
+      model: "gpt-4.1-mini",
       messages: [
         {
           role: "system",

@@ -57,7 +57,7 @@ export async function generateCityDescription(city: City, lang: "de" | "en"): Pr
 
   try {
     const response = await openai.beta.chat.completions.parse({
-      model: "gpt-4o-mini",
+      model: "gpt-4.1",
       messages: [
         {
           role: "system",
