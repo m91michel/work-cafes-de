@@ -74,7 +74,7 @@ export async function processJob(job: Job<JobData>) {
 
   try {
     if ((cafe?.processed as any)?.google_reviews_at) {
-      console.log(`Skipping ${cafe.name} because it as already been processed`);
+      console.log(`⚠️ Skipping ${cafe.name} because it as already been processed`);
       return {
         success: true,
         cafeId,

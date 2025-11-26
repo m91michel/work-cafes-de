@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
 
     //@ts-ignore
     if (cafe.processed?.google_reviews_at) {
-      console.log(`Skipping ${cafe.name} because it as already been processed`);
+      console.log(`⚠️ Skipping ${cafe.name} because it as already been processed`);
       continue;
     } else {
       await setProcessed(cafe);

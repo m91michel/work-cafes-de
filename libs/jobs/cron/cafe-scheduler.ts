@@ -50,21 +50,21 @@ export async function enqueueJob() {
 
 const processCount = {
   updateMaps: 10,
-  regularUpdateOfPublishedCafes: 5, // Regular updates for published cafes
-  updateImages: 5,
+  regularUpdateOfPublishedCafes: 1, // Regular updates for published cafes
+  updateImages: 1,
   fetchReviews: 2,
-  evaluateCafes: 10,
+  evaluateCafes: 2,
   fetchAboutContent: 2,
 };
 export async function processJob(job: Job) {
   console.log(`⚡️ Starting ${JOB_NAME} job ${job.id}`);
-  if (isProd) {
-    console.log(`⚡️ Skipping ${JOB_NAME} job ${job.id} in production`);
-    return {
-      success: true,
-      skip: true,
-    };
-  }
+  // if (isProd) {
+  //   console.log(`⚡️ Skipping ${JOB_NAME} job ${job.id} in production`);
+  //   return {
+  //     success: true,
+  //     skip: true,
+  //   };
+  // }
 
   const { data: updateMapDetailsCafes = [], count: updateMapsTotalCount = 0 } =
     await getCafesForGoogleMapsDetails({ limit: processCount.updateMaps });
