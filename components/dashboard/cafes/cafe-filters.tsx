@@ -9,99 +9,142 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useState, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
 
-export function CafeFilters() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const nameTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const cityTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+function useDebouncedCallback<T extends (...args: any[]) => void>(
+  callback: T,
+  delay: number
+) {
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const updateFilter = useCallback(
-    (key: string, value: string | undefined) => {
-      const params = new URLSearchParams(searchParams.toString());
-      if (value && value !== "all" && value !== "") {
-        params.set(key, value);
-      } else {
-        params.delete(key);
+  const debounced = useCallback(
+    (...args: Parameters<T>) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
       }
-      params.set("page", "1"); // Reset to first page when filtering
-      router.push(`/dashboard/cafes?${params.toString()}`);
+      timeoutRef.current = setTimeout(() => {
+        callback(...args);
+      }, delay);
     },
-    [router, searchParams]
+    [callback, delay]
   );
-
-  const status = searchParams.get("status") || undefined;
-  const [name, setName] = useState(searchParams.get("name") || "");
-  const [city, setCity] = useState(searchParams.get("city") || "");
-
-  // Sync local state with URL params
-  useEffect(() => {
-    setName(searchParams.get("name") || "");
-    setCity(searchParams.get("city") || "");
-  }, [searchParams]);
-
-  const handleNameChange = (value: string) => {
-    setName(value);
-    if (nameTimeoutRef.current) {
-      clearTimeout(nameTimeoutRef.current);
-    }
-    nameTimeoutRef.current = setTimeout(() => {
-      updateFilter("name", value || undefined);
-    }, 500);
-  };
-
-  const handleCityChange = (value: string) => {
-    setCity(value);
-    if (cityTimeoutRef.current) {
-      clearTimeout(cityTimeoutRef.current);
-    }
-    cityTimeoutRef.current = setTimeout(() => {
-      updateFilter("city", value || undefined);
-    }, 500);
-  };
 
   useEffect(() => {
     return () => {
-      if (nameTimeoutRef.current) {
-        clearTimeout(nameTimeoutRef.current);
-      }
-      if (cityTimeoutRef.current) {
-        clearTimeout(cityTimeoutRef.current);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
       }
     };
   }, []);
 
-  const limit = searchParams.get("limit") || "100";
+  return debounced;
+}
+
+export function CafeFilters() {
+  const [{ name, city, status, limit }, setFilters] = useQueryStates(
+    {
+      name: parseAsString.withDefault(""),
+      city: parseAsString.withDefault(""),
+      status: parseAsString,
+      limit: parseAsInteger.withDefault(100),
+      page: parseAsInteger.withDefault(1),
+    },
+    {
+      history: "push",
+      shallow: false,
+    }
+  );
+
+  const [nameInput, setNameInput] = useState(name || "");
+  const [cityInput, setCityInput] = useState(city || "");
+
+  // Keep local inputs in sync when navigating/back/forward
+  useEffect(() => {
+    setNameInput(name || "");
+  }, [name]);
+
+  useEffect(() => {
+    setCityInput(city || "");
+  }, [city]);
+
+  const debouncedUpdateFilters = useDebouncedCallback(
+    (patch: { name?: string | null; city?: string | null }) => {
+      const updated: {
+        name?: string | null;
+        city?: string | null;
+        page: number;
+      } = {
+        page: 1, // reset to first page when filtering
+      };
+
+      if (patch.name !== undefined) {
+        updated.name = patch.name;
+      }
+
+      if (patch.city !== undefined) {
+        updated.city = patch.city;
+      }
+
+      setFilters(updated);
+    },
+    500
+  );
+
+  const handleNameChange = (value: string) => {
+    setNameInput(value);
+    debouncedUpdateFilters({
+      name: value === "" ? null : value,
+    });
+  };
+
+  const handleCityChange = (value: string) => {
+    setCityInput(value);
+    debouncedUpdateFilters({
+      city: value === "" ? null : value,
+    });
+  };
+
+  const handleStatusChange = (value: string) => {
+    setFilters({
+      status: value === "all" ? null : value,
+      page: 1,
+    });
+  };
+
+  const handleLimitChange = (value: string) => {
+    const numeric = Number(value) || 100;
+    setFilters({
+      limit: numeric,
+      page: 1,
+    });
+  };
 
   return (
-    <div className="flex gap-4 justify-between flex-wrap">
-      <div className="w-full md:w-1/4">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-4 items-end">
+      <div className="w-full">
         <Label>Search by Name</Label>
         <Input
           placeholder="Search cafes..."
-          value={name}
+          value={nameInput}
           onChange={(event) => handleNameChange(event.target.value)}
           className="max-w-sm"
         />
       </div>
-      <div className="w-full md:w-1/4">
+      <div className="w-full">
         <Label>Filter by City</Label>
         <Input
           placeholder="Filter by city..."
-          value={city}
+          value={cityInput}
           onChange={(event) => handleCityChange(event.target.value)}
           className="max-w-sm"
         />
       </div>
-      <div className="w-full md:w-1/4">
+      <div className="w-full">
         <Label>Filter by Status</Label>
         <Select
           value={status || "all"}
-          onValueChange={(value) =>
-            updateFilter("status", value === "all" ? undefined : value)
-          }
+          onValueChange={handleStatusChange}
         >
           <SelectTrigger className="min-w-40">
             <SelectValue placeholder="Select status" />
@@ -116,11 +159,11 @@ export function CafeFilters() {
           </SelectContent>
         </Select>
       </div>
-      <div className="w-full md:w-1/4">
+      <div className="w-full">
         <Label>Page Size</Label>
         <Select
-          value={limit}
-          onValueChange={(value) => updateFilter("limit", value)}
+          value={String(limit || 100)}
+          onValueChange={handleLimitChange}
         >
           <SelectTrigger className="min-w-40">
             <SelectValue placeholder="Select page size" />

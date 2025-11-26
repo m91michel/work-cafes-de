@@ -2,7 +2,7 @@
 
 import { Input } from '@/components/ui/input';
 import { useCTranslation } from '@/hooks/use-translation';
-import { useQueryState } from 'next-usequerystate';
+import { useQueryState } from 'nuqs';
 import { useMemo } from 'react';
 import debounce from 'lodash/debounce';
 

@@ -2,7 +2,7 @@
 
 import { City, Country } from "@/libs/types";
 import { useCTranslation } from "@/hooks/use-translation";
-import { useQueryState } from "next-usequerystate";
+import { useQueryState } from "nuqs";
 import { CityGridList, SuggestCityCard } from "./city-list";
 import { FiltersSection } from "../filters/filters-section";
 

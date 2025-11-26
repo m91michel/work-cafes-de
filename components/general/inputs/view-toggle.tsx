@@ -3,7 +3,7 @@
 import { MapIcon, LayoutGridIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/libs/utils";
-import { useQueryState } from 'next-usequerystate';
+import { useQueryState } from 'nuqs';
 
 export type ViewMode = 'list' | 'map';
 

@@ -3,7 +3,7 @@
 import { BaseFilterSelect } from '@/components/general/inputs/base-filter-select';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'next/navigation';
-import { useQueryState, parseAsString } from 'next-usequerystate';
+import { useQueryState, parseAsString } from 'nuqs';
 
 type Props = {
   options: number[];

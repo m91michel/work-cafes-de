@@ -4,7 +4,7 @@ import { CafeCard } from "@/components/cafe/cafe-card";
 import { Cafe, City } from "@/libs/types";
 import { cn } from "@/libs/utils";
 import { FiltersSection } from "../filters/filters-section";
-import { useQueryState } from 'next-usequerystate';
+import { useQueryState } from "nuqs";
 import { MapContainer } from "../map/map-container";
 
 interface Props {

@@ -4,7 +4,7 @@ import { City } from '@/libs/types';
 import { useCTranslation } from '@/hooks/use-translation';
 import { mapCityOption } from '@/components/city/city-selector';
 import { SearchSelectInput } from '@/components/general/form/search-select-input';
-import { useQueryState } from 'next-usequerystate';
+import { useQueryState } from 'nuqs';
 import { useMemo } from 'react';
 
 type CityFilterProps = {

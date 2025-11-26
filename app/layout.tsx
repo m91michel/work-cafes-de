@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import TranslationProvider from "@/components/providers/i18n-provider";
 import initTranslations from "@/libs/i18n/config";
 import config from "@/config/config";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -51,12 +52,18 @@ export default async function RootLayout({
         </>
       )}
       <body className={`${inter.className} min-h-screen flex flex-col`}>
-        <TranslationProvider locale={language} namespaces={namespaces} resources={resources}>
-          <Header />
-          {children}
-          <Footer />
-          <Toaster />
-        </TranslationProvider>
+        <NuqsAdapter>
+          <TranslationProvider
+            locale={language}
+            namespaces={namespaces}
+            resources={resources}
+          >
+            <Header />
+            {children}
+            <Footer />
+            <Toaster />
+          </TranslationProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );

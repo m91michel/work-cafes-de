@@ -9,7 +9,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useQueryState, parseAsString } from "next-usequerystate";
+import { useQueryState, parseAsString } from "nuqs";
 
 interface PaginationSectionProps {
   totalItems: number;
