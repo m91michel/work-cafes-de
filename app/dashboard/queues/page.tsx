@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { PipelineBoard } from '@/components/dashboard/queues/pipeline-board';
 
 interface QueueStats {
   name: string;
@@ -138,17 +139,7 @@ export default function QueuesPage() {
         </div>
       )}
 
-      <div className="mt-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Note</CardTitle>
-            <CardDescription>
-              For full Bull Board UI with job management, consider using a separate Express server
-              or embedding Bull Board via iframe. This dashboard shows basic queue statistics.
-            </CardDescription>
-          </CardHeader>
-        </Card>
-      </div>
+      <PipelineBoard />
     </div>
   );
 }
