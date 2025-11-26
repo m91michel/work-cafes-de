@@ -9,37 +9,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
-
-function useDebouncedCallback<T extends (...args: any[]) => void>(
-  callback: T,
-  delay: number
-) {
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  const debounced = useCallback(
-    (...args: Parameters<T>) => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-      timeoutRef.current = setTimeout(() => {
-        callback(...args);
-      }, delay);
-    },
-    [callback, delay]
-  );
-
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
-
-  return debounced;
-}
+import { useDebounceCallback } from "usehooks-ts";
 
 export function CafeFilters() {
   const [{ name, city, status, limit }, setFilters] = useQueryStates(
@@ -68,7 +40,7 @@ export function CafeFilters() {
     setCityInput(city || "");
   }, [city]);
 
-  const debouncedUpdateFilters = useDebouncedCallback(
+  const debouncedUpdateFilters = useDebounceCallback(
     (patch: { name?: string | null; city?: string | null }) => {
       const updated: {
         name?: string | null;
