@@ -81,7 +81,7 @@ export async function getCafesToEvaluate(
     .gte("review_count", 1)
     // wait 30 minutes before processing again
     .lte("processed_at", dayjs().subtract(30, "minute").toISOString())
-    // .is("checked", null)
+    .is("checked", null)
     .order("created_at", { ascending: true })
     .limit(limit);
 

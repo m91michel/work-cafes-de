@@ -79,7 +79,7 @@ export async function processJob(job: Job<JobData>) {
       console.log(`⚠️ ${cafe.name} is not operational (status: ${placeDetails.business_status})`);
       
       discard_reason = "This place is not operational";
-      status = "DISCARDED";
+      status = "CLOSED";
     }
 
     // Store photo URLs in maps_data (images will be processed separately)

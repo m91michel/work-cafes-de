@@ -2,8 +2,8 @@ import { Database } from "@/types_db";
 import { KeyPrefix, Namespace, TFunction } from "i18next";
 import { FallbackNs } from "react-i18next";
 
-export type CafeStatus = 'NEW' | 'PUBLISHED' | 'PROCESSED' | 'CLOSED' | 'DISCARDED';
-export const validStatuses = ["NEW", "PROCESSED", "PUBLISHED", "CLOSED", "NOT_FRIENDLY", "DISCARDED"];
+export type CafeStatus = 'NEW' | 'PUBLISHED' | 'PROCESSED' | 'CLOSED' | 'DISCARDED' | 'ERROR';
+export const validStatuses = ["NEW", "PROCESSED", "PUBLISHED", "CLOSED", "NOT_FRIENDLY", "DISCARDED", "ERROR"];
 
 export type Cafe = Database['cafeforwork']['Tables']['cafes']['Row'] & {
   status?: CafeStatus | string | null;
