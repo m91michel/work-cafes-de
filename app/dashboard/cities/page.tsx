@@ -30,6 +30,7 @@ export default async function CitiesPage({
 
   const params = await searchParams;
   const status = typeof params.status === 'string' ? params.status : undefined;
+  const name = typeof params.name === 'string' ? params.name : undefined;
   const page = typeof params.page === 'string' ? parseInt(params.page) : 1;
   const limit = typeof params.limit === 'string' ? parseInt(params.limit) : 100;
   const offset = (page - 1) * limit;
@@ -38,6 +39,7 @@ export default async function CitiesPage({
     limit,
     offset,
     status,
+    name,
     sortBy: "created_at",
     sortOrder: "desc",
   });

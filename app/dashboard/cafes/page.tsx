@@ -1,9 +1,10 @@
 import { getSEOTags } from "@/libs/seo";
 import { getCafesForDashboard } from "@/libs/supabase/cafes";
 import { CafesTable } from "@/components/dashboard/cafes/cafes-table";
-import { ProcessDuplicatesButton } from "@/components/dashboard/cafes/buttons/ProcessDuplicatesButton";
+import { JobButton } from "@/components/general/job-button";
 import { createClient } from '@/libs/supabase/server';
 import { redirect } from 'next/navigation';
+import { RefreshCw, Play } from "lucide-react";
 
 export const revalidate = 5;
 
@@ -51,7 +52,26 @@ export default async function CafesPage({
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-3xl font-bold">Cafes</h1>
-        <ProcessDuplicatesButton />
+        <div className="flex gap-2">
+          <JobButton
+            jobName="cafeScheduler"
+            variant="outline"
+            size="sm"
+            successMessage="Cafe scheduler job has been queued"
+          >
+            <Play className="mr-2 h-4 w-4" />
+            Run Scheduler
+          </JobButton>
+          <JobButton
+            jobName="cafeProcessDuplicates"
+            variant="outline"
+            size="sm"
+            successMessage="Duplicate processing job has been queued"
+          >
+            <RefreshCw className="mr-2 h-4 w-4" />
+            Process Duplicates
+          </JobButton>
+        </div>
       </div>
 
       <CafesTable data={cafes} />

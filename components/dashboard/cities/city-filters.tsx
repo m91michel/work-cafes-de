@@ -1,5 +1,6 @@
 "use client";
 
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -8,39 +9,115 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
 
-export function CityFilters() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+function useDebouncedCallback<T extends (...args: any[]) => void>(
+  callback: T,
+  delay: number
+) {
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const updateFilter = useCallback(
-    (key: string, value: string | undefined) => {
-      const params = new URLSearchParams(searchParams.toString());
-      if (value && value !== "all") {
-        params.set(key, value);
-      } else {
-        params.delete(key);
+  const debounced = useCallback(
+    (...args: Parameters<T>) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
       }
-      params.set("page", "1"); // Reset to first page when filtering
-      router.push(`/dashboard/cities?${params.toString()}`);
+      timeoutRef.current = setTimeout(() => {
+        callback(...args);
+      }, delay);
     },
-    [router, searchParams]
+    [callback, delay]
   );
 
-  const status = searchParams.get("status") || undefined;
-  const limit = searchParams.get("limit") || "100";
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  return debounced;
+}
+
+export function CityFilters() {
+  const [{ name, status, limit }, setFilters] = useQueryStates(
+    {
+      name: parseAsString.withDefault(""),
+      status: parseAsString,
+      limit: parseAsInteger.withDefault(100),
+      page: parseAsInteger.withDefault(1),
+    },
+    {
+      history: "push",
+      shallow: false,
+    }
+  );
+
+  const [nameInput, setNameInput] = useState(name || "");
+
+  // Keep local input in sync when navigating/back/forward
+  useEffect(() => {
+    setNameInput(name || "");
+  }, [name]);
+
+  const debouncedUpdateFilters = useDebouncedCallback(
+    (patch: { name?: string | null }) => {
+      const updated: {
+        name?: string | null;
+        page: number;
+      } = {
+        page: 1, // reset to first page when filtering
+      };
+
+      if (patch.name !== undefined) {
+        updated.name = patch.name;
+      }
+
+      setFilters(updated);
+    },
+    500
+  );
+
+  const handleNameChange = (value: string) => {
+    setNameInput(value);
+    debouncedUpdateFilters({
+      name: value === "" ? null : value,
+    });
+  };
+
+  const handleStatusChange = (value: string) => {
+    setFilters({
+      status: value === "all" ? null : value,
+      page: 1,
+    });
+  };
+
+  const handleLimitChange = (value: string) => {
+    const numeric = Number(value) || 100;
+    setFilters({
+      limit: numeric,
+      page: 1,
+    });
+  };
 
   return (
-    <div className="flex gap-4 justify-between">
-      <div className="w-full md:w-1/3">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-3 items-end">
+      <div className="w-full">
+        <Label>Search by Name</Label>
+        <Input
+          placeholder="Search cities (DE/EN)..."
+          value={nameInput}
+          onChange={(event) => handleNameChange(event.target.value)}
+          className="max-w-sm"
+        />
+      </div>
+      <div className="w-full">
         <Label>Filter by Status</Label>
         <Select
           value={status || "all"}
-          onValueChange={(value) =>
-            updateFilter("status", value === "all" ? undefined : value)
-          }
+          onValueChange={handleStatusChange}
         >
           <SelectTrigger className="min-w-40">
             <SelectValue placeholder="Select status" />
@@ -56,11 +133,11 @@ export function CityFilters() {
           </SelectContent>
         </Select>
       </div>
-      <div className="w-full md:w-1/3">
+      <div className="w-full">
         <Label>Page Size</Label>
         <Select
-          value={limit}
-          onValueChange={(value) => updateFilter("limit", value)}
+          value={String(limit || 100)}
+          onValueChange={handleLimitChange}
         >
           <SelectTrigger className="min-w-40">
             <SelectValue placeholder="Select page size" />
@@ -77,4 +154,3 @@ export function CityFilters() {
     </div>
   );
 }
-
