@@ -2,7 +2,13 @@ import Redis from 'ioredis';
 
 // Check if Redis is available/configured
 export const isRedisAvailable = (): boolean => {
-  // If REDIS_URL is explicitly set, use it
+  // During build time, Redis is not available (neither in Vercel nor Docker builds)
+  // Next.js sets NEXT_PHASE=phase-production-build during the build phase
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return false;
+  }
+  
+  // If REDIS_URL is explicitly set, use it (at runtime)
   if (process.env.REDIS_URL) {
     return true;
   }
@@ -10,9 +16,7 @@ export const isRedisAvailable = (): boolean => {
   // During build time on Vercel (where Redis typically isn't available),
   // skip Redis to avoid connection errors
   // Vercel sets VERCEL=1 during builds and deployments
-  const isVercelBuild = process.env.VERCEL === '1' && 
-                        (process.env.NEXT_PHASE === 'phase-production-build' || 
-                         !process.env.REDIS_URL);
+  const isVercelBuild = process.env.VERCEL === '1' && !process.env.REDIS_URL;
   
   if (isVercelBuild) {
     return false;
