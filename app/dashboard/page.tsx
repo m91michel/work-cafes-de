@@ -1,6 +1,7 @@
 import { getSEOTags } from "@/libs/seo";
 import { createClient } from '@/libs/supabase/server';
 import { redirect } from 'next/navigation';
+import { OutscraperQuota } from '@/components/dashboard/outscraper-quota';
 
 export const revalidate = 5;
 
@@ -37,7 +38,7 @@ export default async function DashboardPage() {
         <h1 className="text-3xl font-bold">Dashboard</h1>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Stats Cards */}
         <div className="rounded-lg border bg-card p-6">
           <h3 className="text-lg font-semibold mb-4">Published Cafes</h3>
@@ -48,6 +49,8 @@ export default async function DashboardPage() {
           <h3 className="text-lg font-semibold mb-4">Relevant Reddit Posts</h3>
           <p className="text-3xl font-bold">{relevantPosts || 0}</p>
         </div>
+
+        <OutscraperQuota />
       </div>
     </div>
   );

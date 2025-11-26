@@ -102,3 +102,50 @@ export async function fetchOutscraperResult(url: string) {
   const response = await axios.get<OutscraperRequestBody>(url);
   return response.data;
 }
+
+export type OutscraperBalanceResponse = {
+  balance?: number;
+  quota?: {
+    [productName: string]: {
+      limit?: number;
+      used?: number;
+      remaining?: number;
+    };
+  };
+};
+
+export async function fetchOutscraperBalance(): Promise<OutscraperBalanceResponse | null> {
+  if (!process.env.OUTSCRAPER_API_KEY) {
+    console.error("OUTSCRAPER_API_KEY is not set");
+    return null;
+  }
+
+  try {
+    // Try the balance endpoint
+    const response = await axios.get(
+      "https://api.outscraper.cloud/profile/balance",
+      {
+        headers: {
+          "X-API-KEY": process.env.OUTSCRAPER_API_KEY,
+        },
+      }
+    );
+
+    console.log("outscraper balance response", response.data);
+
+    if (response.status === 200) {
+      return response.data;
+    }
+
+    return null;
+  } catch (error: any) {
+    // If balance endpoint doesn't exist, return null
+    // We'll track usage from webhook data instead
+    if (error.response?.status === 404) {
+      console.log("Outscraper balance endpoint not available, will track from webhooks");
+    } else {
+      console.error("error fetching outscraper balance", error);
+    }
+    return null;
+  }
+}
