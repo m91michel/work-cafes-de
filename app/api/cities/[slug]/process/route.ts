@@ -59,6 +59,9 @@ export async function POST(
       case JOB_NAMES.cityGenerateDescription:
         await enqueue.cityGenerateDescription(slug);
         break;
+      case JOB_NAMES.updateCafeStats:
+        await enqueue.updateCafeStats(slug);
+        break;
       default:
         return NextResponse.json(
           { error: `Job ${jobName} is not supported for individual cities` },

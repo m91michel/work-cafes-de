@@ -1,8 +1,10 @@
 import { getSEOTags } from "@/libs/seo";
 import { getCitiesForDashboard } from "@/libs/supabase/cities";
 import { CitiesTable } from "@/components/dashboard/cities/cities-table";
+import { JobButton } from "@/components/general/job-button";
 import { createClient } from '@/libs/supabase/server';
 import { redirect } from 'next/navigation';
+import { RefreshCw } from "lucide-react";
 
 export const revalidate = 5;
 
@@ -48,7 +50,18 @@ export default async function CitiesPage({
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-3xl font-bold">Cities</h1>
-        <p>{total} cities found</p>
+        <div className="flex items-center gap-4">
+          <p>{total} cities found</p>
+          <JobButton
+            jobName="updateCafeStats"
+            variant="outline"
+            size="sm"
+            successMessage="Update cafe stats job has been queued"
+          >
+            <RefreshCw className="mr-2 h-4 w-4" />
+            Update Cafe Stats
+          </JobButton>
+        </div>
       </div>
 
       <CitiesTable data={cities} />

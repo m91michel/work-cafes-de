@@ -135,12 +135,12 @@ export async function processJob(job: Job) {
   }
 
   const data = {
-    updateMaps: `Updated ${updateMapsTotalCount} of ${updateMapsTotalCount} cafes`,
-    regularUpdateOfPublishedCafes: `Updated ${regularUpdateOfPublishedCafesTotalCount} of ${regularUpdateOfPublishedCafesTotalCount} cafes`,
-    updateImages: `Updated images for ${updateImagesTotalCount} of ${updateImagesTotalCount} cafes`,
-    fetchReviews: `Fetched ${fetchReviewsTotalCount} of ${fetchReviewsTotalCount} cafes`,
-    evaluateCafes: `Evaluated ${evaluateCafesTotalCount} of ${evaluateCafesTotalCount} cafes`,
-    fetchAboutContent: `Fetched ${fetchAboutContentTotalCount} of ${fetchAboutContentTotalCount} cafes`,
+    updateMaps: `Updated ${updateMapDetailsCafes.length} of ${updateMapsTotalCount} cafes`,
+    regularUpdateOfPublishedCafes: `Updated ${regularUpdateOfPublishedCafes.length} of ${regularUpdateOfPublishedCafesTotalCount} cafes`,
+    updateImages: `Updated images for ${updateImagesCafes.length} of ${updateImagesTotalCount} cafes`,
+    fetchReviews: `Fetched ${fetchReviewsCafes.length} of ${fetchReviewsTotalCount} cafes`,
+    evaluateCafes: `Evaluated ${evaluateCafes.length} of ${evaluateCafesTotalCount} cafes`,
+    fetchAboutContent: `Fetched ${fetchAboutContentCafes.length} of ${fetchAboutContentTotalCount} cafes`,
   };
   console.log(data);
   return { success: true, data };

@@ -68,8 +68,8 @@ export async function getCitiesCount(): Promise<number | null> {
   return count;
 }
 
-export async function updateCafeCount(cafe?: Partial<Cafe>) {
-  if (!cafe || !cafe.city_slug) {
+export async function updateCafeCount(city?: Partial<City>) {
+  if (!city || !city.slug) {
     return;
   }
 
@@ -78,15 +78,15 @@ export async function updateCafeCount(cafe?: Partial<Cafe>) {
     .from("cafes")
     .select("name, slug, city_slug", { count: "exact" })
     .eq("status", "PUBLISHED")
-    .eq("city_slug", cafe.city_slug);
+    .eq("city_slug", city.slug);
 
   if (!count) {
     return;
   }
 
-  const status = count > 0 ? "PUBLISHED" : cafe.status || "PROCESSING";
+  const status = count > 0 ? "PUBLISHED" : city.status || "PROCESSING";
 
-  console.log(`Updating ${cafe.city_slug} to count of ${count} cafes with status ${status}`);
+  console.log(`Updating ${city.slug} to count of ${count} cafes with status ${status}`);
 
   // update the city count
   await supabase
@@ -95,7 +95,7 @@ export async function updateCafeCount(cafe?: Partial<Cafe>) {
       cafes_count: count,
       status,
     })
-    .eq("slug", cafe.city_slug);
+    .eq("slug", city.slug);
 }
 
 type DashboardFilters = {

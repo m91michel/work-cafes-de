@@ -2,7 +2,7 @@ import { Job } from 'bullmq';
 import { createHash } from 'crypto';
 import { queue as cronQueue } from '../../queues/cron';
 import supabase from '../../supabase/supabaseClient';
-import { GoogleMapsPlace, searchPlaces } from '../../google-maps';
+import { GoogleMapsPlace, searchPlaces, getPlaceDetails } from '../../google-maps';
 import { sendMessage } from '../../telegram';
 import { Cafe, City } from '../../types';
 import { generateSlug } from '../../utils';
@@ -66,7 +66,7 @@ export async function searchCafesForCity(city: City) {
   const searchQuery = isDACH
     ? `cafe zum arbeiten in ${cityName}`
     : `cafe for working in ${cityName}`;
-  const places = await searchPlaces(searchQuery, { type: "cafe" });
+  const places = await searchPlaces(searchQuery, { type: "cafe", language: isDACH ? "de" : "en" });
 
   if (places === null || places === undefined) {
     throw new Error(`Error searching for cafes in ${cityName}`);
@@ -86,10 +86,23 @@ export async function searchCafesForCity(city: City) {
       continue;
     }
 
-    const formattedAddress = place.formatted_address;
+    // Get English address using getPlaceDetails
+    const google_place_id = place.place_id;
+    let formattedAddress = place.formatted_address;
+    
+    // if (google_place_id) {
+    //   const placeDetails = await getPlaceDetails(google_place_id, { 
+    //     language: "en",
+    //     fields: "formatted_address,geometry,rating,user_ratings_total,price_level,business_status"
+    //   });
+      
+    //   if (placeDetails?.formatted_address) {
+    //     formattedAddress = placeDetails.formatted_address;
+    //   }
+    // }
+
     const lat_long = `${place.geometry?.location?.lat},${place.geometry?.location?.lng}`;
     const rating = place.rating;
-    const google_place_id = place.place_id;
     const slug = generateSlug(`${place.name}-${city.slug}`);
 
     const attributes: Partial<Cafe> = {
@@ -182,7 +195,7 @@ export async function searchCafesForCity(city: City) {
     );
   }
 
-  const status = cafesAdded > 0 ? "PROCESSING" : "CHECK!";
+  const status = cafesAdded > 0 ? city.status || "PROCESSING" : "CHECK!";
   await supabase
     .from("cities")
     .update({ status: status })

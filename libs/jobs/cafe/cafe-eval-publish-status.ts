@@ -9,6 +9,7 @@ import { prepareReviews } from "../../review-utils";
 import { isDev } from "../../environment";
 import { JOB_NAMES } from "../job-names";
 import { setCafeAsError } from "../../supabase/cafe/update-actions";
+import { enqueueJob as enqueueUpdateCafeStats } from "../cron/update-cafe-stats";
 
 export interface JobData {
   cafeId: string;
@@ -125,6 +126,13 @@ export async function processJob(job: Job<JobData>) {
 
     if (updateError) {
       throw new Error(`Error updating cafe: ${cafe.name}`, updateError);
+    }
+
+    // If cafe was published, enqueue a delayed job to update city cafe stats
+    // The delay ensures we batch multiple cafe publications together
+    // If another cafe is published within 5 minutes, the job will be replaced with a new 5-minute delay
+    if (aiResult.status === "PUBLISHED" && cafe.city_slug) {
+      await enqueueUpdateCafeStats(cafe.city_slug, 15);
     }
 
     console.log(`✅ processed ${cafe.name} (${cafeId})`);

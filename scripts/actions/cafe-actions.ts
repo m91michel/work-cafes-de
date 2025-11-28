@@ -37,7 +37,7 @@ export async function publishCafes() {
         }
     }
 
-    await updateCafeCount({ city_slug: citySlug, status: 'PROCESSING' });
+    await updateCafeCount({ slug: citySlug || undefined, status: 'PROCESSING' });
 
     console.log(`✅ Published ${data.length} cafes`);
 }

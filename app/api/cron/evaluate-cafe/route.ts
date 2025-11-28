@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { updateCafeCount } from "@/libs/supabase/cities";
 import { uniq } from "lodash";
 import { prepareReviews } from "@/libs/review-utils";
+import { enqueueJob as enqueueUpdateCafeStats } from "@/libs/jobs/cron/update-cafe-stats";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -92,7 +93,12 @@ export async function GET(request: NextRequest) {
         continue;
       }
 
-      await updateCafeCount(cafe);
+      // If cafe was published, enqueue a delayed job to update city cafe stats
+      // The delay ensures we batch multiple cafe publications together
+      // If another cafe is published within 5 minutes, the job will be replaced with a new 5-minute delay
+      if (aiResult.status === "PUBLISHED" && cafe.city_slug) {
+        await enqueueUpdateCafeStats(cafe.city_slug, 15);
+      }
 
       processedCount++;
       console.log(`🎉 processed ${cafe.name}`);

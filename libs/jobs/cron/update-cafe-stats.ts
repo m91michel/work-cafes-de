@@ -2,7 +2,6 @@ import { Job } from 'bullmq';
 import { queue as cronQueue } from '../../queues/cron';
 import supabase from '../../supabase/supabaseClient';
 import { updateCafeCount } from '../../supabase/cities';
-import { Cafe } from '../../types';
 import { JOB_NAMES } from '../job-names';
 
 export interface JobData {
@@ -13,8 +12,11 @@ export const JOB_NAME = JOB_NAMES.updateCafeStats;
 
 /**
  * Enqueue a job to update cafe stats
+ * @param citySlug - Optional city slug to update stats for a specific city
+ * @param delayMinutes - Optional delay in minutes before the job runs (default: 0 = immediate)
+ *                      If a job with the same jobId already exists, it will be replaced with the new delay
  */
-export async function enqueueJob(citySlug?: string) {
+export async function enqueueJob(citySlug?: string, delayMinutes: number = 0) {
   if (!cronQueue) {
     console.warn(`⚠️ Redis queue not available. Skipping ${JOB_NAME} job${citySlug ? ` for city: ${citySlug}` : ''}`);
     return;
@@ -22,16 +24,22 @@ export async function enqueueJob(citySlug?: string) {
 
   const jobId = citySlug ? `${JOB_NAME}-${citySlug}` : JOB_NAME;
   
-  await cronQueue.add(
-    JOB_NAME,
-    { citySlug },
-    {
-      jobId, // Prevent duplicates
-      priority: 5,
-    }
-  );
+  const jobOptions: {
+    jobId: string;
+    priority: number;
+    delay?: number;
+  } = {
+    jobId, // Prevent duplicates - same jobId will replace existing delayed job
+    priority: 5,
+  };
 
-  console.log(`✅ Enqueued ${JOB_NAME} job${citySlug ? ` for city: ${citySlug}` : ''}`);
+  if (delayMinutes > 0) {
+    jobOptions.delay = delayMinutes * 60 * 1000; // Convert minutes to milliseconds
+  }
+  
+  await cronQueue.add(JOB_NAME, { citySlug }, jobOptions);
+
+  console.log(`✅ Enqueued ${JOB_NAME} job${citySlug ? ` for city: ${citySlug}` : ''}${delayMinutes > 0 ? ` with ${delayMinutes} minute delay` : ''}`);
 }
 
 /**
@@ -44,42 +52,33 @@ export async function processJob(job: Job<JobData>) {
 
   try {
     let query = supabase
-      .from('cafes')
-      .select('id, city_slug, status')
-      .eq('status', 'PUBLISHED');
+      .from('cities')
+      .select('*')
+      .in('status', ['PUBLISHED', 'PROCESSING']);
 
     if (citySlug) {
-      query = query.eq('city_slug', citySlug);
+      query = query.eq('slug', citySlug);
     }
 
-    const { data: cafes, error } = await query;
+    const { data: cities, error } = await query;
 
     if (error) {
-      throw new Error(`Error fetching cafes: ${error.message}`);
+      throw new Error(`Error fetching cities: ${error.message}`);
     }
 
-    if (!cafes || cafes.length === 0) {
-      console.log('⚠️ No published cafes found');
+    if (!cities || cities.length === 0) {
+      console.log('⚠️ No cities found');
       return { success: true, processed: 0 };
     }
 
-    const citySlugs = [...new Set(cafes.map((cafe) => cafe.city_slug).filter(Boolean))];
-
-    console.log(`📊 Processing ${citySlugs.length} cities`);
+    console.log(`📊 Processing ${cities.length} cities`);
 
     let processedCount = 0;
-    for (const slug of citySlugs) {
-      if (!slug) continue;
-      
-      const cafeRef: Partial<Cafe> = {
-        city_slug: slug,
-        status: 'PUBLISHED',
-      };
-
-      await updateCafeCount(cafeRef);
+    for (const city of cities) {
+      await updateCafeCount(city);
       processedCount++;
 
-      await job.updateProgress((processedCount / citySlugs.length) * 100);
+      await job.updateProgress((processedCount / cities.length) * 100);
     }
 
     console.log(`✅ Successfully updated stats for ${processedCount} cities`);
@@ -87,7 +86,7 @@ export async function processJob(job: Job<JobData>) {
     return {
       success: true,
       processed: processedCount,
-      citiesProcessed: citySlugs.length,
+      citiesProcessed: cities.length,
     };
   } catch (error) {
     console.error(`❌ Error in ${JOB_NAME} job:`, error);

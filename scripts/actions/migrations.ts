@@ -3,39 +3,55 @@ import { Command } from "..";
 import { translateCity } from "../../libs/openai/translate-city";
 import { supabase } from "./google-maps";
 import { processLinks } from "../../libs/openai/process-links";
+import { pick } from "lodash";
+import dayjs from "dayjs";
+import { mergeObjects } from "../../libs/utils";
 
 const migrationsActions: Command[] = [
   {
-    name: "Cafe: update published_at",
-    key: "update-published-at",
+    name: "🍰 Cafes: Reset google reviews",
+    key: "reset-google-reviews",
     action: async () => {
-
-
       const { data: cafes, error, count } = await supabase
         .from("cafes")
         .select("*", { count: "exact" })
-        .eq("status", "PUBLISHED")
-        .is("published_at", null)
+        .eq("status", "PROCESSED")
+        // .not("processed->google_reviews_at", "is", null)
+        // .eq("processed->google_reviews_at", "null")
+        // .eq("review_count", 0)
+        .order("created_at", { ascending: false })
+        .limit(1000);
+
 
       if (error) {
         console.error("Error fetching cafes:", error);
         return;
       }
 
+      let processedCount = 0;
       for (const cafe of cafes) {
+        console.log(`⚡️ Processing cafe ${cafe.name} in ${cafe.city}`);
+        // console.log(pick(cafe, "name", "city", "processed", "review_count"));
         const { error: updateError } = await supabase
           .from("cafes")
-          .update({ published_at: cafe.processed_at })
+          .update({
+            processed: mergeObjects(cafe?.processed, {
+              checked_reviews_at: undefined
+            }),
+            checked: null,
+          })
           .eq("id", cafe.id);
 
         if (updateError) {
           console.error("Error updating cafe:", updateError);
           continue;
         }
-        console.log(`✅ Cafe ${cafe.name} published_at updated`);
+        console.log(`✅ Cafe ${cafe.name} discarded`);
+        processedCount++;
       }
 
-      console.log(`✅ ${count} cafes updated (${cafes.length} left)`);
+      const left = count ? count - processedCount : 0;
+      console.log(`✅ ${processedCount} cafes updated (${left} left)`);
     },
   },
   {
@@ -119,6 +135,46 @@ const migrationsActions: Command[] = [
       }
 
       console.log(`✅ ${cafes.length} cafes migrated`);
+    },
+  },
+  {
+    name: "🍰 Cafes: Update city slug",
+    key: "update-city-slug",
+    action: async () => {
+      const { data: cafes, error, count } = await supabase
+        .from("cafes")
+        .select("*", { count: "exact" })
+        .eq("city_slug", "warsaw-pl-masovian-voivodeship")
+        .order("created_at", { ascending: false })
+        .limit(100);
+
+
+      if (error) {
+        console.error("Error fetching cafes:", error);
+        return;
+      }
+
+      let processedCount = 0;
+      for (const cafe of cafes) {
+        console.log(`⚡️ Processing cafe ${cafe.name} in ${cafe.city}`);
+        // console.log(pick(cafe, "name", "city", "processed", "review_count"));
+        const { error: updateError } = await supabase
+          .from("cafes")
+          .update({
+            city_slug: "warsaw",
+          })
+          .eq("id", cafe.id);
+
+        if (updateError) {
+          console.error("Error updating cafe:", updateError);
+          continue;
+        }
+        console.log(`✅ Cafe ${cafe.name} discarded`);
+        processedCount++;
+      }
+
+      const left = count ? count - processedCount : 0;
+      console.log(`✅ ${processedCount} cafes updated (${left} left)`);
     },
   },
 ];

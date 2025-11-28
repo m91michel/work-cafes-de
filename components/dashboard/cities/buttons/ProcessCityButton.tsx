@@ -42,6 +42,11 @@ const JOB_OPTIONS: JobOption[] = [
     label: "Generate Description",
     description: "Generate descriptions (EN/DE) for this city",
   },
+  {
+    name: JOB_NAMES.updateCafeStats,
+    label: "Update Cafe Stats",
+    description: "Update cafe count and statistics for this city",
+  },
 ];
 
 export function ProcessCityButton({ city, title }: Props) {
