@@ -3,15 +3,6 @@ import { createHash } from "crypto";
 import { queue as cronQueue } from "../../queues/cron";
 import { JOB_NAMES } from "../job-names";
 import { enqueue } from "..";
-import {
-  getCafesForGoogleMapsDetails,
-  getCafesForGoogleMapsImages,
-  getCafesToFetchReviews,
-  getCafesToEvaluate,
-  getCafesToFetchAboutContent,
-  getPublishedCafesForRegularUpdate,
-} from "../../supabase/cafe/processing-queries";
-import { isProd } from "../../environment";
 import { getCitiesForImageGeneration } from "@/libs/supabase/cities/processing-queries";
 
 export const JOB_NAME = JOB_NAMES.cityScheduler;

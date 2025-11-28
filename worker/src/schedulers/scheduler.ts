@@ -94,7 +94,7 @@ async function scheduleRepeatableJobs() {
       JOB_NAMES.cityScheduler,
       'update-cafe-stats-daily',
       '*/30 * * * *', // Every 30 minutes
-      'Update cafe stats (daily at 3 AM)',
+      'City scheduler (every 30 minutes)',
       {}
     );
 
