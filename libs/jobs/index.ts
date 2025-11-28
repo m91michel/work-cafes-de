@@ -32,6 +32,8 @@ export const jobHandlers: Record<string, JobHandler> = {
   [citySearchForCafesJobs.JOB_NAME]: citySearchForCafesJobs.processJob,
   [cityGenerateImageJobs.JOB_NAME]: cityGenerateImageJobs.processJob,
   [cityGenerateDescriptionJobs.JOB_NAME]: cityGenerateDescriptionJobs.processJob,
+  // Backward compatibility: handle old job name
+  "UPDATE_CAFE_STATS": updateCafeStatsJobs.processJob,
 };
 
 export const enqueue = {
