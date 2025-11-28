@@ -38,13 +38,13 @@ export async function GET() {
   return NextResponse.json({
     message: "success",
     data: {
-      evaluateCafes: {
-        count: evaluateCafes.count,
-        cafes: mapCafeToResponse(evaluateCafes.data),
-      },
       fetchReviewsCafes: {
         count: fetchReviewsCafes.count,
         cafes: mapCafeToResponse(fetchReviewsCafes.data),
+      },
+      evaluateCafes: {
+        count: evaluateCafes.count,
+        cafes: mapCafeToResponse(evaluateCafes.data),
       },
       fetchAboutContentCafes: {
         count: fetchAboutContentCafes.count,
@@ -54,13 +54,13 @@ export async function GET() {
         count: updateMapDetailsCafes.count,
         cafes: mapCafeToResponse(updateMapDetailsCafes.data),
       },
-      regularUpdateOfPublishedCafes: {
-        count: regularUpdateOfPublishedCafes.count,
-        cafes: mapCafeToResponse(regularUpdateOfPublishedCafes.data),
-      },
       updateImagesCafes: {
         count: updateImagesCafes.count,
         cafes: mapCafeToResponse(updateImagesCafes.data),
+      },
+      regularUpdateOfPublishedCafes: {
+        count: regularUpdateOfPublishedCafes.count,
+        cafes: mapCafeToResponse(regularUpdateOfPublishedCafes.data),
       },
     },
   });

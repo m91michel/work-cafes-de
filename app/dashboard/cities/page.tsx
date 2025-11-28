@@ -53,7 +53,7 @@ export default async function CitiesPage({
         <div className="flex items-center gap-4">
           <p>{total} cities found</p>
           <JobButton
-            jobName="updateCafeStats"
+            jobName="cityUpdateCafeStats"
             variant="outline"
             size="sm"
             successMessage="Update cafe stats job has been queued"

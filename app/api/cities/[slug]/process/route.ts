@@ -59,8 +59,8 @@ export async function POST(
       case JOB_NAMES.cityGenerateDescription:
         await enqueue.cityGenerateDescription(slug);
         break;
-      case JOB_NAMES.updateCafeStats:
-        await enqueue.updateCafeStats(slug);
+      case JOB_NAMES.cityUpdateCafeStats:
+        await enqueue.cityUpdateCafeStats(slug);
         break;
       default:
         return NextResponse.json(

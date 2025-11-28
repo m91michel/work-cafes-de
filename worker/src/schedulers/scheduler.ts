@@ -91,9 +91,9 @@ async function scheduleRepeatableJobs() {
 
     // Schedule update-cafe-stats to run daily at 3 AM
     await scheduleJobIfNotExists(
-      JOB_NAMES.updateCafeStats,
+      JOB_NAMES.cityScheduler,
       'update-cafe-stats-daily',
-      '0 3 * * *', // Daily at 3 AM
+      '*/30 * * * *', // Every 30 minutes
       'Update cafe stats (daily at 3 AM)',
       {}
     );

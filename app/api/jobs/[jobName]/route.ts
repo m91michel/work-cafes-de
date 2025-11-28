@@ -10,7 +10,7 @@ type Params = Promise<{ jobName: string }>;
 const PARAMETERLESS_JOBS = [
   JOB_NAMES.cafeScheduler,
   JOB_NAMES.cafeProcessDuplicates,
-  JOB_NAMES.updateCafeStats,
+  JOB_NAMES.cityUpdateCafeStats,
 ] as const;
 
 type ParameterlessJobName = (typeof PARAMETERLESS_JOBS)[number];
@@ -19,7 +19,7 @@ type ParameterlessJobName = (typeof PARAMETERLESS_JOBS)[number];
 const JOB_ENQUEUE_MAP: Record<ParameterlessJobName, () => Promise<void>> = {
   [JOB_NAMES.cafeScheduler]: () => enqueue.cafeScheduler(),
   [JOB_NAMES.cafeProcessDuplicates]: () => enqueue.cafeProcessDuplicates(),
-  [JOB_NAMES.updateCafeStats]: () => enqueue.updateCafeStats(),
+  [JOB_NAMES.cityUpdateCafeStats]: () => enqueue.cityUpdateCafeStats(),
 };
 
 export async function POST(

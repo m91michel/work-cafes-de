@@ -8,7 +8,7 @@ export interface JobData {
   citySlug?: string;
 }
 
-export const JOB_NAME = JOB_NAMES.updateCafeStats;
+export const JOB_NAME = JOB_NAMES.cityUpdateCafeStats;
 
 /**
  * Enqueue a job to update cafe stats

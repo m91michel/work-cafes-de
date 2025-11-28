@@ -43,7 +43,7 @@ const JOB_OPTIONS: JobOption[] = [
     description: "Generate descriptions (EN/DE) for this city",
   },
   {
-    name: JOB_NAMES.updateCafeStats,
+    name: JOB_NAMES.cityUpdateCafeStats,
     label: "Update Cafe Stats",
     description: "Update cafe count and statistics for this city",
   },

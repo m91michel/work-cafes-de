@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import { updateCafeCount } from "@/libs/supabase/cities";
 import { uniq } from "lodash";
 import { prepareReviews } from "@/libs/review-utils";
-import { enqueueJob as enqueueUpdateCafeStats } from "@/libs/jobs/cron/update-cafe-stats";
+import { enqueueJob as enqueueUpdateCafeStats } from "@/libs/jobs/city/update-cafe-stats";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;

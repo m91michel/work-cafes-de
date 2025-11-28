@@ -9,7 +9,7 @@ import { prepareReviews } from "../../review-utils";
 import { isDev } from "../../environment";
 import { JOB_NAMES } from "../job-names";
 import { setCafeAsError } from "../../supabase/cafe/update-actions";
-import { enqueueJob as enqueueUpdateCafeStats } from "../cron/update-cafe-stats";
+import { enqueueJob as enqueueUpdateCafeStats } from "../city/update-cafe-stats";
 
 export interface JobData {
   cafeId: string;
