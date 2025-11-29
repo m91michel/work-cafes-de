@@ -49,12 +49,12 @@ export async function enqueueJob() {
  */
 
 const processCount = {
-  updateMaps: 10,
-  regularUpdateOfPublishedCafes: 1, // Regular updates for published cafes
-  updateImages: 1,
   fetchReviews: 2,
-  evaluateCafes: 2,
-  fetchAboutContent: 2,
+  evaluateCafes: 5,
+  fetchAboutContent: 5,
+  updateMaps: 10,
+  updateImages: 5,
+  regularUpdateOfPublishedCafes: 1, // Regular updates for published cafes
 };
 export async function processJob(job: Job) {
   console.log(`⚡️ Starting ${JOB_NAME} job ${job.id}`);
