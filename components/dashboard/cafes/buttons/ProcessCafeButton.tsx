@@ -26,16 +26,6 @@ type JobOption = {
 
 const JOB_OPTIONS: JobOption[] = [
   {
-    name: JOB_NAMES.googleMapsDetails,
-    label: "Fetch Google Maps Details",
-    description: "Fetch and update cafe details from Google Maps",
-  },
-  {
-    name: JOB_NAMES.googleMapsImages,
-    label: "Fetch Google Maps Images",
-    description: "Fetch and upload cafe images from Google Maps",
-  },
-  {
     name: JOB_NAMES.cafeFetchReviews,
     label: "Fetch Reviews",
     description: "Fetch reviews from Google Maps",
@@ -49,6 +39,16 @@ const JOB_OPTIONS: JobOption[] = [
     name: JOB_NAMES.cafeFetchAboutContent,
     label: "Fetch About Content",
     description: "Fetch and update cafe about content",
+  },
+  {
+    name: JOB_NAMES.googleMapsDetails,
+    label: "Fetch Google Maps Details",
+    description: "Fetch and update cafe details from Google Maps",
+  },
+  {
+    name: JOB_NAMES.googleMapsImages,
+    label: "Fetch Google Maps Images",
+    description: "Fetch and upload cafe images from Google Maps",
   },
 ];
 

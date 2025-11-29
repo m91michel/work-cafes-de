@@ -125,7 +125,7 @@ export default async function CafePage({ params }: Props) {
               <CafeMapLocation cafe={cafe} />
               <CafeRatingCard cafe={cafe} />
               <CafeAmenities cafe={cafe} />
-              {isDev && false && <DebugInfo cafe={cafe} />}
+              {isDev && <DebugInfo cafe={cafe} />}
             </div>
           </div>
 

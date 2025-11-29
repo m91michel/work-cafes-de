@@ -10,6 +10,7 @@ import { useCTranslation } from '@/hooks/use-translation';
 import { CheckCafeButton } from '@/components/dashboard/cafes/buttons/CheckCafeButton';
 import { Badge } from '../../ui/badge';
 import { StatusDropdown } from '../../dashboard/cafes/buttons/StatusDropdown';
+import { ProcessCafeButton } from '@/components/dashboard/cafes/buttons/ProcessCafeButton';
 interface Props {
   cafe: Cafe | null;
 }
@@ -83,11 +84,12 @@ export function DebugInfo({ cafe }: Props) {
   return (
     <Card className="p-6 mt-6 space-y-6">
       <h2 className="text-2xl font-semibold">Debug Info</h2>
-      <div>
+      <div className="flex flex-col gap-2">
         <div>Status: <Badge variant={cafe.status === 'PUBLISHED' ? 'default' : 'secondary'}>{cafe.status || 'No status'}</Badge></div>
         <div>Checked: <Badge variant={cafe.checked === 'CHECKED' ? 'default' : 'secondary'}>{cafe.checked || 'Not checked'}</Badge></div>
         <CheckCafeButton cafe={cafe} title="Cafe checked" />
         <StatusDropdown cafe={cafe} title="Update status" />
+        <ProcessCafeButton cafe={cafe} title="Process Cafe" />
       </div>
       <div>
         <p>ID: {cafe.id}</p>
