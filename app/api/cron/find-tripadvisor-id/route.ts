@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
       continue;
     }
 
-    const selectedLocation = getTripAdvisorId(tripAdvisorLocations, cafe);
+    const selectedLocation = getTripAdvisorId(tripAdvisorLocations, cafe as Cafe);
 
 
     console.log(selectedLocation);

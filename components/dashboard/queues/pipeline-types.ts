@@ -1,3 +1,5 @@
+import { Processed } from "@/libs/types";
+
 export interface PipelineCafe {
   id: string;
   name: string;
@@ -5,11 +7,7 @@ export interface PipelineCafe {
   city_slug: string;
   processed_at: string | null;
   status: string | null;
-  processed?: {
-    google_reviews_at?: string;
-    fetched_website_content_at?: string;
-    checked_reviews_at?: string;
-  } | null;
+  processed?: Processed | null;
 }
 
 export interface PipelineStage {

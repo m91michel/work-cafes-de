@@ -3,9 +3,8 @@ import { Command } from "..";
 import { translateCity } from "../../libs/openai/translate-city";
 import { supabase } from "./google-maps";
 import { processLinks } from "../../libs/openai/process-links";
-import { pick } from "lodash";
-import dayjs from "dayjs";
 import { mergeObjects } from "../../libs/utils";
+import { Cafe } from "../../libs/types";
 
 const migrationsActions: Command[] = [
   {
@@ -111,7 +110,7 @@ const migrationsActions: Command[] = [
 
       for (const cafe of cafes) {
         console.log(`Processing cafe ${cafe.name}`);
-        const result = await processLinks(cafe);
+        const result = await processLinks(cafe as Cafe);
         console.log(result);
         if (!result) {
           console.error("Error processing links:", cafe.name);

@@ -132,7 +132,7 @@ export async function processJob(job: Job<JobData>) {
   } catch (error) {
     console.error(`❌ Error in ${JOB_NAME} for cafe ${cafeId}:`, error);
     console.timeEnd(timerLabel);
-    await setCafeAsProcessed(cafe);
+    await setCafeAsProcessed(cafe as Cafe);
 
     return {
       success: false,

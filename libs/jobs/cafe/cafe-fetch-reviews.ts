@@ -6,8 +6,7 @@ import { outscraperReviewsTask } from '../../apis/outscraper';
 import { getKeywords } from '../../cafe-utils';
 import { JOB_NAMES } from '../job-names';
 import { setCafeAsError, setProcessed } from '../../supabase/cafe/update-actions';
-import { Cafe } from '../../types';
-import { mergeObjects } from '@/libs/utils';
+import { Cafe, Processed } from '../../types';
 import { omit } from 'lodash';
 
 export interface JobData {
@@ -75,7 +74,7 @@ export async function processJob(job: Job<JobData>) {
   }
 
   try {
-    if ((cafe?.processed as any)?.google_reviews_at) {
+    if ((cafe as Cafe).processed?.google_reviews_at) {
       console.log(`⚠️ Skipping ${cafe.name} because it as already been processed`);
       return {
         success: true,
@@ -85,7 +84,7 @@ export async function processJob(job: Job<JobData>) {
 
     await setProcessed({
       ...cafe,
-      processed: omit(cafe?.processed as any, "checked_reviews_at"),
+      processed: omit(cafe?.processed as Processed, "checked_reviews_at"),
     });
 
     const keywords = getKeywords(cafe.cities?.country_code || "");

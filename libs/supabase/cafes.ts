@@ -136,7 +136,7 @@ export async function getCafeBySlug(
     return null;
   }
 
-  return data;
+  return data as Cafe | null;
 }
 
 type Options = {
@@ -164,7 +164,7 @@ export async function getCafesByCity(
     return [];
   }
 
-  return data;
+  return data as Cafe[];
 }
 
 type CafesCountOptions = {

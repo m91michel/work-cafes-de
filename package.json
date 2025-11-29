@@ -13,6 +13,7 @@
     "email": "email dev --port 3031",
     "start": "node .next/standalone/server.js",
     "lint": "next lint",
+    "ts-check": "tsc --noEmit",
     "types": "npx --yes supabase gen types typescript --project-id \"nkmwwlzfsdpqxnflygyr\" --schema cafeforwork > types_db.ts",
     "worker:dev": "cd worker && yarn dev",
     "worker:build": "cd worker && yarn build"

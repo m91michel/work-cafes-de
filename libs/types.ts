@@ -5,6 +5,14 @@ import { FallbackNs } from "react-i18next";
 export type CafeStatus = 'NEW' | 'PUBLISHED' | 'PROCESSED' | 'CLOSED' | 'DISCARDED' | 'ERROR';
 export const validStatuses = ["NEW", "PROCESSED", "PUBLISHED", "CLOSED", "NOT_FRIENDLY", "DISCARDED", "ERROR"];
 
+export type Processed = {
+  google_details_at?: string | null;
+  google_reviews_at?: string | null;
+  checked_reviews_at?: string | null;
+  fetched_website_content_at?: string | null;
+  [key: string]: string | null | undefined;
+};
+
 export type Cafe = Database['cafeforwork']['Tables']['cafes']['Row'] & {
   status?: CafeStatus | string | null;
   cities?: {
@@ -14,6 +22,7 @@ export type Cafe = Database['cafeforwork']['Tables']['cafes']['Row'] & {
     country?: string | null;
     country_code?: string | null;
   } | null
+  processed?: Processed | null;
 }
 
 export type CityData = {

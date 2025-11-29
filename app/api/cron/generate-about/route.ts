@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
   }
 
   let processedCount = 0;
-  for (const cafe of cafes) {
+  for (const cafe of cafes as Cafe[]) {
     const timerLabel = `⚡️ ${cafe.name} (${cafe.id})`;
     console.time(timerLabel);
     console.log(`⚡️ processing ${cafe.name} ${cafe.address}`);

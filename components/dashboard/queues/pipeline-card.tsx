@@ -1,12 +1,12 @@
 'use client';
 
 import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { PipelineCafe } from './pipeline-types';
 import { formatDistanceToNow } from 'date-fns';
 import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import Paths from '@/libs/paths';
+import { StatusBadge } from '@/components/general/status-badge';
 
 interface PipelineCardProps {
   cafe: PipelineCafe;
@@ -19,21 +19,6 @@ export function PipelineCard({ cafe }: PipelineCardProps) {
       return formatDistanceToNow(new Date(dateString), { addSuffix: true });
     } catch {
       return 'Invalid date';
-    }
-  };
-
-  const getStatusVariant = (status: string | null | undefined): 'default' | 'success' | 'warning' | 'destructive' => {
-    switch (status) {
-      case 'PUBLISHED':
-        return 'success';
-      case 'PROCESSED':
-        return 'default';
-      case 'CLOSED':
-        return 'destructive';
-      case 'DISCARDED':
-        return 'destructive';
-      default:
-        return 'warning';
     }
   };
 
@@ -60,9 +45,7 @@ export function PipelineCard({ cafe }: PipelineCardProps) {
           </div>
           
           {cafe.status && (
-            <Badge variant={getStatusVariant(cafe.status)} className="text-xs">
-              {cafe.status}
-            </Badge>
+            <StatusBadge status={cafe.status} className="text-xs" />
           )}
           
           {cafe.processed_at && (

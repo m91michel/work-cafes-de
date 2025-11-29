@@ -2,7 +2,6 @@
 
 import { Cafe } from "@/libs/types";
 import { DataTable } from "@/components/general/data-table/data-table";
-import { Badge } from "@/components/ui/badge";
 import {
   ColumnDef,
   Row,
@@ -11,6 +10,9 @@ import {
 import { CafeFilters } from "./cafe-filters";
 import { useState } from "react";
 import { CafeActions } from "./table-action";
+import { StatusBadge } from "@/components/general/status-badge";
+import { getCountryByCode } from "@/config/countires";
+import { ProcessingStatus } from "./processing-status";
 
 export const columns: ColumnDef<Cafe>[] = [
   {
@@ -18,25 +20,48 @@ export const columns: ColumnDef<Cafe>[] = [
     header: "Name",
     enableSorting: true,
     enableColumnFilter: true,
-    cell: ({ row }: { row: Row<Cafe> }) => (
-      <div className="font-medium">{row.getValue("name")}</div>
-    ),
+    cell: ({ row }: { row: Row<Cafe> }) => {
+      const cafe = row.original;
+      return (
+        <div>
+          <div className="font-medium">{cafe.name}</div>
+          {cafe.address && (
+            <div className="text-sm text-muted-foreground mt-0.5">
+              {cafe.address}
+            </div>
+          )}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "city",
     header: "City",
     enableSorting: true,
     enableColumnFilter: true,
+    cell: ({ row }: { row: Row<Cafe> }) => {
+      const cafe = row.original;
+      const cityName = row.getValue("city") as string;
+      const countryCode = cafe.cities?.country_code;
+      const country = countryCode ? getCountryByCode(countryCode) : null;
+      
+      return (
+        <div>
+          <div className="font-medium">{cityName || "N/A"}</div>
+          {country && (
+            <div className="text-sm text-muted-foreground mt-0.5 flex items-center gap-1.5">
+              <span>{country.flag}</span>
+              <span>{country.name}</span>
+            </div>
+          )}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "review_count",
     header: "Reviews",
     enableSorting: true,
-  },
-  {
-    accessorKey: "address",
-    header: "Address",
-    enableSorting: false,
   },
   {
     accessorKey: "google_rating",
@@ -54,11 +79,16 @@ export const columns: ColumnDef<Cafe>[] = [
     enableColumnFilter: true,
     cell: ({ row }: { row: Row<Cafe> }) => {
       const status = row.getValue("status") as string;
-      return (
-        <Badge variant={status === "PUBLISHED" ? "default" : "secondary"}>
-          {status}
-        </Badge>
-      );
+      return <StatusBadge status={status} />;
+    },
+  },
+  {
+    accessorKey: "processed",
+    header: "Processing",
+    enableSorting: false,
+    cell: ({ row }: { row: Row<Cafe> }) => {
+      const processed = row.original.processed;
+      return <ProcessingStatus processed={processed} />;
     },
   },
   {

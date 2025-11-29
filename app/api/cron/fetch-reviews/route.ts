@@ -56,12 +56,11 @@ export async function GET(request: NextRequest) {
       continue;
     }
 
-    //@ts-ignore
-    if (cafe.processed?.google_reviews_at) {
+    if ((cafe as Cafe).processed?.google_reviews_at) {
       console.log(`⚠️ Skipping ${cafe.name} because it as already been processed`);
       continue;
     } else {
-      await setProcessed(cafe);
+      await setProcessed(cafe as Cafe);
     }
 
     const keywords = getKeywords(cafe.cities?.country_code || "");
