@@ -79,6 +79,13 @@ class Paths {
     }
     return `${Paths.bestStudy}/in/${slug}`;
   }
+
+  static cafeEdit(slug?: string | null) {
+    if (!slug) {
+      return Paths.cafes;
+    }
+    return `/cafes/${slug}/edit`;
+  }
 }
 
 export default Paths; 

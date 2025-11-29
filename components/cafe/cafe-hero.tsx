@@ -2,11 +2,12 @@ import Image from "next/image";
 import { Cafe } from "@/libs/types";
 import { DefaultCafeImage } from "./Image";
 import { Button } from "../ui/button";
-import { Flag, Globe, MapPinned, MessageCircleWarning } from "lucide-react";
+import { Globe, MapPinned, MessageCircleWarning } from "lucide-react";
 import { MLink } from "../general/link";
 import { countryFlag } from "@/config/countires";
 import Paths from "@/libs/paths";
 import { locationLink } from "@/libs/google-maps";
+import { EditButton } from "./edit/edit-button";
 
 interface CafeHeroProps {
   cafe: Cafe;
@@ -63,6 +64,7 @@ export function CafeHero({ cafe }: CafeHeroProps) {
                   Google Maps
                 </MLink>
               </Button>
+              <EditButton slug={cafe.slug} />
               <Button variant="secondary" size="sm" asChild title="Report">
                 <MLink href={reportHref} noFollow>
                   <MessageCircleWarning className="w-4 h-4" />
