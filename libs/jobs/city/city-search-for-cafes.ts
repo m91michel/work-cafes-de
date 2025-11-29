@@ -73,7 +73,7 @@ export async function searchCafesForCity(city: City) {
   }
 
   for (const [index, place] of places.entries()) {
-    const cityNames = [city.name_local, cityName].filter(Boolean) as string[];
+    const cityNames = [...(city.name_local?.split(",") || []), cityName].filter(Boolean) as string[];
     if (!isInCity(place, cityNames)) {
       console.log(`⚠️ ${place.formatted_address} is not in ${city.name_local || cityName}`);
       firstAddress = place.formatted_address || "";
@@ -82,7 +82,7 @@ export async function searchCafesForCity(city: City) {
 
     // check if its operational
     if (place.business_status !== "OPERATIONAL") {
-      console.log(`⚠️ ${place.formatted_address} is not operational`);
+      console.log(`⏭️ ${place.formatted_address} is not operational`);
       continue;
     }
 
@@ -195,11 +195,13 @@ export async function searchCafesForCity(city: City) {
     );
   }
 
-  const status = cafesAdded > 0 ? city.status || "PROCESSING" : "CHECK!";
-  await supabase
-    .from("cities")
-    .update({ status: status })
-    .eq("slug", city.slug);
+  if (city.status !== "PUBLISHED") {
+    const status = cafesAdded > 0 ? "PROCESSING" : "CHECK!";
+    await supabase
+      .from("cities")
+      .update({ status: status })
+      .eq("slug", city.slug);
+  }
 
   // Automatically trigger duplicate processing if duplicates were found
   if (duplicatesFound) {

@@ -7,6 +7,8 @@ import { getKeywords } from '../../cafe-utils';
 import { JOB_NAMES } from '../job-names';
 import { setCafeAsError, setProcessed } from '../../supabase/cafe/update-actions';
 import { Cafe } from '../../types';
+import { mergeObjects } from '@/libs/utils';
+import { omit } from 'lodash';
 
 export interface JobData {
   cafeId: string;
@@ -81,7 +83,10 @@ export async function processJob(job: Job<JobData>) {
       };
     }
 
-    await setProcessed(cafe, "google_reviews_at");
+    await setProcessed({
+      ...cafe,
+      processed: omit(cafe?.processed as any, "checked_reviews_at"),
+    });
 
     const keywords = getKeywords(cafe.cities?.country_code || "");
     for (const keyword of keywords) {
