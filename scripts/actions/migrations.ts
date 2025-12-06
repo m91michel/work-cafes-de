@@ -54,13 +54,13 @@ const migrationsActions: Command[] = [
     },
   },
   {
-    name: "🏙️ Cities: Translate Cities",
+    name: "🏙️ Cities: Update Status",
     key: "translate-cities",
     action: async () => {
       const { data: cities, error } = await supabase
         .from("cities")
         .select("*")
-        .is("name_en", null)
+        .eq("status", "PROCESSING")
         .limit(100);
 
       if (error) {
@@ -68,25 +68,18 @@ const migrationsActions: Command[] = [
         return;
       }
       for (const city of cities) {
-        const result = await translateCity(city);
-        console.log(result);
-        if (!result) {
-          console.error("Error translating city:", city.name_de);
-          continue;
-        }
+
         const { error: updateError } = await supabase
           .from("cities")
           .update({
-            name_en: result?.name_en,
-            description_short_en: result?.description_short_en,
-            description_long_en: result?.description_long_en,
+            status: "WAIT",
           })
           .eq("slug", city.slug);
         if (updateError) {
           console.error("Error updating city:", updateError);
           continue;
         }
-        console.log(`✅ City ${city.name_de} translated to ${result.name_en}`);
+        console.log(`✅ City ${city.name_de} status updated to WAIT`);
       }
     },
   },
