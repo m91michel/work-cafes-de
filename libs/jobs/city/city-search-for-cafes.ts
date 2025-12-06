@@ -217,7 +217,6 @@ export async function searchCafesForCity(city: City) {
   return {
     cafesAdded,
     cafesWithError,
-    status,
     duplicatesFound,
   };
 }

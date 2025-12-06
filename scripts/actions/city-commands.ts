@@ -3,6 +3,7 @@ import { Database } from "@/types_db";
 import { readCsv } from "../utils/csv";
 import { updateCountForCities } from "./update-cafe-count";
 import { Command } from "..";
+import { generateSlug } from "../../libs/utils";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
@@ -59,11 +60,12 @@ export const citiesCommands: Command[] = [
 ];
 
 export async function upsertCitiesFromCsv() {
-  const cities = await readCsv<any>("../data/cities/nomand-cities.csv");
+  const cities = await readCsv<any>("../data/cities/europe-cities.csv");
 
   for (const city of cities) {
     const name = city.name_en || city.name_de;
-    console.log(`⚡️ Processing ${name} in ${city.country}`);
+    const slug = generateSlug(name);
+    console.log(`⚡️ Processing ${name} in ${city.country} ${city.name_local}`);
 
     if (!name) {
       console.error("❌ City name is null", city);
@@ -74,17 +76,18 @@ export async function upsertCitiesFromCsv() {
     const { error } = await supabase
       .from("cities")
       .upsert({
-        slug: city.slug,
+        slug: city.slug || slug,
         name_de: city.name_de || city.name_en,
         name_en: city.name_en || city.name_de,
         country: city.country,
         country_code: city.country_code,
-        description_long_de: city.description_long_de || null,
-        description_long_en: city.description_long_en || null,
-        description_short_de: city.description_short_de || null,
-        description_short_en: city.description_short_en || null,
-        state: city.state,
-        state_code: city.state_code,
+        name_local: city.name_local,
+        // description_long_de: city.description_long_de || null,
+        // description_long_en: city.description_long_en || null,
+        // description_short_de: city.description_short_de || null,
+        // description_short_en: city.description_short_en || null,
+        // state: city.state,
+        // state_code: city.state_code,
         population: city.population ? parseInt(city.population) : 0,
         cafes_count: 0,
         status: "NEW",

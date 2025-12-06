@@ -95,13 +95,15 @@ export function CityFilters() {
             <SelectValue placeholder="Select status" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All</SelectItem>
-            <SelectItem value="NEW">New</SelectItem>
-            <SelectItem value="READY">Ready</SelectItem>
-            <SelectItem value="PROCESSING">Processing</SelectItem>
-            <SelectItem value="PUBLISHED">Published</SelectItem>
-            <SelectItem value="BOOSTED">Boosted</SelectItem>
-            <SelectItem value="CHECK!">Check!</SelectItem>
+            <SelectItem value="all">All cities</SelectItem>
+            <SelectItem value="NEW">NEW</SelectItem>
+            <SelectItem value="READY">READY</SelectItem>
+            <SelectItem value="PROCESSING">PROCESSING</SelectItem>
+            <SelectItem value="PUBLISHED">PUBLISHED</SelectItem>
+            <SelectItem value="CHECK!">CHECK!</SelectItem>
+            <SelectItem value="WAIT">WAIT</SelectItem>
+            <SelectItem value="UNKNOWN">UNKNOWN</SelectItem>
+            <SelectItem value="NO_CAFE_FOUND">NO_CAFE_FOUND</SelectItem>
           </SelectContent>
         </Select>
       </div>
